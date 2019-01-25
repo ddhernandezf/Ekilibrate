@@ -1,0 +1,109 @@
+﻿@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themefourthcolor">
+                <span class="widget-caption"> Seguimiento Nutricional</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>*@
+                </div>
+            </div>
+            <div class="widget-body">
+                @*<div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <input onclick='NoConcluidas(this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                        <label>Mostrar sólo citas no concluidas</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <input onclick='OtrasNutricionistas(this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                        <label>Mostrar citas de otras nutricionistas</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <input onclick='OtrasDias(this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                        <label>Mostrar solo citas del día</label>
+                    </div>
+                </div>*@
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsCita>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.TipoCitaId).Hidden();
+                        columns.Bound(p => p.No);
+                        columns.Bound(p => p.Nombre).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+                        columns.Bound(p => p.ParticipanteId).Hidden();
+                        columns.Bound(p => p.Fecha).Format("{0:dddd, dd MMMM}");
+                        columns.Bound(p => p.Hora);
+                        columns.Bound(p => p.NutricionistaId).Hidden();
+                        columns.Command(command =>
+                        {
+                            //command.Edit().Text("Segumiento");
+                            //command.Destroy().Text("Eliminar");
+                            command.Custom("Segumiento").Text("Atender").Click("OnClickSeguimiento");
+                            command.Custom("Reprogramar").Text("Reprogramar");
+                        }).Width(250);
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                        .Filterable(f =>
+                        {
+                            f.Mode(GridFilterMode.Row);
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable(s => s.Height("auto"))
+                    //.HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+
+                        })
+
+                        .Read(read => read.Action("Read", "Seguimiento"))
+                    )
+                        )
+
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function OnClickSeguimiento(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var TipoCita = dataItem.TipoCitaId;
+        var ParticipanteId = dataItem.ParticipanteId;
+        var NutricionistaId = dataItem.NutricionistaId;
+
+//        window.location = "Seguimiento/Seguimiento?par=" + dataItem.ParticipanteId + "&cita=" + dataItem.Id;
+        window.location = "Seguimiento/Seguimiento?cita=" + dataItem.Id;
+    }
+</script>

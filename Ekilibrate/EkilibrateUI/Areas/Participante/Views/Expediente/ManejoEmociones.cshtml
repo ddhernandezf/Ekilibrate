@@ -1,0 +1,52 @@
+﻿@using Kendo.Mvc.UI;
+
+
+@model Ekilibrate.Model.Entity.Participante.clsExpedienteManejoEmociones
+
+
+<div class="row">
+    <div class="col-xs-10">
+            <div class="widget">
+                <div class="widget-header bg-themethirdcolor">
+                    <span class="widget-caption">Test ansiedad</span>
+                    <div class="widget-buttons">
+
+                    </div>
+                </div>
+                <div class="widget-body">
+                        <div class="row">
+                               
+                            <div class="part-single">
+                                @{
+                                    if (Model.RiesgoEnfermedadEstress <= 150)
+                                    {
+                                        <label style="color: #34A853  ;font-size:  45px;text-align: center;width: 100%;">@Model.RiesgoEnfermedadEstress Riesgo leve de desarrollar una enfermedad debido al stress.</label>
+                                            
+                                    }
+                                    else if (Model.RiesgoEnfermedadEstress > 150 && Model.RiesgoEnfermedadEstress <= 299)
+                                    {
+                                        <label style="color: #FBBC05;font-size:  45px;text-align: center;width: 100%;">@Model.RiesgoEnfermedadEstress Riesgo moderado de desarrollar una enfermedad debido al stress.</label>
+                                    }
+                                    else
+                                    {
+                                        <label style="color: #EA4335 ;font-size:  45px;text-align: center;width: 100%;">@Model.RiesgoEnfermedadEstress Riesgo severo de desarrollar una enfermedad debido al stress.</label>
+                                    }
+}
+                            </div>
+                        </div>
+
+               
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="bg-themethirdcolor h4" style="color: white;">Observaciones:</div>
+                        </div>
+                        <div class="part-single">
+                            @{
+                                <label style=" color: gray;height:100px;width: 100%;"> @Model.ObservacionesAnsiedad  </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

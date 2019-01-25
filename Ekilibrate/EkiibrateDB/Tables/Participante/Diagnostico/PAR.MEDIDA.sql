@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[PAR.MEDIDA](
+	[ID_MEDIDA] [numeric](18, 0) NOT NULL,
+	[MEDIDA] [varchar](max) NULL,
+ CONSTRAINT [PK_PAR_MEDIDA] PRIMARY KEY CLUSTERED 
+(
+	[ID_MEDIDA] ASC
+)
+) 

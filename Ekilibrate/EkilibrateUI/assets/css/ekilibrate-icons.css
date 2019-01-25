@@ -1,0 +1,289 @@
+﻿
+.icon-home {
+    background: url('../icon/home.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-empresa {
+    background: url('../icon/empresas.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-proyecto {
+    background: url('../icon/proyectos.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-colaborador {
+    background: url('../icon/colaboradores-menu.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-catalogo {
+    background: url('..img/icons/Dossier Folder-32.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-desempeño {
+    background: url('..img/icons/Check-32.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-resultados {
+    background: url('../img/icons/Ratings-32.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.icon-expediente {
+    background: url('../icon/expediente.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-pasos {
+    background: url('../icon/pasos.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-alimentacion {
+    background: url('../icon/alimentos.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-contacto {
+    background: url('../icon/contacto.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-cuestionario {
+    background: url('../icon/cuestionario.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-diagnostico {
+    background: url('../icon/diagnostico.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-seguimiento {
+    background: url('../icon/seguimiento.png');
+    display: inline-block !important;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.k-grid-edit {
+    background: url('../icon/editar.png');
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Contacto {
+    background: url('../icon/contacto.png');
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Adicional {
+    background: url('../img/icons/Todo List-32.png');
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-edit {
+    display: none !important;
+}
+
+.k-grid-delete {
+    background: url('../icon/eliminar.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-delete {
+    display: none !important;
+}
+
+
+.k-grid-add {
+    background: url('../img/icons/Add Row-32.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-add {
+    display: none !important;
+}
+
+
+.k-grid-Areas {
+    background: url('../icon/areas.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Salones {
+    background: url('../icon/salones.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Colaborador {
+    background: url('../icon/colaboradores.png') !important;
+   background-size: contain !important;
+    background-repeat: no-repeat !important;
+    
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Talleres {
+    background: url('../icon/talleres.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Contactos {
+    background: url('../icon/contactos.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Participantes {
+    background: url('../icon/participantes.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Finalizar {
+    background: url('../icon/aceptar.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Excel {
+    background: url('../img/icons/MS Excel-32.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Arrancar {
+    background: url('../icon/iniciar.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-PruebaCorreo {
+    background: url('../icon/notificar.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-AsignarNutricionistas {
+    background: url('../icon/UserGroup-32.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-ProgramarCitas {
+    background: url('../icon/Calendar-32.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Enviar {
+    background: url('../icon/notificar.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Diagnostico {
+    background: url('../img/icons/Heart Monitor-32.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;    
+    height: 32px !important;
+    border: none !important;
+}
+
+.k-grid-Cuestionario {
+    background: url('../img/icons/Survey-32.png') !important;
+   background-size: contain !important;
+    background-repeat: no-repeat !important;
+    
+    height: 32px !important;
+    border: none !important;
+}

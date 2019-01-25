@@ -1,0 +1,287 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Administrador.clsEmpresaBase
+
+@(Html.Kendo().TabStrip()
+          .Name("tabstrip")
+          .HtmlAttributes(new { style = "width:100%" })
+          .Items(tabstrip =>
+          {
+          tabstrip.Add().Text("Datos Generales").Selected(true)
+          .Content( @<text>
+<div class="edit-form">
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.Nombre)</div>
+                <div class="value">
+                    @(Html.Kendo().TextBoxFor(x => x.Nombre)
+                        .HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(x => x.Nombre)
+                </div>
+            </div>
+        </div>
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.PBX)</div>
+                <div class="value">
+                    @(Html.Kendo().TextBoxFor(x => x.PBX)
+                        .HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(x => x.PBX)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title-single">@Html.LabelFor(x => x.Direccion)</div>
+                <div class="value-single">
+                    @(Html.Kendo().TextBoxFor(x => x.Direccion)
+                        .HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(x => x.Direccion)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.GiroId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.GiroId)
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel("Seleccionar...")
+                    .DataSource(d =>
+                    {
+                        d.Read(r =>
+                        {
+                            r.Action("GetGiro", "Empresa");
+                        })
+                        .ServerFiltering(true);
+                    })
+                    .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(x => x.GiroId)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title-single">@Html.LabelFor(x => x.CantidadAdministrativo)</div>
+                <div class="value-single">
+                    @(Html.Kendo().IntegerTextBoxFor(x => x.CantidadAdministrativo)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Events(e => e.Change("CalcularTE"))
+                    )  
+                    @Html.ValidationMessageFor(x => x.CantidadAdministrativo)
+                </div>
+            </div>
+        </div>
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.CantidadDistribucion)</div>
+                <div class="value">
+                    @(Html.Kendo().IntegerTextBoxFor(x => x.CantidadDistribucion)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Events(e => e.Change("CalcularTE"))
+                    )
+                    @Html.ValidationMessageFor(x => x.CantidadDistribucion)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title-single">@Html.LabelFor(x => x.CantidadProduccion)</div>
+                <div class="value-single">
+                    @(Html.Kendo().IntegerTextBoxFor(x => x.CantidadProduccion)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Events(e => e.Change("CalcularTE"))
+                    )
+                    @Html.ValidationMessageFor(x => x.CantidadProduccion)
+                </div>
+            </div>
+        </div>
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.CantidadVentas)</div>
+                <div class="value">
+                    @(Html.Kendo().IntegerTextBoxFor(x => x.CantidadVentas)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Events(e => e.Change("CalcularTE"))
+                    )
+                    @Html.ValidationMessageFor(x => x.CantidadVentas)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title-single">@Html.LabelFor(x => x.CantidadOtros)</div>
+                <div class="value-single">
+                    @(Html.Kendo().IntegerTextBoxFor(x => x.CantidadOtros)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Events(e => e.Change("CalcularTE"))
+                    )
+                    @Html.ValidationMessageFor(x => x.CantidadOtros)
+                </div>
+            </div>
+        </div>
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.OtrosDescripcion)</div>
+                <div class="value">
+                    @(Html.Kendo().TextBoxFor(x => x.OtrosDescripcion)
+                        .HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(x => x.OtrosDescripcion)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title-single">@Html.LabelFor(x => x.CantidadTotalEmpleados)</div>
+                <div class="value-single">
+                    @(Html.Kendo().TextBoxFor(x => x.CantidadTotalEmpleados)
+                        .HtmlAttributes(new { style = "width:100%" }).Enable(false)
+                    )
+                    @Html.ValidationMessageFor(x => x.CantidadTotalEmpleados)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="avatar-area" id="divPhoto">
+            Imagen
+            @{
+                //<img src="@Url.Content("~/Uploads/Empresas/" + Model.Id + ".png")" class="avatar" style="width:100%; max-width:200px; max-height:200px;">
+                
+            }
+            @(Html.Kendo().Upload()
+                .Name("EmpresaImg")
+                .Multiple(false)
+                .Messages(x => x.Select("Cargar Imagen"))
+                .Events(x => x.Upload("onUpload"))
+
+                .Async(a => a
+                    .Save("SubmitE", "../SitioAdministrativo/Home")
+                    .AutoUpload(true)
+                )
+            )
+            <p>Unicamante puede subir imagenes con extensión .PNG</p>
+            <script type="text/javascript">
+              
+            </script>
+        </div>
+    </div>
+</div>
+        </text>
+);
+              tabstrip.Add().Text("Contacto")
+
+                  .ContentHtmlAttributes(new { style = "height:98%;" })
+                  .LoadContentFrom(Url.Content("~/Administrador/Empresa/EditContactos"));
+
+              tabstrip.Add().Text("Salones")
+                  .ContentHtmlAttributes(new { style = "height:98%;" })
+                 .LoadContentFrom(Url.Content("~/Administrador/Empresa/EditSalones"));
+
+          })
+)
+
+
+<style>
+    .k-edit-form-container {
+        width: 650px !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 90%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>

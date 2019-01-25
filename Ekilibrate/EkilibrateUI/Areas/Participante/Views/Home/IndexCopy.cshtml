@@ -1,0 +1,295 @@
+﻿@using Kendo.Mvc.UI;
+@using BeyondThemes.Bootstrap;
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Description = "Empresas";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@*<h2>Index</h2>*@
+<div class="row">
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <img src='../assets/img/icons/Star Filled-32.png' />
+                Cuadro de Honor
+            </div>
+            <div>
+                <div class="widget-main">
+                    @using (var tabs = Html.Bootstrap().Begin(new Tabs("SimpleTab")))
+                    {
+                        tabs.Tab("1", BootstrapColors.Sky);
+                        tabs.Tab("2", BootstrapColors.Sky);
+                        tabs.Tab("3", BootstrapColors.Sky);
+                        tabs.Tab("4", BootstrapColors.Sky);
+                        tabs.Tab("5", BootstrapColors.Sky);
+                        tabs.Tab("6", BootstrapColors.Sky);
+                        tabs.Tab("7", BootstrapColors.Sky);
+                        tabs.Tab("8", BootstrapColors.Sky);
+                        tabs.Tab("9", BootstrapColors.Sky);
+                        tabs.Tab("10", BootstrapColors.Sky);
+
+                        using (tabs.BeginPanel())
+                        {
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/divyia.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">98 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">1</span>
+                                            <div class="databox-text darkgray">Marta Jimenez</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/david.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">96 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">2</span>
+                                            <div class="databox-text darkgray">Jorge López</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Nicolai-Larson.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">95 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">3</span>
+                                            <div class="databox-text darkgray">Claudia Sosa</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Osvaldus-Valutis.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">92 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">4</span>
+                                            <div class="databox-text darkgray">Luis Herrera</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Stephanie-Walter.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">92 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">5</span>
+                                            <div class="databox-text darkgray">Mónica Castillo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <img src='../assets/img/icons/Stack of Photos-32.png' />
+                Galeria de Fotos
+            </div>
+            <div class="btn-group  padding-left-50">
+                <img src="~/assets/img/foto1.jpg" />
+            </div>
+            <div class="btn-group text-align-center padding-left-50">
+                @Html.Bootstrap().Button().Text("<").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("1").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("2").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("3").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("4").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("5").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("6").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("7").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text("8").Color(BootstrapColors.Default)
+                @Html.Bootstrap().Button().Text(">").Color(BootstrapColors.Default)
+            </div>   
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <img src='../assets/img/icons/Stack of Photos-32.png' />
+                Recursos
+            </div>
+            <div>
+                <div class="tickets-container">
+                    Presiona click en el link de tu interés
+                    <ul class="tickets-list">
+                        <li class="ticket-item">
+                            <div class="row">
+                                <div class="ticket-user col-lg-12 col-sm-12">
+                                    <img src="~/assets/img/bajar-peso.jpg" class="user-avatar">
+                                    <a href='javascript: void(0)' onclick="www.karinbarquero.com"><span class="user-name">Bajar de peso y sentirte bien</span></a>
+                                    <span class="user-company">Karin Barquero</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ticket-item">
+                            <div class="row">
+                                <div class="ticket-user col-lg-12 col-sm-12">
+                                    <img src="~/assets/img/ahorro.jpg" class="user-avatar">
+                                    <a href='javascript: void(0)' onclick="www.karinbarquero.com"><span class="user-name">Creando el hábito del Ahorro</span></a>
+                                    <span class="user-company">Alex Gudiel</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ticket-item">
+                            <div class="row">
+                                <div class="ticket-user col-lg-12 col-sm-12">
+                                    <img src="~/assets/img/inteligencia_emocional.jpg" class="user-avatar">
+                                    <a href='javascript: void(0)' onclick="www.karinbarquero.com"><span class="user-name">Inteligencia emocional, un paso hacia el éxito</span></a>
+                                    <span class="user-company">Karla Escobar</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <img src='../assets/img/icons/Timeline-32.png' />
+                Actividades
+            </div>
+            <div class="orders-container">
+                <ul class="orders-list">
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                                <div class="item-booker">Diagnóstico</div>
+                                <div class="item-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>05 Oct</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item top">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                                <div class="item-booker">Lanzamiento</div>
+                                <div class="item-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>12 Oct</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                                <div class="item-booker">Seguimiento Nutricional</div>
+                                <div class="item-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>21 Oct</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                                <div class="item-booker">MANPO KEI</div>
+                                <div class="item-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>21 Oct - 30 Dic</span>
+                                </div>
+                            </div>                            
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                                <div class="item-booker">Talleres</div>
+                                <div class="item-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>05 Ene - 30 Marzo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="orders-footer">
+                    <a class="show-all" href=""><i class="fa fa-angle-down"></i> Mostrar Todas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

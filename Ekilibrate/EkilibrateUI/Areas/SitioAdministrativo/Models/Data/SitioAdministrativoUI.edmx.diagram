@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a3230c3a601470b94ea61e45e7d0430" Name="Diagram1">
+        <EntityTypeShape EntityType="EkiibrateDBModel.Menu" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.MenuTipo" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Objeto" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.ParametroGeneral" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.ParametroTipo" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Permiso" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Producto" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Propietario" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Rol" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.UsuarioPorRol" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Menu_MenuTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Menu_Objeto" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Objeto" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Objeto_Padre" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Objeto_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Parametro_Propietario" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Parametro_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Producto_Propietario" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Rol_Propietario" ManuallyRouted="false" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_RoleToUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.HistoricoUsuarioPorRol" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.GE_Persona" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="16.625" />
+        <EntityTypeShape EntityType="EkiibrateDBModel.Usuario" Width="1.5" PointX="3" PointY="16.375" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Usuario_TipoUsuario" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_UserToRole" />
+        <AssociationConnector Association="EkiibrateDBModel.FK_Usuario_Persona" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<div class="grid-mantenimientos-content-center">
+
+
+    @model System.Collections.Generic.IEnumerable<SitioAdministrativoUI.Models.Data.Producto>
+
+
+    @(Html.Kendo().Grid(Model)
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdProducto).Width(50).Title("");
+
+                columns.Bound(p => p.Nombre).Width(160);
+                columns.Bound(p => p.Descripcion).Width(200);
+                columns.ForeignKey(p => p.IdPropietario, (System.Collections.IEnumerable)ViewBag.Owner, "Value", "Text")
+                        .Title("Propietario").Width(125);
+                columns.Command(command => { command.Edit().Text("Actualizar"); command.Destroy().Text("Eliminar"); command.Custom("ProbarUrl").Click("urlPropietario"); }).Width(150);
+            })
+                    .ToolBar(toolbar => toolbar.Create().Text("Nuevo"))
+                .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+                    .Pageable(p =>
+                    {
+                        p.Refresh(true);
+                    })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                        .Events(events =>
+                        {
+                            events.Change("GridReload");
+                            events.Error("error_handler");
+                        })
+                .Model(model =>
+                {
+                    model.Id(p => p.IdProducto);
+                    model.Field(p => p.IdProducto).Editable(false);
+                    model.Field(p => p.Activo).DefaultValue(true);
+
+                })
+                .Create(update => update.Action("Product_Create", "GeneralManager"))
+                .Read(read => read.Action("Product_Read", "GeneralManager"))
+                .Update(update => update.Action("Product_Update", "GeneralManager"))
+                .Destroy(update => update.Action("Product_Destroy", "GeneralManager"))
+            )
+    )
+
+</div>
+
+<script type="text/javascript">
+
+    function urlPropietario(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        urlCargar = dataItem.Url;
+        window.open(urlCargar);
+    }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var Notificacion = $("#Notificacion").data("kendoNotification");
+        var flag = "@ViewBag.isError"
+        if (flag == "Error") {
+            Notificacion.show({
+                title: "Nueva Notificación",
+                message: "@ViewBag.Error"
+            }, "error");
+
+        }
+        else if (flag == "Exito") {
+            Notificacion.show({
+                title: "Nueva Notificación",
+                message: "Operación exitosa"
+            }, "exito");
+        }
+    })
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Home"
+      action="Index" key="00000000-0000-0000-0000-000000000001"
+        Template="~/Views/Shared/_Layout.cshtml" imageUrl="glyphicon glyphicon-home">
+    <mvcSiteMapNode title="Dynamic Nodes"
+              dynamicNodeProvider="BarcoSoftUtilidades.Seguridad.BarcoSoftSiteMapMenu, BarcoSoftUtilidades" >
+    </mvcSiteMapNode>
+    
+   <mvcSiteMapNode title="Hodsdme" controller="Administrador"
+        action="Index" key="00000000-0000-0000-0000-000000000002"
+          area="Proyecto" imageUrl="glyphicon glyphicon-home">
+  </mvcSiteMapNode>
+  </mvcSiteMapNode>
+
+ 
+
+</mvcSiteMap>

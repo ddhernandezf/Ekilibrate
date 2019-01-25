@@ -1,0 +1,42 @@
+﻿@using Kendo.Mvc.UI
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsEnfermeraBase>()
+                    .Name("gridEnfermero")
+                    .Columns(columns =>
+                    {
+
+                        columns.ForeignKey(p => p.ColaboradorId, (System.Collections.IEnumerable)ViewBag.ColaboradorEnfermera, "Value", "Text").Width(175);
+                        columns.Command(cmd =>
+                        {
+                            cmd.Edit().Text(" ");
+                            cmd.Destroy().Text(" ");
+                        }).Width(100);
+                    })
+                    .ToolBar(tl => tl.Create().Text(" "))
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+                    .Pageable(p =>
+                    {
+                        p.Refresh(true);
+                    })
+                        .Events(events => events.DataBound("dataBound"))
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.ColaboradorId);
+                        })
+                        .Read(read => read.Action("Enfermera_Read", "Proyecto").Data("ProyectoSeleccionado"))
+                        .Create(read => read.Action("Enfermera_Create", "Proyecto").Data("ProyectoSeleccionado"))
+                            .Update(read => read.Action("Enfermera_Update", "Proyecto").Data("ProyectoSeleccionado"))
+                        .Destroy(read => read.Action("Enfermera_Destroy", "Proyecto").Data("ProyectoSeleccionado"))
+                    )
+)

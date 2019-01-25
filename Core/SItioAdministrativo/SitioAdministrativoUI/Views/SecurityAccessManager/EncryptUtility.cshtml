@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "EncryptUtility";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using (Html.BeginForm("EncryptUtility", "SecurityAccessManager", FormMethod.Post, new { id = "myForm" }))
+{
+
+    <div class="widget">
+        <div class="widget-header ">
+            <span class="widget-caption"></span>
+            <div class="widget-buttons">
+                <a href="#" data-toggle="maximize">
+                    <i class="fa fa-expand"></i>
+                </a>
+                <a href="#" data-toggle="collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+                <a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            @model SitioAdministrativoUI.Models.EncryptUtility
+
+            @Html.HiddenFor(model => model.ValueDecript)
+            @Html.HiddenFor(model => model.ValueEncript)
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wrapper-title fha-font-size">
+                    @Html.LabelFor(model => model.EncryptString)
+                </div>
+                <div class="wrapper-content">
+                    @Html.TextAreaFor(model => model.EncryptString, new { style = "height: 150px; margin: 0px; width: 80%;"})
+                    @Html.ValidationMessageFor(model => model.EncryptString)
+                </div>
+            </div>
+
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wrapper-title fha-font-size">
+                    @Html.LabelFor(model => model.ValueDecript)
+                </div>
+                <div class="wrapper-content">
+                    @Html.DisplayFor(model => model.ValueDecript, new { style = "height: 100px;width:100%;word-wrap:break-word;" })
+                    @Html.ValidationMessageFor(model => model.ValueDecript)
+                </div>
+            </div>
+
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wrapper-title fha-font-size">
+                    @Html.LabelFor(model => model.DecryptString)
+                </div>
+                <div class="fha-content">
+                    @Html.TextAreaFor(model => model.DecryptString, new { style = "height: 150px; margin: 0px; width: 80%;" })
+                    @Html.ValidationMessageFor(model => model.DecryptString)
+                </div>
+            </div>
+
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wrapper-title fha-font-size">
+                    @Html.LabelFor(model => model.ValueEncript)
+                </div>
+                <div class="wrapper-content">
+                    <div style="word-wrap:break-word;width:100%;">
+                        @Html.DisplayFor(model => model.ValueEncript, new { style = "height: 100px;width:100%;word-wrap:break-word;" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ValueEncript)
+                </div>
+            </div>
+
+
+
+            <div class="wrapper-row fha-padding-top-15px ">
+
+                @(Html.Kendo().Button()
+                    .Name("btnSend")
+                    .Content("Operar")
+                    .HtmlAttributes(new { @class = "k-primary" })
+                )
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+}
+

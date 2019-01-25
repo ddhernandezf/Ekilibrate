@@ -1,0 +1,85 @@
+﻿@using Kendo.Mvc.UI
+
+<style>
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>
+
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsContactoBase>()
+            .Name("gridContacto")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdPersona).Visible(false);
+                //columns.Bound(p => p.Nombre).Width(120).ClientTemplate("<img src='../Uploads/Participantes/#=IdPersona#.jpg' style= 'width:100%; max-width:128px;' class='avatar'> #=Nombre # #=Apellido #");
+                columns.Bound(p => p.Nombre).Width(300).ClientTemplate(
+                            @"<div class='profile-header row'>
+                                  <div class='col-lg-2 col-md-4 col-sm-12 text-center'>
+                                    <img src='../Uploads/Participantes/#=IdPersona#.jpg' style='width:100%; max-width:128px;' alt='' class='header-avatar' />
+                                  </div>
+                                  <div class='col-lg-5 col-md-8 col-sm-12 profile-info'>
+                                    <div class='header-fullname'>#=Nombre # #=Apellido #</div>
+                                    <div class='contact-info'>
+                                        <p>
+                                            <i class='glyphicon glyphicon-phone-alt'></i> Oficina	: #=Telefono# Ext	: #=Extension#<br>
+                                            <i class='glyphicon glyphicon-phone'></i> Móvil		: #=Celular# <br>
+                                            <i class='glyphicon glyphicon-envelope'></i> Email		: #=Correo# <br>
+                                        </p>                                    
+                                    </div>
+                                  </div>
+                               </div> "
+                        );
+                //columns.Bound(p => p.Telefono).Width(50).Title("Tel. Oficina");
+                //columns.Bound(p => p.Extension).Width(35).Title("Ext.");
+                //columns.Bound(p => p.Correo).Width(120).Title("Correo");
+                //columns.Bound(p => p.Celular).Width(50).Title("Tel. Móvil");
+                columns.Bound(p => p.EsPrincipal).Width(120).Title("Contacto Principal").ClientTemplate("<input type='checkbox' disabled #= EsPrincipal == true ? checked='checked' : '' # />");
+                columns.Command(cmd =>
+                {
+                    cmd.Edit().Text(" ");
+                    cmd.Destroy().Text(" ");
+                }).Width(80);
+            })
+            .ToolBar(tl => tl.Create().Text(" "))
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditContacto").Window(w => w.Width(800)))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+            .Sortable()
+            .Scrollable(s => s.Height("auto"))
+            //.HtmlAttributes(new { style = "height:98%;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .PageSize(10)
+                .Model(model =>
+                {
+                    model.Id(p => p.IdPersona);
+                })
+                        .Create(update => update.Action("Create", "Contacto").Data("EmpresaSeleccionada"))
+                        .Read(read => read.Action("Read", "Contacto").Data("EmpresaSeleccionada"))
+                        .Update(update => update.Action("Update", "Contacto").Data("EmpresaSeleccionada"))
+                        .Destroy(update => update.Action("Delete", "Contacto"))
+            )
+)

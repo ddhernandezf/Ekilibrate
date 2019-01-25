@@ -1,0 +1,405 @@
+﻿@using Kendo.Mvc.UI;
+@using BeyondThemes.Bootstrap;
+@{
+    ViewBag.Title = "Home";
+    ViewBag.Description = "Home";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2>Home</h2>
+<div class="row">
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <img src='../assets/img/icons/Star Filled-32.png' />
+                Cuadro de Honor
+            </div>
+            <div>
+                <div class="widget-main">
+                    @using (var tabs = Html.Bootstrap().Begin(new Tabs("SimpleTab")))
+                    {
+                        tabs.Tab("1", BootstrapColors.Sky);
+                        tabs.Tab("2", BootstrapColors.Sky);
+                        tabs.Tab("3", BootstrapColors.Sky);
+                        tabs.Tab("4", BootstrapColors.Sky);
+                        tabs.Tab("5", BootstrapColors.Sky);
+                        tabs.Tab("6", BootstrapColors.Sky);
+                        tabs.Tab("7", BootstrapColors.Sky);
+                        tabs.Tab("8", BootstrapColors.Sky);
+                        tabs.Tab("9", BootstrapColors.Sky);
+                        tabs.Tab("10", BootstrapColors.Sky);
+
+                        using (tabs.BeginPanel())
+                        {
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <h3>Destacados</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <h3>Alerta</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/divyia.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">98 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">1</span>
+                                            <div class="databox-text darkgray">Marta Jimenez</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/claudia.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">0 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">1</span>
+                                            <div class="databox-text darkgray">Claudia Morales</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/david.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">96 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">2</span>
+                                            <div class="databox-text darkgray">Jorge López</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/guillermo.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">20 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">2</span>
+                                            <div class="databox-text darkgray">Guillermo Cruz</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Nicolai-Larson.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">95 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">3</span>
+                                            <div class="databox-text darkgray">Claudia Sosa</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/silvia.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">25 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">3</span>
+                                            <div class="databox-text darkgray">Silvia Rodriguez</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Osvaldus-Valutis.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">40 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">4</span>
+                                            <div class="databox-text darkgray">Luis Herrera</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/marlon.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">50 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">4</span>
+                                            <div class="databox-text darkgray">Marlon Barrios</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/Stephanie-Walter.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">92 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">5</span>
+                                            <div class="databox-text darkgray">Mónica Castillo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <img src="~/assets/img/avatars/monica.jpg" style="width:65px; height:65px;">
+                                        </div>
+                                        <div class="databox-right padding-top-10">
+                                            <div class="databox-stat bg-purple radius-bordered">
+                                                <div class="stat-text">52 pts.</div>
+                                            </div>
+                                            <span class="databox-number purple">5</span>
+                                            <div class="databox-text darkgray">Paola Garcia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                        using (tabs.BeginPanel())
+                        {
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <span class="widget-caption"><img src='../assets/img/icons/Calendar-32.png' />Citas del día</span>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsCita>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.TipoCitaId).Hidden();
+                        columns.Bound(p => p.Nombre).Width(175);
+                        columns.Bound(p => p.ParticipanteId).Width(175).Hidden();
+                        columns.Bound(p => p.Fecha).Width(90);
+                        columns.Bound(p => p.Hora).Width(95);
+                        columns.Bound(p => p.NutricionistaId).Width(175).Hidden();
+                        columns.Command(command =>
+                        {
+                            //command.Edit().Text("Segumiento");
+                            //command.Destroy().Text("Eliminar");
+                            command.Custom("Segumiento").Text("Atender").Click("OnClickSeguimiento");
+                            command.Custom("Reprogramar").Text("Reprogramar").Click("onClickParticipante");
+                        }).Width(250);
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                        .Filterable(f =>
+                        {
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+
+                        })
+                        .Create(update => update.Action("Create", "Home"))
+                        .Read(read => read.Action("Read", "Home"))
+                        .Update(update => update.Action("Update", "Home"))
+                        .Destroy(update => update.Action("Delete", "Home"))
+                    )
+                    .Events(e => e.Edit("onEdit"))
+                )
+            </div>
+        </div>
+        </div>
+</div>
+
+@{Html.Kendo().Window()
+    .Name("window")
+    .Title("Participantes")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(50))
+    .Content(
+    @<text>
+        <h2> <label id="EmpresaNombre"></label> </h2>
+        @*<h4> <label id="RoleDescriptionU"></label> </h4>*@
+        @*<h3>Agregar Usuarios</h3>*@
+
+        <div id="divUnAssignedUsers" class="grid-mantenimientos-content-center">
+            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsParticipante>()
+                .Name("gridParticipantes")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.Id).Width(25).Title("");
+                    columns.Bound(p => p.Nombre).Width(175);
+                    columns.Bound(p => p.Apellido).Width(175);
+                    columns.Bound(p => p.Grupo).Width(175);
+                    columns.Command(command =>
+                    {
+                        //command.Edit().Text("Actualizar");
+                        command.Destroy().Text("Eliminar");
+                    }).Width(200);
+                })
+                .ToolBar(toolbar => toolbar.Create().Text("Crear"))
+                .ToolBar(toolbar => toolbar.Custom().Text("Cargar Excel"))
+                .Editable(editable => editable.Mode(GridEditMode.InCell))
+                .Filterable(f =>
+                {
+                    f.Extra(false);
+                })
+                .Pageable(p =>
+                {
+                    p.Refresh(true);
+                })
+                .Sortable()
+                .Scrollable()
+                .HtmlAttributes(new { style = "height:430px;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Events(events => events.Error("error_handler"))
+                    .PageSize(10)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.Id);
+                    })
+                    .Create(update => update.Action("Create", "Participante"))
+                    .Read(read => read.Action("Read", "Participante").Data("ParametroProyecto"))
+                    .Update(update => update.Action("Update", "Participante"))
+                    .Destroy(update => update.Action("Delete", "Participante"))
+                )
+                .Events(e => e.Edit("onEdit"))
+            )
+        </div>
+    </text>
+)
+    .Render();
+}
+
+<script type="text/javascript">
+    var ProyectoId;
+    function ParametroProyecto() {
+        return {
+            pProyectoId: ProyectoId
+        }
+    }
+
+    function onEdit(e) {
+        $('[name="Empresa"]').attr("readonly", true);
+    }
+
+    function OnClickSeguimiento(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var TipoCita = dataItem.TipoCitaId;
+        var ParticipanteId = dataItem.ParticipanteId;
+        var NutricionistaId = dataItem.NutricionistaId;
+
+        switch (TipoCita) {
+            case 1:
+                window.location = "../Nutricionista/Diagnostico?Par=" + ParticipanteId;
+                bre;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+
+        }
+
+        
+
+    }
+
+    function onClickParticipante(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        ProyectoId = dataItem.Id;
+
+        document.getElementById("EmpresaNombre").innerHTML = "Empresa: <b>" + dataItem.Empresa + "</b>";
+
+        $("#gridParticipantes").data("kendoGrid").dataSource.read();
+        $("#window").data("kendoWindow").open();
+    }
+</script>

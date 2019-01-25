@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[PAR.Participante]
+(
+	[Id] INT NOT NULL, 
+	[ProyectoId] INT NOT NULL, 
+    [PaisId] INT NULL,
+	[GrupoId] INT NULL, 
+	[Compa] INT NULL,
+    [Baja] BIT NULL, 
+    [NutricionistaId] INT NULL, 
+    [CitaDia] INT NULL, 
+    [CitaHora] TIME NULL, 
+    [PrimeraCita] DATETIME NULL, 
+    [Ranking] INT NULL, 
+	[Restrictiva] BIT NULL,
+	[FechaDiagnosticoInicial] DATETIME NULL,
+	[FechaBxInicial] DATETIME NULL,
+	[FechaDiagnosticoFinal] DATETIME NULL,
+	[FechaBxFinal] DATETIME NULL,
+    CONSTRAINT [FK_PAR.Participante_Persona] FOREIGN KEY ([Id]) REFERENCES [GE.Persona]([Id]),
+	CONSTRAINT [FK_PAR.Participante_Pais] FOREIGN KEY ([PaisId]) REFERENCES [CA.Pais]([Id]),
+	CONSTRAINT [FK_PAR.Participante_Compa] FOREIGN KEY ([Compa], [ProyectoId]) REFERENCES [PAR.Participante]([Id], [ProyectoId]),
+	CONSTRAINT [FK_PAR.Participante_Grupo] FOREIGN KEY ([GrupoId]) REFERENCES [PR.Grupo]([Id]),
+	CONSTRAINT [FK_PAR.Participante_Nutricionista] FOREIGN KEY ([ProyectoId], [NutricionistaId]) REFERENCES [PR.Nutricionista]([ProyectoId], [ColaboradorId]),
+	PRIMARY KEY ([Id], [ProyectoId])
+)

@@ -1,0 +1,188 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+@model Ekilibrate.Model.Entity.Participante.clsAlimentacionBase
+
+@{
+    ViewBag.Title = "Alimentacion";
+    ViewBag.Description = "Alimentacion";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Alimentacion", FormMethod.Post, new { id = "myform" }))
+{
+
+    <h1><img src="../assets/img/icons/Heart Monitor-32.png" />Evaluación del Estilo de Vida</h1>
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+                <ul>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Diagnostico'><span class="step">1</span></a>1<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">2</span><span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Riesgo'><span class="step">3</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Cuidado'><span class="step">4</span><span class="chevron"></span></a></li>
+                    @*<li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Emocion'><span class="step">5</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Tiempo'><span class="step">6</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Comunicacion'><span class="step">7</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/ComunicacionDos'><span class="step">8</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/TestFinanzas'><span class="step">9</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Liderazgo'><span class="step">10</span><span class="chevron"></span></a></li>*@
+                </ul>
+            </div>
+            
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption" style="font-size:28px"><img src="../assets/img/icons/User Menu-32.png" /> Área del Cuidado de la Salud</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            @Html.HiddenFor(x => x.ID_PARTICIPANTE)
+            <div class="widget-header bordered-bottom bordered-themethirdcolor">
+                <span class="widget-caption themethirdcolor"> Test sobre hábitos alimentarios</span>
+                <div class="widget-buttons">
+                </div>
+            </div>
+            <div class="widget-body">
+                <div id="Horizontal-form">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-lg-12 control-label">Señala los tiempos de comida que realizas generalmente al día:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.DESAYUNO, "false") Desayuno
+
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.REFACCION_AM, "false") Refrigerio/Merienda en la mañana
+
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.ALMUERZO, "false") Almuerzo
+
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.REFACCION_TARDE, "false") Refrigerio/Merienda en la tarde
+
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.CENA, "false") Cena
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.CheckBoxFor(model => model.REFACCION_NOCHE, "false") Refrigerio/Merienda en la noche
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-lg-7 control-label">¿Cuántos vasos de agua tomas al día?</label>                                    
+                                    <label class="col-lg-7 control-label h6"> Incluir todas los refrescos naturales, café o te que no tengan más de 2 cucharaditas de azúcar</label>
+                                    <div class="col-lg-3">
+                                        @(Html.Kendo().DropDownListFor(x => x.ID_VASOS)
+                                                .HtmlAttributes(new { @style = "width:100%" })
+                                                .Name("ID_VASOS")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Seleccione una opción")
+                                                .BindTo(new List<SelectListItem>{
+                                            new SelectListItem{Text = "Ninguno", Value="1"},
+                                            new SelectListItem{Text = "1 - 4 vasos", Value="2"},
+                                            new SelectListItem{Text = "5 - 8 vasos", Value="3"},
+                                            new SelectListItem{Text = "Más de 8 vasos", Value="4"}
+                                            })
+                                        )
+                                        @Html.ValidationMessageFor(x => x.ID_VASOS, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-md-7 control-label">¿Cuántas cucharaditas de azúcar utilizas al día?</label>
+                                    <label class="col-lg-7 control-label h6"> Incluye la de las bebidas que tomas</label>
+                                    <div class="col-lg-3">
+                                        @(Html.Kendo().TextBoxFor(Model => Model.CUCHARADAS_DIARIAS).HtmlAttributes(new { @class = "form-control" }))
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label class="col-lg-2 control-label">Cucharaditas</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-lg-8 control-label">¿Agregas más sal a tu comida, de la que se utilizó para cocinarla?</label>
+                                    <div class="col-lg-2">
+                                        @Html.RadioButtonFor(model => model.SAL, "true") Si
+                                    </div>
+                                    <div class="col-lg-2">
+                                        @Html.RadioButtonFor(model => model.SAL, "false") No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-4 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bg-pink header-large">
+                                    <span class="widget-caption"><font color="#666">¿Cuáles son tus comidas favoritas?</font></span>
+                                </div>
+                                <div class="widget-body">
+                                    <br />
+                                    @(Html.TextAreaFor(Model => Model.COMIDA_FAVORITA, 3, 1, new { @class = "form-control" }))
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8 col-sm-4 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bg-sky header-large">
+                                    <span class="widget-caption"><font color="#666">¿Qué comidas no te gustan?</font></span>
+                                </div>
+                                <div class="widget-body bordered-top bordered-sky">
+                                    <br />
+                                    @(Html.TextAreaFor(Model => Model.COMIDA_NO_FAVORITA, 3, 1, new { @class = "form-control" }))
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-sm-4 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-header bg-blueberry ">
+                                    <span class="widget-caption"><font color="#666">¿Qué comidas te hacen daño?</font></span>
+                                </div>                                
+                                <div class="widget-body bordered-top bordered-blueberry">
+                                    (Por favor indica que molestias te causan)
+                                    <br />
+                                    @(Html.TextAreaFor(Model => Model.COMIDA_DANINA, 3, 1, new { @class = "form-control" }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <br />
+                    <div class="row">
+                        <div class="pull-right" style="display: inline-flex; padding-right: 1em;">
+                            <div class="btn-group">
+                                <button type="submit" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+                                <button type="button" class="btn-lg btn-warning" onclick="location.href = '../Participante/Diagnostico';"><i class="fa fa-angle-left"></i> Atrás</button>
+                                <button type="submit" class="btn-lg btn-success btn-next" data-last="Finish" value="Siguiente" name="accion">Siguiente <i class="fa fa-angle-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+}

@@ -1,0 +1,363 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+@model Ekilibrate.Model.Entity.Participante.clsRiesgoBase
+
+@{
+    ViewBag.Title = "Riesgo";
+    ViewBag.Description = "Riesgo";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "Riesgo", FormMethod.Post, new { id = "myform" }))
+{
+    <h2><img src="../assets/img/icons/Heart Monitor-32.png" />Evaluación del Estilo de Vida</h2>
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+                <ul>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Diagnostico'><span class="step">1</span></a>1<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Alimentacion'><span class="step">2</span></a>2<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">3</span><span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Cuidado'><span class="step">4</span><span class="chevron"></span></a></li>
+                    @*<li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Emocion'><span class="step">5</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Tiempo'><span class="step">6</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Comunicacion'><span class="step">7</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/ComunicacionDos'><span class="step">8</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/TestFinanzas'><span class="step">9</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Liderazgo'><span class="step">10</span><span class="chevron"></span></a></li>*@
+                </ul>
+            </div>
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption" style="font-size:28px"><img src="../assets/img/icons/Medical Doctor-50.png" width="32px" height="32px" /> Área del Cuidado de la Salud</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>*@
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            @Html.HiddenFor(x => x.ID_PARTICIPANTE)
+            <div class="widget-header bordered-bottom bordered-themethirdcolor">
+                <span class="widget-caption themethirdcolor"> Test sobre factores de riesgo</span>
+                <div class="widget-buttons">
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label h4">1. ¿Fumas?</label>
+                        <div class="col-lg-1">
+                            @Html.RadioButtonFor(model => model.FUMAR, "false") Si
+                        </div>
+                        <div class="col-lg-1">
+                            @Html.RadioButtonFor(model => model.FUMAR, "true") No
+                            @*@Html.Kendo().RadioButton().Label("No").Name("NO_SAL").Checked(isChecked: false)*@
+                        </div>
+                        <label class="col-lg-2 control-label">¿Con qué frecuencia?</label>
+                        <div class="col-lg-2">
+                                @(Html.Kendo().DropDownList()
+                                            .HtmlAttributes(new { @style = "width:100%" })
+                                            .Name("CODIGO_FRECUENCIA_FUMAR")
+                                            .DataTextField("Text")
+                                            .DataValueField("Value")
+                                            .OptionLabel("Seleccione una opción")
+                                            .BindTo(new List<SelectListItem>{
+                                                    new SelectListItem{Text = "Diario", Value="1"},
+                                                    new SelectListItem{Text = "Semanal", Value="2"},
+                                                    new SelectListItem{Text = "Mensual", Value="3"},
+                                                    })
+                                )                            
+                        </div>
+                        <label class="col-lg-2 control-label">¿Cuántos cigarrillos fumas cada vez?</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().IntegerTextBoxFor(model => model.NUM_CIGARROS).HtmlAttributes(new { style = "width:100%" }))
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row">
+                    
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-title">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label h4">2. ¿Tomas bebidas alcohólicas?</label>
+                        <div class="col-lg-1">
+                            @Html.RadioButtonFor(model => model.BEBER, "false") Si
+                        </div>
+                        <div class="col-lg-1">
+                            @Html.RadioButtonFor(model => model.BEBER, "true") No
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">¿Con qué frecuencia?</label>
+                        <div class="col-lg-3">
+                            @(Html.Kendo().DropDownList()
+                                .HtmlAttributes(new { @style = "width:100%" })
+                                .Name("CODIGO_FRECUENTE_BEBER")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("Seleccione una opción")
+                                .BindTo(new List<SelectListItem>{
+                                        new SelectListItem{Text = "Diario", Value="1"},
+                                        new SelectListItem{Text = "Semanal", Value="2"},
+                                        new SelectListItem{Text = "Mensual", Value="3"},
+                                        })
+                            )
+                        </div>
+                        @(Html.LabelFor(x => x.NUMERO_BEBIDA, new { @class = "col-sm-3 control-label no-padding-right" }))
+                        <div class="col-md-3">
+                            @(Html.Kendo().IntegerTextBoxFor(model => model.NUMERO_BEBIDA).HtmlAttributes(new { style = "width:100%" }))                            
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">¿Qué bebidas consumes con mayor frecuencia?</label>
+                        <div class="col-lg-3">
+                            @if (Model != null && Model.LISTA_BEBIDA != null)
+                            {
+
+                                foreach (Ekilibrate.Model.Entity.Participante.clsBebidasFrecuentes item in Model.LISTA_BEBIDA)
+                                {
+                                    if (item.Seleccionado)
+                                    {
+                                        <input onclick='OnCheckedBebida(@item.ID_BEBIDA, this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    else
+                                    {
+                                        <input onclick='OnCheckedBebida(@item.ID_BEBIDA, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    <label>@item.NOMBRE_BEBIDA</label><br />
+                                }
+                            }
+                        </div>
+                        <label class="col-lg-3 control-label">Marca la medida de la bebida que consumes con mayor frecuencia</label>
+                        <div class="col-lg-3">
+                            @if (Model != null && Model.LISTA_MEDIDA != null)
+                            {
+                                foreach (Ekilibrate.Model.Entity.Participante.clsMedidaBebida item in Model.LISTA_MEDIDA)
+                                {
+                                    if (item.Seleccionado)
+                                    {
+                                        <input onclick='OnCheckedMedida(@item.ID_MEDIDA, this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    else
+                                    {
+                                        <input onclick='OnCheckedMedida(@item.ID_MEDIDA, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    <label>@item.MEDIDA</label><br />
+
+                                }
+                            }
+                        </div>                        
+                    </div>
+                </div>    
+                <br />
+                <div class="row">
+                    <div class="form-title">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-12 control-label h4">3. ¿Algún miembro de tu familia cercana (papá, mamá, abuelitos, hermanos) padecieron o padecen alguna de estas enfermedades? (Marca todas las que apliquen)</label>
+                        @if (Model.LISTA_ENFERMEDAD != null)
+                        {
+                            foreach (Ekilibrate.Model.Entity.Participante.clsEnfermedad item in Model.LISTA_ENFERMEDAD)
+                            {
+                                <div class="col-lg-8">
+                                    @if (item.Seleccionado)
+                                    {
+                                        <input onclick='OnCheckedEnfermedad(@item.ID_ENFERMEDAD, this);' checked='checked' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    else
+                                    {
+                                        <input onclick='OnCheckedEnfermedad(@item.ID_ENFERMEDAD, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    <label>@item.ENFERMEDAD</label>
+                                </div>
+                            }
+                        }
+                        
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="pull-right" style="display: inline-flex; padding-right: 1em;">
+                        <div class="btn-group">
+                            <button type="submit" class="btn-lg btn-blue tooltip-blue" value="Guardar" name="accion" data-toggle="tooltip" data-placement="top" data-original-title="Guardar"><i class="fa fa-check"></i>Guardar</button>
+                            <button type="button" class="btn-lg btn-warning tooltip-warning" data-toggle="tooltip" data-placement="top" data-original-title="Atrás" onclick="location.href = '../Participante/Alimentacion';"><i class="fa fa-angle-left"></i> Atrás</button>
+                            <button type="submit" class="btn-lg btn-success btn-next tooltip-success" data-last="Finish" value="Siguiente" name="accion" data-toggle="tooltip" data-placement="top" data-original-title="Siguiente">Siguiente <i class=" fa fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+    </div>
+        
+    <script type="text/javascript">
+        function OnCheckedBebida(pID_BEBIDA, e) 
+        {
+            if (e.checked) {
+                $.ajax({
+                    url: 'Riesgo/AddBebidasFrecuentes?pID_BEBIDA=' + pID_BEBIDA,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+            }
+            else {
+                $.ajax({
+                    url: 'Riesgo/DeleteBebidasFrecuentes?pID_BEBIDA=' + pID_BEBIDA,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+
+        function OnCheckedMedida(pID_MEDIDA, e) {
+
+
+            if (e.checked) {
+
+
+                $.ajax({
+                    url: 'Riesgo/AddMedidaBebida?pID_MEDIDA=' + pID_MEDIDA,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+            }
+            else {
+                $.ajax({
+                    url: 'Riesgo/DeleteMedidaBebida?pID_MEDIDA=' + pID_MEDIDA,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+
+        function OnCheckedEnfermedad(ID_ENFERMEDAD, e) 
+        {
+            if (e.checked) {
+                $.ajax({
+                    url: 'Riesgo/AddEnfermedad?IdEnfermedad=' + ID_ENFERMEDAD,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+            }
+            else {
+                $.ajax({
+                    url: 'Riesgo/DeleteEnfermedad?IdEnfermedad=' + ID_ENFERMEDAD,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+    </script>
+
+
+}

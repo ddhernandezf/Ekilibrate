@@ -1,0 +1,83 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+
+@{
+    ViewBag.Title = "Participantes";
+    ViewBag.Description = "Participantes";
+    Layout = "~/Views/Shared/_Empty.cshtml";
+}
+
+<h4> <label id="EmpresaNombre"></label> </h4>
+<label id="ProyectoId"></label>
+<label id="RoleDescriptionU">Para cargar el listado de participantes por medio de un archivo de Excel (.xls, .xlsx) presione el botón seleccionar y seleccione el archivo</label>
+<label>Descargar Excel de prueba</label><a href="~/Uploads/Participantes/Participantes.xlsx" title='Descargar Excel Ejemplo'><img src='../assets/img/icons/MS Excel-32.png' /></a>
+
+
+@(Html.Kendo().Upload()
+        .Name("files1")
+        .Multiple(false)
+        .Messages(x => x.Select("Cargar"))
+        .Events(x => x.Upload("onImageUpload").Complete("onComplete"))
+        .Async(a => a
+            .Save("Submit", "Proyecto")
+            .AutoUpload(true)
+        )
+)
+
+<script type="text/javascript">
+        function onComplete() {
+            alert("Archivo cargado exitosamente.");
+            $("#gridParticipantes").data("kendoGrid").dataSource.read();
+        }
+
+        var ProyectoId;
+        function ParametroProyecto() {
+            return {
+                pProyectoId: $("#ProyectoId").val()
+            }
+        }
+</script>
+
+<div id="divUnAssignedUsers" class="grid-mantenimientos-content-center">
+    @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsParticipante>()
+            .Name("gridParticipantes")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.Id).Width(25).Title("");
+                columns.Bound(p => p.Nombre).Width(175);
+                columns.Bound(p => p.Apellido).Width(175);
+                columns.Bound(p => p.Grupo).Width(175);
+                columns.Command(command =>
+                {
+                    //command.Edit().Text("Actualizar");
+                    command.Destroy().Text(" ");
+                }).Width(200);
+            })
+            //.ToolBar(toolbar => toolbar.Create().Text(" "))
+            .Editable(editable => editable.Mode(GridEditMode.InCell))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .PageSize(10)
+                .Model(model =>
+                {
+                    model.Id(p => p.Id);
+                })
+                //.Create(update => update.Action("Create", "Participante"))
+                .Read(read => read.Action("Read", "Participante").Data("ParametroProyecto"))
+                //.Update(update => update.Action("Update", "Participante"))
+                //.Destroy(update => update.Action("Delete", "Participante"))
+            )
+    )
+</div>

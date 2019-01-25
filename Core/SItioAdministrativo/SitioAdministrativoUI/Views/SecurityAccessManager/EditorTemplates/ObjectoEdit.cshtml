@@ -1,0 +1,108 @@
+﻿
+@model SitioAdministrativoUI.Models.ViewModelObjeto
+
+<center>
+    <h3 style="color:black;">Información de permiso</h3>
+    <br />
+    @Html.HiddenFor(model => model.IdPermission)
+    @Html.HiddenFor(model => model.IdProduct)
+
+
+    <div class="wrapper-row padding-top-15px ">
+        <div class="title font-size">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="content">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+
+    <div class="wrapper-row padding-top-15px ">
+        <div class="title fha-font-size">
+            Descripción del permiso
+        </div>
+        <div class="content">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+
+
+
+
+
+
+    @*<div class="fha-wrapper-row fha-padding-top-15px ">
+            <div class="fha-title fha-font-size">
+                @Html.Label("Propietario")
+            </div>
+
+
+            <div class="fha-content">
+                @(Html.Kendo().DropDownListFor(m => m.IdOwner)
+                        // .Name("IdOwner")
+                        //.AutoBind(false)
+                      .DataTextField("Text")
+                      .DataValueField("Value")
+                      .OptionLabel("Elija el propietario...")
+                      .DataSource(dataSource =>
+                      {
+                          dataSource.Read(read => read.Action("GetOwners", "GeneralManager"));
+
+                      })
+                )
+            </div>
+        </div>
+
+        <div class="fha-wrapper-row fha-padding-top-15px ">
+            <div class="fha-title fha-font-size">
+                @Html.LabelFor(model => model.IdProduct)
+            </div>
+            <div class="fha-content">
+                @(Html.Kendo().DropDownListFor(m => m.IdProduct)
+                      .AutoBind(false)
+                      .OptionLabel("Elija el producto...")
+                      .DataTextField("Text")
+                      .DataValueField("Value")
+                      .DataSource(dataSource =>
+                      {
+                          dataSource.Read(read => read.Action("GetProducts", "GeneralManager").Data("filterOwners"))
+                          .ServerFiltering(true);
+                      })
+                        .CascadeFrom("IdOwner")
+                          .Enable(false)
+
+                )
+                @Html.ValidationMessageFor(model => model.IdProduct)
+            </div>
+
+        </div>*@
+
+
+    <div class="fha-wrapper-row fha-padding-top-15px ">
+        <div class="fha-title fha-font-size">
+            @Html.LabelFor(model => model.IdPermissionParent)
+        </div>
+        <div class="fha-content">
+            @(Html.Kendo().DropDownListFor(m => m.IdNewPermissionParent)
+                  .AutoBind(false)
+                    //   .Name("IdPermissionParent")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .OptionLabel("Elija el permiso padre...")
+                        .DataSource(dataSource =>
+                        {
+                            dataSource.Read(read => read.Action("GetPermission", "SecurityAccessManager").Data("filterProducts"))
+                            .ServerFiltering(true);
+                        })
+
+            )
+            @Html.ValidationMessageFor(model => model.IdPermissionParent)
+        </div>
+    </div>
+
+
+
+
+</center>

@@ -1,0 +1,115 @@
+﻿@model EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Usuario
+@using Kendo.Mvc.UI;
+<center>
+    <h3 style="color:black;">Información Usuario</h3>
+    <br />
+    @Html.HiddenFor(model => model.IdUsuario)
+    @Html.HiddenFor(model => model.IdPersona)
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.NombreUsuario)
+        </div>
+        <div class="wrapper-content">
+            @Html.EditorFor(model => model.NombreUsuario)
+            @Html.ValidationMessageFor(model => model.NombreUsuario)
+        </div>
+    </div>
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Nombre)
+        </div>
+        <div class="wrapper-content">
+            @Html.EditorFor(model => model.GE_Persona.Nombre)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Nombre)
+        </div>
+    </div>
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Apellido)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Apellido)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Apellido)
+        </div>
+    </div>
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Direccion)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Direccion)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Direccion)
+        </div>
+    </div>
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Telefono)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Telefono)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Telefono)
+        </div>
+    </div>
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Extension)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Extension)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Extension)
+        </div>
+    </div>
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Puesto)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Puesto)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Puesto)
+        </div>
+    </div>
+
+
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.LabelFor(model => model.GE_Persona.Correo)
+        </div>
+        <div class="wrapper-content">
+            @Html.Kendo().TextBoxFor(model => model.GE_Persona.Correo)
+            @Html.ValidationMessageFor(model => model.GE_Persona.Correo)
+        </div>
+    </div>
+
+
+
+    <div class="wrapper-row  ">
+        <div class="wrapper-title fha-font-size">
+            @Html.Label("Tipo del Usuario")
+        </div>
+        <div class="wrapper-content">
+            @(Html.Kendo().DropDownListFor(m => m.IdTipoUsuario)
+                    //  .Name("IdOwner")
+                    //.AutoBind(false)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .OptionLabel("Elija el tipo del usuario...")
+                .BindTo((System.Collections.IEnumerable)ViewBag.UserTypes)
+            )
+        </div>
+    </div>
+
+
+</center>

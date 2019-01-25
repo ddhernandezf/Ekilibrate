@@ -1,0 +1,96 @@
+﻿
+@*@{
+    ViewBag.Title = "Analisis";
+}*@
+
+@*@Html.Partial("~/Participante/Expediente/Index")*@
+@model int?
+@using Kendo.Mvc.UI
+@using System.Web.Mvc
+
+@{
+    ViewBag.Title = "Expediente del Participante";
+    ViewBag.Description = "Expediente";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .HtmlAttributes(new { style = "width:100%; min-height:972px;" })
+    .Animation(animation =>
+    {
+        animation.Enable(true);
+        animation.Open(config =>
+        {
+            config.Expand();
+            config.Fade(FadeDirection.In);
+            config.Duration(AnimationDuration.Normal);
+        });
+    })
+    .SelectedIndex(0)
+    .Events(e =>
+    {
+        e.Activate("heightsResize");
+    })
+    .Items(panelbar =>
+    {        
+        panelbar.Add().Text("Resumen").LinkHtmlAttributes(new { style = "color:#fbfbfb;" }).HtmlAttributes(new { style = "background-color:#00ADEF;color:#fbfbfb;" })
+                .LoadContentFrom(Url.Content("~/Participante/Expediente/Resumen?IdParticipante="+@Model));
+        panelbar.Add().Text("Estado de salud").LinkHtmlAttributes(new { style = "color:#fbfbfb;" }).HtmlAttributes(new { style = "background-color:#ED207B;color:#fbfbfb;" })
+              .LoadContentFrom(Url.Content("~/Participante/Expediente/EstadoSaludExpediente?IdParticipante="+@Model));
+        panelbar.Add().Text("Manejo de emociones").LinkHtmlAttributes(new { style = "color:#fbfbfb;" }).HtmlAttributes(new { style = "background-color:#92278F;color:#fbfbfb;" })
+              .LoadContentFrom(Url.Content("~/Participante/Expediente/ManejoEmociones?IdParticipante=" + @Model));
+        panelbar.Add().Text("Relaciones interpersonales").LinkHtmlAttributes(new { style = "color:#fbfbfb;" }).HtmlAttributes(new { style = "background-color:#53a93f;color:#fbfbfb;" })
+              .LoadContentFrom(Url.Content("~/Participante/Expediente/RelacionesInterpersonales?IdParticipante=" + @Model));
+        panelbar.Add().Text("Crecimiento personal").LinkHtmlAttributes(new { style = "color:#fbfbfb;" }).HtmlAttributes(new { style = "background-color:#00ADEF;color:#fbfbfb;" })
+              .LoadContentFrom(Url.Content("~/Participante/Expediente/CrecimientoPersonal?IdParticipante=" + @Model));
+    })
+)
+
+<script language="javascript">
+    window.onresize = heightsResize;
+
+    function heightsResize() {
+        var altura = document.getElementById('foto').clientHeight;
+        var alturaDiv = document.getElementById('divprincipal').clientHeight;
+
+        $("#segnut-edad").css("height", altura);
+        $("#segnut-sexo").css("height", altura);
+        $("#segnut-gestacional").css("height", altura);
+        $("#segnut-meses").css("height", altura);
+
+        $("#segnut-pesoreal").css("height", altura);
+        $("#segnut-pesodeseable").css("height", altura);
+        $("#segnut-pt").css("height", altura);
+        $("#segnut-abdomen").css("height", altura);
+
+        $("#segnut-chol").css("height", altura);
+        $("#segnut-tgl").css("height", altura);
+        $("#segnut-gli").css("height", altura);
+
+        $(".bioquimico").css("height", altura);
+        $(".vet").css("height", altura);
+        $(".caritas-img").css("height", altura);
+        $(".comida-vale").css("height", altura);
+        $(".red-img").css("height", altura);
+
+        $(".extended").css("height", alturaDiv);
+        $("#divRed").css("height", alturaDiv);
+
+        //esto es lo que se va a quedar al final
+        var alt = document.getElementById('internal-row').clientHeight;
+        var alt2 = document.getElementById('cell-inicial').clientHeight;
+
+        alert(alt2);
+
+        $(".background-img").css("height", alt);
+        $(".internal-cell").css("height", alt2);
+    };
+
+    function Additional() {
+        return {
+            IdParticipante: "@Model"
+
+        }
+    }
+</script>

@@ -1,0 +1,85 @@
+﻿@using Kendo.Mvc.UI;
+@using System.Web.Mvc
+@using BeyondThemes.Bootstrap;
+
+@model Ekilibrate.Model.Entity.Participante.clsAvanceCuestionario
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Description = "Empresas";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<div style="background-image:url(../assets/img/home-wide2.jpg); background-size:cover; background-repeat:no-repeat; width:100%;">
+    <div class="row">
+        <div class="col-lg-4" style="align-content:center; text-align:center; margin-top: 33%;">
+            @*@if (Model.Porcentaje >= 80)
+            {*@
+                @*<a href="../Participante/Diagnostico">*@
+                    @*<div style="opacity: 0.4; filter: alpha(opacity=40);">
+                        <img src="~/assets/img/icono_diagnostico.png" alt="Quiero realizar mi diagnóstico de estilo de vida ahora" width="280" height="232" />
+                    </div>*@
+                @*</a>*@
+            @*}
+            else
+            {*@
+                <a href="../Participante/Diagnostico">
+                    @*<div style="opacity: 0.4; filter: alpha(opacity=40);">*@
+                    <img src="~/assets/img/icono_diagnostico.png" alt="Quiero realizar mi diagnóstico de estilo de vida ahora" width="280" height="232" />
+                    @*</div>*@
+                </a>
+            @*}*@
+        </div>
+        <div class="col-lg-4" style="align-content:center; text-align:center; margin-top: 33%;">
+            @*@if (Model.Porcentaje >= 80)
+            {*@
+                <a href="../Participante/Expediente">
+                    @*<div style="opacity: 0.4; filter: alpha(opacity=40);">*@
+                    <img src="~/assets/img/icono_expediente.png" alt="Quiero ver mi expediente" width="280" height="250" />
+                    @*</div>*@
+                </a>
+            @*}
+            else
+            {*@
+                @*<a href="../Participante/Expediente">*@
+                    @*<div style="opacity: 0.4; filter: alpha(opacity=40);">
+                        <img src="~/assets/img/icono_expediente.png" alt="Parece que tienes pendiente algo en los cuestionarios concluye y regresa acá para continuar." width="280" height="232" />
+                    </div>*@
+                @*</a>*@
+                @*if (Model.Porcentaje > 0)
+                {
+                    <p class="warning h3">Parece que tienes pendiente algo en los cuestionarios concluye y regresa acá para continuar tu seguimiento nutricional.</p>
+                }
+            }*@
+        </div>
+        <div class="col-lg-4" style="align-content:center; text-align:center; margin-top: 33%;">
+            <button data-toggle="modal" data-target=".bs-example-modal-lg" style="background-color: Transparent; outline:none; border: none;">
+                <img src="~/assets/img/play-button.png" width="280" height="232" />                
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <br />
+        <br />
+    </div>
+    @*<button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Ver video</button>*@
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Hall of Fame</h4>
+                </div>
+                <div class="modal-body">
+                    <video controls="controls" width="850">
+                        <source src="~/assets/img/xoom2.mp4" type="video/mp4" />
+                        <source src="~/assets/xoom.ogg" type="video/ogg">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>

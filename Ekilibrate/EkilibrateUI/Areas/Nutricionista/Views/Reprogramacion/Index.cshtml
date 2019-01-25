@@ -1,0 +1,201 @@
+﻿@using Kendo.Mvc.UI;
+@model Ekilibrate.Model.Entity.Administrador.clsCitaProgramacionHora
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2>Reprogramación de citas</h2>
+
+<div class="row">
+    <div class="col-lg-3">
+        Seleccione fecha para reprogramar
+    </div>
+    <div class="col-lg-2">
+        @(Html.Kendo().DatePicker()
+          .Name("datepicker")
+          .Events(e =>
+          {
+              e.Change("CambiaFecha");
+              
+          })
+        )
+    </div>
+</div>
+<div class="k-grid">
+    
+    <div>
+        @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsCita>()
+                    .Name("gridCitas")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.TipoCitaId).Hidden().Filterable(false).Sortable(false);
+                        columns.Bound(p => p.Nombre).Width(175).Filterable(false).Sortable(false);
+                        columns.Bound(p => p.ParticipanteId).Width(175).Hidden();
+                        columns.Bound(p => p.Fecha).Width(90).Filterable(false).Sortable(false);
+                        columns.Bound(p => p.Hora).Width(95).Filterable(false).Sortable(false);
+                        columns.Bound(p => p.NutricionistaId).Width(175).Hidden().Filterable(false).Sortable(false);
+                    })
+                        
+                        .Editable(editable => editable.Mode(GridEditMode.InCell))
+                        .Navigatable()
+                        .Filterable(f =>
+                        {
+                            f.Enabled(false);
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Enabled(false);
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable()
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Batch(true)
+                        .ServerOperation(false)
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(20)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+
+                        })
+                            .Update(update => update.Action("Update_Alimentos", "Diagnostico"))
+                            .Read(read => read.Action("Read", "Reprogramacion").Data("CargaFecha"))
+                    )
+        )
+    </div>
+    
+        
+        
+
+</div>
+
+    <div>
+        <span><b>Fecha de reprogramación: </b></span><span><b>@ViewBag.Fecha</b></span>
+    </div>
+    <div>
+        &nbsp;
+    </div>
+    <div>
+        <div>
+            Hora de reprogramación:
+        </div>
+        <div>
+            De: 
+            @(Html.Kendo().NumericTextBox<decimal>
+                        ()
+                        .Name("Hora")
+                        .Format("##")
+                        .Min(6)
+                        .Max(19)
+                        .Value(8)
+                    .HtmlAttributes(new { style = "width: 75px" })
+            )
+
+            :
+
+            @(Html.Kendo().NumericTextBox<decimal>
+                        ()
+                        .Name("Minuto")
+                        .Format("##")
+                        .Min(0)
+                        .Max(59)
+                        .Value(0)
+                    .HtmlAttributes(new { style = "width: 75px" })
+            )
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            
+            a:
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            @(Html.Kendo().NumericTextBox<decimal>
+                        ()
+                        .Name("HoraFin")
+                        .Format("##")
+                        .Min(6)
+                        .Max(19)
+                        .Value(8)
+                    .HtmlAttributes(new { style = "width: 75px" })
+            )
+
+            :
+
+            @(Html.Kendo().NumericTextBox<decimal>
+                        ()
+                        .Name("MinutoFin")
+                        .Format("##")
+                        .Min(0)
+                        .Max(59)
+                        .Value(0)
+                    .HtmlAttributes(new { style = "width: 75px" })
+            )
+        </div>
+
+
+    </div>
+    <div>
+        &nbsp;          
+    </div>
+    <div>
+        <input type="submit" class="btn btn-default" onclick="Reprogramar()" value="Reprogramar" />
+    </div>
+
+<script>
+
+
+    function Reprogramar() {
+        var numericTextBox = $("#Hora").data("kendoNumericTextBox");
+        var valueHora = numericTextBox.value();
+        var numericTextBox = $("#Minuto").data("kendoNumericTextBox");
+        var valueMin = numericTextBox.value();
+        var numericTextBox1 = $("#HoraFin").data("kendoNumericTextBox");
+        var valueHora2 = numericTextBox1.value();
+        var numericTextBox2 = $("#MinutoFin").data("kendoNumericTextBox");
+        var valueMin2 = numericTextBox2.value();
+
+
+        var url = '@Url.Action("Reprograma", "Reprogramacion", new { Par = @Request.QueryString["Par"], Ci = @Request.QueryString["Ci"], Pr = @Request.QueryString["Pr"], Nu = @Request.QueryString["Nu"], Fe = @Request.QueryString["Fe"], Ho = "+", Mi = ".", Ho2 = "#", Mi2 = "@" })';
+        url = url.replace("%2B", valueHora);
+        url = url.replace(".", valueMin);
+        url = url.replace("%23", valueHora2);
+        url = url.replace("%40", valueMin2);
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        window.location.href = url;
+
+    }
+
+    function CargaFecha() {
+        return {
+            fecha: "@Request.QueryString["Fe"]"
+
+        }
+    }
+
+    function CambiaFecha() {
+
+        var fecha = kendo.toString(this.value(), 'd').replace("/", "-");
+        fecha = fecha.replace("/", "-");
+        var url = '@Url.Action("Index", "Reprogramacion", new { Par = @Request.QueryString["Par"], Ci = @Request.QueryString["Ci"], Pr = @Request.QueryString["Pr"], Nu = @Request.QueryString["Nu"], Fe = "*" })';
+        url = url.replace("%2A", fecha);
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        url = url.replace("&amp;", "&");
+        window.location.href = url;
+    }
+</script>

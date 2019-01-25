@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "UserTypes";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2>Tipo de usuarios</h2>
+
+<div class="grid-mantenimientos-content-center">
+
+    @model System.Collections.Generic.IEnumerable<SitioAdministrativoUI.Models.Data.TipoUsuario>
+
+
+    @(Html.Kendo().Grid(Model)
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.Nombre).Width(200);
+                columns.Bound(p => p.Descripcion).Width(300);
+                columns.Bound(p => p.UrlRedireccion).Width(150);
+                columns.Command(command => { command.Edit().Text("Actualizar"); command.Destroy().Text("Eliminar"); }).Width(172);
+            })
+            .ToolBar(toolbar => toolbar.Create().Text("Nuevo"))
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Events(events =>
+                        {
+                            events.Change("GridReload");
+                            events.Error("error_handler");
+                        })
+                    .Model(model =>
+                    {
+                        model.Id(p => p.IdTipoUsuario);
+                        model.Field(p => p.Activo).DefaultValue(true);
+
+                    })
+                    .Create(update => update.Action("UserType_Create", "AccountsManager"))
+                    .Read(read => read.Action("UserType_Read", "AccountsManager"))
+                    .Update(update => update.Action("UserType_Update", "AccountsManager"))
+                    .Destroy(update => update.Action("UserType_Destroy", "AccountsManager"))
+            )
+    )
+
+</div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+</script>

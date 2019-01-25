@@ -1,0 +1,355 @@
+﻿@using Kendo.Mvc.UI;
+
+@model Ekilibrate.Model.Entity.Nutricionista.clsSeguimiento
+
+@{ 
+    string ObsColumnName = "Observaciones Consulta #" + (Model.No - 1);
+    string MetaColumnName = "Meta Consulta #" + (Model.No - 1);
+    string LogroColumnName = "Logro Consulta #" + (Model.No - 1);
+}
+
+@if (Model.No == 1)
+{
+    @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.clsSeguimientoAspectos>()
+        .Name("gridMetas")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ParticipanteId).Hidden();
+            columns.Bound(p => p.Nuevo).Hidden();
+            columns.Bound(p => p.Aspecto);
+            columns.Bound(p => p.Diagnostico);
+            columns.Bound(p => p.Meta);
+            if (!Model.ReadOnly)
+            {
+                columns.Bound(p => p.Observaciones);
+            }
+        })
+        .ToolBar(toolbar => {
+            if (!Model.ReadOnly)
+            {
+                toolbar.Save();
+            }
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Navigatable()
+        .Sortable()
+        .Scrollable(s => s.Height("auto"))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .ServerOperation(false)
+            .Events(events =>
+            {
+                events.Error("error_handler");
+            }
+            )
+            .PageSize(14)
+            .Group(g => g.Add(p => p.Area))
+            .Model(model =>
+            {
+                model.Id(p => p.ParticipanteId);
+                model.Id(p => p.Area);
+                model.Field(p => p.Aspecto).Editable(false);
+                model.Field(p => p.Diagnostico).Editable(false);
+                model.Field(p => p.Porcentaje).Editable(false);
+                if (Model.ReadOnly)
+                {
+                    model.Field(p => p.Meta).Editable(false);                    
+                }
+            })
+            .Read(read => read.Action("Read_Aspectos", "Seguimiento", new { Area = "Nutricionista", pParticipante = Model.ParticipanteId, pCita = Model.CitaId }))
+            .Update(update => update.Action("Update_Aspectos", "Seguimiento"))
+        )
+    );
+}
+else
+{
+    @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.clsSeguimientoAspectos>()
+        .Name("gridMetas")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ParticipanteId).Hidden();
+            columns.Bound(p => p.Nuevo).Hidden();
+            columns.Bound(p => p.Aspecto);
+            columns.Bound(p => p.Diagnostico);
+            columns.Bound(p => p.Base).Title("Última Medición");
+            if (!Model.ReadOnly)
+            {
+                columns.Bound(p => p.ObservacionesAnterior).Title(ObsColumnName); ;
+            }
+            columns.Bound(p => p.MetaAnterior).Title(MetaColumnName);
+            columns.Bound(p => p.LogroAnterior).Title(LogroColumnName);            
+            //columns.Template(p => { }).ClientTemplate("#=calcularNota(data)#");
+            //columns.Template(p => { }).ClientTemplate("#= LogroAnterior / MetaAnterior #");
+            columns.Bound(p => p.Meta).Title("Meta a Establecer");
+            if (!Model.ReadOnly)
+            {
+                columns.Bound(p => p.Observaciones);
+            }
+            columns.Bound(p => p.Porcentaje).Title("Calificación");
+        })
+        .ToolBar(toolbar =>
+        {
+            if (!Model.ReadOnly)
+            {
+                toolbar.Save();
+            }
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Navigatable()
+        .Scrollable(s => s.Height("auto"))
+        .Events(ev => ev.Edit("selectTextOnGrid"))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Batch(true)
+            .ServerOperation(false)
+            .Events(events =>
+            {
+                events.Error("error_handler");
+                events.Change("CalcularPorcentaje");
+            }
+            )
+            .PageSize(14)
+            .Group(g => g.Add(p => p.Area))
+            .Model(model =>
+            {
+                model.Id(p => p.ParticipanteId);
+                model.Id(p => p.Area);
+                model.Field(p => p.Aspecto).Editable(false);
+                model.Field(p => p.Diagnostico).Editable(false);                
+                model.Field(p => p.MetaAnterior).Editable(false);
+                model.Field(p => p.ObservacionesAnterior).Editable(false);
+                if (Model.ReadOnly)
+                {
+                    model.Field(p => p.Meta).Editable(false);
+                    model.Field(p => p.LogroAnterior).Editable(false);                    
+                }
+
+            })
+            .Read(read => read.Action("Read_Aspectos", "Seguimiento", new { Area = "Nutricionista", pParticipante = Model.ParticipanteId, pCita = Model.CitaId }))
+            .Update(update => update.Action("Update_Aspectos", "Seguimiento"))
+        )
+    )
+}
+<br />
+<br />
+
+
+    @Html.HiddenFor(m => m.CitaId)
+    @Html.HiddenFor(m => m.Nuevo)
+    @Html.HiddenFor(m => m.NutricionistaId)
+    @Html.HiddenFor(m => m.ParticipanteId)
+    <div id="Horizontal-form">
+        <div class="row">
+            <div class="col-lg-4">
+                @Html.LabelFor(model => model.ComentariosRelevantes)
+            </div>
+            <div class="col-lg-9">
+                @if (Model.ReadOnly)
+                {
+                    @Html.TextAreaFor(m => m.ComentariosRelevantes, new { style = "width: 100%;height: 150px;", @readonly = "readonly" })
+                }
+                else
+                {
+                    @Html.TextAreaFor(m => m.ComentariosRelevantes, new { style = "width: 100%;height: 150px;" })
+                }                
+                @Html.ValidationMessageFor(model => model.ComentariosRelevantes)
+            </div>
+        </div>        
+    </div>
+
+
+<script type="text/javascript">
+	function Additional() {
+		return {
+			pCita: "@Model.CitaId",
+			pParticipante: "@Model.ParticipanteId"
+
+		}
+	}
+
+	function change_handler(e) {
+		//console.log(e);
+		if (e.action == "sync") {
+			//$("#spinner").show();
+			//   location.reload();
+		}
+    }
+
+    function calcularNota(data) {
+        return data.LogroAnterior / data.MetaAnterior;
+    }
+
+    function CalcularPorcentaje(e) {
+        if (e.action === "itemchange") {
+            var data = e.items[0];
+
+            if (data.MetaAnterior != null && data.MetaAnterior != 0 && data.LogroAnterior != 0) 
+                if (Math.abs(data.LogroAnterior) == Math.abs(data.MetaAnterior))
+                    data.set("Porcentaje", 100);
+                else
+                {
+                    var nota = 0;
+                    if (data.Aspecto == "Agua")                        
+                        if (data.Base == data.MetaAnterior)
+                            nota = Math.round((data.LogroAnterior / data.MetaAnterior) * 100);                            
+                        else
+                            nota = Math.round(((data.LogroAnterior - data.Base) / (data.MetaAnterior - data.Base)) * 100);
+                    else
+                        if (data.Base == data.MetaAnterior)
+                            nota = Math.round((data.MetaAnterior / data.LogroAnterior) * 100);                            
+                        else
+                            nota = Math.round(((data.Base - data.LogroAnterior) / (data.Base - data.MetaAnterior)) * 100);
+                    
+                    data.set("Porcentaje", Math.round(nota));
+                }
+            else
+                data.set("Porcentaje", 0);
+
+            
+            if (data.Aspecto == "Peso")
+            {
+                var Peso = data.LogroAnterior
+                var Estatura = $("#lbEstatura").val();
+                $("#lbPesoActual").val(Peso);
+                $("#IMC").val(Math.round(((Peso / 2.20462) / (Estatura * Estatura)) * 10000));
+            }
+        }
+    }
+
+    function FinalizarCita(e) {
+        location.href = '<%: Url.Action("CuadroMetas", "Seguimiento") %>'
+    }
+
+    $("#gridMetas").find("table").on("keydown", function (e)
+    {
+    //    var grid = $('#gridMetas').data('kendoGrid');
+    //    if (e.keyCode === kendo.keys.TAB && $($(e.target).closest('.k-edit-cell'))[0]) {
+    //        e.preventDefault();
+    //        var currentNumberOfItems = grid.dataSource.view().length;
+    //        var row = $(e.target).closest('tr').index();
+    //        var col = grid.cellIndex($(e.target).closest('td'));
+
+    //        var dataItem = grid.dataItem($(e.target).closest('tr'));
+    //        var field = grid.columns[col].field;
+    //        var value = $(e.target).val();
+    //        dataItem.set(field, value);
+
+    //        if (row >= 0 && row < currentNumberOfItems && col >= 0 && col < grid.columns.length) {
+    //            var nextCellRow;
+    //            var nextCellCol = col === 0 ? 2 : 0;
+    //            if (e.shiftKey) {
+    //                nextCellRow = nextCellCol === 0 ? row : row - 1;
+    //            } else {
+    //                nextCellRow = nextCellCol === 0 ? row + 1 : row;
+    //            }
+
+    //            if (nextCellRow >= currentNumberOfItems || nextCellRow < 0) {
+    //                return;
+    //            }
+
+    //            // wait for cell to close and Grid to rebind when changes have been made
+    //            setTimeout(function () {
+    //                grid.editCell(grid.tbody.find("tr:eq(" + nextCellRow + ") td:eq(" + nextCellCol + ")"));
+    //            });
+    //        }
+    //    }
+        //var grid = $("#gridMetas").data("kendoGrid");
+        //$(grid.tbody).on("keydown", "td", function (e) {
+
+        //    if (e.keyCode === kendo.keys.TAB) {
+        //        var current = grid.current();
+        //        //dumpObject(current);
+        //        if (!current.hasClass("editable-cell")) {
+        //            var nextCell = current.nextAll(".editable-cell");
+        //            if (!nextCell[0]) {
+        //                //search the next row
+        //                var nextRow = current.parent().next();
+        //                var nextCell = current.parent().next().children(".editable-cell:first");
+        //            }
+        //            grid.current(nextCell);
+        //            grid.editCell(nextCell[0])
+        //        }
+        //    }
+        //});
+    });
+</script>
+
+<style>
+    .k-edit-form-container {
+        width: 650px !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 90%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>

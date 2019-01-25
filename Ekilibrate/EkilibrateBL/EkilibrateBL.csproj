@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{09E30300-3E50-4021-8228-7DA2A886564A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ekilibrate.BL</RootNamespace>
+    <AssemblyName>EkilibrateBL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Wcf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Wcf.4.0.0\lib\net45\Autofac.Integration.Wcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ad\Administracion\clsUsuarioPorRol.cs" />
+    <Compile Include="ad\Administracion\clsUsuario.cs" />
+    <Compile Include="ad\Administrador\clsAsistente.cs" />
+    <Compile Include="ad\Administrador\clsCitaProgramacion.cs" />
+    <Compile Include="ad\Administrador\clsCita.cs" />
+    <Compile Include="ad\Administrador\clsClienteRol.cs" />
+    <Compile Include="ad\Administrador\clsColaborador.cs" />
+    <Compile Include="ad\Administrador\clsContacto.cs" />
+    <Compile Include="ad\Administrador\clsEmpresa.cs" />
+    <Compile Include="ad\Administrador\clsEnfermera.cs" />
+    <Compile Include="ad\Administrador\clsFacilitador.cs" />
+    <Compile Include="ad\Administrador\clsNutricionista.cs" />
+    <Compile Include="ad\Administrador\clsProyectoArea.cs" />
+    <Compile Include="ad\Administrador\clsProyectoContacto.cs" />
+    <Compile Include="ad\Administrador\clsProyectoSalon.cs" />
+    <Compile Include="ad\Administrador\clsGrupo.cs" />
+    <Compile Include="ad\Administrador\clsTallerNota.cs" />
+    <Compile Include="ad\Administrador\clsTallerProgramacion.cs" />
+    <Compile Include="ad\Administrador\clsProyectoTaller.cs" />
+    <Compile Include="ad\Administrador\clsSalon.cs" />
+    <Compile Include="ad\Administrador\clsCiclo.cs" />
+    <Compile Include="ad\Administrador\clsSemana.cs" />
+    <Compile Include="ad\Catalogos\clsGrupoAlimento.cs" />
+    <Compile Include="ad\Catalogos\clsTipoUsoSalon.cs" />
+    <Compile Include="ad\Administrador\clsProyecto.cs" />
+    <Compile Include="ad\Nutricionista\clsPlanAlimentacion.cs" />
+    <Compile Include="ad\Nutricionista\clsDiagnosticoAlimentos.cs" />
+    <Compile Include="ad\Nutricionista\clsDiagnosticoAnamnesis.cs" />
+    <Compile Include="ad\Nutricionista\clsSeguimientoAspectos.cs" />
+    <Compile Include="ad\Nutricionista\clsSeguimiento.cs" />
+    <Compile Include="ad\Nutricionista\clsDiagnostico.cs" />
+    <Compile Include="ad\Participante\clsPasos.cs" />
+    <Compile Include="ad\Participante\clsTestTemaFinanzas.cs" />
+    <Compile Include="ad\Participante\clsTestFinanzas.cs" />
+    <Compile Include="ad\Participante\clsAnsiedad.cs" />
+    <Compile Include="ad\Participante\clsAsertiva.cs" />
+    <Compile Include="ad\Participante\clsAsertivaDos.cs" />
+    <Compile Include="ad\Participante\clsBebidasFrecuentes.cs" />
+    <Compile Include="ad\Participante\clsCondicionPreExistente.cs" />
+    <Compile Include="ad\Participante\clsPadecimiento.cs" />
+    <Compile Include="ad\Participante\clsFrecuencia.cs" />
+    <Compile Include="ad\Participante\clsTestLiderazgo.cs" />
+    <Compile Include="ad\Participante\clsComunicacionDos.cs" />
+    <Compile Include="ad\Participante\clsEnfermedad.cs" />
+    <Compile Include="ad\Participante\clsMedidaBebida.cs" />
+    <Compile Include="ad\Participante\clsParticipante.cs" />
+    <Compile Include="Common\clsMail.cs" />
+    <Compile Include="Controller\Administrador\clsCitaProgramacion.cs" />
+    <Compile Include="Controller\Administrador\clsController.cs" />
+    <Compile Include="Controller\Administrador\clsProyectoContacto.cs" />
+    <Compile Include="Controller\Catalogos\clsGrupoAlimento.cs" />
+    <Compile Include="Controller\Cliente\clsController.cs" />
+    <Compile Include="ad\General\clsPersona.cs" />
+    <Compile Include="ad\General\clsError.cs" />
+    <Compile Include="ad\Participante\clsAlimentacion.cs" />
+    <Compile Include="ad\Participante\clsAlimentacionDia.cs" />
+    <Compile Include="ad\Participante\clsComunicacion.cs" />
+    <Compile Include="ad\Participante\clsActividadFisica.cs" />
+    <Compile Include="ad\Participante\clsDiagnostico.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ad\Participante\clsEmocion.cs" />
+    <Compile Include="ad\Participante\clsPasosDia.cs" />
+    <Compile Include="ad\Participante\clsRiesgo.cs" />
+    <Compile Include="ad\Participante\clsTiempo.cs" />
+    <Compile Include="Common\clsLog.cs" />
+    <Compile Include="Controller\Administrador\clsAsistente.cs" />
+    <Compile Include="Controller\Administrador\clsClienteRol.cs" />
+    <Compile Include="Controller\Administrador\clsColaborador.cs" />
+    <Compile Include="Controller\Administrador\clsContacto.cs" />
+    <Compile Include="Controller\Administrador\clsEmpresa.cs" />
+    <Compile Include="Controller\Administrador\clsEnfermera.cs" />
+    <Compile Include="Controller\Administrador\clsFacilitador.cs" />
+    <Compile Include="Controller\Administrador\clsNutricionista.cs" />
+    <Compile Include="Controller\Administrador\clsProyectoArea.cs" />
+    <Compile Include="Controller\Administrador\clsProyectoSalon.cs" />
+    <Compile Include="Controller\Administrador\clsSalon.cs" />
+    <Compile Include="Controller\Administrador\clsTaller.cs" />
+    <Compile Include="Controller\Catalogos\clsTipoUsoSalon.cs" />
+    <Compile Include="Controller\Cliente\clsProyecto.cs" />
+    <Compile Include="ad\General\clsMensajeCorreo.cs" />
+    <Compile Include="Controller\General\clsMensajeCorreo.cs" />
+    <Compile Include="Controller\Nutricionista\clsController.cs" />
+    <Compile Include="Controller\Nutricionista\clsPlanAlimentacion.cs" />
+    <Compile Include="Controller\Nutricionista\clsDiagnosticoAlimentos.cs" />
+    <Compile Include="Controller\Nutricionista\clsDiagnosticoAnamnesis.cs" />
+    <Compile Include="Controller\Nutricionista\clsSeguimientoAspecto.cs" />
+    <Compile Include="Controller\Nutricionista\clsSeguimiento.cs" />
+    <Compile Include="Controller\Nutricionista\clsDiagnostico.cs" />
+    <Compile Include="Controller\Participante\clsAlimentacion.cs" />
+    <Compile Include="Controller\Participante\clsAlimentacionDia.cs" />
+    <Compile Include="Controller\Participante\clsController.cs" />
+    <Compile Include="Controller\Participante\clsTestTemaFinanzas.cs" />
+    <Compile Include="Controller\Participante\clsTestFinanzas.cs" />
+    <Compile Include="Controller\Participante\clsAnsiedad.cs" />
+    <Compile Include="Controller\Participante\clsAsertiva.cs" />
+    <Compile Include="Controller\Participante\clsAsertivaDos.cs" />
+    <Compile Include="Controller\Participante\clsCondicionPreExistente.cs" />
+    <Compile Include="Controller\Participante\clsFrecuencia.cs" />
+    <Compile Include="Controller\Participante\clsBebidasFrecuentes.cs" />
+    <Compile Include="Controller\Participante\clsTestLiderazgo.cs" />
+    <Compile Include="Controller\Participante\clsComunicacionDos.cs" />
+    <Compile Include="Controller\Participante\clsComunicacion.cs" />
+    <Compile Include="Controller\Participante\clsCuidado.cs" />
+    <Compile Include="Controller\Participante\clsDiagnostico.cs" />
+    <Compile Include="Controller\Participante\clsEmocion.cs" />
+    <Compile Include="Controller\Participante\clsEnfermedad.cs" />
+    <Compile Include="Controller\Participante\clsMedidaBebida.cs" />
+    <Compile Include="Controller\Participante\clsPasosDia.cs" />
+    <Compile Include="Controller\Participante\clsRiesgo.cs" />
+    <Compile Include="Controller\Administrador\clsProyecto.cs" />
+    <Compile Include="Controller\Participante\clsTiempo.cs" />
+    <Compile Include="DataRetriever\Administrador\clsAsistente.cs" />
+    <Compile Include="DataRetriever\Administrador\clsClienteRol.cs" />
+    <Compile Include="DataRetriever\Administrador\clsColaborador.cs" />
+    <Compile Include="DataRetriever\Administrador\clsContacto.cs" />
+    <Compile Include="DataRetriever\Administrador\clsEmpresa.cs" />
+    <Compile Include="DataRetriever\Administrador\clsEnfermera.cs" />
+    <Compile Include="DataRetriever\Administrador\clsFacilitador.cs" />
+    <Compile Include="DataRetriever\Administrador\clsMail.cs" />
+    <Compile Include="DataRetriever\Administrador\clsMensajeCorreo.cs" />
+    <Compile Include="DataRetriever\Administrador\clsNutricionista.cs" />
+    <Compile Include="DataRetriever\Administrador\clsProyectoContacto.cs" />
+    <Compile Include="DataRetriever\Administrador\clsSalon.cs" />
+    <Compile Include="DataRetriever\Administrador\clsProyectoSalon.cs" />
+    <Compile Include="DataRetriever\Administrador\clsGrupo.cs" />
+    <Compile Include="DataRetriever\Administrador\clsTallerProgramacion.cs" />
+    <Compile Include="DataRetriever\Administrador\clsTallerNota.cs" />
+    <Compile Include="DataRetriever\Administrador\clsTallerProyecto.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsArea.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsGrupoAlimento.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsRolNutricionista.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsAseguradora.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsTaller.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsGiroEmpresa.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsTipoProyecto.cs" />
+    <Compile Include="DataRetriever\Catalogos\clsTipoUsoSalon.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsAnamnesis.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsCita.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsCalificacionTaller.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsMetaPasos.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsPlanAlimentacion.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsSeguimientoAspecto.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsSeguimiento.cs" />
+    <Compile Include="DataRetriever\Participante\Ansiedad.cs" />
+    <Compile Include="DataRetriever\Participante\clsExpediente.cs" />
+    <Compile Include="DataRetriever\Participante\clsTipoEjercicio.cs" />
+    <Compile Include="DataRetriever\Participante\CondicionPreExistente.cs" />
+    <Compile Include="DataRetriever\Participante\Enfermedad.cs" />
+    <Compile Include="DataRetriever\Participante\MedidaBebida.cs" />
+    <Compile Include="DataRetriever\Participante\PreguntaLiderazgo.cs" />
+    <Compile Include="DataRetriever\Participante\AsertivaDos.cs" />
+    <Compile Include="DataRetriever\Participante\Asertiva.cs" />
+    <Compile Include="DataRetriever\Participante\BebidasFrecuentes.cs" />
+    <Compile Include="DataRetriever\Nutricionista\clsDiagnostico.cs" />
+    <Compile Include="DataRetriever\Participante\clsAlimentacionDia.cs" />
+    <Compile Include="DataRetriever\Participante\clsLiderazgo.cs" />
+    <Compile Include="DataRetriever\Participante\clsComunicacionDos.cs" />
+    <Compile Include="DataRetriever\Participante\clsComunicacion.cs" />
+    <Compile Include="DataRetriever\Participante\clsCuidado.cs" />
+    <Compile Include="DataRetriever\Participante\clsEmocion.cs" />
+    <Compile Include="DataRetriever\Participante\clsParticipante.cs" />
+    <Compile Include="DataRetriever\Cliente\clsProyecto.cs" />
+    <Compile Include="DataRetriever\Administrador\clsProyectoArea.cs" />
+    <Compile Include="DataRetriever\Participante\clsAlimentacion.cs" />
+    <Compile Include="DataRetriever\Participante\clsDiagnostico.cs" />
+    <Compile Include="DataRetriever\Participante\clsPasosDia.cs" />
+    <Compile Include="DataRetriever\Participante\clsRiesgo.cs" />
+    <Compile Include="DataRetriever\Administrador\clsProyecto.cs" />
+    <Compile Include="DataRetriever\Participante\clsTestFinanzas.cs" />
+    <Compile Include="DataRetriever\Participante\clsTestTemaFinanzas.cs" />
+    <Compile Include="DataRetriever\Participante\clsTiempo.cs" />
+    <Compile Include="DataRetriever\Participante\Frecuencia.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Administracion\QUsuarioPorRol.cs" />
+    <Compile Include="Queries\Administracion\QUsuario.cs" />
+    <Compile Include="Queries\Administrador\QCitaProgramacion.cs" />
+    <Compile Include="Queries\Administrador\QCita.cs" />
+    <Compile Include="Queries\Administrador\QClienteRol.cs" />
+    <Compile Include="Queries\Administrador\QColaboradores.cs" />
+    <Compile Include="Queries\Administrador\QContaco.cs" />
+    <Compile Include="Queries\Administrador\QEmpresa.cs" />
+    <Compile Include="Queries\Administrador\QAsistente.cs" />
+    <Compile Include="Queries\Administrador\QFacilitador.cs" />
+    <Compile Include="Queries\Administrador\QEnfermera.cs" />
+    <Compile Include="Queries\Administrador\QMail.cs" />
+    <Compile Include="Queries\Administrador\QNutricionista.cs" />
+    <Compile Include="Queries\Administrador\QGrupo.cs" />
+    <Compile Include="Queries\Administrador\QProyectoArea.cs" />
+    <Compile Include="Queries\Administrador\QProyectoContacto.cs" />
+    <Compile Include="Queries\Administrador\QProyectoSalon.cs" />
+    <Compile Include="Queries\Administrador\QSalon.cs" />
+    <Compile Include="Queries\Administrador\QCiclo.cs" />
+    <Compile Include="Queries\Administrador\QTallerNota.cs" />
+    <Compile Include="Queries\Administrador\QTallerProgramacion.cs" />
+    <Compile Include="Queries\Administrador\QTallerProyecto.cs" />
+    <Compile Include="Queries\Catalogos\QArea.cs" />
+    <Compile Include="Queries\Catalogos\QRolNutricionista.cs" />
+    <Compile Include="Queries\Catalogos\QAseguradora.cs" />
+    <Compile Include="Queries\Catalogos\QTaller.cs" />
+    <Compile Include="Queries\Catalogos\QGiroEmpresa.cs" />
+    <Compile Include="Queries\Administrador\QSemana.cs" />
+    <Compile Include="Queries\Catalogos\QTipoProyecto.cs" />
+    <Compile Include="Queries\Catalogos\QTipoUsoSalon.cs" />
+    <Compile Include="Queries\General\QPersona.cs" />
+    <Compile Include="Queries\Nutricionista\QPlanAlimentacion.cs" />
+    <Compile Include="Queries\Nutricionista\QAlimentacion.cs" />
+    <Compile Include="Queries\Nutricionista\QAnamnesis.cs" />
+    <Compile Include="Queries\Nutricionista\QCalificacionTaller.cs" />
+    <Compile Include="Queries\Nutricionista\QSeguimientoAspectos.cs" />
+    <Compile Include="Queries\Nutricionista\QSeguimiento.cs" />
+    <Compile Include="Queries\Nutricionista\QDiagnostico.cs" />
+    <Compile Include="Queries\Nutricionista\QPasos.cs" />
+    <Compile Include="Queries\Nutricionista\QCita.cs" />
+    <Compile Include="Queries\Participante\QAlimentacionDia.cs" />
+    <Compile Include="Queries\Participante\QCondicionPreExistente.cs" />
+    <Compile Include="Queries\Participante\QPadecimiento.cs" />
+    <Compile Include="Queries\Participante\QExpediente.cs" />
+    <Compile Include="Queries\Nutricionista\QMetaPasos.cs" />
+    <Compile Include="Queries\Participante\QEnfermedad.cs" />
+    <Compile Include="Queries\Participante\QMedidaBebida.cs" />
+    <Compile Include="Queries\Participante\QPasos.cs" />
+    <Compile Include="Queries\Participante\QPreguntaLiderazgo.cs" />
+    <Compile Include="Queries\Participante\QAsertivaDos.cs" />
+    <Compile Include="Queries\Participante\QAsertiva.cs" />
+    <Compile Include="Queries\Participante\QBebidasFrecuentes.cs" />
+    <Compile Include="Queries\Participante\QTestLiderazgo.cs" />
+    <Compile Include="Queries\Participante\QComunicacionDos.cs" />
+    <Compile Include="Queries\Participante\QComunicacion.cs" />
+    <Compile Include="Queries\Participante\QActividadFisica.cs" />
+    <Compile Include="Queries\Participante\QEmocion.cs" />
+    <Compile Include="Queries\Participante\QFrecuencia.cs" />
+    <Compile Include="Queries\Participante\QParticipante.cs" />
+    <Compile Include="Queries\Cliente\QProyecto.cs" />
+    <Compile Include="Queries\Administrador\QProyecto.cs" />
+    <Compile Include="Queries\General\QError.cs" />
+    <Compile Include="Queries\Participante\QAlimentacion.cs" />
+    <Compile Include="Queries\Participante\QDiagnostico.cs" />
+    <Compile Include="Queries\Participante\QPasosDia.cs" />
+    <Compile Include="Queries\Participante\QRespAnsiedad.cs" />
+    <Compile Include="Queries\Participante\QRiesgo.cs" />
+    <Compile Include="Queries\Participante\QTemaFinanzas.cs" />
+    <Compile Include="Queries\Participante\QTestFinanzas.cs" />
+    <Compile Include="Queries\Participante\QTiempo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarcoSoftUtilidades\BarcoSoftUtilidades.csproj">
+      <Project>{c1112225-3ff3-4ce8-92af-bb346d5ad945}</Project>
+      <Name>BarcoSoftUtilidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{2a1404a2-de56-446c-bfd0-13094c85a055}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EkiibrateDB\EkiibrateDB.sqlproj">
+      <Project>{6fa11458-ae4f-40ec-83a5-42c47346cd80}</Project>
+      <Name>EkiibrateDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EkilibrateModel\EkilibrateModel.csproj">
+      <Project>{c7f40bf3-098d-41f8-b1c6-a4da93134be6}</Project>
+      <Name>EkilibrateModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ad\Cliente\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

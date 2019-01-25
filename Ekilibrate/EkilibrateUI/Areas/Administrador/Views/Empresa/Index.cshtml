@@ -1,0 +1,222 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Empresas";
+    ViewBag.Description = "Empresas";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2><img src='~/assets/icon/empresas.png' height="32px" /> Empresa</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-themeprimary">
+                <span class="widget-caption">Listado de Empresas</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                            <i class="fa fa-times"></i>
+                        </a>*@
+                </div>
+            </div>
+            <div class="widget-body bordered-top bordered-info">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsEmpresaContacto>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Width(25).Title("").Visible(true);
+                        columns.Bound(p => p.Nombre).Width(400).ClientTemplate(@"
+                            <a onclick='clickEdit(this)'>
+                                `<img src='../Uploads/Empresas/#=Id#.png' style='width:100%; max-width:200px;'  class='img_empresa' alt='#=Nombre#'>
+                            </a>");
+                        columns.Bound(p => p.ContactoNombre).ClientTemplate(
+                            @"<div class='profile-header row'>
+                                <div class='col-lg-2 col-md-4 col-sm-12 text-center'>
+                                <img src='../Uploads/Participantes/#=PersonaId#.jpg' style='width:100%; max-width:128px;' alt='#=ContactoNombre#' class='header-avatar' />
+                                </div>
+                                <div class='col-lg-5 col-md-8 col-sm-12 profile-info'>
+                                <div class='header-fullname'>#=ContactoNombre#</div>
+                                <div class='contact-info'>
+                                    <p>
+                                        <i class='glyphicon glyphicon-phone-alt'></i> Oficina	: #=ContactoTelefono# Ext	: #=ContactoExtension#<br>
+                                        <i class='glyphicon glyphicon-phone'></i> Móvil		: #=ContactoCelular# <br>
+                                        <i class='glyphicon glyphicon-envelope'></i> Email		: #=ContactoCorreo# <br>
+                                    </p>
+                                </div>
+                                </div>
+                            </div> "
+                        );
+                        columns.Bound(p => p.PBX).Width(60).Visible(false);
+                        columns.Bound(p => p.Direccion).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadAdministrativo).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadDistribucion).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadProduccion).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadTotalEmpleados).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadVentas).Width(200).Visible(false);
+                        columns.Bound(p => p.CantidadOtros).Width(200).Visible(false);
+                        columns.Bound(p => p.OtrosDescripcion).Width(200).Visible(false);
+                        columns.ForeignKey(p => p.GiroId, (System.Collections.IEnumerable)ViewBag.GiroEmpresa, "Id", "Nombre").Width(150).Title("Actividad").Visible(false);
+                        //Creating custom edit and delete image buttons
+                        columns.Command(command =>
+                        {
+                           // command.Edit().Text(" ");
+                            command.Destroy().Text(" ");
+                        }).Width(200).Title("Opciones");
+                    })
+                        .ToolBar(toolbar => toolbar.Create().Text(" "))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditEmpresa").Window(x => x.Title("Información empresa")))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Events(x=>x.Edit("OnEdit"))
+                    //.Pageable(p =>
+                    //{
+                    //    p.Refresh(true);
+                    //})
+                    .Sortable()
+                    .Scrollable(s => s.Height("auto"))
+                    //.HtmlAttributes(new { style = "height:680px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                                //.PageSize(30)
+                                .Model(model =>
+                                {
+                                    model.Id(p => p.Id);
+                                })
+                                .Create(update => update.Action("Create", "Empresa"))
+                                .Read(read => read.Action("Read", "Empresa"))
+                                .Update(update => update.Action("Update", "Empresa"))
+                                .Destroy(update => update.Action("Delete", "Empresa"))
+                    )
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div id="Informacion Adicional">
+
+    @{Html.Kendo().Window()
+                .Name("WindowAdicional")
+                .Title("Información Adicional")
+                .Modal(true)
+                .Visible(false)
+                .Width(1100)
+                .HtmlAttributes(new { style = "background-color:white;" })
+                .Height(600)
+                .Position(x => x.Top(50))
+
+                .Content(
+        @<text>
+
+            @(Html.Kendo().TabStrip()
+          .Name("tabstrip")
+          .Items(tabstrip =>
+            {
+                tabstrip.Add().Text("Contacto")
+                    .Selected(true)
+                    .ContentHtmlAttributes(new { style = "height:98%;" })
+                    .LoadContentFrom(Url.Content("~/Administrador/Empresa/EditContactos"));
+
+                tabstrip.Add().Text("Salones")
+                    .ContentHtmlAttributes(new { style = "height:98%;" })
+                   .LoadContentFrom(Url.Content("~/Administrador/Empresa/EditSalones"));
+
+            })
+            )
+
+        </text>
+)
+    .Render();
+    }
+</div>*@
+
+
+
+<script type="text/javascript">
+    function clickEdit(e) {
+        var grid = $("#grid").data("kendoGrid");
+        //console.debug(grid);
+        grid.editRow(e.closest("tr"));
+        var dataItem = grid.dataItem(e.closest("tr"));//this.dataItem($(e.currentTarget).closest("tr"));
+        //alert(dataItem.Id);
+        IdEmpresa = dataItem.Id;
+    }
+
+    function OnEdit(e)
+    {
+        var insertMode = e.model.isNew();
+
+        if (insertMode) {
+            var tabStrip = $("#tabstrip").data("kendoTabStrip");
+            var general = tabStrip.select();
+            var next = general.next();
+            IdEmpresa = null;
+            for (var i = 1; i < 3; i++) {
+                tabStrip.enable(next, next.hasClass("k-state-disabled"));
+                next = next.next();
+            }
+        }
+    }
+</script>
+<script type="text/javascript">
+    var IdEmpresa;
+
+  
+
+    function onUpload(e) {
+        var files = e.files;
+        $.each(files, function () {
+
+            if (this.extension.toLowerCase() != ".png") {
+                alert("Unicamente se permiten imagenes con extensión PNG")
+                e.preventDefault();
+            }
+
+            if (this.size / 1024 / 1024 > 5) {
+                alert("El tamaño de la imagen no debe de ser mayor a los 5Mb!")
+                e.preventDefault();
+            }
+        });
+        e.data = { pIdEmpresa: IdEmpresa };
+    }
+    function EmpresaSeleccionada() {
+
+        return {
+            pIdEmpresa: IdEmpresa
+        };
+    }
+
+    function CalcularTE() {
+        var Total = 0;
+
+        if ($("#CantidadAdministrativo").val() != null)
+            Total = Total + parseInt($("#CantidadAdministrativo").val());
+
+        if ($("#CantidadDistribucion").val() != null)
+            Total = Total + parseInt($("#CantidadDistribucion").val());
+
+        if ($("#CantidadProduccion").val() != null)
+            Total = Total + parseInt($("#CantidadProduccion").val());
+
+        if ($("#CantidadVentas").val() != null)
+            Total = Total + parseInt($("#CantidadVentas").val());
+
+        if ($("#CantidadOtros").val() != null)
+            Total = Total + parseInt($("#CantidadOtros").val());
+
+        $("#CantidadTotalEmpleados").val(Total.toString());
+    }
+    
+
+
+</script>

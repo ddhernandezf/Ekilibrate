@@ -1,0 +1,291 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+@model Ekilibrate.Model.Entity.Participante.clsCuidado
+
+@{
+    ViewBag.Title = "Cuidado";
+    ViewBag.Description = "Cuidado";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Cuidado", FormMethod.Post, new { id = "myform" }))
+{
+    <h2><img src="../assets/img/icons/Heart Monitor-32.png" />Evaluación del Estilo de Vida</h2>
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+                <ul>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Diagnostico'><span class="step">1</span></a>1<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Alimentacion'><span class="step">2</span></a>2<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="complete"><a href='../Participante/Riesgo'><span class="step">3</span></a>3<span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">4</span><span class="chevron"></span></li>
+                    @*<li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Emocion'><span class="step">5</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Tiempo'><span class="step">6</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Comunicacion'><span class="step">7</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/ComunicacionDos'><span class="step">8</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/TestFinanzas'><span class="step">9</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Liderazgo'><span class="step">10</span><span class="chevron"></span></a></li>*@
+                </ul>
+            </div>
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption" style="font-size:28px"><img src="../assets/img/icons/Medical Doctor-50.png" width="32px" height="32px" /> Área del Cuidado de la Salud</span>
+            </div>
+            <div class="row">
+            </div>
+            @Html.HiddenFor(x => x.ActividadFisica.ID_PARTICIPANTE)
+            @Html.HiddenFor(x => x.Padecimiento.ID_PARTICIPANTE)
+
+            <div class="widget-header bordered-bottom bordered-themethirdcolor">
+                <span class="widget-caption themethirdcolor" style="text-align:left;">Test sobre estilo de vida</span>
+                <div class="widget-buttons">
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div id="Horizontal-form">
+                    <br />
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label h4">¿Realizas actividad física?</label>
+                            <div class="col-lg-2">
+                                @Html.RadioButtonFor(model => model.ActividadFisica.REALIZA_ACTIVIDAD, "true") Si
+                            </div>
+                            <div class="col-lg-2">
+                                @Html.RadioButtonFor(model => model.ActividadFisica.REALIZA_ACTIVIDAD, "false") No
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label h4">Principal</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label h4">Secundario</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-2 control-label">¿Cuál o cuáles?</label>
+                        <div class="col-lg-3">
+                            @(Html.Kendo().DropDownListFor(x => x.ActividadFisica.ID_PRINCIPAL)
+                                                .HtmlAttributes(new { @style = "width:100%" })
+                                                .DataTextField("NOMBRE_EJERCICIO")
+                                                .DataValueField("ID_EJERCICIO")
+                                                .OptionLabel("Seleccione una opción")
+                                                .BindTo(ViewBag.TipoEjercicio)
+                                                .Filter("contains")
+                            )
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3">
+                            @(Html.Kendo().DropDownListFor(x => x.ActividadFisica.ID_SECUNDARIO)
+                                                .HtmlAttributes(new { @style = "width:100%" })
+                                                .DataTextField("NOMBRE_EJERCICIO")
+                                                .DataValueField("ID_EJERCICIO")
+                                                .OptionLabel("Seleccione una opción")
+                                                .BindTo(ViewBag.TipoEjercicio)
+                                                .Filter("contains")
+                            )
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-2 control-label">¿Cuántas veces a la semana los haces?</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().NumericTextBoxFor(model => model.ActividadFisica.PRINCIPAL_VECES).Decimals(0).Min(0).HtmlAttributes(new { @style = "width:100%" }))
+                            @*@(Html.Kendo().NumericTextBoxFor(x => x.Glucosa).Name("Glucosa").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Resultado glucosa (mg/dl)" }))*@
+                        </div>
+                        <label class="col-lg-2">veces</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().NumericTextBoxFor(model => model.ActividadFisica.SECUNDARIO_VECES).Decimals(0).Min(0).HtmlAttributes(new { @style = "width:100%" }))
+                        </div>
+                        <label class="col-lg-1">veces</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-1"></div>
+                        <label class="col-lg-2 control-label">¿Cuánto tiempo haces?</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().NumericTextBoxFor(model => model.ActividadFisica.PRINCIPAL_TIEMPO).Decimals(0).Min(0).HtmlAttributes(new { @style = "width:100%" }))
+                        </div>
+                        <label class="col-lg-2">minutos</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().NumericTextBoxFor(model => model.ActividadFisica.SECUNDARIO_TIEMPO).Decimals(0).Min(0).HtmlAttributes(new { @style = "width:100%" }))
+                        </div>
+                        <label class="col-lg-1">minutos</label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="widget-header bordered-bottom bordered-themethirdcolor">
+                <span class="widget-caption themethirdcolor"> Condiciones preexistentes</span>
+                <div class="widget-buttons">
+                </div>
+
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-lg-12 control-label h4">1. ¿Padeces de alguna de estas enfermedades? (puedes marcar más de una)</label>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                        @if (Model.ListadoCondiciones != null)
+                        {
+                            foreach (Ekilibrate.Model.Entity.Participante.clsCondicionPreExistente item in Model.ListadoCondiciones)
+                            {
+                                <div class="col-lg-3">
+                                    @if (item.Seleccionado)
+                                    {
+                                        <input onclick='OnCheckedCondicion(@item.ID_CONDICION,this);' checked="checked" style='opacity:1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+
+                                    }
+                                    else
+                                    {
+                                        <input onclick='OnCheckedCondicion(@item.ID_CONDICION, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' ch />
+                                    }
+                                    <label>@item.NOMBRE_CONDICION</label><br />
+                                </div>
+                            }
+                        }
+                                
+                </div>
+                <div class="form-title">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label h4">2. ¿Actualmente estás bajo tratamiento Médico?</label>
+                        <div class="col-lg-2">
+                            @Html.RadioButtonFor(model => model.Padecimiento.TRATAMIENTO, "true") Si
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.RadioButtonFor(model => model.Padecimiento.TRATAMIENTO, "false") No
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3">
+                            <label class="col-lg-12 control-label h4">Principal</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-lg-12 control-label h4">Secundario</label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-1"></div>
+                        <label class="col-sm-2 control-label ">a. ¿Por qué padecimiento?</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().TextBoxFor(model => model.Padecimiento.PADECIMIENTO_PRINCIPAL).HtmlAttributes(new { @class = "form-control" }))
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().TextBoxFor(model => model.Padecimiento.PADECIMIENTO_SECUNDARIO).HtmlAttributes(new { @class = "form-control" }))
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-1"></div>
+                        <label class="col-sm-2 control-label ">b. ¿Qué medicamentos estás tomando?</label>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().TextBoxFor(model => model.Padecimiento.MEDICAMENTO_PRINCIPAL).HtmlAttributes(new { @class = "form-control" }))
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().TextBoxFor(model => model.Padecimiento.MEDICAMENTO_SECUNDARIO).HtmlAttributes(new { @class = "form-control" }))
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="widget-header bg-themethirdcolor">
+                    <span class="widget-caption" style="font-size:28px"><img src="../assets/img/icons/Medical Doctor-50.png" width="32px" height="32px" />Has finalizado el Área del Cuidado de la Salud</span>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="pull-right" style="display: inline-flex; padding-right: 1em;">
+                        <div class="btn-group">
+                            <button type="submit" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+                            <button type="button" class="btn-lg btn-warning" onclick="location.href = '../Participante/Riesgo';"><i class="fa fa-angle-left"></i> Atrás</button>
+                            @*<button type="submit" class="btn-lg btn-success btn-next" data-last="Finish" value="Siguiente" name="accion">Siguiente <i class="fa fa-angle-right"></i></button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script type="text/javascript">
+        function OnCheckedCondicion(pID_CONDICION, e) {
+
+
+            if (e.checked) {
+
+
+                $.ajax({
+                    url: 'Cuidado/AddCondicionPreExistente?pID_CONDICION=' + pID_CONDICION,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+
+            }
+            else {
+                $.ajax({
+                    url: 'Cuidado/DeleteCondicionPreExistente?pID_CONDICION=' + pID_CONDICION,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.success) {
+
+                        }
+                        else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+        </script>
+    }
+
+

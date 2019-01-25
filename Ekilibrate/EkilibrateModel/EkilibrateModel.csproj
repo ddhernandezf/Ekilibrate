@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ekilibrate.Model</RootNamespace>
+    <AssemblyName>EkilibrateModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Wcf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Wcf.4.0.0\lib\net45\Autofac.Integration.Wcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ExecutionResult.cs" />
+    <Compile Include="Constantes\Administracion.cs" />
+    <Compile Include="Constantes\Administrador.cs" />
+    <Compile Include="Constantes\Correo.cs" />
+    <Compile Include="Entity\Administracion\UsuarioRol.cs" />
+    <Compile Include="Entity\Administrador\Asistente.cs" />
+    <Compile Include="Entity\Administrador\Ciclo.cs" />
+    <Compile Include="Entity\Administrador\Cita.cs" />
+    <Compile Include="Entity\Administrador\CitaProgramacion.cs" />
+    <Compile Include="Entity\Administrador\ClienteRol.cs" />
+    <Compile Include="Entity\Administrador\Colaborador.cs" />
+    <Compile Include="Entity\Administrador\Contacto.cs" />
+    <Compile Include="Entity\Administrador\Empresa.cs" />
+    <Compile Include="Common\clsFiltro.cs" />
+    <Compile Include="Common\clsRespuesta.cs" />
+    <Compile Include="Entity\Administrador\Enfermera.cs" />
+    <Compile Include="Entity\Administrador\Facilitador.cs" />
+    <Compile Include="Entity\Administrador\Grupo.cs" />
+    <Compile Include="Entity\Administrador\Nutricionista.cs" />
+    <Compile Include="Entity\Administrador\ProyectoArea.cs" />
+    <Compile Include="Entity\Administrador\ProyectoContacto.cs" />
+    <Compile Include="Entity\Administrador\ProyectoSalon.cs" />
+    <Compile Include="Entity\Administrador\ProyectoTaller.cs" />
+    <Compile Include="Entity\Administrador\Salon.cs" />
+    <Compile Include="Entity\Catalogos\Alimento.cs" />
+    <Compile Include="Entity\Catalogos\Area.cs" />
+    <Compile Include="Entity\Catalogos\GrupoAlimento.cs" />
+    <Compile Include="Entity\Catalogos\RolNutricionista.cs" />
+    <Compile Include="Entity\Administrador\Semana.cs" />
+    <Compile Include="Entity\Catalogos\Aseguradora.cs" />
+    <Compile Include="Entity\Catalogos\Taller.cs" />
+    <Compile Include="Entity\Catalogos\GiroEmpresa.cs" />
+    <Compile Include="Entity\Catalogos\TipoProyecto.cs" />
+    <Compile Include="Entity\Catalogos\TipoUsoSalon.cs" />
+    <Compile Include="Entity\Administrador\Proyecto.cs" />
+    <Compile Include="Entity\General\CorreoElectronico.cs" />
+    <Compile Include="Entity\General\Error.cs" />
+    <Compile Include="Entity\General\MensajeCorreo.cs" />
+    <Compile Include="Entity\General\Persona.cs" />
+    <Compile Include="Entity\Nutricionista\AnalisisDiagnostico.cs" />
+    <Compile Include="Entity\Nutricionista\Diagnostico.cs" />
+    <Compile Include="Entity\Nutricionista\DiagnosticoAlimentacion.cs" />
+    <Compile Include="Entity\Nutricionista\DiagnosticoAnamnesis.cs" />
+    <Compile Include="Entity\Nutricionista\CalificacionTaller.cs" />
+    <Compile Include="Entity\Nutricionista\MetaPasos.cs" />
+    <Compile Include="Entity\Nutricionista\PlanAlimentacion.cs" />
+    <Compile Include="Entity\Nutricionista\Seguimiento.cs" />
+    <Compile Include="Entity\Nutricionista\SeguimientoAspectos.cs" />
+    <Compile Include="Entity\Participante\Alimentacion.cs" />
+    <Compile Include="Entity\Participante\AlimentacionDia.cs" />
+    <Compile Include="Entity\Participante\Ansiedad.cs" />
+    <Compile Include="Entity\Participante\Condicion.cs" />
+    <Compile Include="Entity\Participante\CondicionPreExistente.cs" />
+    <Compile Include="Entity\Participante\ExpedienteCrecimientoPersonal.cs" />
+    <Compile Include="Entity\Participante\ExpedienteRelacionesInterpersonales.cs" />
+    <Compile Include="Entity\Participante\ExpedienteManejoEmociones.cs" />
+    <Compile Include="Entity\Participante\Enfermedad.cs" />
+    <Compile Include="Entity\Participante\Medida.cs" />
+    <Compile Include="Entity\Participante\MedidaBebida.cs" />
+    <Compile Include="Entity\Participante\Pasos.cs" />
+    <Compile Include="Entity\Participante\PreguntaLiderazgoDos.cs" />
+    <Compile Include="Entity\Participante\PreguntaLiderazgo.cs" />
+    <Compile Include="Entity\Participante\AsertivaDos.cs" />
+    <Compile Include="Entity\Participante\Asertiva.cs" />
+    <Compile Include="Entity\Participante\Bebida.cs" />
+    <Compile Include="Entity\Participante\BebidasFrecuentes.cs" />
+    <Compile Include="Entity\Participante\TipoEjercicio.cs" />
+    <Compile Include="Entity\Participante\TestLiderazgo.cs" />
+    <Compile Include="Entity\Participante\ComunicacionDos.cs" />
+    <Compile Include="Entity\Participante\Comunicacion.cs" />
+    <Compile Include="Entity\Participante\Cuidado.cs" />
+    <Compile Include="Entity\Participante\Diagnostico.cs" />
+    <Compile Include="Entity\Participante\Emocion.cs" />
+    <Compile Include="Entity\Participante\ExpedienteEstadoSalud.cs" />
+    <Compile Include="Entity\Participante\Frecuencia.cs" />
+    <Compile Include="Entity\Participante\Participante.cs" />
+    <Compile Include="Entity\Participante\PreguntaFinanzas.cs" />
+    <Compile Include="Entity\Participante\PreguntaTiempo.cs" />
+    <Compile Include="Entity\Participante\PreguntaDos.cs" />
+    <Compile Include="Entity\Participante\PreguntaUno.cs" />
+    <Compile Include="Entity\Participante\RespAnsiedad.cs" />
+    <Compile Include="Entity\Participante\TestTemaFinanzas.cs" />
+    <Compile Include="Entity\Participante\TestFinanzas.cs" />
+    <Compile Include="Entity\Participante\RespuestaFinanzas.cs" />
+    <Compile Include="Entity\Participante\ResumenExpediente.cs" />
+    <Compile Include="Entity\Participante\Riesgo.cs" />
+    <Compile Include="Entity\Participante\TemaFinanzas.cs" />
+    <Compile Include="Entity\Participante\Tiempo.cs" />
+    <Compile Include="Entity\Proyecto\Cita.cs" />
+    <Compile Include="Entity\Proyecto\CitaProgramacion.cs" />
+    <Compile Include="Entity\Proyecto\AlimentacionDia.cs" />
+    <Compile Include="Entity\Participante\PasosDia.cs" />
+    <Compile Include="Entity\Proyecto\Grupo.cs" />
+    <Compile Include="Entity\Proyecto\Proyecto.cs" />
+    <Compile Include="Entity\Administracion\Usuario.cs" />
+    <Compile Include="Entity\Proyecto\TallerNota.cs" />
+    <Compile Include="Entity\Proyecto\TallerProgramacion.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\Administrador\IDataInjector.cs" />
+    <Compile Include="Servicios\Administrador\IDataRetriever.cs" />
+    <Compile Include="Servicios\Cliente\IDataInjector.cs" />
+    <Compile Include="Servicios\Cliente\IDataRetriever.cs" />
+    <Compile Include="Servicios\Nutricionista\IDataInjector.cs" />
+    <Compile Include="Servicios\Nutricionista\IDataRetriever.cs" />
+    <Compile Include="Servicios\Participante\IDataInjector.cs" />
+    <Compile Include="Servicios\Participante\IDataRetriever.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{2a1404a2-de56-446c-bfd0-13094c85a055}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="Correo\" />
+    <Folder Include="Entity\Cliente\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\EkilibrateModel.dll" />
+    <Content Include="bin\Debug\EkilibrateModel.pdb" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,283 @@
+﻿@model Ekilibrate.Model.Entity.Participante.clsExpedienteEstadoSalud
+
+<div class="container-fluid" style="left:0px;">
+    <div class="row">        
+        <div class="col-xs-12 col-lg-6" style="left:0px">
+            <div class="widget">
+                <div class="widget-header bg-themethirdcolor">
+                    <span class="widget-caption">Estado Nutricional</span>
+                </div>
+                <div class="widget-body">
+                    <div id="Horizontal-form">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label">Tu estado nutricional según el peso para tu estatura es:</label>
+                            </div>
+                            <div class="col-lg-6 task-state">
+                                <span class="label label-@Model.PTColor">@Model.PTTexto</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label">Porcentaje de grasa:</label>
+                            </div>
+                            <div class="col-lg-6 task-state">
+                                <span class="label label-@Model.PorcentajeGrasaColor">@Model.PorcentajeGrasaTexto</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label h4">Resultados Bioquímicos</label>
+                            </div>
+                            <div class="col-lg-6 task-state"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label">Colesterol</label>
+                            </div>
+                            <div class="col-lg-6 task-state">
+                                <span class="label label-@Model.CHOLColor">@Model.CHOLTexto</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label">Triglicéridos</label>
+                            </div>
+                            <div class="col-lg-6 task-state">
+                                <span class="label label-@Model.TGLColor">@Model.TGLTexto</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 control-label">Glucosa</label>
+                            </div>
+                            <div class="col-lg-6 task-state">
+                                <span class="label label-@Model.GLIColor">@Model.GLITexto</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 themethirdcolor h4">Observaciones Generales</label>
+                            </div>
+                            <div class="col-lg-6 task-state"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-lg-12 control-label">@Model.ObservacionNutricional</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <div class="widget">
+                <div class="widget-header bg-themefourthcolor">
+                    <span class="widget-caption">Hábitos Alimentarios</span>
+                </div>
+                <div class="widget-body">
+                    <div class="tickets-container">
+                        <ul class="tickets-list">
+                            <li class="ticket-item">
+                                <div class="row">
+                                    <div class="ticket-user col-lg-6 col-sm-12">
+                                        <div class="row-title">Consumo de agua:</div>
+                                    </div>
+                                    <br />
+                                    <div class="part-single">
+                                        @{
+                                            if (Model.ConsumoAgua == 1)
+                                            {
+                                                <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">Muy bajo</label>
+
+                                            }
+                                            else if (Model.ConsumoAgua == 2)
+                                            {
+                                                <label style="color: orange;font-size:  45px;text-align: center;width: 100%;">Bajo</label>
+
+                                            }
+                                            else if (Model.ConsumoAgua == 3)
+                                            {
+                                                <label style="color: #FBBC05;font-size:  45px;text-align: center;width: 100%;">Medio</label>
+                                            }
+                                            else
+                                            {
+                                                <label style="color: #34A853;font-size:  45px;text-align: center;width: 100%;">Adecuado</label>
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="ticket-item">
+                                <div class="row">
+                                    <div class="part-single">
+                                        <div class="row-title">Consumo de azúcar:</div>
+                                    </div>
+                                    <br />
+                                    <div class="part-single">
+                                        @{
+                                            if (Model.ConsumoAzucar <= 9)
+                                            {
+                                                <label style="color: #34A853;font-size:  45px;text-align: center;width: 100%;">@Model.ConsumoAzucar % Adecuado</label>
+                                            }
+                                            else
+                                            {
+                                                <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">@Model.ConsumoAzucar %  Elevado</label>
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ticket-item">
+                                <div class="row">
+                                    <div class="part-single">
+                                        <div class="row-title">Consumo de sal:</div>
+                                    </div>
+                                    <br />
+                                    <div class="part-single">
+                                        @{
+                                            if (!Model.ConsumoSal)
+                                            {
+                                                <label style="color: #34A853;font-size:  45px;text-align: center;width: 100%;">Adecuado</label>
+                                            }
+                                            else
+                                            {
+                                                <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">Elevado</label>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-lg-12 themefourthcolor h4">Observaciones Generales</label>
+                            </div>
+                            <div class="col-lg-6 task-state"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-lg-12 control-label">@Model.ObservacionesHabitosAlimentarios</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <div class="widget">
+                <div class="widget-header bg-success">
+                    <span class="widget-caption">Factores de riesgo</span>
+                </div>
+                <div class="widget-body">
+
+                    <div>
+                        @*<div style="min-height:380px">*@
+                        <div class="row">
+                            <div class="part-single">
+                                @{
+                                    if (Model.FactoresRiesgo != null)
+                                    {
+                                        foreach (var item in Model.FactoresRiesgo)
+                                        {
+                                            <label style="color: #EA4335;font-size:  2.4vw;text-align: center;width: 100%;"> @item</label>
+                                        }
+                                    }
+                                }
+
+                            </div>
+                            <br />
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="bg-success h4" style="color: white;">Observaciones:</div>
+                        </div>
+                        <div class="part-single">
+                            @{
+                                <label style="  color: gray;height:100px;width: 100%;"> @Model.ObservacionesFactoresRiesgo  </label>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <div class="widget">
+                <div class="widget-header bg-themeprimary">
+                    <span class="widget-caption">Estilo de vida</span>
+                </div>
+                <div class="widget-body">
+
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="row-title">Actividad física:</div>
+                        </div>
+                        <br />
+                        <div class="part-single">
+
+                            @{
+                                if (Model.MinutosActividadFisica <= 150)
+                                {
+                            <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">@Model.MinutosActividadFisica <label style="color:gray"> min</label> Insuficiente</label>
+
+                            }
+                            else
+                            {
+                            <label style="color: #34A853;font-size:  45px;text-align: center;width: 100%;">@Model.MinutosActividadFisica <label style="color:gray"> min</label> Adecuado</label>
+                            }
+                            }
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="part-single">
+
+                            <div class="part-single">
+                                <div class="row-title">Condiciones preexistentes:</div>
+                            </div>
+                            <br />
+                            <div class="part-single">
+                                @{
+                                if (Model.CondicionesPrexistentes != null)
+                                {
+                                    foreach (var item in Model.CondicionesPrexistentes)
+                                    {
+                                <label style="color: #EA4335;font-size:  2.4vw;text-align: center;width: 100%;"> @item</label>
+                                    }
+                                }
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="bg-themeprimary h4" style="color: white;">Observaciones:</div>
+                        </div>
+                        <div class="part-single">
+                            @{
+                                <label style="color: gray;height:100px;width: 100%;"> @Model.ObservacionesEstilovida  </label>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

@@ -1,0 +1,323 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+
+@model Ekilibrate.Model.Entity.Proyecto.clsCita
+
+@{
+    ViewBag.Title = "Seguimiento";
+    ViewBag.Description = "Expediente";
+    Layout = "~/Views/Shared/_Default.cshtml";
+
+    Ekilibrate.Model.Entity.Participante.ResumenExpediente ModelResumen = ViewBag.ModelResumen;
+    Ekilibrate.Model.Entity.Nutricionista.clsSeguimiento ModelSeg = ViewBag.ModelSeg;
+    Ekilibrate.Model.Entity.Nutricionista.clsPlanAlimentacion ModelPlan = ViewBag.ModelPlan;
+
+    string Estatura = ModelResumen.Estatura.ToString("#");
+    string IMC = Math.Round(((Double.Parse(ModelResumen.PesoActual.ToString()) / 2.20462) / Double.Parse((ModelResumen.Estatura * ModelResumen.Estatura).ToString())) * 10000).ToString();
+}
+
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.ParticipanteId)
+
+<h5 class="row-title"><i class="typcn typcn-folder themeprimary"></i>Seguimiento Nutricional</h5>
+<br />
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+            <div class="databox-top bg-white padding-10">
+                <div class="col-lg-4 col-sm-4 col-xs-4">
+                    @if (Model != null && Model.ParticipanteId > 0)
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" style="width:75px; height:75px;" class="image-circular bordered-3 bordered-gray">
+                        @*if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + Model.ParticipanteId + ".jpg")))
+                            {
+                            <img src="@Url.Content("~/Uploads/Participantes/"+ Model.ParticipanteId + ".jpg")" class="avatar">
+                            }
+                            else if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + Model.ParticipanteId + ".png")))
+                            {
+                            <img src="@Url.Content("~/Uploads/Participantes/"+ Model.ParticipanteId + ".png")" class="avatar">
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" class="avatar">
+                            }*@
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" style="width:75px; height:75px;" class="image-circular bordered-3 bordered-palegreen">
+                    }
+                </div>
+                <div class="col-lg-8 col-sm-8 col-xs-8 text-align-left padding-10">
+                    <span class="databox-header carbon no-margin">@ModelResumen.Nombre</span>
+                    <span class="databox-text lightcarbon no-margin">@ModelResumen.Puesto</span>
+                </div>
+            </div>
+            <div class="databox-bottom bg-white padding-10">
+                <div class="databox-row row-12">
+                    <div class="databox-cell cell-2 no-padding text-align-center bordered-right bordered-platinum">
+                        <span class="databox-text sonic-silver  no-margin">Edad</span>
+                        <span class="databox-number lightcarbon no-margin">@ModelResumen.Edad</span>
+                    </div>
+                    <div class="databox-cell cell-3 no-padding text-align-center bordered-right bordered-platinum">
+                        <span class="databox-text sonic-silver no-margin">Peso(lb)</span>
+                        <span class="databox-number lightcarbon no-margin">
+                            <label id="lbPesoActual" class="databox-number lightcarbon no-margin">@ModelResumen.PesoActual</label>
+                        </span>
+                    </div>
+                    <div class="databox-cell cell-3 no-padding text-align-center bordered-right bordered-platinum">
+                        <span class="databox-text sonic-silver no-margin">Estatura(cms)</span>
+                        <label id="lbEstatura" class="databox-number lightcarbon no-margin">@Estatura</label>
+                    </div>
+                    <div class="databox-cell cell-3 no-padding text-align-center">
+                        <span class="databox-text sonic-silver no-margin">IMC</span>
+                        <label id="lbPesoActual" class="databox-number lightcarbon no-margin">@IMC</label>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <br />
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="tab-green bg-green">
+                        <a data-toggle="tab" href="#metas">
+                            <span class="widget-caption h5">Cuadro de Metas</span>
+                        </a>
+                    </li>
+
+                    <li class="tab-themethirdcolor bg-themethirdcolor">
+                        <a data-toggle="tab" href="#plan">
+                            <span class="widget-caption h5">Plan de Alimentación</span>
+                        </a>
+                    </li>
+
+                    <li class="tab-themefourthcolor bg-themefourthcolor">
+                        <a data-toggle="tab" href="#pasos">
+                            <span class="widget-caption h5">Manpo Kei</span>
+                        </a>
+                    </li>
+
+                    <li class="tab-themeprimary bg-themeprimary">
+                        <a data-toggle="tab" href="#resumen">
+                            <span class="widget-caption h5">Resumen</span>
+                        </a>
+                    </li>
+
+                    @*<li class="tab-themethirdcolor bg-themethirdcolor">
+                            <a data-toggle="tab" href="#talleres-salud">
+                                <span class="widget-caption h5">Talleres Salud</span>
+                            </a>
+                        </li>
+
+                        <li class="tab-themefourthcolor bg-themefourthcolor">
+                            <a data-toggle="tab" href="#talleres-emociones">
+                                <span class="widget-caption h5">Talleres Emociones</span>
+                            </a>
+                        </li>
+
+                        <li class="tab-green bg-green">
+                            <a data-toggle="tab" href="#talleres-relaciones">
+                                <span class="widget-caption h5">Talleres Relaciones</span>
+                            </a>
+                        </li>
+
+                        <li class="tab-themeprimary bg-themeprimary">
+                            <a data-toggle="tab" href="#taleres-crecimiento">
+                                <span class="widget-caption h5">Talleres Crecimiento</span>
+                            </a>
+                        </li>*@
+                </ul>
+
+                <div class="tab-content">
+
+                    <div id="metas" class="tab-pane in active">
+                        @{
+                            using (Html.BeginForm("CuadroMetas", "Seguimiento", FormMethod.Post, new { id = "CuadroMetas" }))
+                            {
+                                Html.RenderPartial("CuadroMetas", ModelSeg);
+                                <button type="submit" value="Finalizar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Finalizar Cita</button>
+                            }
+                        }
+                    </div>
+
+                    <div id="plan" class="tab-pane">
+                        @{
+                            //using (Html.BeginForm("Plan", "Seguimiento", FormMethod.Post, new { id = "frmPlan" }))
+                            //{
+                            Html.RenderPartial("Plan", ModelPlan);
+                            @*<button id="btnGuardarPlan" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+                                }*@
+                        }
+                    </div>
+
+                    <div id="pasos" class="tab-pane">
+                        @{
+                            Html.RenderPartial("~/Areas/Nutricionista/Views/Diagnostico/MetaPasos.cshtml", @Model.Id);
+                        }
+                    </div>
+
+                    <div id="resumen" class="tab-pane">
+                        @{
+                            Html.RenderPartial("~/Areas/Participante/Views/Expediente/Resumen.cshtml", ModelResumen);
+                        }
+                    </div>
+
+                    @*<div id="talleres-salud" class="tab-pane">
+                            @{
+                                Html.RenderPartial("TallerAreaSalud", @Model.Id);
+                            }
+                        </div>
+
+                        <div id="talleres-emociones" class="tab-pane">
+                            @{
+                                Html.RenderPartial("TallerManejoEmociones", @Model.Id);
+                            }
+                        </div>
+
+                        <div id="talleres-relaciones" class="tab-pane">
+                            @{
+                                Html.RenderPartial("TallerRelacionesInterpersonales", @Model.Id);
+                            }
+                        </div>
+
+                        <div id="talleres-crecimiento" class="tab-pane">
+                            @{
+                                Html.RenderPartial("TallerCrecimientoPersonal", @Model.Id);
+                            }
+                        </div>*@
+                </div>
+            </div>
+            @*@(Html.Kendo().TabStrip()
+                    .Name("tabstrip")
+                    .HtmlAttributes(new { style = "width:100%; min-height:972px;" })
+                    .Animation(animation =>
+                    {
+                        animation.Enable(true);
+                        animation.Open(config =>
+                        {
+                            config.Expand();
+                            config.Fade(FadeDirection.In);
+                            config.Duration(AnimationDuration.Normal);
+                        });
+                    })
+                    .SelectedIndex(0)
+                    .Events(e =>
+                    {
+                        e.Activate("heightsResize");
+                    })
+                    .Items(panelbar =>
+                    {
+                                        panelbar.Add().Text("Expediente")
+                                .LoadContentFrom(Url.Content("~/Participante/Expediente/Resumen?IdParticipante=" + @Model.Id));
+                        panelbar.Add().Text("Cuadro de Metas")
+                            .LoadContentFrom(Url.Content("~/Nutricionista/Seguimiento/CuadroMetas?par=" + @Model.Id + "&cita=" + @Model.Id));
+                        panelbar.Add().Text("Manpo kei")
+                            .LoadContentFrom(Url.Content("~/Nutricionista/Diagnostico/MetaPasos?IdParticipante=" + @Model.Id));
+                                        panelbar.Add().Text("Talleres - Salud")
+                              .LoadContentFrom(Url.Content("~/Nutricionista/Seguimiento/TallerAreaSalud?par=" + @Model.Id));
+
+                                        panelbar.Add().Text("Talleres - Emociones")
+                              .LoadContentFrom(Url.Content("~/Nutricionista/Seguimiento/TallerManejoEmociones?par=" + @Model.Id));
+
+                                        panelbar.Add().Text("Talleres - Relaciones")
+                              .LoadContentFrom(Url.Content("~/Nutricionista/Seguimiento/TallerRelacionesInterpersonales?par=" + @Model.Id));
+
+                                        panelbar.Add().Text("Talleres - Crecimiento")
+                              .LoadContentFrom(Url.Content("~/Nutricionista/Seguimiento/TallerCrecimientoPersonal?par=" + @Model.Id));
+                    })
+                )*@
+        </div>
+    </div>
+
+    <script language="javascript">
+    window.onresize = heightsResize;
+
+    function heightsResize() {
+        var altura = document.getElementById('foto').clientHeight;
+        var alturaDiv = document.getElementById('divprincipal').clientHeight;
+
+        $("#segnut-edad").css("height", altura);
+        $("#segnut-sexo").css("height", altura);
+        $("#segnut-gestacional").css("height", altura);
+        $("#segnut-meses").css("height", altura);
+
+        $("#segnut-pesoreal").css("height", altura);
+        $("#segnut-pesodeseable").css("height", altura);
+        $("#segnut-pt").css("height", altura);
+        $("#segnut-abdomen").css("height", altura);
+
+        $("#segnut-chol").css("height", altura);
+        $("#segnut-tgl").css("height", altura);
+        $("#segnut-gli").css("height", altura);
+
+        $(".bioquimico").css("height", altura);
+        $(".vet").css("height", altura);
+        $(".caritas-img").css("height", altura);
+        $(".comida-vale").css("height", altura);
+        $(".red-img").css("height", altura);
+
+        $(".extended").css("height", alturaDiv);
+        $("#divRed").css("height", alturaDiv);
+
+        //esto es lo que se va a quedar al final
+        var alt = document.getElementById('internal-row').clientHeight;
+        var alt2 = document.getElementById('cell-inicial').clientHeight;
+
+        alert(alt2);
+
+        $(".background-img").css("height", alt);
+        $(".internal-cell").css("height", alt2);
+    };
+
+    var IdParticipante;
+    var IdCita;
+    $(document).ready(function () {
+        IdParticipante = "@Model.Id";
+        IdCita = "@Model.Id";
+    });
+    function Additional() {
+        alert(IdParticipante);
+        return {
+            IdParticipante: IdParticipante
+
+        }
+    }
+
+    function AdditionalCuadroMetas() {
+        return {
+            pCita: "@Model.Id",
+            pParticipante: IdParticipante
+        }
+    }
+
+    function AdditionalMetaPaso() {
+        return {
+            IdParticipante: "@Model.Id"
+        }
+    }
+
+
+    </script>
+    <style>
+        .nav-tabs > li > a {
+            color: #FFFFFF;
+        }
+
+        .nav-tabs > li:active > a {
+            color: #000000;
+        }
+
+        .k-grid .k-grid-header .k-header .k-link {
+            height: auto;
+        }
+
+        .k-grid .k-grid-header .k-header {
+            white-space: normal;
+        }
+    </style>

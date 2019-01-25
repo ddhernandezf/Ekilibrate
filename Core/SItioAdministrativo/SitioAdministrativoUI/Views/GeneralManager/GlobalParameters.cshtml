@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Parametros Generales";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+
+<div class="fha-wrapper-row fha-padding-top-15px ">
+    <div class="fha-title fha-font-size">
+        @Html.Label("Propietario")
+    </div>
+
+
+    <div class="fha-content">
+        @(Html.Kendo().DropDownList()
+                  .Name("IdOwners")
+                //.AutoBind(false)
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .OptionLabel("Elija el propietario...")
+                 .Events(e => e.Select("onChangeOwner"))
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetOwners", "GeneralManager"));
+
+                  })
+        )
+
+        &nbsp;
+
+        @(Html.Kendo().Button()
+                    .Name("btnBuscar")
+                    .Content("Generar Enumerable")
+                    .HtmlAttributes(new { @class = "k-primary" })
+        )
+    </div>
+
+    <div class="fha-wrapper-principal">
+        <div class="fha-content">
+
+
+
+        </div>
+    </div>
+    @{Html.Kendo().Window()
+    .Name("window")
+    .Title("Enumerable Producto")
+     .Draggable()
+    .Resizable()
+    .Actions(actions => actions.Minimize().Maximize().Close())
+    .Visible(false)
+    .Width(500)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(200)
+    .Position(x => x.Top(350))
+
+    .Content(
+    @<text>
+
+        <label style="color:black;" id="EnumProduct"></label>
+    </text>
+)
+        .Render();
+    }
+
+</div>
+
+
+<div class="grid-mantenimientos-content-center">
+
+
+    @model System.Collections.Generic.IEnumerable<SitioAdministrativoUI.Models.Data.ParametroGeneral>
+
+    @(Html.Kendo().Grid(Model)
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdParametroGeneral).Width(45).Title("");
+                columns.Bound(p => p.Nombre).Width(175);
+                columns.Bound(p => p.Valor).Width(175);
+                columns.ForeignKey(p => p.IdParametroTipo, (System.Collections.IEnumerable)ViewBag.ParameterType, "Value", "Text").Title("Tipo de parámetro").Width(150);
+                columns.ForeignKey(p => p.IdPropietario, (System.Collections.IEnumerable)ViewBag.Owner, "Value", "Text").Title("Propietario").Width(150);
+
+                columns.Command(command =>
+                {
+                    command.Edit().Text("Actualizar");
+                    command.Destroy().Text("Eliminar");
+                }).Width(200);
+            })
+                    .ToolBar(toolbar => toolbar.Create().Text("Nuevo"))
+                .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+                    .Pageable(p =>
+                    {
+                        p.Refresh(true);
+                    })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Events(events =>
+                {
+                    events.Change("GridReload");
+                    events.Error("error_handler");
+                })
+                        .Model(model =>
+                        {
+                            model.Id(p => p.IdParametroGeneral);
+                            model.Field(p => p.IdParametroGeneral).Editable(false);
+
+                        })
+                        .Create(update => update.Action("GlobalParameter_Create", "GeneralManager"))
+                                            .Read(read => read.Action("GlobalParameter_Read", "GeneralManager"))
+                                            .Update(update => update.Action("GlobalParameter_Update", "GeneralManager"))
+                                            .Destroy(update => update.Action("GlobalParameter_Destroy", "GeneralManager"))
+            )
+    )
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $("#btnBuscar").kendoButton({
+        click: function (e) {
+            if (IdOwner > 0) {
+                $.ajax({
+                    url: '/GeneralManager/ParametersByProductEnumerable?pIdOwner=' + IdOwner,
+                    type: 'POST',
+                    data: {
+
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.success) {
+                            document.getElementById("EnumProduct").innerHTML = data.result;
+                            $("#window").data("kendoWindow").open();
+                        }
+                        else {
+                            alert(data.result);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+            else {
+                alert("Debe seleccionar primero el propietario");
+            }
+        }
+    });
+
+    function onChangeOwner(e) {
+
+        var dataItem = this.dataItem(e.item);
+
+        IdOwner = dataItem.Value;
+
+    }
+
+    var IdOwner;
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+    $(document).ready(function () {
+        var Notificacion = $("#Notificacion").data("kendoNotification");
+        var flag = "@ViewBag.isError"
+        if (flag == "Error") {
+            Notificacion.show({
+                title: "Nueva Notificación",
+                message: "@ViewBag.Error"
+            }, "error");
+
+        }
+        else if (flag == "Exito") {
+            Notificacion.show({
+                title: "Nueva Notificación",
+                message: "Operación exitosa"
+            }, "exito");
+        }
+    })
+
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

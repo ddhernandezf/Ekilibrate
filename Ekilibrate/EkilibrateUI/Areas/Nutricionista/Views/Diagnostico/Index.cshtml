@@ -1,0 +1,18 @@
+﻿@model Ekilibrate.Model.Entity.Nutricionista.Diagnostico
+@{
+    ViewBag.Title = "Diagnostico";
+    Layout = "~/Views/Shared/_Default.cshtml";
+
+}
+
+<div class="widget">
+    <div class="widget-header bg-themesecondary">
+        <span class="widget-caption" style="font-size:28px"> Análisis e Interpretación de Resultados</span>        
+    </div>    
+    @{
+        Html.RenderPartial("Diagnostico", Model);
+        Html.RenderPartial("Alimentos", new Ekilibrate.Model.Entity.Nutricionista.DiagnosticoAlimentos());
+        Html.RenderPartial("Anamnesis", new Ekilibrate.Model.Entity.Nutricionista.DiagnosticoAnamnesisTiempo());
+    }
+    
+</div>

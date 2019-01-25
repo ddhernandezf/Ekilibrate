@@ -1,0 +1,154 @@
+﻿@using Kendo.Mvc.UI;
+@model Ekilibrate.Model.Entity.Participante.clsExpedienteRelacionesInterpersonales
+
+<div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="widget">
+                <div class="widget-header bg-themethirdcolor">
+                    <span class="widget-caption">Manejo de tiempo</span>
+                </div>
+                <div class="widget-body">
+                    <div class="row">                               
+                        <div class="part-single">
+                            @{
+                                if (Model.FactorAdministracionTiempo <= 14)
+                                {
+                                    <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">@Model.FactorAdministracionTiempo Tienes un problema a la hora de administrar tu tiempo. </label>
+                                }
+                                else if (Model.FactorAdministracionTiempo > 15 && Model.FactorAdministracionTiempo <= 28)
+                                {
+                                    <label style="color: #FBBC05;font-size:  45px;text-align: center;width: 100%;">@Model.FactorAdministracionTiempo Tratas de administrar tu tiempo pero podrías mejorar.</label>
+                                }
+                                else
+                                {
+                                    <label style="color: #34A853 ;font-size:  45px;text-align: center;width: 100%;">@Model.FactorAdministracionTiempo Haces buen uso de tu tiempo. </label>
+                                }
+                            }
+                        </div>
+                    </div>               
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="bg-themethirdcolor h4" style="color: white;">Observaciones:</div>
+                        </div>
+                        <div class="part-single">
+                            @{
+                                <label style=" color: gray;height:100px;width: 100%;"> @Model.ObservacionesManejoTiempo  </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="widget">
+                <div class="widget-header bg-themefourthcolor">
+                    <span class="widget-caption">Comunicación asertiva</span>
+                    <div class="widget-buttons">
+
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="part-single">
+
+                            @*@{
+                                if (Model.FactorComunicacionAsertiva <= 40)
+                                {
+                                    <label style="color: #34A853;font-size:  45px;text-align: center;width: 100%;">@Model.FactorComunicacionAsertiva Eres una persona asertiva</label>
+                                }
+                                else if (Model.FactorComunicacionAsertiva > 41 && Model.FactorComunicacionAsertiva <= 70)
+                                {
+                                    <label style="color: #FBBC05;font-size:  45px;text-align: center;width: 100%;">@Model.FactorComunicacionAsertiva Debes mejorar tu asertividad.</label>
+                                }
+                                else
+                                {
+                                    <label style="color: #EA4335;font-size:  45px;text-align: center;width: 100%;">@Model.FactorComunicacionAsertiva Es necesario trabajar para lograr una conducta asertiva. </label>
+                                }
+                            }*@
+                            <div class="form-group has-@Model.ComunicacionAsertivaColor">
+                                <label class="control-label" style="font-size:  45px;text-align: center;width: 100%;">@Model.FactorComunicacionAsertiva @Model.ComunicacionAsertivaTexto</label>
+                                <span class="fa fa-@Model.ComunicacionAsertivaColor"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="part-single">
+                            <div class="bg-themefourthcolor h4" style="color: white;">Observaciones:</div>
+                        </div>
+                        <div class="part-single">
+                            @{
+                                <label style=" color: gray;height:100px;width: 100%;"> @Model.ObservacionesComunicacionAsertiva  </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+@*<center>
+    <div style="width: 80%; padding-top:30px;">
+        @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.clsSeguimientoAspectos>()
+
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ParticipanteId).Hidden();
+                        columns.Bound(p => p.Nuevo).Hidden();
+                        columns.Bound(p => p.Aspecto);
+                        columns.Bound(p => p.Logro);
+                        columns.Bound(p => p.Meta);
+                        columns.Bound(p => p.Porcentaje).ClientTemplate("#=Porcentaje #%");
+                        columns.Bound(p => p.Observaciones);
+
+                    })
+                    .HtmlAttributes(new { style = "height:216;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+
+                        .ServerOperation(false)
+
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.ParticipanteId);
+                            model.Field(p => p.Aspecto).Editable(false);
+                            model.Field(p => p.Porcentaje).Editable(false);
+
+                        })
+                            .Read(read => read.Action("Read_Aspectos", "Expediente"))
+
+                    )
+        )
+
+        <br />
+        <br />
+
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption">@Html.LabelFor(model => model.ComentariosRelevantes)</span>
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="#" data-toggle="collapse">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        @*<a href="#" data-toggle="dispose">
+                                <i class="fa fa-times"></i>
+                            </a>*@
+@*</div>
+                    </div>
+    <div class="widget-body bordered-top bordered-info">
+        @Html.TextAreaFor(m => m.ComentariosRelevantes, new { style = "width: 100%;height: 100px;", @readonly = true })
+    </div>
+                </div>
+            </div>
+        </div>
+    </center>*@

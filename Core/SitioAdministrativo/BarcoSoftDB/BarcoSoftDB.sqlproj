@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BarcoSoftDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{abc69584-0693-46e2-858e-5c3a554e14cf}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BarcoSoftDB</RootNamespace>
+    <AssemblyName>BarcoSoftDB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Administracion" />
+    <Folder Include="Administracion\Tablas" />
+    <Folder Include="LogIns" />
+    <Folder Include="Administracion\StoredProcedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Administracion\Administracion.sql" />
+    <Build Include="Administracion\Tablas\Persona.sql" />
+    <Build Include="Administracion\Tablas\Usuario.sql" />
+    <Build Include="Administracion\Tablas\Rol.sql" />
+    <Build Include="Administracion\Tablas\Producto.sql" />
+    <Build Include="Administracion\Tablas\Propietario.sql" />
+    <Build Include="Administracion\Tablas\Objeto.sql" />
+    <Build Include="Administracion\Tablas\Permiso.sql" />
+    <Build Include="Administracion\Tablas\UsuarioPorRol.sql" />
+    <Build Include="Administracion\Tablas\HistoricoUsuarioPoRol.sql" />
+    <Build Include="Administracion\Tablas\HistoricoPermiso.sql" />
+    <Build Include="Administracion\Tablas\TipoUsuario.sql" />
+    <Build Include="LogIns\AppAdministracionLogIn.sql" />
+    <PostDeploy Include="LogIns\Script.SetOwnerShipSchemasForLogIns.sql" />
+    <Build Include="Administracion\StoredProcedures\SP_PermisoAObjeto_Ins.sql" />
+    <Build Include="Administracion\StoredProcedures\SP_PermisoAObjeto_Del.sql" />
+    <Build Include="Administracion\Tablas\Menu.sql" />
+    <Build Include="Administracion\Tablas\MenuTipo.sql" />
+    <Build Include="Administracion\Tablas\ParametroGeneral.sql" />
+    <Build Include="Administracion\Tablas\ParametroTipo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LocalPablo.publish.xml" />
+  </ItemGroup>
+</Project>

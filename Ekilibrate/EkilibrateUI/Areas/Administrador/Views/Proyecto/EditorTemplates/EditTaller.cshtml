@@ -1,0 +1,295 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Administrador.clsTallerVista
+
+<div class="edit-form">
+
+
+    <div class="row">
+
+
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.TallerId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.TallerId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetCATaller", "Proyecto").Data("ProyectoSeleccionadoContacto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+
+                    @Html.ValidationMessageFor(model => model.TallerId)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.GrupoId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.GrupoId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetGrupo", "Proyecto").Data("ProyectoSeleccionadoContacto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.GrupoId)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoSesiones)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoSesiones)
+
+                    @Html.ValidationMessageFor(model => model.NoSesiones)
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DDuracionSesiones)</div>
+                <div class="value">
+                    @Html.Kendo().TimePickerFor(x => x.DDuracionSesiones).Interval(15).Format("HH:mm").Max(new TimeSpan(2, 0, 0))
+                    @Html.ValidationMessageFor(model => model.DDuracionSesiones)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title"> @Html.Label("Frecuencia cada")</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.FrecuenciaSesiones).HtmlAttributes(new { style = "width:29%;" })
+                    @(Html.Kendo().DropDownListFor(x => x.FrecuenciaSesionesUnidad)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                               .BindTo((System.Collections.IEnumerable)new List<SelectListItem>() {
+              new SelectListItem() {Text = "Dias",Value = "1"},new SelectListItem() {Text = "Semanas",Value = "2"},new SelectListItem() {Text = "Meses",Value = "3"}})
+                        .HtmlAttributes(new { style = "width:69%;" })
+                    )
+
+                    @Html.ValidationMessageFor(model => model.FrecuenciaSesiones)
+                    @Html.ValidationMessageFor(model => model.FrecuenciaSesionesUnidad)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.SalonId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.SalonId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetSalon", "Proyecto").Data("ProyectoSeleccionadoContacto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.SalonId)
+                </div>
+            </div>
+        </div>
+        <div class="part-b">
+            <div class="object">
+                <div class="title-profile">@Html.Label("Dias asignados")</div>
+                <div class="check-container">
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Lunes).Label("Lunes"))
+
+                    </div>
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Martes).Label("Martes"))
+                    </div>
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Miercoles).Label("Miercoles"))
+                    </div>
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Jueves).Label("Jueves"))
+                    </div>
+
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Viernes).Label("Viernes"))
+                    </div>
+
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Sabado).Label("Sabado"))
+                    </div>
+
+                    <div class="check-row">
+                        @(Html.Kendo().CheckBoxFor(x => x.Domingo).Label("Domingo"))
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FacilitadorId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.FacilitadorId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetFacilitador", "Proyecto").Data("ProyectoSeleccionadoContacto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.FacilitadorId)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DHoraInicio)</div>
+                <div class="value">
+                    @(Html.Kendo().TimePickerFor(x => x.DHoraInicio))
+                    @Html.ValidationMessageFor(model => model.DHoraInicio)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DHoraFin)</div>
+                <div class="value">
+                    @(Html.Kendo().TimePickerFor(x => x.DHoraFin))
+                    @Html.ValidationMessageFor(model => model.DHoraFin)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<style>
+    .k-edit-form-container {
+        width: 650px !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 90%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>

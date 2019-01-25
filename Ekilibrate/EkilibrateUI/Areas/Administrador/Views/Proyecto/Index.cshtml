@@ -1,0 +1,687 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Proyecto";
+    ViewBag.Description = "Administración de proyectos Ekilibrate";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2><img src='~/assets/icon/proyectos.png' height="32px" /> Proyectos</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-themefourthcolor">
+                <span class="widget-caption">Listado de Proyectos</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsProyecto>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        //columns.Bound(p => p.Id).Width(30);
+        columns.Bound(p => p.Nombre).Width(400).ClientTemplate(@"
+                            <a onclick='clickEdit(this)'>
+                                <div class='col-lg col-md-12 col-sm-12'>
+                                    <div class='col-lg-2 col-md-6 col-sm-12 text-center'>
+                                        <img src='../../Uploads/Proyectos/#=Id#.png' style='width:100%; max-width:200px;'  class='img_proyecto' alt='#=Nombre#'>
+                                    </div>
+                                    <div class='col-lg-5 col-md-6 col-sm-12 profile-info'>
+                                        <label class='col-lg-12 control-label h4'><i class='glyphicon glyphicon-star'></i> #=Nombre#</label>
+                                        <div class='col-lg-12'>
+                                            <p>
+                                                <i class='glyphicon glyphicon-asterisk'></i> No.	: #=Id# <br>
+                                                <i class='glyphicon glyphicon-briefcase'></i> Empresa	: #=EmpresaNombre# <br>
+                                                <i class='glyphicon glyphicon-tag'></i> Tipo de Proyecto   : #=TipoProyecto# <br>
+                                                <i class='glyphicon glyphicon-info-sign'></i> Estado		: #=Estado# <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>"
+);
+        //                        columns.Bound(p => p.Nombre).Width(200).ClientTemplate(
+        //                            @"<div class='profile-header row'>
+        //                                <div class='col-lg-2 col-md-4 col-sm-12 text-center'>
+        //                                    <img src='../Uploads/Participantes/#=PersonaId#.jpg' style='width:100%; max-width:128px;' alt='#=ContactoNombre#' class='header-avatar' />
+        //                                </div>
+        //                                <div class='col-lg-5 col-md-8 col-sm-12 profile-info'>
+        //                                    <div class='header-fullname'>#=ContactoNombre#</div>
+        //                                    <div class='contact-info'>
+        //                                        <p>
+        //                                            <i class='glyphicon glyphicon-phone-alt'></i> Oficina	: #=ContactoTelefono# Ext	: #=ContactoExtension#<br>
+        //                                            <i class='glyphicon glyphicon-phone'></i> Móvil		: #=ContactoCelular# <br>
+        //                                            <i class='glyphicon glyphicon-envelope'></i> Email		: #=ContactoCorreo# <br>
+        //                                        </p>
+        //                                    </div>
+        //                                </div>
+        //                            </div>"
+        //                        );
+        columns.Bound(p => p.Nombre).Width(120).Visible(false);
+        //columns.ForeignKey(p => p.EmpresaId, (System.Collections.IEnumerable)ViewBag.Empresas, "Value", "Text").Width(150).Visible(false);
+        //columns.ForeignKey(p => p.TipoProyectoId, (System.Collections.IEnumerable)ViewBag.TipoProyecto, "Value", "Text").Width(60).Visible(false);
+        //columns.Bound(p => p.Estado).Width(125).Visible(false);
+        //columns.Bound(p => p.FechaInicio).Format("{0:dd/MM/yyyy}").Width(75).Visible(false);
+        //columns.Bound(p => p.FechaFin).Format("{0:dd/MM/yyyy}").Width(75).Visible(false);
+        columns.Command(command =>
+        {
+            command.Destroy().Text(" ");
+            command.Custom("Enviar").Text("  ").Click("Enviar");
+            command.Custom("Arrancar").Text("  ").Click("Arrancar");
+            command.Custom("PruebaCorreo").Text("  ").Click("PruebaCorreo");
+            command.Custom("ProgramarCitas").Text("  ").Click("ProgramarCitas");
+            command.Custom("AsignarNutricionistas").Text("  ").Click("AsignarNutricionistas");
+        }).Width(150);
+    })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Create().Text(" ");
+            //toolbar.Custom().Name("Arrancar").Text(" ").Action("Arrancar", "Proyecto");
+        })
+            .Editable(editable => editable.Mode(GridEditMode.PopUp)
+            .TemplateName("EditProyecto").Window(w => w.Title("Modificar Parámetros del Proyecto").Resizable()
+            .Name("EditProyecto").Position(p => { p.Top(50); p.Left(50); }).Pinned()))
+                            .Filterable(f =>
+                             {
+                                 f.Extra(false);
+                             })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+                    .Sortable()
+                    .Groupable()
+                    .Scrollable(s => s.Height("auto"))
+                    //.HtmlAttributes(new { style = "height:680px;" })
+                    .Events(e => e.Save("GuardarColor").Edit("CargarColor"))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Group(g => g.Add(p => p.Estado))
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+                            model.Field(p => p.Estado).DefaultValue("EN REGISTRO");
+                            model.Field(p => p.HoraInicioConsultas).DefaultValue(new TimeSpan(7, 0, 0));
+                            model.Field(p => p.HoraFinConsultas).DefaultValue(new TimeSpan(17, 0, 0));
+                            model.Field(p => p.FechaInicioConsultas).DefaultValue(DateTime.Now);
+                            model.Field(p => p.FechaCorreoInvitacion).DefaultValue(DateTime.Now);
+                            model.Field(p => p.NoParticipantesPorGrupo).DefaultValue(0);
+                            model.Field(p => p.FrecuenciaConsultasUnidad).DefaultValue(0);
+                            model.Field(p => p.FrecuenciaAlertasUnidad).DefaultValue(0);
+                            model.Field(p => p.FrecuenciaConsultas).DefaultValue(0);
+                            model.Field(p => p.FrecuenciaConsultasUnidad).DefaultValue(0);
+                            model.Field(p => p.NoConsultasNutricionales).DefaultValue(0);
+                            model.Field(p => p.NoFacilitadores).DefaultValue(0);
+                            model.Field(p => p.NoSemanas).DefaultValue(0);
+                            model.Field(p => p.NoConsultasNutricionales).DefaultValue(0);
+                            model.Field(p => p.NoConsultasNutricionales).DefaultValue(0);
+                        })
+                        .Create(update => update.Action("Create", "Proyecto"))
+                        .Read(read => read.Action("Read", "Proyecto"))
+                        .Update(update => update.Action("Update", "Proyecto"))
+                        .Destroy(update => update.Action("Delete", "Proyecto"))
+                    )
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Contacto")
+        .Position(TooltipPosition.Top)
+            .Content("Contacto")
+        .Width(120)
+)
+
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Arrancar")
+        .Position(TooltipPosition.Top)
+                .Content("Iniciar Proyecto")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Enviar")
+        .Position(TooltipPosition.Top)
+                .Content("Enviar a Contactos")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-PruebaCorreo")
+        .Position(TooltipPosition.Top)
+                .Content("Prueba de Correo de Invitación")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-ProgramarCitas")
+        .Position(TooltipPosition.Top)
+                .Content("Programación de Citas")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-AsignarNutricionistas")
+        .Position(TooltipPosition.Top)
+                .Content("Asignación de Nutricionistas")
+        .Width(120)
+)
+
+
+
+
+
+<script type="text/javascript">
+    function dataBound() {
+        this.table.find(".k-grid-edit").hide();
+    }
+
+    function clickEdit(e) {
+        var grid = $("#grid").data("kendoGrid");
+        grid.editRow(e.closest("tr"));
+        var dataItem = grid.dataItem(e.closest("tr"));
+        IdProyecto = dataItem.Id;
+        IdEmpresa = dataItem.EmpresaId;
+
+        var editWindow = $("#grid").data("kendoWindow");
+        if (editWindow) {
+            editWindow.center();
+        }
+    }
+
+    function OnCheckedSalon(pIdSalon, e) {
+
+        if (e.checked) {
+
+            $.ajax({
+                url: 'Proyecto/AddProyectoSalon?pIdProyecto=' + IdProyecto + '&pIdSalon=' + pIdSalon,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Salon asociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'Proyecto/DeleteProyectoSalon?pIdProyecto=' + IdProyecto + '&pIdSalon=' + pIdSalon,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Salon desasociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+    }
+
+    function OnCheckedContacto(pIdContacto, e) {
+
+        if (e.checked) {
+
+            $.ajax({
+                url: 'Proyecto/AddProyectoContacto?pIdProyecto=' + IdProyecto + '&pIdContacto=' + pIdContacto,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Contacto asociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'Proyecto/DeleteProyectoContacto?pIdProyecto=' + IdProyecto + '&pIdContacto=' + pIdContacto,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Contacto desasociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+    }
+
+    function OnCheckedArea(pIdArea, e) {
+        if (e.checked) {
+            $.ajax({
+                url: 'Proyecto/AddProyectoArea?pIdProyecto=' + IdProyecto + '&pIdArea=' + pIdArea,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Área asociada a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'Proyecto/DeleteProyectoArea?pIdProyecto=' + IdProyecto + '&pIdArea=' + pIdArea,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        //alert("Área desasociada a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+    }
+    var IdProyecto;
+    var IdEmpresa;
+
+    //function MostrarSalones(e) {
+    //    e.preventDefault();
+    //    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+    //    IdProyecto = dataItem.Id;
+    //    IdEmpresa = dataItem.EmpresaId;
+
+    //    $("#WindowSalones").data("kendoWindow").open();
+    //    $("#gridSalonesProyecto").data("kendoGrid").dataSource.read();
+
+    //    $('#WindowSalones').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#ED207B');
+    //    $('#WindowSalones').parent().find('.k-window-title').css('color', '#FFFFFF');
+    //}
+
+    function MostrarContacto(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+        IdEmpresa = dataItem.EmpresaId;
+
+        $("#WindowContacto").data("kendoWindow").open();
+
+        $("#gridContactosProyecto").data("kendoGrid").dataSource.read();
+
+        $('#WindowContacto').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#92278F');
+        $('#WindowContacto').parent().find('.k-window-title').css('color', '#FFFFFF');
+    }
+
+    function MostrarColaboradores(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+        IdEmpresa = dataItem.EmpresaId;
+
+        $("#WindowColaboradores").data("kendoWindow").open();
+        $("#gridFacilitador").data("kendoGrid").dataSource.read();
+        $('#WindowColaboradores').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#00ADEF');
+        $('#WindowColaboradores').parent().find('.k-window-title').css('color', '#FFFFFF');
+    }
+
+    function ProyectoSeleccionado() {
+
+        return {
+            pIdProyecto: IdProyecto,
+            pIdEmpresa: IdEmpresa
+        };
+    }
+
+    function ProyectoSeleccionadoContacto() {
+
+        return {
+            pIdProyecto: IdProyecto
+        };
+    }
+
+    function Arrancar(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/Arrancar?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                if (data.success) {
+                    dataItem.Estado = "EN EJECUCIÓN";
+                    alert("Proyecto se inició correctamente.");
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function PruebaCorreo(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/PruebaCorreo?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+                    dataItem.Estado = "EN EJECUCIÓN";
+                    Notify('Proyecto se inició correctamente.!', 'top-right', '5000', 'info', 'fa-envelope', true);
+                }
+                else {
+                    Notify(data.error, 'top-right', '5000', 'danger', 'fa-envelope', true);                    
+                }
+            },
+            error: function () {
+                Notify('error', 'top-right', '5000', 'danger', 'fa-envelope', true);
+            }
+        });
+    }
+
+    function Enviar(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/Enviar?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                if (data.success) {
+                    dataItem.Estado = "CREACIÓN DE PARTICIPANTES";
+                    alert("El Proyecto se envió a los contactos correctamente.");
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });        
+    }
+
+    function AsignarNutricionistas(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/AsignarNutricionistas?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+                    dataItem.Estado = "EN EJECUCIÓN";
+                    Notify('Proyecto se inició correctamente.!', 'top-right', '5000', 'info', 'fa-envelope', true);
+                }
+                else {
+                    Notify(data.error, 'top-right', '5000', 'danger', 'fa-envelope', true);
+                }
+            },
+            error: function () {
+                Notify('error', 'top-right', '5000', 'danger', 'fa-envelope', true);
+            }
+        });
+    }
+
+    function ProgramarCitas(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/ProgramarCitas?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+                    dataItem.Estado = "EN EJECUCIÓN";
+                    Notify('Proyecto se inició correctamente.!', 'top-right', '5000', 'info', 'fa-envelope', true);
+                }
+                else {
+                    Notify(data.error, 'top-right', '5000', 'danger', 'fa-envelope', true);
+                }
+            },
+            error: function () {
+                Notify('error', 'top-right', '5000', 'danger', 'fa-envelope', true);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function onComplete() {
+
+        location.reload();
+    }
+</script>
+
+
+
+<script>
+    function GuardarColor(e) {
+        var colorpicker = $("#pallete").data("kendoColorPalette");
+        e.model.set("Color", colorpicker.value());
+    }
+
+    function CargarColor(e) {
+
+        var insertMode = e.model.isNew();
+ 
+        if (insertMode) {
+            var tabStrip = $("#tabstripProyecto").data("kendoTabStrip");
+            var general = tabStrip.select();
+            var next = general.next();
+            IdProyecto = null;
+            IdEmpresa = null;
+            for (var i = 1; i < 6; i++) {
+                tabStrip.enable(next, next.hasClass("k-state-disabled"));
+                next = next.next();
+            }
+        }
+        var colorpicker = $("#pallete").data("kendoColorPalette");
+        var color = document.getElementById('hColor').value;
+        try {
+            color = kendo.parseColor(color);
+            colorpicker.value(color);
+        } catch (ex) {
+            //alert('Cannot parse color: "' + color + '"');
+        }
+    }
+
+
+    function ProjectTypeSelect(e) {
+
+
+        var dataItem = this.dataItem(e.item);
+
+        if (dataItem.Value == "1") {
+            $("#divNoConsultas").hide();
+            $("#divFrecuenciaConsulta").hide();
+            $("#divAditionalInfo").hide();
+            $("#divParticpantesPorG").hide();
+            $("#divNoFacilitadores").hide();
+
+        }
+        else {
+
+            $("#divNoConsultas").show();
+            $("#divFrecuenciaConsulta").show();
+            $("#divAditionalInfo").show();
+            $("#divParticpantesPorG").show();
+            $("#divNoFacilitadores").show();
+        }
+    }
+
+</script>
+
+<script>
+
+
+
+    function CalcularSemanas() {
+        if ($("#FechaPrimeraCitaDiagnostico").data("kendoDatePicker").value() != null
+            && $("#FechaInicioConsultas").data("kendoDatePicker").value() != null
+            && $("#NoConsultasNutricionales").val() != null
+            && $("#FrecuenciaConsultasUnidad").data("kendoDropDownList").value() != null
+            && $("#FrecuenciaConsultas").val() != null) {
+            var fechaID = new Date($("#FechaPrimeraCitaDiagnostico").data("kendoDatePicker").value());
+            var fechaIC = new Date($("#FechaInicioConsultas").data("kendoDatePicker").value());//$("FechaInicioConsultas").val());
+            console.debug($("#NoConsultasNutricionales"));//$("NoConsultasNutricionales"));
+            //alert($("#NoConsultasNutricionales").val());
+            var NConsultas = parseInt($("#NoConsultasNutricionales").val());
+            var FrecuenciaConsultasUnidad = parseInt($("#FrecuenciaConsultasUnidad").data("kendoDropDownList").value());
+            var FrecuenciaC = parseInt($("#FrecuenciaConsultas").val()); // $("#FrecuenciaConsultas").data("kendoIntegerTextBox").value();
+            var fechaFC = new Date(fechaIC);
+
+
+            switch (FrecuenciaConsultasUnidad) {
+                case 1:
+                    fechaFC.setDate(fechaIC.getDate() + FrecuenciaC);//* 1000 * 60 * 60 * 24);
+                    //alert(fechaFC);
+                    break;
+                case 2:
+                    fechaFC = new Date(fechaIC + FrecuenciaC * 1000 * 60 * 60 * 24 * 7);
+                    //alert(fechaFC);
+                    break;
+                case 3:
+                    fechaFC = new Date(fechaIC + FrecuenciaC * 1000 * 60 * 60 * 24 * 7 * 30);
+                    break;
+            }
+
+
+            var NSemanasD = Math.round((fechaIC - fechaID) / 1000 / 60 / 60 / 24 / 7);
+            var NSemanasC = Math.round((fechaFC - fechaIC) / 1000 / 60 / 60 / 24 / 7);
+            alert(NSemanasC);
+            var datepicker = $("#FechaFin").data("kendoDatePicker");
+            datepicker.value(fechaFC);
+            $("#NoSemanas").val(NSemanasC.toString());
+
+        }
+        //$("FrecuenciaConsultas").val(NSemanasD + NSemanasC);
+    }
+
+    function change() {
+        kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+    }
+
+    function onUpload(e) {
+        var files = e.files;
+        $.each(files, function () {
+
+            if (this.extension.toLowerCase() != ".png") {
+                alert("Unicamente se permiten imagenes con extensión PNG")
+                e.preventDefault();
+            }
+
+            if (this.size / 1024 / 1024 > 5) {
+                alert("El tamaño de la imagen no debe de ser mayor a los 5Mb!")
+                e.preventDefault();
+            }
+        });
+        e.data = { pIdProyecto: IdProyecto };
+    }
+</script>

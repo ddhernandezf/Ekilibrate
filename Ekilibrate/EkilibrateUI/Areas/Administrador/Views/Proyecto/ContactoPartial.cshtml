@@ -1,0 +1,31 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsProyectoContacto>()
+
+            .Name("gridContactosProyecto")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ContactoId).Title(" ").Width(50).Visible(false);
+                columns.Bound(p => p.Nombre).Width(100);
+                columns.Bound(p => p.Seleccionado).ClientTemplate("<input onclick='OnCheckedContacto(#=ContactoId #, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' #= Seleccionado ? checked='checked' :'' # />").Width(200);
+
+            })
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:98%;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.ContactoId);
+
+                })
+                        .Read(read => read.Action("ProyectoContacto_Read", "Proyecto").Data("ProyectoSeleccionado"))
+
+            )
+)

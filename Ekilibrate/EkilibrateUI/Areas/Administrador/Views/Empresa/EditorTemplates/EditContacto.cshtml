@@ -1,0 +1,203 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Administrador.clsContactoBase
+
+@Html.HiddenFor(x => x.IdPersona)
+    <div class="edit-form">
+        <div class="row">
+            <div class="part-a">
+                <div class="object">
+                    <div class="title">Nombre</div>
+                    <div class="value">
+                        @(Html.Kendo().TextBoxFor(x => x.PrimerNombre).HtmlAttributes(new { style = "width:100%" }))
+                    </div>
+                </div>
+            </div>
+            <div class="part-b">
+                <div class="object">
+                    <div class="title">Apellido</div>
+                    <div class="value">
+                        @(Html.Kendo().TextBoxFor(x => x.PrimerApellido).HtmlAttributes(new { style = "width:100%" }))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-a">
+                <div class="object">
+                    <div class="title">Telefono</div>
+                    <div class="value">
+                        @(Html.Kendo().TextBox()
+                        .Name("Telefono")
+                        .Value(Model.Telefono)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+            <div class="part-b">
+                <div class="object">
+                    <div class="title">Extension</div>
+                    <div class="value">
+                        @(Html.Kendo().TextBox()
+                        .Name("Extension")
+                        .Value(Model.Extension)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-single">
+                <div class="object">
+                    <div class="title-single">Teléfono Móvil</div>
+                    <div class="value-single">
+                        @(Html.Kendo().TextBox()
+                        .Name("Celular")
+                        .Value(Model.Celular)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-single">
+                <div class="object">
+                    <div class="title-single">Correo electronico</div>
+                    <div class="value-single">
+                        @(Html.Kendo().TextBox()
+                        .Name("Correo")
+                        .Value(Model.Correo)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-single">
+                <div class="object">
+                    <div class="title-single">Direccion</div>
+                    <div class="value-single">
+                        @(Html.Kendo().TextBox()
+                        .Name("Direccion")
+                        .Value(Model.Direccion)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-single">
+                <div class="object">
+                    <div class="title">Puesto</div>
+                    <div class="value">
+                        @(Html.Kendo().TextBox()
+                        .Name("Puesto")
+                        .Value(Model.Puesto)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+            <div class="part-b">                             
+            </div>
+        </div>
+        <div class="row">
+            <div class="part-single">
+                <div class="object">
+                    <div class="title">¿Contacto Principal?</div>
+                    <div class="value">
+                        @(Html.Kendo().CheckBox()
+                        .Name("EsPrincipal")
+                        .Checked(Model.EsPrincipal)
+                        //.Value(Model.Puesto)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        )
+                    </div>
+                </div>
+            </div>
+            <div class="part-b">
+            </div>
+        </div>
+    </div>
+    <style>
+        .k-edit-form-container {
+            width: 650px !important;
+        }
+
+        .edit-form {
+            position: relative;
+            width: 90%;
+            display: inline-block;
+            margin-left: 5%;
+        }
+
+        .row {
+            width: 100%;
+            position: relative;
+            display: inline-block;
+            margin-left: 0%;
+            padding-bottom: 15px;
+        }
+
+        .part-a {
+            width: 48%;
+            float: left;
+            position: relative;
+            display: inline-block;
+        }
+
+        .part-b {
+            width: 48%;
+            float: left;
+            position: relative;
+            display: inline-block;
+            margin-left: 1%;
+        }
+
+        .title {
+            width: 25%;
+            float: left;
+            font-weight: bolder;
+        }
+
+        .value {
+            margin-left: 1%;
+            width: 68%;
+            float: left;
+        }
+
+        .title-single {
+            width: 22%;
+            float: left;
+            font-weight: bolder;
+        }
+
+        .value-single {
+            margin-left: 1%;
+            width: 71%;
+            float: left;
+        }
+
+        .object-check {
+            padding-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .title-profile {
+            width: 21%;
+            float: left;
+            font-weight: bolder;
+        }
+
+        .check-container {
+            float: left;
+            margin-left: 2%;
+            width: 70%;
+        }
+    </style>

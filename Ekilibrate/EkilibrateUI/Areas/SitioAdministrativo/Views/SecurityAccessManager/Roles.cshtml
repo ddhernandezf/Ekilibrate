@@ -1,0 +1,490 @@
+﻿@{
+    ViewBag.Title = "Administración de roles";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using Kendo.Mvc.UI;
+<h2>@ViewBag.Title </h2>
+<div class="grid-mantenimientos-content-center">
+
+
+    @model System.Collections.Generic.IEnumerable<EkilibrateUI.Areas.SitioAdministrativo.Models.ViewModelRole>
+    @(Html.Kendo().Grid(Model)
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdRol).Width(25).Title("");
+                columns.Bound(p => p.Nombre).Width(175);
+                columns.Bound(p => p.Descripcion).Width(175);
+                columns.ForeignKey(p => p.IdPropietario, (System.Collections.IEnumerable)ViewBag.Owner, "Value", "Text")
+                             .Title("Propietario").Width(150);
+
+                columns.Command(command =>
+                {
+                    command.Edit().Text(" ");
+                    command.Destroy().Text(" ");
+                    command.Custom("Asignar Accesos").Click("AsignacionAccesos");
+                    command.Custom("Asignar Usuarios").Click("AsignacionUsuarios");
+                }).Width(200);
+            })
+            .ToolBar(toolbar => toolbar.Create().Text(" "))
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Events(events =>
+                        {
+                            events.Change("GridReload");
+                            events.Error("error_handler");
+                        })
+                .Model(model =>
+                {
+                    model.Id(p => p.IdRol);
+                    model.Field(p => p.IdRol).Editable(false);
+                    model.Field(p => p.Activo).DefaultValue(true);
+
+                })
+                .Create(update => update.Action("Role_Create", "SecurityAccessManager"))
+                .Read(read => read.Action("Role_Read", "SecurityAccessManager"))
+                .Update(update => update.Action("Role_Update", "SecurityAccessManager"))
+                .Destroy(update => update.Action("Role_Destroy", "SecurityAccessManager"))
+            )
+    )
+
+</div>
+
+<div id="Accesos por Rol">
+
+    @{Html.Kendo().Window()
+    .Name("window")
+    .Title("Asignción Accesos por Rol")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+  .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(780)
+    .Position(x => x.Top(50))
+
+    .Content(
+    @<text>
+
+        <h2> <label id="RoleName"></label> </h2>
+        <h4> <label id="RoleDescription"></label> </h4>
+
+
+        <div class="wrapper-row padding-top-15px ">
+            <div class="wraper-title fha-font-size">
+                @Html.Label("Propietario")
+            </div>
+
+
+            <div class="wraper-content">
+                @(Html.Kendo().DropDownList()
+                  .Name("IdOwner")
+                        //.AutoBind(false)
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Events(e => e.Select("onChangeOwner"))
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetOwners", "GeneralManager"));
+
+                  })
+                )
+            </div>
+        </div>
+
+        <div class="wrapper-row fha-padding-top-15px ">
+            <div class="wraper-title fha-font-size">
+                @Html.Label("Producto")
+            </div>
+            <div class="wraper-content">
+                @(Html.Kendo().DropDownList()
+                  .Name("IdProduct")
+                  .AutoBind(false)
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Events(e => e.Select("onChange"))
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetProducts", "GeneralManager").Data("filterOwners"))
+                      .ServerFiltering(true);
+                  })
+                    .CascadeFrom("IdOwner")
+                    .Enable(false)
+
+                )
+            </div>
+
+        </div>
+    <br />
+
+        <div id="treeListDiv" class="grid-mantenimientos-content-center">
+
+            @(Html.Kendo().TreeList<EkilibrateUI.Areas.SitioAdministrativo.Models.PermisoObjeto>()
+        .Name("treelist")
+        .Columns(columns =>
+        {
+            columns.Add().Field(e => e.IdObjeto).Width(100).Title("Id");
+            columns.Add().Field(e => e.Nombre).Width(160);
+            columns.Add().Field(e => e.Descripcion);
+            columns.Add().Field(e => e.TieneAcceso).Title("¿Tiene permiso?").Template("<input onclick='OnChangePermission(#=IdObjeto #,#=IdRol #, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' #= TieneAcceso ? checked='checked' :'' # />").Width(100);
+   
+        })
+        .Filterable()
+        .Sortable()
+        .Editable()
+
+        .DataSource(dataSource => dataSource
+                    .Read(read => read.Action("Read_RoleToPermission", "SecurityAccessManager").Data("additionalInfo"))
+                    .Events(x => x.Change("TreeListChange"))
+            .ServerOperation(false)
+            .Model(m =>
+            {
+                m.Id(f => f.IdObjeto);
+                m.ParentId(f => f.IdPermissionParent).Editable(false);
+                m.Expanded(true);
+                m.Field(f => f.IdObjeto).Editable(false);
+                m.Field(f => f.IdPermissionParent).Editable(false);
+                m.Field(f => f.Nombre).Editable(false);
+                m.Field(f => f.Descripcion).Editable(false);
+                m.Field(f => f.TieneAcceso);
+            })
+        )
+        .Height(540)
+            )
+        </div>
+
+
+
+    </text>
+)
+    .Render();
+    }
+
+</div>
+
+<div id="Usuarios por rol">
+
+    @{Html.Kendo().Window()
+    .Name("windowUsers")
+    .Title("Asignación de usuarios a Rol")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(830)
+    .Position(x => x.Top(50))
+
+    .Content(
+    @<text>
+
+        <h2> <label id="RoleNameU"></label> </h2>
+        <h4> <label id="RoleDescriptionU"></label> </h4>
+
+        <h3>Agregar Usuarios</h3>
+
+        <div id="divUnAssignedUsers" class="grid-mantenimientos-content-center">
+
+            @(Html.Kendo().Grid<EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Usuario>()
+
+            .Name("gridUnAssignedUsers")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdUsuario).Title("").Width(30);
+                columns.Bound(p => p.NombreUsuario).Width(200);
+                columns.Bound(p => p.GE_Persona.Nombre).Width(200);
+
+                columns.ForeignKey(p => p.IdTipoUsuario, (System.Collections.IEnumerable)ViewBag.UserTypes, "Value", "Text")
+                             .Title("Tipo Usuario").Width(90);
+                columns.Command(command => { command.Custom("Asignar").Text("Asignar a rol").Click("AddUser"); }).Width(110);
+            })
+
+
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:300px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.IdUsuario);
+                    model.Field(p => p.GE_Persona).DefaultValue(new EkilibrateUI.Areas.SitioAdministrativo.Models.Data.GE_Persona());
+                })
+                        .Read(read => read.Action("UsersToAsign_Read", "SecurityAccessManager").Data("UsersToAsignData"))
+
+            )
+            )
+
+        </div>
+
+        <h3>Usuarios Agregados</h3>
+
+        <div id="divAssignedUsers" class="grid-mantenimientos-content-center">
+
+            @(Html.Kendo().Grid<EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Usuario>()
+
+            .Name("gridAssignedUsers")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdUsuario).Title("").Width(30);
+                columns.Bound(p => p.NombreUsuario).Width(200);
+                columns.Bound(p => p.GE_Persona.Nombre).Width(200);
+                columns.ForeignKey(p => p.IdTipoUsuario, (System.Collections.IEnumerable)ViewBag.UserTypes, "Value", "Text")
+                                            .Title("Tipo Usuario").Width(90);
+                columns.Command(command => { command.Custom("Quitar").Text("Quitar").Click("DeleteUser"); }).Width(110);
+            })
+
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:300px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(5)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.IdUsuario);
+                    model.Field(p => p.GE_Persona).DefaultValue(new EkilibrateUI.Areas.SitioAdministrativo.Models.Data.GE_Persona());
+                })
+                .Read(read => read.Action("AssignedUsers_Read", "SecurityAccessManager").Data("UsersToAsignData"))
+
+            )
+            )
+
+        </div>
+
+    </text>
+)
+    .Render();
+    }
+
+
+
+
+</div>
+
+
+
+<script type="text/javascript">
+
+    function OnChangePermission(pIdObjeto, pIdRole, e) {
+        
+           
+        $.ajax({
+            url: 'OnChangePermission?pIdRole=' + pIdRole + '&pIdObjeto=' + pIdObjeto + '&pTieneAcceso=' + $(e).prop("checked"),
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+                   // alert("Permiso asignado exitosamente!");
+                    $("#treelist").data("kendoTreeList").dataSource.read();
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("Lo sentimos ocurrió un error inesperado.");
+            }
+        });
+    }
+
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+
+    function AsignacionAccesos(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdRole = dataItem.IdRol;
+        document.getElementById("RoleName").innerHTML = "Permisos para rol: <b>" + dataItem.Nombre + "</b>";
+        document.getElementById("RoleDescription").innerHTML = "<b>" + dataItem.Descripcion + "</b>";
+        //$("#treeListDiv").fadeOut();
+        $("#window").data("kendoWindow").open();
+
+    }
+
+
+
+    var IdRole;
+    function additionalInfo() {
+        return {
+            pIdProduct: IdProduct,
+            pIdRole: IdRole
+        }
+    }
+
+    function AsignacionUsuarios(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdRole = dataItem.IdRol;
+        document.getElementById("RoleNameU").innerHTML = "Usuarios para rol: <b>" + dataItem.Nombre + "</b>";
+        document.getElementById("RoleDescriptionU").innerHTML = "<b>" + dataItem.Descripcion + "</b>";
+
+        $("#gridUnAssignedUsers").data("kendoGrid").dataSource.read();
+        $("#gridAssignedUsers").data("kendoGrid").dataSource.read();
+        $("#windowUsers").data("kendoWindow").open();
+
+    }
+    function UsersToAsignData() {
+        return {
+            pIdRole: IdRole
+        }
+    }
+
+    function AddUser(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var IdUser = dataItem.IdUsuario;
+
+
+
+        $.ajax({
+            url: 'AddUserToRole?pIdUser=' + IdUser + '&pIdRole=' + IdRole,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.success) {
+                    alert("Usuario agregado exitosamente!");
+                    $("#gridUnAssignedUsers").data("kendoGrid").dataSource.read();
+                    $("#gridAssignedUsers").data("kendoGrid").dataSource.read();
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function DeleteUser(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var IdUser = dataItem.IdUsuario;
+
+
+
+        $.ajax({
+            url: 'DeleteUserToRole?pIdUser=' + IdUser + '&pIdRole=' + IdRole,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                if (data.success) {
+                    alert("Usuario quitado exitosamente!");
+                    $("#gridUnAssignedUsers").data("kendoGrid").dataSource.read();
+                    $("#gridAssignedUsers").data("kendoGrid").dataSource.read();
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function filterOwners() {
+
+        return {
+            IdOwner: $("#IdOwner").data("kendoDropDownList").value(),
+
+        };
+    }
+
+    function TreeListChange(e) {
+        if (e.action == "sync") {
+            $("#treelist").data("kendoTreeList").dataSource.read();
+        }
+    }
+
+
+
+    function onChangeOwner(e) {
+        $("#treeListDiv").fadeOut();
+    }
+    function onChange(e) {
+
+        var dataItem = this.dataItem(e.item);
+
+        IdProduct = dataItem.Value;
+        if (IdProduct == "") {
+            $("#treeListDiv").fadeOut();
+        }
+        else {
+            $("#treeListDiv").fadeIn();
+            $("#treelist").data("kendoTreeList").dataSource.read();
+        }
+
+    }
+
+    var IdProduct;
+
+
+
+
+    $(document).ready(function () {
+        //$("#treeListDiv").fadeOut(0);
+
+    });
+</script>

@@ -1,0 +1,123 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EkiibrateDB", "EkiibrateDB\EkiibrateDB.sqlproj", "{6FA11458-AE4F-40EC-83A5-42C47346CD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateServices", "EkilibrateServices\EkilibrateServices.csproj", "{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8DDD3313-2DC2-490E-AAF8-88943B12D0E9} = {8DDD3313-2DC2-490E-AAF8-88943B12D0E9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateModel", "EkilibrateModel\EkilibrateModel.csproj", "{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateBL", "EkilibrateBL\EkilibrateBL.csproj", "{09E30300-3E50-4021-8228-7DA2A886564A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6} = {C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{2A1404A2-DE56-446C-BFD0-13094C85A055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateSvc", "EkilibrateSvc\EkilibrateSvc.csproj", "{8DDD3313-2DC2-490E-AAF8-88943B12D0E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateUI", "EkilibrateUI\EkilibrateUI.csproj", "{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468} = {726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7A0417CC-B999-4C1E-BA5D-8B19E8FBD6A0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcoSoftUtilidades", "BarcoSoftUtilidades\BarcoSoftUtilidades.csproj", "{C1112225-3FF3-4CE8-92AF-BB346D5AD945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EkilibrateSendMail", "EkilibrateSendMail\EkilibrateSendMail.csproj", "{00B6EE87-57D6-48EF-82B5-77A13F68285D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468} = {726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FA11458-AE4F-40EC-83A5-42C47346CD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA11458-AE4F-40EC-83A5-42C47346CD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA11458-AE4F-40EC-83A5-42C47346CD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA11458-AE4F-40EC-83A5-42C47346CD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA11458-AE4F-40EC-83A5-42C47346CD80}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726BE82C-5CD9-4D6D-A5C4-8FF05BE68468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F40BF3-098D-41F8-B1C6-A4DA93134BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E30300-3E50-4021-8228-7DA2A886564A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E30300-3E50-4021-8228-7DA2A886564A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E30300-3E50-4021-8228-7DA2A886564A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E30300-3E50-4021-8228-7DA2A886564A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1404A2-DE56-446C-BFD0-13094C85A055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1404A2-DE56-446C-BFD0-13094C85A055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1404A2-DE56-446C-BFD0-13094C85A055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1404A2-DE56-446C-BFD0-13094C85A055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDD3313-2DC2-490E-AAF8-88943B12D0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDD3313-2DC2-490E-AAF8-88943B12D0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDD3313-2DC2-490E-AAF8-88943B12D0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDD3313-2DC2-490E-AAF8-88943B12D0E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1112225-3FF3-4CE8-92AF-BB346D5AD945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1112225-3FF3-4CE8-92AF-BB346D5AD945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1112225-3FF3-4CE8-92AF-BB346D5AD945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1112225-3FF3-4CE8-92AF-BB346D5AD945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B6EE87-57D6-48EF-82B5-77A13F68285D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B6EE87-57D6-48EF-82B5-77A13F68285D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B6EE87-57D6-48EF-82B5-77A13F68285D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B6EE87-57D6-48EF-82B5-77A13F68285D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://barcosoft.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EkiibrateDB\\EkiibrateDB.sqlproj
+		SccProjectName1 = EkiibrateDB
+		SccLocalPath1 = EkiibrateDB
+		SccProjectUniqueName2 = EkilibrateServices\\EkilibrateServices.csproj
+		SccProjectName2 = EkilibrateServices
+		SccLocalPath2 = EkilibrateServices
+		SccProjectUniqueName3 = EkilibrateModel\\EkilibrateModel.csproj
+		SccProjectName3 = EkilibrateModel
+		SccLocalPath3 = EkilibrateModel
+		SccProjectUniqueName4 = EkilibrateBL\\EkilibrateBL.csproj
+		SccProjectName4 = EkilibrateBL
+		SccLocalPath4 = EkilibrateBL
+		SccProjectUniqueName5 = DataLayer\\DataLayer.csproj
+		SccProjectName5 = DataLayer
+		SccLocalPath5 = DataLayer
+		SccProjectUniqueName6 = EkilibrateSvc\\EkilibrateSvc.csproj
+		SccProjectName6 = EkilibrateSvc
+		SccLocalPath6 = EkilibrateSvc
+		SccProjectUniqueName7 = EkilibrateUI\\EkilibrateUI.csproj
+		SccProjectName7 = EkilibrateUI
+		SccLocalPath7 = EkilibrateUI
+		SccProjectUniqueName8 = BarcoSoftUtilidades\\BarcoSoftUtilidades.csproj
+		SccProjectName8 = BarcoSoftUtilidades
+		SccLocalPath8 = BarcoSoftUtilidades
+		SccProjectUniqueName9 = EkilibrateSendMail\\EkilibrateSendMail.csproj
+		SccProjectName9 = EkilibrateSendMail
+		SccLocalPath9 = EkilibrateSendMail
+	EndGlobalSection
+EndGlobal

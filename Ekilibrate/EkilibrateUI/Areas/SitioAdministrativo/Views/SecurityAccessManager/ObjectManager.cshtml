@@ -1,0 +1,342 @@
+﻿@{
+    ViewBag.Title = "Administración de objetos";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using Kendo.Mvc.UI;
+
+<h2>@ViewBag.Title </h2>
+
+<div class="wrapper-row fha-padding-top-15px ">
+    <div class="title fha-font-size">
+        @Html.Label("Propietario")
+    </div>
+
+
+    <div class="content">
+        @(Html.Kendo().DropDownList()
+                  .Name("IdOwners")
+                //.AutoBind(false)
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .OptionLabel("Elija el propietario...")
+                 .Events(e => e.Select("onChangeOwner"))
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetOwners", "GeneralManager"));
+
+                  })
+        )
+    </div>
+</div>
+
+
+<div class="wrapper-row fha-padding-top-15px ">
+    <div class="title fha-font-size">
+        @Html.Label("Producto")
+    </div>
+    <div class="content">
+        @(Html.Kendo().DropDownList()
+                  .Name("IdProducts")
+                  .AutoBind(false)
+                  .OptionLabel("Elija el producto...")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Events(e => e.Select("onChange"))
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("GetProducts", "GeneralManager").Data("filterOwnersD"))
+                      .ServerFiltering(true);
+                  })
+                    .CascadeFrom("IdOwners")
+                    .Enable(false)
+
+        )
+    </div>
+
+</div>
+<br />
+<div id="treeListDiv" class="grid-mantenimientos-content-center">
+
+    @(Html.Kendo().TreeList<EkilibrateUI.Areas.SitioAdministrativo.Models.ViewModelObjeto>()
+                .Name("treelist")
+                    .Toolbar(toolbar => toolbar.Create().Text(" "))
+                    .Columns(columns =>
+                    {
+                        columns.Add().Field(e => e.IdPermission).Width(100).Title("Id");
+                        columns.Add().Field(e => e.Name).Width(160);
+                        columns.Add().Field(e => e.Description);
+                        columns.Add().Width(300).Command(c =>
+                        {
+                            c.Edit().Text(" ");
+                            c.Destroy().Text(" ");
+                            
+                            c.Custom().Text("Ver Menu").Click("MenuClick").Name("MenuClick");
+
+                        })
+                         .HtmlAttributes(new
+                         {
+                             style = "text-align: center;"
+                         });
+                    })
+                    .Filterable()
+                    .Sortable()
+                            .Editable(x => x.Mode("popup").TemplateName("ObjectoEdit"))
+
+                    .DataSource(dataSource => dataSource
+                        .Create(update => update.Action("Object_Create", "SecurityAccessManager"))
+                        .Read(read => read.Action("Object_Read", "SecurityAccessManager").Data("additionalInfo"))
+                        .Update(update => update.Action("Object_Update", "SecurityAccessManager"))
+                        .Destroy(update => update.Action("Object_Destroy", "SecurityAccessManager").Data("ConfirmDelete"))
+
+                        .Events(e =>
+                        {
+                            e.Change("TreeListChange");
+                        })
+                        .ServerOperation(false)
+                        .Model(m =>
+                        {
+                            m.Id(f => f.IdPermission);
+                            m.ParentId(f => f.IdPermissionParent).Editable(false);
+                            m.Expanded(true);
+                            m.Field(f => f.IdPermission).Editable(false);
+                            m.Field(f => f.IdPermissionParent);
+                            m.Field(f => f.Name);
+                            m.Field(f => f.Description);
+                            m.Field(f => f.ProductName);
+                            m.Field(f => f.IdProduct);
+                        })
+                    )
+                    .Events(events =>
+                    {
+                        events.Save("Grid_Save");
+                        events.Edit("Grid_Edit");
+                    })
+                    .Height(540)
+    )
+</div>
+
+<div id="EnumerableProductoGenDiv">
+    <div id="divGenEnum" class="wrapper-row padding-top-15px ">
+        <div class="title ">
+            @Html.Label("Generar enumerable...")
+        </div>
+        <div class="content">
+
+            <button id="button" type="button">Generar Enumerable</button>
+
+        </div>
+
+    </div>
+
+    @{Html.Kendo().Window()
+    .Name("window")
+    .Title("Enumerable Producto")
+     .Draggable()
+    .Resizable()
+    .Actions(actions => actions.Minimize().Maximize().Close())
+    .Visible(false)
+    .Width(500)
+  .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(350))
+
+    .Content(
+    @<text>
+
+        <label style="color:black;" id="EnumProduct"></label>
+    </text>
+)
+        .Render();
+    }
+</div>
+
+@{Html.Kendo().Window()
+    .Name("windowMenu")
+    .Title("Menu")
+    .Draggable()
+    .Resizable()
+    .Modal(true)
+    .Visible(false)
+    .Width(800)
+    .HtmlAttributes(new { })
+    .Height(750)
+    .Position(x => x.Top(350))
+
+
+        .Render();
+}
+
+
+<script>
+
+    function MenuClick(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdPermission = dataItem.IdPermission;
+        var dialog = $("#windowMenu").data("kendoWindow");
+        dialog.refresh({
+            url: "Menu?pIdObject=" + IdPermission + "&pObject=" + dataItem.Name,
+        });
+        dialog.center();
+        dialog.open();
+    }
+
+    function ConfirmDelete() {
+        var s = confirm("¿Está seguro que desea eliminar este registro?");
+        if (s == true) {
+            return {
+                pOperar: true
+            }
+        }
+        else {
+            return {
+                pOperar: false
+            }
+        }
+    };
+
+
+    $("#button").kendoButton({
+        click: function (e) {
+
+
+            $.ajax({
+                url: 'ProductObjectEnumerable?pIdProduct=' + IdProduct,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.success) {
+                        document.getElementById("EnumProduct").innerHTML = data.result;
+                        $("#window").data("kendoWindow").open();
+                    }
+                    else {
+                        alert(data.result);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    function additionalInfo() {
+        return {
+            pIdProduct: IdProduct
+        }
+    }
+
+    function TreeListChange(e) {
+
+        if (e.action == "sync") {
+            $("#treelist").data("kendoTreeList").dataSource.read();
+        }
+    }
+
+    function onChangeOwner(e) {
+        $("#treeListDiv").fadeOut();
+        $("#divGenEnum").fadeOut();
+
+    }
+
+    function onChange(e) {
+
+        var dataItem = this.dataItem(e.item);
+
+        IdProduct = dataItem.Value;
+        if (IdProduct == "") {
+            $("#treeListDiv").fadeOut();
+            $("#divGenEnum").fadeOut();
+        }
+        else {
+            $("#divGenEnum").fadeIn();
+            $("#treeListDiv").fadeIn();
+            $("#treelist").data("kendoTreeList").dataSource.read();
+        }
+
+    }
+
+    function onChangeType(e) {
+
+        var dataItem = this.dataItem(e.item);
+        if (parseInt(dataItem.Value) == 1) {
+            $("#htmlDescDiv").fadeIn();
+        }
+        else {
+            $("#htmlDescDiv").fadeOut(0);
+        }
+
+    }
+
+    var IdProduct;
+
+
+    $(document).ready(function () {
+
+        $("#treeListDiv").fadeOut(0);
+        $("#divGenEnum").fadeOut(0);
+    });
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+    var IdPermission;
+
+    function filterOwners() {
+
+        return {
+            IdOwner: $("#IdOwner").data("kendoDropDownList").value(),
+
+        };
+    }
+
+    function filterOwnersD() {
+
+        return {
+            IdOwner: $("#IdOwners").data("kendoDropDownList").value(),
+
+        };
+    }
+
+
+    function filterProducts() {
+        return {
+            IdProduct: IdProduct,
+            IdPermission: IdPermission
+        };
+    }
+
+    function Grid_Edit(e) {
+        IdPermission = document.getElementById('IdPermission').value;
+        $("#IdNewPermissionParent").data("kendoDropDownList").dataSource.read();
+    }
+
+    function Grid_Save(e) {
+        e.model.set("IdProduct", parseInt(IdProduct));
+        var BossValue = $("#IdNewPermissionParent").data().kendoDropDownList.value();
+
+        if (BossValue == "") {
+            BossValue = null;
+            BossText = "Elegir"
+        }
+
+        e.model.set("IdNewPermissionParent", parseInt(BossValue));
+
+    }
+
+</script>
+
+

@@ -1,0 +1,269 @@
+﻿@using Kendo.Mvc.UI;
+
+@model Ekilibrate.Model.Entity.Nutricionista.clsPlanAlimentacion
+
+<form id="frmPlan" method="post" onsubmit="return false;">
+    @Html.HiddenFor(m => m.CitaId)
+    @Html.HiddenFor(m => m.ParticipanteId)
+    @Html.HiddenFor(m => m.Nuevo)
+    @Html.HiddenFor(m => m.ReadOnly)
+
+    @if (!Model.ReadOnly)
+    {
+        <h5 class="row-title"><i class="typcn typcn-folder themeprimary"></i>Plan de alimentación para <b>@Model.RED</b> calorías</h5>        
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-lightred">
+                        <span class="widget-caption" style="font-size:18px">Frutas</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Frutas</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Frutas, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-themethirdcolor">
+                        <span class="widget-caption" style="font-size:18px">Veg.</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Vegetales</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Vegetales, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-blueberry">
+                        <span class="widget-caption" style="font-size:18px">Cereal</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Cereales</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Cereales, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-magenta">
+                        <span class="widget-caption" style="font-size:18px">Prot</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Carnes</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Carnes, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-azure">
+                        <span class="widget-caption" style="font-size:18px">Azucar</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Azucares</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Azucares, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-pink">
+                        <span class="widget-caption" style="font-size:18px">Lacteos</span>
+                    </div>
+                    <div class="widget-body" style="text-align:center">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Lacteos</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Lacteos, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="widget">
+                    <div class="widget-header bg-yellow">
+                        <span class="widget-caption" style="font-size:18px">Grasa</span>
+                    </div>
+                    <div class="widget-body">
+                        @if (Model.ReadOnly)
+                        {
+                            <p style="font-size:50px">@Model.Grasas</p>
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Grasas, new { style = "width: 100%;height: 55px;font-size:50px;text-align:center;" })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <h5 class="row-title"><i class="typcn typcn-folder themeprimary"></i>Ejemplo de Menú</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Este es un ejemplo de plan de alimentación que puede ayudarte a mantener un estado nutricional adecuado*</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+            <div class="widget">
+                <div class="widget-header bg-palegreen" style="text-align:center">
+                    <span class="widget-caption" style="font-size:28px">Desayuno</span>
+                </div>
+                <div class="widget-body" style="text-align:center">
+                    @if (Model.ReadOnly)
+                    {
+                        @Html.TextAreaFor(m => m.Desayuno, new { style = "width: 100%;height: 300px;", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(m => m.Desayuno, new { style = "width: 100%;height: 300px;" })
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="widget">
+                <div class="widget-header bg-magenta">
+                    <span class="widget-caption" style="font-size:28px">Refacción</span>
+                </div>
+                <div class="widget-body" style="text-align:center">
+                    @if (Model.ReadOnly)
+                    {
+                        @Html.TextAreaFor(m => m.RefaccionAm, new { style = "width: 100%;height: 300px;", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(m => m.RefaccionAm, new { style = "width: 100%;height: 300px;" })
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="widget">
+                <div class="widget-header bg-azure">
+                    <span class="widget-caption" style="font-size:28px">Almuerzo</span>
+                </div>
+                <div class="widget-body" style="text-align:center">
+                    @if (Model.ReadOnly)
+                    {
+                        @Html.TextAreaFor(m => m.Almuerzo, new { style = "width: 100%;height: 300px;", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(m => m.Almuerzo, new { style = "width: 100%;height: 300px;" })
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="widget">
+                <div class="widget-header bg-pink">
+                    <span class="widget-caption" style="font-size:28px">Refacción</span>
+                </div>
+                <div class="widget-body" style="text-align:center">
+                    @if (Model.ReadOnly)
+                    {
+                        @Html.TextAreaFor(m => m.RefaccionPm, new { style = "width: 100%;height: 300px;", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(m => m.RefaccionPm, new { style = "width: 100%;height: 300px;" })
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="widget">
+                <div class="widget-header bg-yellow">
+                    <span class="widget-caption" style="font-size:28px">Cena</span>
+                </div>
+                <div class="widget-body" style="text-align:center">
+                    @if (Model.ReadOnly)
+                    {
+                        @Html.TextAreaFor(m => m.Cena, new { style = "width: 100%;height: 300px;", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(m => m.Cena, new { style = "width: 100%;height: 300px;" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Observaciones Generales</h3>
+            <p>*Si tienes una condición especial consulta con tu nutricionista  y médico antes de hacer cualquier ajuste en tu alimentación.</p>
+        </div>
+    </div>
+    @if (!Model.ReadOnly)
+    {
+        <button id="btnGuardarPlan" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+    }    
+    
+</form>
+<script>
+    $(document).ready(function() {
+        $("#frmPlan").on("submit", function(event) {
+            var $this = $(this);
+            var frmValues = $this.serialize();
+            $.ajax({
+                cache: false,
+                async: false,
+                type: "POST",
+                url: "@Url.Action("Plan", "Seguimiento", new { Area = "Nutricionista" })",
+                data: frmValues,
+                success: function (result) {
+                    Notify('Plan guardado exitosamente!', 'top-right', '5000', 'info', 'fa-envelope', true);
+                    return false;
+                },
+                error: function (result) {
+                    alert(result.statusText);
+                    Notify('Error al guardar plan!', 'top-right', '5000', 'danger', 'fa-envelope', true);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>EkiibrateDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{6fa11458-ae4f-40ec-83a5-42c47346cd80}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>EkiibrateDB</RootNamespace>
+    <AssemblyName>EkiibrateDB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Tables\Administrador" />
+    <Folder Include="Tables\Catalogos" />
+    <Folder Include="Tables\Cliente" />
+    <Folder Include="Tables\General" />
+    <Folder Include="Tables\Participante" />
+    <Folder Include="Tables\Proyecto" />
+    <Folder Include="Scripts" />
+    <Folder Include="Tables\Participante\Diagnostico" />
+    <Folder Include="SitioAdministrativo" />
+    <Folder Include="SitioAdministrativo\StoredProcedures" />
+    <Folder Include="SitioAdministrativo\Tablas" />
+    <Folder Include="Tables\Nutricionista" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Administrador\Colaborador.sql" />
+    <Build Include="Tables\Administrador\Empresa.sql" />
+    <Build Include="Tables\Administrador\Salon.sql" />
+    <Build Include="Tables\Catalogos\Area.sql" />
+    <Build Include="Tables\Catalogos\GiroEmpresa.sql" />
+    <Build Include="Tables\Catalogos\RolNutricionista.sql" />
+    <Build Include="Tables\Catalogos\TipoUsoSalon.sql" />
+    <Build Include="Tables\General\GE.Error.sql" />
+    <Build Include="Tables\Proyecto\Asistente.sql" />
+    <Build Include="Tables\Proyecto\Facilitador.sql" />
+    <Build Include="Tables\Proyecto\Grupo.sql" />
+    <Build Include="Tables\Proyecto\Nutricionista.sql" />
+    <Build Include="Tables\Proyecto\Proyecto.sql" />
+    <Build Include="Tables\Proyecto\ProyectoArea.sql" />
+    <Build Include="Tables\Proyecto\ProyectoSalon.sql" />
+    <Build Include="Tables\Proyecto\Taller.sql" />
+    <Build Include="Tables\Proyecto\TallerProgramacion.sql" />
+    <None Include="Scripts\Init.sql" />
+    <Build Include="Scripts\sis.sql" />
+    <Build Include="Scripts\PocoGen.sql" />
+    <Build Include="Tables\Proyecto\Enfermera.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.ACTIVIDAD_FISICA.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.ALIMENTACION.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.ALIMENTACION_VASOS.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.ANSIEDAD.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.BEBIDA.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.BEBIDAS_FRECUENTES.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.COMUNICACION_ASERTIVA_UNO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.COMUNICACION_ASERVITA_DOS.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.CONDICION.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.CONDICION_PRE_EXISTENTE.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.CONDICION_TRATAMIENTO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.ENFERMEDAD.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.FAC_RIESGO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.INFORMACION_GENERAL.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.MEDIDA.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.MEDIDA_BEBIDA.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.MEDIO_COMUNICACION.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.PREGUNTA_COMUNICACION_ASERTIVA_DOS.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.PREGUNTA_COMUNICACION_ASERTIVA_UNO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.PREGUNTA_TIEMPO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.RESP_ANSIEDAD.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TIEMPO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TIPO_EJERCICIO.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TIPO_ENFERMEDAD.sql" />
+    <Build Include="Tables\General\Persona.sql" />
+    <Build Include="Tables\Catalogos\ClienteRol.sql" />
+    <Build Include="Tables\Catalogos\Aseguradora.sql" />
+    <Build Include="Tables\Participante\Participante.sql" />
+    <Build Include="Tables\Catalogos\Pais.sql" />
+    <Build Include="Tables\Catalogos\MedioComunicacion.sql" />
+    <Build Include="Tables\Proyecto\ParticipanteTaller.sql" />
+    <Build Include="Tables\Catalogos\CitaDia.sql" />
+    <Build Include="Tables\Catalogos\CitaHora.sql" />
+    <Build Include="Tables\Catalogos\CitaDuracion.sql" />
+    <Build Include="Tables\Catalogos\UnidadTiempo.sql" />
+    <Build Include="Tables\Proyecto\CitaProgramacion.sql" />
+    <Build Include="Tables\Proyecto\Cita.sql" />
+    <Build Include="Tables\Proyecto\EmpresaContacto.sql" />
+    <Build Include="Tables\Proyecto\Semana.sql" />
+    <Build Include="Tables\Proyecto\PasosDia.sql" />
+    <Build Include="Tables\Proyecto\AlimentacionDia.sql" />
+    <Build Include="Tables\Catalogos\GrupoAlimento.sql" />
+    <Build Include="Tables\Proyecto\Desempeño.sql" />
+    <Build Include="Tables\Proyecto\Alimentacion.sql" />
+    <Build Include="Tables\Proyecto\Pasos.sql" />
+    <Build Include="SitioAdministrativo\StoredProcedures\SP_PermisoAObjeto_Del.sql" />
+    <Build Include="SitioAdministrativo\StoredProcedures\SP_PermisoAObjeto_Ins.sql" />
+    <Build Include="SitioAdministrativo\Tablas\HistoricoPermiso.sql" />
+    <Build Include="SitioAdministrativo\Tablas\HistoricoUsuarioPoRol.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Menu.sql" />
+    <Build Include="SitioAdministrativo\Tablas\MenuTipo.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Objeto.sql" />
+    <Build Include="SitioAdministrativo\Tablas\ParametroGeneral.sql" />
+    <Build Include="SitioAdministrativo\Tablas\ParametroTipo.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Permiso.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Producto.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Propietario.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Rol.sql" />
+    <Build Include="SitioAdministrativo\Tablas\TipoUsuario.sql" />
+    <Build Include="SitioAdministrativo\Tablas\Usuario.sql" />
+    <Build Include="SitioAdministrativo\Tablas\UsuarioPorRol.sql" />
+    <Build Include="SitioAdministrativo\Administracion.sql" />
+    <Build Include="Tables\General\GE.CorreoElectronico.sql" />
+    <Build Include="Tables\General\GE.Lista_Persona.sql" />
+    <Build Include="Tables\General\GE.ListaDifusion.sql" />
+    <Build Include="Tables\General\GE.MensajeCorreo.sql" />
+    <Build Include="Tables\Catalogos\Taller.sql" />
+    <Build Include="Tables\Catalogos\Alimento.sql" />
+    <Build Include="Tables\Nutricionista\Diagnostico.sql" />
+    <Build Include="Tables\Nutricionista\DiagnosticoAlimentacion.sql" />
+    <Build Include="Tables\Nutricionista\DiagnosticoAnamnesis.sql" />
+    <Build Include="Tables\Catalogos\TiempoComida.sql" />
+    <Build Include="Tables\Nutricionista\AnalisisDiagnostico.sql" />
+    <Build Include="Tables\Nutricionista\Seguimiento.sql" />
+    <Build Include="Tables\Proyecto\Ciclo.sql" />
+    <Build Include="Tables\Catalogos\TipoCita.sql" />
+    <Build Include="Tables\Catalogos\Aspecto.sql" />
+    <Build Include="Tables\Nutricionista\SeguimientoAspectos.sql" />
+    <Build Include="Tables\Catalogos\Dia.sql" />
+    <Build Include="Tables\Administrador\Contacto.sql" />
+    <Build Include="Tables\Proyecto\TallerNota.sql" />
+    <Build Include="Tables\Nutricionista\PesoIdeal.sql" />
+    <Build Include="Tables\Catalogos\Contextura.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TestLiderazgo.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.PreguntaLiderazgo.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.PreguntaFinanzas.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.RespuestaFinanzas.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TestFinanzas.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TemaFinanzas.sql" />
+    <Build Include="Tables\Participante\Diagnostico\PAR.TestTemaFinanzas.sql" />
+    <Build Include="Tables\Catalogos\TipoProyecto.sql" />
+    <Build Include="Tables\General\GE.Dia.sql" />
+    <Build Include="Tables\Nutricionista\PlanAlimentacion.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EkiibrateDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="EkiibrateDB.refactorlog" />
+  </ItemGroup>
+</Project>

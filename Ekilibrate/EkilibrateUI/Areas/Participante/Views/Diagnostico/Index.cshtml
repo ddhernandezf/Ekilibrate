@@ -1,0 +1,398 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+@model Ekilibrate.Model.Entity.Participante.clsDiagnosticoBase
+
+@{
+    ViewBag.Title = "Diagnostico";
+    ViewBag.Description = "Diagnostico";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Diagnostico", FormMethod.Post, new { id = "myform" }))
+{
+    <h1><img src="../assets/img/icons/Heart Monitor-32.png" />Evaluación del Estilo de Vida</h1>
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">            
+            <br />
+            @*<h4>¡Bienvenid@@ a un recorrido por tu estilo de vida.  Este recorrido consta de 10 cuestionarios.  Completarlos te tomará aproximadamente MEDIA HORA. Si no tienes ese tiempo disponible, puedes responder por partes. Al final de cada pantalla se te muestran dos opciones: “Siguiente” ó "Guardar y continuar en otro momento” esta última guardará tu información y, la próxima vez que accedas a tu usuario podrás retomar donde te quedaste.</h4>*@
+            <div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+                <ul>
+                    <li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">1</span><span class="chevron"></span></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Alimentacion'><span class="step">2</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Riesgo'><span class="step">3</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Cuidado'><span class="step">4</span><span class="chevron"></span></a></li>
+                    @*<li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Emocion'><span class="step">5</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Tiempo'><span class="step">6</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Comunicacion'><span class="step">7</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/ComunicacionDos'><span class="step">8</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/TestFinanzas'><span class="step">9</span><span class="chevron"></span></a></li>
+                    <li data-target="#simplewizardinwidgetstep1"><a href='../Participante/Liderazgo'><span class="step">10</span><span class="chevron"></span></a></li>*@
+                </ul>
+            </div>
+            <div class="widget-header bg-themeprimary">
+                <span class="widget-caption" style="font-size:28px"><img src="../assets/img/icons/User Menu-32.png" /> Información General</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                </div>
+
+            </div>            
+            @*<div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">Datos Generales</span>
+                </div>*@
+            @*@using (var form = Html.Bootstrap().Begin(new Form().Type(FormType.Vertical)))*@
+            <form class="form-horizontal" role="form" action="" method="post">
+                <div class="widget-body">
+                    <div id="horizontal-form">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                                @Html.ValidationSummary(true, "Favor verifique los campos obligatorios", new { @class = "text-danger" })
+                                @Html.AntiForgeryToken()
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Nombre, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-4">
+                                        @(Html.Kendo().TextBoxFor(x => x.PrimerNombre).HtmlAttributes(new { @class = "form-control", Placeholder = "Primer Nombre" }))
+                                        @Html.HiddenFor(x => x.ID_PARTICIPANTE)
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @(Html.Kendo().TextBoxFor(x => x.SegundoNombre).HtmlAttributes(new { @class = "form-control", Placeholder = "Segundo Nombre" }))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Apellido, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-4">
+                                        @(Html.Kendo().TextBoxFor(x => x.PrimerApellido).HtmlAttributes(new { @class = "form-control", Placeholder = "Primer Apellido" }))
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @(Html.Kendo().TextBoxFor(x => x.SegundoApellido).HtmlAttributes(new { @class = "form-control", Placeholder = "Segundo Apellido" }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.ApellidoCasada, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().TextBoxFor(x => x.ApellidoCasada).HtmlAttributes(new { @class = "form-control", Placeholder = "Apellido de Casada (Si aplica)" }))
+                                        @(Html.Kendo().Tooltip()
+                                        .For("#ApellidoCasada")
+                                        .Position(TooltipPosition.Top)
+                                        .Content("Apellido de Casada (Si aplica)")
+                                        .Width(120)
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Correo, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().TextBoxFor(x => x.Correo).HtmlAttributes(new { @class = "form-control", Placeholder = "Segundo Apellido" }))
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Departamento, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().TextBoxFor(x => x.Departamento).HtmlAttributes(new { @class = "form-control", Placeholder = "Departamento o área donde colaboro" }))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Puesto, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().TextBoxFor(x => x.Puesto).HtmlAttributes(new { @class = "form-control", Placeholder = "Puesto que desempeño" }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Telefono, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-2">
+                                        @(Html.Kendo().MaskedTextBoxFor(x => x.TelPais).HtmlAttributes(new { @class = "form-control" }).Mask("+999"))
+                                        @(Html.Kendo().Tooltip()
+                                            .For("#TelPais")
+                                            .Position(TooltipPosition.Top)
+                                            .Content("Código de País. Ejemplo: +502")
+                                            .Width(120)
+                                        )
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @(Html.Kendo().MaskedTextBoxFor(x => x.TelNumero).HtmlAttributes(new { @class = "form-control" }).Mask("0000-0000"))
+                                        @(Html.Kendo().Tooltip()
+                                        .For("#TelNumero")
+                                        .Position(TooltipPosition.Top)
+                                        .Content("Número de Teléfono. Ejemplo: 2222-2222")
+                                        .Width(120)
+                                        )
+                                    </div>
+                                    @(Html.LabelFor(x => x.Extension, new { @class = "col-sm-1 control-label no-padding-right" }))
+                                    <div class="col-sm-2">
+                                        @(Html.Kendo().TextBoxFor(x => x.Extension).HtmlAttributes(new { @class = "form-control" }))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.Celular, new { @class = "col-sm-4 control-label no-padding-right" }))
+                                    <div class="col-sm-2">
+                                        @(Html.Kendo().MaskedTextBoxFor(x => x.CelPais).HtmlAttributes(new { @class = "form-control" }).Mask("+999"))
+                                        @(Html.Kendo().Tooltip()
+                                            .For("#CelPais")
+                                            .Position(TooltipPosition.Top)
+                                            .Content("Código de País. Ejemplo: +502")
+                                            .Width(120)
+                                        )
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @(Html.Kendo().MaskedTextBoxFor(x => x.CelNumero).HtmlAttributes(new { @class = "form-control" }).Mask("0000-0000"))
+                                        @(Html.Kendo().Tooltip()
+                                        .For("#CelNumero")
+                                        .Position(TooltipPosition.Top)
+                                        .Content("Número de Teléfono. Ejemplo: 5555-5555")
+                                        .Width(120)
+                                        )
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.Celular, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.SEXO, new { @class = "col-sm-4 control-label padding-right" })
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().DropDownList()
+                                            .HtmlAttributes(new { @style = "width:100%" })
+                                            .Name("SEXO")
+                                            .DataTextField("Text")
+                                            .Events(e => e.Select("ChangeSex"))
+                                            .DataValueField("Value")
+                                            .OptionLabel("Seleccione el sexo")
+                                            .BindTo(new List<SelectListItem>{
+                                        new SelectListItem{Text = "Masculino", Value="MASCULINO"},
+                                        new SelectListItem{Text = "Femenino", Value="FEMENINO"}
+                                        })
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.FECHA_NACIMIENTO, new { @class = "col-sm-4 control-label padding-right" })
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().DatePickerFor(x => x.FECHA_NACIMIENTO).Name("FECHA_NACIMIENTO").HtmlAttributes(new { @style = "width:100%", @type = "" }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.ID_MEDIO_COMUNICACION, new { @class = "col-sm-4 control-label padding-right" }))
+                                    @Html.ValidationMessageFor(x => x.ID_MEDIO_COMUNICACION, "", new { @class = "text-danger" })
+                                    <div class="col-lg-8">
+                                        @(Html.Kendo().DropDownList()
+                                                .HtmlAttributes(new { @style = "width:100%" })
+                                                .Name("ID_MEDIO_COMUNICACION")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Seleccione una opción")
+                                                .BindTo(new List<SelectListItem>{
+                                                                        new SelectListItem{Text = "Llamada", Value="1"},
+                                                                        new SelectListItem{Text = "Whatsapp", Value="2"},
+                                                                        new SelectListItem{Text = "FB Messenger", Value="3"},
+                                                                        new SelectListItem{Text = "E-mail", Value="4"},
+                                                })
+                                        )
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @(Html.LabelFor(x => x.FACEBOOK, new { @class = "col-sm-4 control-label padding-right" }))
+                                    <div class="col-sm-8">
+                                        @(Html.Kendo().TextBoxFor(x => x.FACEBOOK).HtmlAttributes(new { @class = "form-control", Placeholder = "Facebook" }))
+                                        @Html.ValidationMessageFor(x => x.FACEBOOK, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row" id="SoloMujeres">
+                            <div class="col-sm-12 col-sm-4 col-xs-12">
+                                <div class="widget">
+                                    <div class="widget-header bg-pink">
+                                        <span class="widget-caption">1. Para mujeres embarazadas</span>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.FEC_ULT_MENSTRUACION, new { @class = "col-sm-6 control-label padding-right" })
+                                                <div class="col-sm-6">
+                                                    @(Html.Kendo().DatePickerFor(x => x.FEC_ULT_MENSTRUACION).Name("FEC_ULT_MENSTRUACION").HtmlAttributes(new { @style = "width:100%", @type = "" }).Events(e => e.Change("CalcularEdad")))
+                                                    @Html.ValidationMessageFor(x => x.FEC_ULT_MENSTRUACION, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.EDAD_GESTACIONAL, new { @class = "col-sm-6 control-label padding-right" })
+                                                <div class="col-sm-6">
+                                                    @(Html.Kendo().TextBoxFor(x => x.EDAD_GESTACIONAL).HtmlAttributes(new { style = "width:100%" }).Enable(false))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.PESO_ANTERIOR, new { @class = "col-sm-6 control-label padding-right" })
+                                                <div class="col-sm-6">
+                                                    @(Html.Kendo().NumericTextBoxFor<int>(x => x.PESO_ANTERIOR).Name("PESO_ANTERIOR").Decimals(0).HtmlAttributes(new { @style = "width:100%" }))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8 col-sm-4 col-xs-12">
+                                <div class="widget">
+                                    <div class="widget-header bg-sky">
+                                        <span class="widget-caption">2. Para mujeres en Lactancia</span>
+                                    </div>
+                                    <div class="widget-body bordered-top bordered-sky">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.FEC_NAC_BEBE, new { @class = "col-sm-6 control-label padding-right" })
+                                                <div class="col-sm-6">
+                                                    @Html.Kendo().DatePickerFor(x => x.FEC_NAC_BEBE).HtmlAttributes(new { @style = "width:100%", @type = "" }).Events(e => e.Change("CalcularEdadBebe"))
+                                                    @Html.ValidationMessageFor(x => x.FEC_NAC_BEBE, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.EDAD, new { @class = "col-sm-6 control-label padding-right" })
+                                                <div class="col-sm-6">
+                                                    @(Html.Kendo().TextBoxFor(x => x.EDAD).HtmlAttributes(new { style = "width:100%" }).Enable(false))
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-sm-4 col-xs-12">
+                                <div class="widget">
+                                    <div class="widget-header bg-blueberry">
+                                        <span class="widget-caption">3. Síntomas de menopausia</span>
+                                    </div>
+                                    <div class="widget-body bordered-top bordered-blueberry">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @Html.LabelFor(x => x.MENOPAUSIA, new { @class = "col-sm-8 control-label padding-right" })
+                                                <div class="col-sm-2">
+                                                    @Html.RadioButtonFor(x => x.MENOPAUSIA, "true") SI
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    @Html.RadioButtonFor(x => x.MENOPAUSIA, "false") NO
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="row">
+                            <div class="pull-right" style="display: inline-flex; padding-right: 1em;">
+                                <div class="btn-group">
+                                    <button type="submit" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+                                    <button type="submit" value="Siguiente" name="accion" class="btn-lg btn-success btn-next" data-last="Finish">Siguiente <i class="fa fa-angle-right"></i></button>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+
+        <script>
+            function ChangeSex(e) {
+                if (this.dataItem(e.item).Value == "FEMENINO")
+                    $("#SoloMujeres").css("display", "block");
+                else
+                    $("#SoloMujeres").css("display", "none");
+            };
+
+            function CalcularEdad() {
+                var FechaI = 0;
+
+                if ($("#FEC_ULT_MENSTRUACION").data("kendoDatePicker").value() != null)
+                {
+                    var fechaID = new Date($("#FEC_ULT_MENSTRUACION").data("kendoDatePicker").value());
+                    var fechaIC = new Date();
+                    $("#EDAD_GESTACIONAL").val((Math.round((fechaIC - fechaID) / 1000 / 60 / 60 / 24 / 7)).toString());
+                }
+            }
+
+            function CalcularEdadBebe() {
+                var FechaI = 0;
+
+                if ($("#FEC_NAC_BEBE").data("kendoDatePicker").value() != null) {
+                    var fechaID = new Date($("#FEC_NAC_BEBE").data("kendoDatePicker").value());
+                    var fechaIC = new Date();
+                    $("#EDAD").val(((fechaIC.getYear() - fechaID.getYear()) * 12) + fechaIC.getMonth() - fechaID.getMonth());
+                }
+            }
+
+            $(document).ready(function () {
+                CalcularEdadBebe();
+                CalcularEdad();
+                if ($("#SEXO").val() == "FEMENINO")
+                    $("#SoloMujeres").css("display", "block");
+                else
+                    $("#SoloMujeres").css("display", "none");
+            });
+        </script>
+    </div>
+}
+              

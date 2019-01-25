@@ -1,0 +1,52 @@
+﻿@using Kendo.Mvc.UI
+@using System.Web.Mvc
+@{
+    ViewBag.Title = "Home";
+    ViewBag.Description = "Modulo de Cliente - Sistema Ekilibrate";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<img src="~/assets/img/cintillo.png" alt="" width="100%" />
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        @(Html.Kendo().TabStrip()
+                .Name("tabstrip")
+                .Animation(animation =>
+                            animation.Open(effect =>
+                            effect.Fade(FadeDirection.In)))
+                .Items(tabstrip =>
+                {
+                    if (ViewBag != null && ViewBag.Proyecto != null)
+                    {
+                        foreach (Ekilibrate.Model.Entity.Administrador.clsProyecto x in ViewBag.Proyecto)
+                        {
+                            switch (x.Estado)
+                            {
+                                case "CREACIÓN DE PARTICIPANTES":
+                                    tabstrip.Add()
+                                     .ImageUrl(Url.Content("~/assets/img/essential.png"))
+                                     .Selected(true)
+                                     .LoadContentFrom("Proyecto", "Home", new { ProyectoId = x.Id } );
+                                     //.LoadContentFrom(Url.Content("../Cliente/Home/Participante"));
+                                    break;
+                                case "EN EJECUCIÓN":
+                                case "FINALIZADO":
+                                    tabstrip.Add()
+                                     .ImageUrl(Url.Content("~/assets/img/essential.png"))
+                                     .Selected(true)
+                                     .LoadContentFrom("Proyecto", "Home", new { ProyectoId = x.Id });
+                                    break;
+                                default:
+                                    tabstrip.Add()
+                                     .ImageUrl(Url.Content("~/assets/img/essential.png"))
+                                     .Selected(true)
+                                     .LoadContentFrom("Proyecto", "Home", new { ProyectoId = x.Id });
+                                    break;
+                            }
+                        }
+                    }
+                })
+            )
+    </div>
+</div>
+@*<img src="../assets/img/home-cliente.jpg" alt="" width="100%" />*@

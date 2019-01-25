@@ -1,0 +1,178 @@
+﻿@using Kendo.Mvc.UI;
+@using BeyondThemes.Bootstrap;
+@{
+    ViewBag.Title = "Home";
+    ViewBag.Description = "Home";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2>Home</h2>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-xs-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+                <span class="widget-caption"><img src='../assets/img/icons/Calendar-32.png' />Citas del día</span>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsCita>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.TipoCitaId).Hidden();
+                        columns.Bound(p => p.Nombre).Width(175);
+                        columns.Bound(p => p.ParticipanteId).Width(175).Hidden();
+                        columns.Bound(p => p.Fecha).Width(90);
+                        columns.Bound(p => p.Hora).Width(95);
+                        columns.Bound(p => p.NutricionistaId).Width(175).Hidden();
+                        columns.Command(command =>
+                        {
+                            //command.Edit().Text("Segumiento");
+                            //command.Destroy().Text("Eliminar");
+                            command.Custom("Segumiento").Text("Atender").Click("OnClickSeguimiento");
+                            command.Custom("Reprogramar").Text("Reprogramar").Click("onClickParticipante");
+                        }).Width(250);
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                        .Filterable(f =>
+                        {
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+
+                        })
+                        .Create(update => update.Action("Create", "Home"))
+                        .Read(read => read.Action("ReadD", "Home"))
+                        .Update(update => update.Action("Update", "Home"))
+                        .Destroy(update => update.Action("Delete", "Home"))
+                    )
+                    .Events(e => e.Edit("onEdit"))
+                )
+            </div>
+        </div>
+        </div>
+</div>
+
+@{Html.Kendo().Window()
+    .Name("window")
+    .Title("Participantes")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(50))
+    .Content(
+    @<text>
+        <h2> <label id="EmpresaNombre"></label> </h2>
+        @*<h4> <label id="RoleDescriptionU"></label> </h4>*@
+        @*<h3>Agregar Usuarios</h3>*@
+
+        <div id="divUnAssignedUsers" class="grid-mantenimientos-content-center">
+            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsParticipante>()
+                .Name("gridParticipantes")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.Id).Width(25).Title("");
+                    columns.Bound(p => p.Nombre).Width(175);
+                    columns.Bound(p => p.Apellido).Width(175);
+                    columns.Bound(p => p.Grupo).Width(175);
+                    columns.Command(command =>
+                    {
+                        //command.Edit().Text("Actualizar");
+                        command.Destroy().Text("Eliminar");
+                    }).Width(200);
+                })
+                .ToolBar(toolbar => toolbar.Create().Text("Crear"))
+                .ToolBar(toolbar => toolbar.Custom().Text("Cargar Excel"))
+                .Editable(editable => editable.Mode(GridEditMode.InCell))
+                .Filterable(f =>
+                {
+                    f.Extra(false);
+                })
+                .Pageable(p =>
+                {
+                    p.Refresh(true);
+                })
+                .Sortable()
+                .Scrollable()
+                .HtmlAttributes(new { style = "height:430px;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Events(events => events.Error("error_handler"))
+                    .PageSize(10)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.Id);
+                    })
+                    .Create(update => update.Action("Create", "Participante"))
+                    .Read(read => read.Action("Read", "Participante").Data("ParametroProyecto"))
+                    .Update(update => update.Action("Update", "Participante"))
+                    .Destroy(update => update.Action("Delete", "Participante"))
+                )
+                .Events(e => e.Edit("onEdit"))
+            )
+        </div>
+    </text>
+)
+    .Render();
+}
+
+<script type="text/javascript">
+    var ProyectoId;
+    function ParametroProyecto() {
+        return {
+            pProyectoId: ProyectoId
+        }
+    }
+
+    function onEdit(e) {
+        $('[name="Empresa"]').attr("readonly", true);
+    }
+
+    function OnClickSeguimiento(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var TipoCita = dataItem.TipoCitaId;
+        var ParticipanteId = dataItem.ParticipanteId;
+        var NutricionistaId = dataItem.NutricionistaId;
+
+        switch (TipoCita) {
+            case 1:
+                window.location = "../Nutricionista/Diagnostico?Par=" + ParticipanteId;
+                bre;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+
+        }
+
+        
+
+    }
+
+    function onClickParticipante(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        ProyectoId = dataItem.Id;
+
+        document.getElementById("EmpresaNombre").innerHTML = "Empresa: <b>" + dataItem.Empresa + "</b>";
+
+        $("#gridParticipantes").data("kendoGrid").dataSource.read();
+        $("#window").data("kendoWindow").open();
+    }
+</script>

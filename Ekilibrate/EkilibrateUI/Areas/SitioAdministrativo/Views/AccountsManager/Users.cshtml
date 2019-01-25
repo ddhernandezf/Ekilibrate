@@ -1,0 +1,108 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Usuarios";
+    ViewBag.Description = "Administración de usuarios";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2>@ViewBag.Title </h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">Listado de usuarios</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                            <i class="fa fa-times"></i>
+                        </a>*@
+                </div>
+            </div>
+            <div class="widget-body bordered-top bordered-info">
+
+
+
+                @(Html.Kendo().Grid<EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Usuario>()
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdUsuario).Title("").Width(50);
+                columns.Bound(p => p.NombreUsuario).Width(100);
+                columns.Bound(p => p.GE_Persona.Nombre).Width(250);
+                columns.ForeignKey(p => p.IdTipoUsuario, (System.Collections.IEnumerable)ViewBag.UserTypes, "Value", "Text")
+                             .Title("Tipo Usuario").Width(150);
+
+                columns.Command(command => { command.Edit().Text(" "); command.Destroy().Text(" "); }).Width(172);
+            })
+                .ToolBar(toolbar => toolbar.Create().Text(" "))
+                    .Editable(editable =>
+                    {
+                        editable.Mode(GridEditMode.PopUp).DisplayDeleteConfirmation(true).ConfirmDelete("¿Está seguro que desea eliminar?").TemplateName("UserTemplate");
+                    })
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+                    .Pageable(p =>
+                    {
+                        p.Refresh(true);
+                    })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .ServerOperation(false)
+                .Events(events =>
+                        {
+                            events.Change("GridReload");
+                            events.Error("error_handler");
+                        })
+                .Model(model =>
+                {
+                    model.Id(p => p.IdUsuario);
+                    model.Field(p => p.GE_Persona).DefaultValue(new EkilibrateUI.Areas.SitioAdministrativo.Models.Data.GE_Persona());
+                })
+                    .Create(update => update.Action("User_Create", "AccountsManager"))
+                    .Read(read => read.Action("User_Read", "AccountsManager"))
+                    .Update(update => update.Action("User_Update", "AccountsManager"))
+                    .Destroy(update => update.Action("User_Destroy", "AccountsManager"))
+            )
+                )
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+</script>

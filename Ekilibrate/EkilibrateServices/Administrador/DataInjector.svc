@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Service="Ekilibrate.Services.Administrador.clsDataInjector, EkilibrateSvc" Factory="Autofac.Integration.Wcf.AutofacServiceHostFactory, Autofac.Integration.Wcf" %>

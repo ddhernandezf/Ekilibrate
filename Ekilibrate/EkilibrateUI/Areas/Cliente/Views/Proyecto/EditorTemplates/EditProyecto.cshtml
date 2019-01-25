@@ -1,0 +1,455 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Administrador.clsProyecto
+
+
+
+
+<div class="edit-form">
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.EmpresaId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.EmpresaId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetEmpresa", "Proyecto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.EmpresaId)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FechaInicio)</div>
+                <div class="value">
+                    @Html.Kendo().DatePickerFor(x => x.FechaInicio)
+                    @Html.ValidationMessageFor(model => model.FechaInicio)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FechaFin)</div>
+                <div class="value">
+                    @Html.Kendo().DatePickerFor(x => x.FechaFin)
+                    @Html.ValidationMessageFor(model => model.FechaFin)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.Estado)</div>
+                <div class="value">
+                    @Html.TextBoxFor(x => x.Estado, new { disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Estado)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoAsistentes)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoAsistentes)
+                    @Html.ValidationMessageFor(model => model.NoAsistentes)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoEnfermeras)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoEnfermeras)
+                    @Html.ValidationMessageFor(model => model.NoEnfermeras)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoFacilitadores)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoFacilitadores)
+                    @Html.ValidationMessageFor(model => model.NoFacilitadores)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoNutricionistas)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoNutricionistas)
+                    @Html.ValidationMessageFor(model => model.NoNutricionistas)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoParticipantes)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoParticipantes)
+                    @Html.ValidationMessageFor(model => model.NoParticipantes)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoSemanas)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoSemanas)
+                    @Html.ValidationMessageFor(model => model.NoSemanas)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoConsultasNutricionales)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoConsultasNutricionales)
+                    @Html.ValidationMessageFor(model => model.NoConsultasNutricionales)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FrecuenciaConsultas)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.FrecuenciaConsultas).HtmlAttributes(new { style = "width:29%;" })
+                    @(Html.Kendo().DropDownListFor(x => x.FrecuenciaConsultasUnidad)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                               .BindTo((System.Collections.IEnumerable)new List<SelectListItem>() {
+              new SelectListItem() {Text = "Dias",Value = "1"},new SelectListItem() {Text = "Semanas",Value = "2"},new SelectListItem() {Text = "Meses",Value = "3"}})
+                        .HtmlAttributes(new { style = "width:69%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.FrecuenciaConsultas)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FrecuenciaAlertas)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.FrecuenciaAlertas).HtmlAttributes(new { style = "width:29%;" })
+                    @(Html.Kendo().DropDownListFor(x => x.FrecuenciaAlertasUnidad)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                               .BindTo((System.Collections.IEnumerable)new List<SelectListItem>() {
+              new SelectListItem() {Text = "Dias",Value = "1"},new SelectListItem() {Text = "Semanas",Value = "2"},new SelectListItem() {Text = "Meses",Value = "3"}})
+                        .HtmlAttributes(new { style = "width:69%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.FrecuenciaAlertas)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.CrearUsuarios)</div>
+                <div class="value">
+                    @Html.Kendo().CheckBoxFor(x => x.CrearUsuarios)
+                    @Html.ValidationMessageFor(model => model.CrearUsuarios)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FechaPrimeraCitaDiagnostico)</div>
+                <div class="value">
+                    @Html.Kendo().DatePickerFor(x => x.FechaPrimeraCitaDiagnostico).Value(DateTime.Now)
+                    @Html.ValidationMessageFor(model => model.FechaPrimeraCitaDiagnostico)
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.AseguradoraId)</div>
+                <div class="value">
+                    @(Html.Kendo().DropDownListFor(x => x.AseguradoraId)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Seleccionar...")
+                        .DataSource(d =>
+                        {
+                            d.Read(r =>
+                            {
+                                r.Action("GetAseguradora", "Proyecto");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+                    )
+                    @Html.ValidationMessageFor(model => model.AseguradoraId)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(x => x.IndiceReclamos)</div>
+                <div class="value">
+                    @Html.Kendo().NumericTextBoxFor(x => x.IndiceReclamos)
+                    @Html.ValidationMessageFor(x => x.IndiceReclamos)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.NoParticipantesPorGrupo)</div>
+                <div class="value">
+                    @Html.Kendo().IntegerTextBoxFor(x => x.NoParticipantesPorGrupo)
+                    @Html.ValidationMessageFor(model => model.NoParticipantesPorGrupo)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FechaCorreoInvitacion)</div>
+                <div class="value">
+                    @Html.Kendo().DatePickerFor(x => x.FechaCorreoInvitacion).Value(DateTime.Now)
+                    @Html.ValidationMessageFor(model => model.FechaCorreoInvitacion)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.FechaInicioConsultas)</div>
+                <div class="value">
+                    @Html.Kendo().DatePickerFor(x => x.FechaInicioConsultas).Value(DateTime.Now)
+                    @Html.ValidationMessageFor(model => model.FechaInicioConsultas)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DDuracionConsultas)</div>
+                <div class="value">
+                    @Html.Kendo().TimePickerFor(x => x.DDuracionConsultas).Interval(15).Format("HH:mm").Max(new TimeSpan(2, 0, 0))
+                    @Html.ValidationMessageFor(model => model.DDuracionConsultas)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="part-a">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DHoraInicioConsultas)</div>
+                <div class="value">
+                    @Html.Kendo().TimePickerFor(x => x.DHoraInicioConsultas)
+                    @Html.ValidationMessageFor(model => model.DHoraInicioConsultas)
+                </div>
+            </div>
+        </div>
+
+        <div class="part-b">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.DHoraFinConsultas)</div>
+                <div class="value">
+                    @Html.Kendo().TimePickerFor(x => x.DHoraFinConsultas).Value(DateTime.Now)
+                    @Html.ValidationMessageFor(model => model.DHoraFinConsultas)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.LogoURL)</div>
+                <div class="value">
+                    @Html.Kendo().TextBoxFor(x => x.LogoURL)
+                    @Html.ValidationMessageFor(model => model.LogoURL)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="part-single">
+            <div class="object">
+                <div class="title">@Html.LabelFor(model => model.Color)</div>
+                <div class="value">
+                    <!--Theme Selector Area-->
+                    @(Html.Kendo().ColorPalette()
+                            .Name("Color")
+                    .Columns(12)
+                    .TileSize(s => s.Width(34).Height(19))
+                    .Value(Model.Color)
+                    .Palette(new string[] {
+                        "#5DB2FF",
+                        "#2dc3e8",
+                        "#03B3B2",
+                        "#53a93f",
+                        "#FF8F32",
+                        "#cc324b",
+                        "#AC193D",
+                        "#8C0095",
+                        "#0072C6",
+                        "#585858",
+                        "#474544",
+                        "#001940",
+                    })
+                    )
+                    <!--/Theme Selector Area-->
+                    @Html.ValidationMessageFor(model => model.Color)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Html.HiddenFor(x => x.DuracionConsultas)
+    @Html.HiddenFor(x => x.HoraFinConsultas)
+    @Html.HiddenFor(x => x.HoraInicioConsultas)
+    @Html.HiddenFor(x => x.Color)
+
+
+
+
+
+
+</div>
+
+
+<style>
+    .k-edit-form-container {
+        width: 650px !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 90%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>

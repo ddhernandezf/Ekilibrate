@@ -1,0 +1,107 @@
+﻿@using Kendo.Mvc.UI;
+@using (Html.BeginForm("Index", "Anamnesis", FormMethod.Post, new { id = "myform" }))
+{
+	<div class="form-horizontal">
+		<div class="row">
+			<div class="col-lg-6 col-sm-12 col-xs-12">
+				@Html.ValidationSummary(true, "Favor verifique los campos obligatorios", new { @class = "text-danger h3" })
+				@Html.AntiForgeryToken()
+			</div>
+		</div>
+		<div class="widget-header bordered-bottom bordered-themesecondary">
+			<span class="widget-caption themesecondary">Recordatorio de 24 Horas</span>
+		</div>
+		<div class="widget-body">
+			<div class="row">
+				<div class="col-lg-12 col-sm-4 col-xs-12">
+					<div class="form-group">
+						<label class="col-lg-12 control-label h5">
+							Pídale al participante que le cuente todos los alimentos que consumió durante las últimas 24 horas en orden de tiempos de comida.  Anote la cantidad de porciones que la persona consume de cada grupo de alimentos por tiempo de comida, tomando en consideración las preparaciones (azúcar y grasas añadidas).
+						</label>
+					</div>
+				</div>
+				<div class="col-lg-12 col-sm-4 col-xs-12">
+					@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.DiagnosticoAnamnesisTiempo>()
+					.Name("gridAnamnesia")
+					.Columns(columns =>
+					{
+						columns.Bound(p => p.ParticipanteId).Hidden();
+						columns.Bound(p => p.TiempoComidaId).Title("TiempoComidaId").Hidden().Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.GrupoAlimentoId).Title("Alimento").Hidden().Width(175).Sortable(false).Filterable(false);
+						columns.Bound(p => p.TiempoComida).Title("Tiempo de comida").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Lacteos_Enteros).Title("Lácteos enteros").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Lacteos_Semi_descremados).Title("Lácteos semi-descremados").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Lacteos_Descremados).Title("Lácteos descremados").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Cereales).Title("Cereales").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Carnes).Title("Carnes").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Frutas).Title("Frutas").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Vegetales).Title("Vegetales").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Azucares).Title("Azúcares").Width(40).Sortable(false).Filterable(false);
+						columns.Bound(p => p.Grasas).Title("Grasas").Width(40).Sortable(false).Filterable(false);
+					})
+					.ToolBar(toolbar =>
+					{
+						toolbar.Save();
+					})
+					.Editable(editable => editable.Mode(GridEditMode.InCell))
+					.Navigatable()
+					.Filterable(f =>
+					{
+						f.Enabled(false);
+						f.Extra(false);
+					})
+					.Pageable(p =>
+					{
+						p.Enabled(false);
+						p.Refresh(true);
+					})
+					.Sortable()
+					.Scrollable(s => s.Height("auto"))
+					.Events(ev => ev.Edit("selectTextOnGrid"))
+					.DataSource(dataSource => dataSource
+						.Ajax()
+						.Batch(true)
+						.ServerOperation(false)
+						.Events(events =>
+						{
+							events.Error("error_handler");
+						})
+						.PageSize(20)
+						.Model(model =>
+						{
+							model.Id(p => p.TiempoComidaId);
+							model.Field(p => p.TiempoComida).Editable(false);
+
+						})
+									.Update(update => update.Action("Update_Anamnesis", "Diagnostico").Data("CargarParametros"))
+							.Read(read => read.Action("Read_Anam", "Diagnostico").Data("CargarParametros"))
+					//.Read(read => read.Action("Read", "Diagnostico").Data("CargarParametros"))
+					)
+					//.Events(e => e.Edit("onEdit"))
+					)
+
+				</div>
+			</div>
+		</div>
+	</div>
+}
+<script type="text/javascript">
+    function CargarParametros() {
+        return {
+            Par: "@Request.QueryString["P"].ToString()",
+            Ci: "@Request.QueryString["C"].ToString()"
+		}
+	}
+
+		//function selectText(e) {
+		//    $(e.container).find(".k-input.k-textbox").select();
+		//    $('.k-input').on('focus', function () {
+		//        var input = $(this);
+		//        setTimeout(function () {
+		//            input.select();
+		//        });
+		//    });
+		//}
+
+
+</script>

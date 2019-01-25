@@ -1,0 +1,635 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Administrador.clsProyecto
+
+@(Html.Kendo().TabStrip()
+          .Name("tabstripProyecto")
+          .HtmlAttributes(new { style = "width:100%" })
+          .Items(tabstrip =>
+          {
+          tabstrip.Add().Text("Datos Generales").Selected(true)
+              .ContentHtmlAttributes(new { style = "height:98%;" })
+          .Content( @<text>
+
+    <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
+        <ul class="steps">
+            <li data-target="#wiredstep1" class="active"><span class="step">1</span><span class="title"></span><span class="chevron"></span></li>
+            <li data-target="#wiredstep2"><span class="step">2</span><span class="title"></span> <span class="chevron"></span></li>
+            <li data-target="#wiredstep3"><span class="step">3</span><span class="title"></span> <span class="chevron"></span></li>
+            <li data-target="#wiredstep4"><span class="step">4</span><span class="title"></span> <span class="chevron"></span></li>
+        </ul>
+        <br />
+    </div>
+    <div class="step-content" id="WiredWizardsteps">
+        <div class="step-pane active" id="wiredstep1">
+            <h4>Parámetros Generales del Proyecto</h4>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        @(Html.LabelFor(x => x.EmpresaId, new { @class = "col-sm-3 control-label no-padding-right" }))
+                        <div class="col-sm-7">
+                            @(Html.Kendo().DropDownListFor(x => x.EmpresaId)
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("Seleccionar...")
+                                .DataSource(d =>
+                                {
+                                    d.Read(r =>
+                                    {
+                                        r.Action("GetEmpresa", "Proyecto");
+                                    })
+                                    .ServerFiltering(true);
+                                })
+                                .HtmlAttributes(new { style = "width:100%;" })
+                            )
+                            @Html.ValidationMessageFor(x => x.EmpresaId)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b">
+                    <div class="form-group">
+                        @(Html.LabelFor(x => x.Nombre, new { @class = "col-sm-3 control-label no-padding-right" }))
+                        <div class="col-sm-7">
+                            @Html.Kendo().TextBoxFor(m => m.Nombre)
+                            @Html.ValidationMessageFor(x => x.Nombre)
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label no-padding-right">@Html.LabelFor(m => m.TipoProyectoId)</div>
+                        <div class="col-sm-7">
+                            @(Html.Kendo().DropDownListFor(x => x.TipoProyectoId)
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("Seleccionar...")
+                                .Events(e => e.Select("ProjectTypeSelect").DataBound("ProjectTypeSelect"))
+                                .DataSource(d =>
+                                {
+                                    d.Read(r =>
+                                    {
+                                        r.Action("GetTipoProyecto", "Proyecto");
+                                    })
+                                    .ServerFiltering(true);
+                                })
+                                .HtmlAttributes(new { style = "width:100%;" })
+                            )
+                            @Html.ValidationMessageFor(m => m.TipoProyectoId)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label no-padding-right">@Html.LabelFor(x => x.Estado)</div>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(x => x.Estado, new { disabled = "disabled", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(x => x.Estado)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label no-padding-right">@Html.LabelFor(x => x.NoParticipantes)</div>
+                        <div class="col-sm-7">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoParticipantes)
+                            @Html.ValidationMessageFor(x => x.NoParticipantes)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="part-a" id="divParticpantesPorG">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoParticipantesPorGrupo)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoParticipantesPorGrupo)
+                            @Html.ValidationMessageFor(x => x.NoParticipantesPorGrupo)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.CrearUsuarios)</div>
+                        <div class="value">
+                            @Html.RadioButtonFor(x => x.CrearUsuarios, "true") Carga de Excel
+                            <br />
+                            @Html.RadioButtonFor(x => x.CrearUsuarios, "false") Formulario de Registro
+                            @Html.ValidationMessageFor(x => x.CrearUsuarios)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c">
+                    <div id="divPhoto">
+
+
+                        @(Html.Kendo().Upload()
+        .Name("ProyectoImg")
+        .Multiple(false)
+        .Messages(x => x.Select("Cargar Imagen"))
+        .Events(x => x.Upload("onUpload"))
+
+        .Async(a => a
+        .Save("SubmitP", "../SitioAdministrativo/Home")
+        .AutoUpload(true)
+        )
+                        )
+                        <p>Unicamante puede subir imagenes con extensión .PNG</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="part-a" id="divParticpantesPorG">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.CodigoRegistro)</div>
+                        <div class="value">
+                            @Html.Kendo().TextBoxFor(x => x.CodigoRegistro)
+                            @Html.ValidationMessageFor(x => x.CodigoRegistro)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.Correo)</div>
+                        <div class="value">
+                            @Html.Kendo().TextBoxFor(x => x.Correo)
+                            @Html.ValidationMessageFor(x => x.Correo)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.PasswordCorreo)</div>
+                        <div class="value">
+                            @Html.Kendo().TextBoxFor(x => x.PasswordCorreo)
+                            @Html.ValidationMessageFor(x => x.PasswordCorreo)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="part-single">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.Color)</div>
+                        <div class="value">
+    <!--Theme Selector Area-->
+    @(Html.Kendo().ColorPalette()
+                .Name("pallete")
+        .Columns(12)
+        .TileSize(s => s.Width(34).Height(19))
+        .Value(Model.Color)
+        .Palette(new string[] {
+            "#5DB2FF",
+            "#2dc3e8",
+            "#03B3B2",
+            "#53a93f",
+            "#FF8F32",
+            "#cc324b",
+            "#AC193D",
+            "#8C0095",
+            "#0072C6",
+            "#585858",
+            "#474544",
+            "#001940",
+        })
+    )
+    <!--/Theme Selector Area-->
+    @Html.ValidationMessageFor(x => x.Color)
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="wiredstep2">
+            <div class="row">
+                <h4>Tiempos del Proyecto</h4>
+                <h5>Diagnóstico del Estilo de Vida</h5>
+            </div>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaCorreoInvitacion)</div>
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaCorreoInvitacion).Format("{0:dd/MM/yyyy}").ParseFormats(new string[] { "dd/MM/yyyy" }).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.FechaCorreoInvitacion)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="wide" />
+            <div class="row">
+                <h5>Diagnóstico Bioquímico</h5>
+            </div>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaInicioBx)</div>                        
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaInicioBx).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.FechaInicioBx)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraInicioBx)</div>                        
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraInicioBx).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DHoraInicioBx)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraFinBx)</div>                        
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraFinBx).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DHoraFinBx)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="wide" />
+            <h5>Diagnóstico Nutricional</h5>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaPrimeraCitaDiagnostico)</div>
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaPrimeraCitaDiagnostico).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.FechaPrimeraCitaDiagnostico)
+                        </div>
+                    </div>
+                </div>                
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraInicioDN)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraInicioDN)
+                            @Html.ValidationMessageFor(x => x.DHoraInicioDN)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraFinDN)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraFinDN).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DHoraFinDN)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DDuracionDN)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DDuracionDN).Interval(5).Format("HH:mm").Max(new TimeSpan(2, 0, 0)).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DDuracionDN)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="wide" />
+            <h5>Seguimiento Nutricional</h5>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaInicioConsultas)</div>
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaInicioConsultas).HtmlAttributes(new { @style = "width:100%", @type = "" }).Events(e => e.Change("CalcularSemanas"))
+                            @Html.ValidationMessageFor(x => x.FechaInicioConsultas)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b" id="divNoConsultas">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoConsultasNutricionales)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoConsultasNutricionales)
+                            @Html.ValidationMessageFor(x => x.NoConsultasNutricionales)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c" id="divFrecuenciaConsulta">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FrecuenciaConsultas)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.FrecuenciaConsultas).HtmlAttributes(new { style = "width:29%;" })
+                            @(Html.Kendo().DropDownListFor(x => x.FrecuenciaConsultasUnidad)
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel("Seleccionar...")
+                                        .BindTo((System.Collections.IEnumerable)new List<SelectListItem>() {
+                                            new SelectListItem() {Text = "Dias",Value = "1"},new SelectListItem() {Text = "Semanas",Value = "2"},new SelectListItem() {Text = "Meses",Value = "3"}})
+                                        .HtmlAttributes(new { style = "width:69%;" })
+                            )
+                            @Html.ValidationMessageFor(x => x.FrecuenciaConsultas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DDuracionConsultas)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DDuracionConsultas).Interval(5).Format("HH:mm").Max(new TimeSpan(2, 0, 0)).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DDuracionConsultas)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraInicioConsultas)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraInicioConsultas)
+                            @Html.ValidationMessageFor(x => x.DHoraInicioConsultas)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.DHoraFinConsultas)</div>
+                        <div class="value">
+                            @Html.Kendo().TimePickerFor(x => x.DHoraFinConsultas).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.DHoraFinConsultas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="wide" />
+            <h5>Información Adicional</h5>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaInicio)</div>
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaInicio).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.FechaInicio)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FechaFin)</div>
+                        <div class="value">
+                            @Html.Kendo().DatePickerFor(x => x.FechaFin).HtmlAttributes(new { @style = "width:100%", @type = "" })
+                            @Html.ValidationMessageFor(x => x.FechaFin)
+                        </div>
+                    </div>
+                </div>
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.FrecuenciaAlertas)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.FrecuenciaAlertas).HtmlAttributes(new { style = "width:29%;" })
+                            @(Html.Kendo().DropDownListFor(x => x.FrecuenciaAlertasUnidad)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel("Seleccionar...")
+                    .BindTo((System.Collections.IEnumerable)new List<SelectListItem>() {
+    new SelectListItem() {Text = "Dias",Value = "1"},new SelectListItem() {Text = "Semanas",Value = "2"},new SelectListItem() {Text = "Meses",Value = "3"}})
+            .HtmlAttributes(new { style = "width:69%;" })
+                            )
+                            @Html.ValidationMessageFor(x => x.FrecuenciaAlertas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="divAditionalInfo">
+                <div class="row">
+                    
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <div class="step-pane" id="wiredstep3">
+            <h4>Recursos Humanos</h4>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoAsistentes)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoAsistentes)
+                            @Html.ValidationMessageFor(x => x.NoAsistentes)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoEnfermeras)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoEnfermeras)
+                            @Html.ValidationMessageFor(x => x.NoEnfermeras)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-c">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoNutricionistas)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoNutricionistas)
+                            @Html.ValidationMessageFor(x => x.NoNutricionistas)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="part-a" id="divNoFacilitadores">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.NoFacilitadores)</div>
+                        <div class="value">
+                            @Html.Kendo().IntegerTextBoxFor(x => x.NoFacilitadores)
+                            @Html.ValidationMessageFor(x => x.NoFacilitadores)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="wiredstep4">
+            <h4>Datos de Aseguradora</h4>
+            <div class="row">
+                <div class="part-a">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.AseguradoraId)</div>
+                        <div class="value">
+                            @(Html.Kendo().DropDownListFor(x => x.AseguradoraId)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .OptionLabel("Seleccionar...")
+                .DataSource(d =>
+                {
+                    d.Read(r =>
+                    {
+                        r.Action("GetAseguradora", "Proyecto");
+                    })
+                    .ServerFiltering(true);
+                })
+                .HtmlAttributes(new { style = "width:100%;" })
+                            )
+                            @Html.ValidationMessageFor(x => x.AseguradoraId)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part-b">
+                    <div class="form-group">
+                        <div class="title">@Html.LabelFor(x => x.IndiceReclamos)</div>
+                        <div class="value">
+                            @Html.Kendo().NumericTextBoxFor(x => x.IndiceReclamos)
+                            @Html.ValidationMessageFor(x => x.IndiceReclamos)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions actions-footer" id="WiredWizard-actions">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm btn-prev"> <i class="fa fa-angle-left"></i>Prev</button>
+                <button type="button" class="btn btn-default btn-sm btn-next" data-last="Finish">Next<i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(x => x.DuracionConsultas)
+    @Html.HiddenFor(x => x.HoraFinConsultas)
+    @Html.HiddenFor(x => x.HoraInicioConsultas)
+    @Html.HiddenFor(x => x.Color, new { id = "hColor", name = "hColor" })
+</text>
+);
+              tabstrip.Add().Text("Colaboradores")
+
+                  .ContentHtmlAttributes(new { style = "height:98%;" })
+                  .LoadContentFrom(Url.Content("~/Administrador/Proyecto/ColaboradoresPartial"));
+              tabstrip.Add().Text("Areas")
+                  .ContentHtmlAttributes(new { style = "height:98%;" })
+                 .LoadContentFrom(Url.Content("~/Administrador/Proyecto/AreasPartial"));
+              tabstrip.Add().Text("Contacto")
+                        .ContentHtmlAttributes(new { style = "height:98%;" })
+                       .LoadContentFrom(Url.Content("~/Administrador/Proyecto/ContactoPartial"));
+              tabstrip.Add().Text("Salones")
+                        .ContentHtmlAttributes(new { style = "height:98%;" })
+                       .LoadContentFrom(Url.Content("~/Administrador/Proyecto/SalonesPartial"));
+              tabstrip.Add().Text("Talleres")
+                        .ContentHtmlAttributes(new { style = "height:98%;" })
+                       .LoadContentFrom(Url.Content("~/Administrador/Proyecto/TalleresPartial"));
+
+          })
+)
+
+<script>
+    kendo.culture("es-GT");
+</script>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#WiredWizard').wizard();
+    });
+</script>
+
+<style>
+    .k-edit-form-container {
+        width: 100% !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 94%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 32%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 32%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .part-c {
+        width: 32%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>
+

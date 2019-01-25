@@ -1,0 +1,550 @@
+﻿@using Kendo.Mvc.UI;
+@using System.Web.Mvc;
+
+@{
+    //Pasos
+    List<String> TitleList = (List<String>)ViewBag.TitleList;
+    List<Int32> MetaList = (List<Int32>)ViewBag.MetaList;
+    List<Int32> PasosList = (List<Int32>)ViewBag.PasosList;
+    List<Int32> MetaCompaList = (List<Int32>)ViewBag.MetaCompaList;
+    List<Int32> PasosCompaList = (List<Int32>)ViewBag.PasosCompaList;
+
+    Int32 IdCompa = (Int32)ViewBag.IdCompa;
+    string NombreCompa = (string)ViewBag.NombreCompa;
+    Int32 MaxMeta = (Int32)ViewBag.MaxMeta;
+    Int32 AvgMeta = (Int32)ViewBag.AvgMeta;
+    Int32 AvgPasos = (Int32)ViewBag.AvgPasos;
+    Int32 CountPasos = (Int32)ViewBag.CountPasos;
+
+    //Alimentacion
+    List<String> ATitleList = (List<String>)ViewBag.ATitleList;
+    List<decimal> AMetaList = (List<decimal>)ViewBag.AMetaList;
+    List<decimal> ComidoList = (List<decimal>)ViewBag.ComidoList;
+
+    Int32 MaxAMeta = (Int32)ViewBag.MaxAMeta;
+    Int32 AvgAMeta = (Int32)ViewBag.AvgAMeta;
+    Int32 AvgComidos = (Int32)ViewBag.AvgComidos;
+
+    string FechaInicio = (string)ViewBag.FechaInicio;
+    string FechaFin = (string)ViewBag.FechaFin;
+
+}
+
+@using (Html.BeginForm("Index", "Pasos", FormMethod.Post, new { id = "myform" }))
+{
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption">Pasos caminados durante la semana (@CountPasos)</span>
+                </div>
+                <div class="widget-body">
+                    @*<span class="widget-caption h4">Registro de Pasos Caminados</span>
+                    <br />*@
+                    <span class="widget-caption">Ingresando datos de la semana del <b>@FechaInicio</b> al <b>@FechaFin</b></span>
+                    <br />
+                    <span class="widget-caption">Mi meta actual es <b>@AvgMeta</b></span>
+                    <br />
+                    @if (IdCompa != 0)
+                    {
+                        <span class="widget-caption">Mi Compa es <b>@NombreCompa</b></span>
+                    }
+                    <br />                    
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">                            
+                            @if (IdCompa == 0)
+                            {
+                                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsPasosDiaBase>()
+                                    .Name("gridPasos")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(p => p.Id).Width(0).Hidden();
+                                        columns.Bound(p => p.Dia).Width(0).Hidden();
+                                        columns.Bound(p => p.SemanaId).Width(0).Hidden();
+                                        columns.Bound(p => p.ParticipanteId).Width(0).Hidden();
+                                        columns.Bound(p => p.ProyectoId).Width(0).Hidden();
+                                        columns.Bound(p => p.Meta).Width(0).Hidden();
+                                        columns.Bound(p => p.NombreDia).Title("Dia").Filterable(false).Sortable(false);
+                                        columns.Bound(p => p.Caminados).Title("Pasos").Filterable(false).Sortable(false);
+                                    })
+                                    .ToolBar(toolbar =>
+                                    {
+                                        toolbar.Save();
+                                    })
+                                    .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                    .Navigatable()
+                                    .Filterable(f =>
+                                    {
+                                        f.Enabled(false);
+                                        f.Extra(false);
+                                    })
+                                    .Pageable(p =>
+                                    {
+                                        p.Enabled(false);
+                                        p.Refresh(true);
+                                    })
+                                    .Scrollable(s => s.Height("auto"))
+                                    //.HtmlAttributes(new { style = "height:98%;" })
+                                    .DataSource(dataSource => dataSource
+                                        .Ajax()
+                                        .Batch(true)
+                                        .ServerOperation(true)
+                                        .Events(events =>
+                                        {
+                                            events.Error("error_handler");
+                                            //events.Edit("selectText");
+                                        })
+                                        .PageSize(20)
+                                        .Model(model =>
+                                        {
+                                            model.Id(p => p.NombreDia);
+                                            model.Field(p => p.NombreDia).Editable(false);
+                                            model.Field(p => p.Caminados).Editable(true);
+                                        })
+                                        .Update("Update", "PasosDia")
+                                        //.Update(update => update.Action("UpdatePasos", "Expediente"))
+                                        .Read(read => read.Action("Read", "PasosDia"))
+                                    )
+                                )
+                            }
+                            else
+                            {                            
+                                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsRegistroPasos>()
+                                    .Name("gridPasos")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(p => p.Id).Width(0).Hidden();
+                                        columns.Bound(p => p.Dia).Width(0).Hidden();
+                                        columns.Bound(p => p.SemanaId).Width(0).Hidden();
+                                        columns.Bound(p => p.ParticipanteId).Width(0).Hidden();
+                                        columns.Bound(p => p.ProyectoId).Width(0).Hidden();
+                                        columns.Bound(p => p.Meta).Width(0).Hidden();
+                                        columns.Bound(p => p.NombreDia).Title("Dia").Filterable(false).Sortable(false);
+                                        columns.Bound(p => p.Caminados).Title("Mis Pasos").Filterable(false).Sortable(false);
+                                        columns.Bound(p => p.IdPasosCompa).Width(0).Hidden();
+                                        columns.Bound(p => p.CaminadosCompa).Title("Pasos " + @NombreCompa).Filterable(false).Sortable(false);
+                                    })
+                                    .ToolBar(toolbar =>
+                                    {
+                                        toolbar.Save().SaveText("Enviar Reporte").CancelText("Cancelar");
+                                    })
+                                    .Editable(editable => editable.Mode(GridEditMode.InCell))
+                                    .Navigatable()
+                                    .Filterable(f =>
+                                    {
+                                        f.Enabled(false);
+                                        f.Extra(false);
+                                    })
+                                    .Pageable(p =>
+                                    {
+                                        p.Enabled(false);
+                                        p.Refresh(true);
+                                    })
+                                    .Scrollable(s => s.Height("auto"))
+                                    .DataSource(dataSource => dataSource
+                                        .Ajax()
+                                        .Batch(true)
+                                        .ServerOperation(true)
+                                        .Events(events =>
+                                        {
+                                            events.Error("error_handler");
+                                        })
+                                        .PageSize(20)
+                                        .Model(model =>
+                                        {
+                                            model.Id(p => p.NombreDia);
+                                            model.Field(p => p.NombreDia).Editable(false);
+                                            model.Field(p => p.Caminados).Editable(false);
+                                            model.Field(p => p.CaminadosCompa).Editable(true);
+                                        })
+                                        .Update("Update", "PasosDia")
+                                        //.Update(update => update.Action("UpdatePasos", "Expediente"))
+                                        .Read(read => read.Action("Read", "PasosDia"))
+                                        .Aggregates(aggregates =>
+                                        {
+                                            aggregates.Add(p => p.Caminados).Sum();
+                                            aggregates.Add(p => p.CaminadosCompa).Sum();
+                                        })
+                                    )
+                                )
+                            }
+                        </div>
+                        <div class="col-xs-12 col-md-7">
+                            @if (CountPasos > 0)
+                            {
+                                if (IdCompa == 0)
+                                {
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartP1")
+                                        .Title("Meta de la semana: " + AvgMeta.ToString() + " pasos diarios \n Avance diario")
+                                        .Legend(legend => legend
+                                            .Position(ChartLegendPosition.Top)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                            .Background("transparent")
+                                        )
+                                        .Series(series =>
+                                        {
+                                            series.Bar(PasosList).Name("Mis Pasos").Color("#00ADEF");
+                                            series.Line(MetaList).Name("Meta").Color("#ED207B");
+                                        })
+                                        .CategoryAxis(axis => axis
+                                            .Name("series-axis")
+                                            .Line(line => line.Visible(false))
+                                        )
+                                        .CategoryAxis(axis => axis
+                                            .Name("label-axis")
+                                            .Categories(TitleList)
+                                        )
+                                        .ValueAxis(axis => axis
+                                            .Numeric()
+                                                .Labels(labels => labels.Format("{0}"))
+
+                                                // Move the label-axis all the way down the value axis
+                                                .AxisCrossingValue(0, MaxMeta)
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                            .Visible(true)
+                                            .Format("{0}%")
+                                            .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                }
+                                else
+                                {
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartP1")
+                                        .Title("Meta de la semana: " + AvgMeta.ToString() + " pasos diarios \n Avance diario")
+                                        .Legend(legend => legend
+                                            .Position(ChartLegendPosition.Top)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                            .Background("transparent")
+                                        )
+                                        .Series(series =>
+                                        {
+                                            series.Bar(PasosList).Name("Mis Pasos").Color("#00ADEF");
+                                            series.Line(MetaList).Name("Mi Meta").Color("#ED207B");
+                                            series.Bar(PasosCompaList).Name("Pasos de " + NombreCompa).Color("#53a93f");
+                                            series.Line(MetaCompaList).Name("Meta de " + NombreCompa).Color("#92278F");
+                                        })
+                                        .CategoryAxis(axis => axis
+                                            .Name("series-axis")
+                                            .Line(line => line.Visible(false))
+                                        )
+                                        .CategoryAxis(axis => axis
+                                            .Name("label-axis")
+                                            .Categories(TitleList)
+                                        )
+                                        .ValueAxis(axis => axis
+                                            .Numeric()
+                                                .Labels(labels => labels.Format("{0}"))
+
+                                                // Move the label-axis all the way down the value axis
+                                                .AxisCrossingValue(0, MaxMeta)
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                            .Visible(true)
+                                            .Format("{0}%")
+                                            .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="objGraph2">
+                            @if (CountPasos > 0)
+                            {
+                                if (IdCompa == 0)
+                                {
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartP2")
+                                        .Title("Avance Semanal")
+                                        .Legend(legend => legend
+                                            .Visible(false)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                            .Background("transparent")
+                                            .Height(150)
+                                        )
+                                        .Series(series =>
+                                        {
+                                            series.Bar(new double[] { AvgPasos, AvgMeta }).Color("#00ADEF").ColorField("#ED207B").Name("Avance");
+                                        })
+                                        .CategoryAxis(axis => axis
+                                            .Categories("Avance promedio, diario", "Meta diaria")
+                                            .MajorGridLines(lines => lines.Visible(false))
+                                        )
+                                        .ValueAxis(axis => axis
+                                            .Numeric()
+                                            .Max(MaxMeta)
+                                            .Line(line => line.Visible(false))
+                                            .MajorGridLines(lines => lines.Visible(true))
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                            .Visible(true)
+                                            .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                }
+                                else
+                                {
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartP2")
+                                        .Title("Avance Semanal")
+                                        .Legend(legend => legend
+                                            .Visible(false)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                            .Background("transparent")
+                                            .Height(150)
+                                        )
+                                        .Series(series =>
+                                         {
+                                             series.Bar(new double[] { AvgPasos, AvgMeta }).Color("#00ADEF").ColorField("#ED207B").Name("Avance");
+                                         })
+                                        .CategoryAxis(axis => axis
+                                            .Categories("Avance promedio, diario", "Meta diaria")
+                                            .MajorGridLines(lines => lines.Visible(false))
+                                        )
+                                        .ValueAxis(axis => axis
+                                            .Numeric()
+                                            .Max(MaxMeta)
+                                            .Line(line => line.Visible(false))
+                                            .MajorGridLines(lines => lines.Visible(true))
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                            .Visible(true)
+                                            .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption">Calorias semana (@AvgAMeta)</span>
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="#" data-toggle="collapse">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7">
+                            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsAlimentacionDiaBase>()
+                            .Name("grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(p => p.Id).Width(0).Hidden();
+                                columns.Bound(p => p.ParticipanteId).Width(0).Hidden();
+                                columns.Bound(p => p.GrupoAlimentoId).Width(0).Hidden();
+                                columns.Bound(p => p.SemanaId).Width(0).Hidden();
+                                columns.Bound(p => p.Dia).Width(0).Hidden();
+                                columns.Bound(p => p.ProyectoId).Width(0).Hidden();
+                                //columns.Bound(p => p.SortableName).Width(0).Hidden().ClientGroupHeaderTemplate("Dia: #= value #");
+
+                                columns.Bound(p => p.NombreDia).Title("Dia").Filterable(false).Sortable(false);
+                                columns.Bound(p => p.NombreAlimento).Title("Alimento").Filterable(false).Sortable(false);
+                                columns.Bound(p => p.Meta).Title("Meta").Filterable(false).Sortable(false);
+                                columns.Bound(p => p.Comido).Title("Consumido").Filterable(false).Sortable(false);
+                            })
+                            .ToolBar(toolbar => toolbar.Save())
+                            .Editable(editable => editable.Mode(GridEditMode.InCell))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+                    .Sortable()
+                    .Scrollable(s => s.Height("auto"))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Batch(true)
+                        .ServerOperation(false)
+                        .Events(events =>
+                        {
+                            events.Error("error_handler");
+                            events.Change("change_handler");
+                        }
+                        )
+                        .PageSize(7)                        
+                        .Total(7 * @Convert.ToInt32(DateTime.Now.DayOfWeek))
+                        //.Group(g => g.Add(p => p.SortableName))
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+                            model.Field(p => p.NombreAlimento).Editable(false);
+                            model.Field(p => p.Meta).Editable(false);
+                        })
+                        .Update("Update", "AlimentacionDia")
+                        .Read(read => read.Action("Read", "AlimentacionDia"))
+                            //.Update(update => update.Action("Update", "AlimentacionDia"))
+                            )
+                        )
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="objGraph1">
+                                @if (AvgComidos > 0)
+                                {
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartA1")
+                                        .Title("Meta de la semana: " + AvgAMeta.ToString() + " calorias diarias \n Consumo diario")
+                                        .Legend(legend => legend
+                                        .Position(ChartLegendPosition.Top)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                        .Background("transparent")
+                                        )
+                                        .Series(series =>
+                                        {
+                                            series.Bar(AMetaList).Name("Meta").Color("#00ADEF");
+                                            series.Bar(ComidoList).Name("Comido").Color("#ED207B");
+                                        })
+                                        .CategoryAxis(axis => axis
+                                        .Name("series-axis")
+                                        .Line(line => line.Visible(false))
+                                        )
+                                        .CategoryAxis(axis => axis
+                                        .Name("label-axis")
+                                        .Categories(ATitleList)
+                                        )
+                                        .ValueAxis(axis => axis
+                                        .Numeric()
+                                        .Labels(labels => labels.Format("{0}"))
+
+                                        // Move the label-axis all the way down the value axis
+                                        .AxisCrossingValue(0, MaxAMeta)
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                        .Visible(true)
+                                        .Format("{0}%")
+                                        .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            @if (AvgComidos > 0)
+                            {
+                                <div class="objGraph2">
+                                    @(Html.Kendo().Chart()
+                                        .Name("chartA2")
+                                        .Title("Avance Semanal")
+                                        .Legend(legend => legend
+                                            .Visible(false)
+                                        )
+                                        .ChartArea(chartArea => chartArea
+                                            .Background("transparent")
+                                            .Height(150)
+                                        )
+                                        .Series(series =>
+                                        {
+                                            series.Bar(new double[] { AvgComidos, AvgAMeta }).Color("#00ADEF").ColorField("#ED207B").Name("Avance");
+                                        })
+                                        .CategoryAxis(axis => axis
+                                            .Categories("Promedio de avance", "Meta diaria")
+                                            .MajorGridLines(lines => lines.Visible(false))
+                                        )
+                                        .ValueAxis(axis => axis
+                                            .Numeric()
+                                            .Max(MaxMeta)
+                                            .Line(line => line.Visible(false))
+                                            .MajorGridLines(lines => lines.Visible(true))
+                                        )
+                                        .Tooltip(tooltip => tooltip
+                                            .Visible(true)
+                                            .Template("#= series.name #: #= value #")
+                                        )
+                                    )
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .HiddenClass {
+        color: transparent;
+        display: inline-block;
+        overflow: hidden;
+        font-size: 0px;
+        visibility: hidden;
+    }
+
+    .row-pasos {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+    }
+
+        .row-pasos .Grid {
+            float: left;
+            width: 40%;
+            padding-top: 10px;
+        }
+
+        .row-pasos .objGraph1 {
+            float: left;
+            margin-left: 2%;
+            width: 58%;
+        }
+
+        .row-pasos .objGraph2 {
+            width: 60%;
+            padding-top: 15px;
+            margin-left: 20%;
+        }
+</style>
+
+<script type="text/javascript">
+    function change_handler(e) {
+        //console.log(e);
+        if (e.action == "sync") {
+            //$("#spinner").show();
+            location.reload();
+        }
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    //$("#gridPasos").on('edit', function () {
+    //    e.container.find("td:eq(2) input").focus();
+    //});
+</script>

@@ -1,0 +1,99 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Colaboradores";
+    ViewBag.Description = "Colaboradores";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2><img src='~/assets/icon/colaboradores-menu.png' height="32px"/> Colaboradores</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-themesecondary">
+                <span class="widget-caption">Listado de Colaboradores</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>*@
+                </div>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsColaboradorBase>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Width(25).Title("").EditorTemplateName("ReadOnlyTemplate").Visible(false);
+                        columns.Bound(p => p.PrimerNombre).ClientTemplate(" #=PrimerNombre#  #=PrimerApellido# ").Width(500);
+                        columns.Bound(p => p.Estado).Width(100);
+                        columns.Command(command =>
+                        {
+                            command.Edit().Text(" ");
+                            command.Destroy().Text(" ");
+                        });
+                    })
+                    .ToolBar(
+                        toolbar => toolbar.Create().Text(" "))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("Edit"))
+                        .Filterable(f =>
+                        {
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                                .Model(model =>
+                                {
+                                    model.Id(p => p.Id);
+                                })
+                                .Create(update => update.Action("Create", "Colaboradores"))
+                                .Read(read => read.Action("Read", "Colaboradores"))
+                                .Update(update => update.Action("Update", "Colaboradores"))
+                                .Destroy(update => update.Action("Delete", "Colaboradores"))
+                    )
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function createRow() {
+        grid = $("#grid").data("kendoGrid");
+        grid.addRow();
+    }
+
+    function cancelRow() {
+        grid = $("#grid").data("kendoGrid");
+        grid.cancelRow();
+    }
+
+    function editRow(element) {
+        grid = $("#grid").data("kendoGrid");
+        grid.editRow($(element).closest("tr"));
+    }
+
+    function updateRow() {
+        grid = $("#grid").data("kendoGrid");
+        grid.saveRow();
+    }
+
+    function deleteRow(element) {
+        grid = $("#grid").data("kendoGrid");
+        grid.removeRow($(element).closest("tr"));
+    }
+</script>

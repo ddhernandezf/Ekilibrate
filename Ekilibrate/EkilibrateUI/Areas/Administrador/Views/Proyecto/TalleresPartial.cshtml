@@ -1,0 +1,50 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsTallerVista>()
+
+            .Name("gridATallerProyecto")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.Id).Title("Identificador").Width(50);
+                columns.Bound(p => p.NombreArea).Width(175);
+                columns.Bound(p => p.NombreGrupo).Width(175);
+                columns.Bound(p => p.NombreTaller).Width(175);
+                columns.Command(cmd =>
+                {
+                    cmd.Edit().Text(" ");
+                    cmd.Destroy().Text(" ");
+                }).Width(100);
+            })
+
+
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .ToolBar(toolbar => toolbar.Create().Text(" "))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditTaller"))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:98%;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.Id);
+
+                })
+                        .Read(read => read.Action("ProyectoTaller_Read", "Proyecto").Data("ProyectoSeleccionado"))
+                        .Create(update => update.Action("CreateTaller", "Proyecto").Data("ProyectoSeleccionado"))
+                                .Update(update => update.Action("UpdateTaller", "Proyecto").Data("ProyectoSeleccionado"))
+                                        .Destroy(update => update.Action("DeleteTaller", "Proyecto").Data("ProyectoSeleccionado"))
+            )
+)

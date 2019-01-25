@@ -1,0 +1,130 @@
+﻿@using Kendo.Mvc.UI;
+@using BeyondThemes.Bootstrap;
+@{
+    ViewBag.Title = "Home";
+    ViewBag.Description = "Home";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themesecondary">
+                <span class="widget-caption"> Análisis e Interpretación de Resultados</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsCita>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Hidden();
+                        columns.Bound(p => p.ProgramacionId).Hidden();
+                        columns.Bound(p => p.TipoCitaId).Hidden();
+                        columns.Bound(p => p.Nombre).Width(175).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+                        columns.Bound(p => p.ParticipanteId).Width(175).Hidden();
+                        columns.Bound(p => p.Fecha).Width(90).Format("{0:dddd, dd MMMM}");
+                        columns.Bound(p => p.Hora).Width(95);
+                        columns.Bound(p => p.NutricionistaId).Width(175).Hidden();
+                        columns.Command(command =>
+                        {
+                            //command.Edit().Text("Segumiento");
+                            //command.Destroy().Text("Eliminar");
+                            command.Custom("Segumiento").Text("Atender").Click("OnClickSeguimiento");
+                            //command.Custom("Reprogramar").Text("Reprogramar").Click("onClickParticipante");
+                        }).Width(250);
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                        .Filterable(f =>
+                        {
+                            f.Mode(GridFilterMode.Row); 
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable(s => s.Height("auto"))
+                    //.HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+
+                        })
+                        .Create(update => update.Action("Create", "Home"))
+                        .Read(read => read.Action("ReadF", "Home"))
+                        .Update(update => update.Action("Update", "Home"))
+                        .Destroy(update => update.Action("Delete", "Home"))
+                    )
+                    .Events(e => e.Edit("onEdit"))
+                )
+            </div>
+        </div>
+     </div>
+</div>
+
+<script type="text/javascript">
+    var ProyectoId;
+    function ParametroProyecto() {
+        return {
+            pProyectoId: ProyectoId
+        }
+    }
+
+    function onEdit(e) {
+        $('[name="Empresa"]').attr("readonly", true);
+    }
+
+    function OnClickSeguimiento(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var TipoCita = dataItem.TipoCitaId;
+        var CitaId = dataItem.Id;
+        var ParticipanteId = dataItem.ParticipanteId;
+
+        switch (TipoCita) {
+            case 1:
+                window.location = "../../Nutricionista/Diagnostico/Diagnostico?P=" + ParticipanteId;
+                break;
+            case 2:
+                break;
+            case 3:
+                window.location = "../../Nutricionista/Diagnostico?P=" + ParticipanteId + "&C=" + CitaId;
+                break;
+            default:
+        }
+
+        
+
+    }
+
+    function onClickParticipante(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var CitaId = dataItem.Id;
+        var ParticipanteId = dataItem.ParticipanteId;
+        var NutricionistaId = dataItem.NutricionistaId;
+        var Programacion = dataItem.ProgramacionId;
+
+        window.location = "../../Nutricionista/Reprogramacion?Par=" + ParticipanteId + "&Ci=" + CitaId + "&Nu=" + NutricionistaId + "&Pr=" + Programacion;
+
+        /*document.getElementById("EmpresaNombre").innerHTML = "Empresa: <b>" + dataItem.Empresa + "</b>";
+
+        $("#gridParticipantes").data("kendoGrid").dataSource.read();
+        $("#window").data("kendoWindow").open();
+        
+        alert(window.location);// = "/Reprogramacion"
+        */
+    }
+</script>

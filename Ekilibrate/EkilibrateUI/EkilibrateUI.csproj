@@ -1,0 +1,2219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E4B9457-16DD-4F5C-875C-4B3AD9E951F4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EkilibrateUI</RootNamespace>
+    <AssemblyName>EkilibrateUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PublishDatabases>false</PublishDatabases>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Wcf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Wcf.4.0.0\lib\net45\Autofac.Integration.Wcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BeyondThemes.Bootstrap, Version=2.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\BeyondThemes.Bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Kendo.Mvc, Version=2015.2.624.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Kendo.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcSiteMapProvider, Version=4.6.18.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.Core.4.6.18\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider.WebActivator, Version=4.6.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.4.6.18\lib\net45\MvcSiteMapProvider.WebActivator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\T4MVCExtensions.3.16.0\lib\net40\T4MVCExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\AlimentosController.cs" />
+    <Compile Include="Areas\Api\Controllers\NotificationController.cs" />
+    <Compile Include="Areas\Api\Controllers\PasosController.cs" />
+    <Compile Include="Areas\Api\Controllers\SeguridadController.cs" />
+    <Compile Include="Areas\Api\Controllers\StepsController.cs" />
+    <Compile Include="Areas\Cliente\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Nutricionista\Controllers\DiagnosticoController.cs" />
+    <Compile Include="Areas\Nutricionista\Controllers\ReprogramacionController.cs" />
+    <Compile Include="Areas\Nutricionista\Controllers\SeguimientoController.cs" />
+    <Compile Include="Areas\Participante\Controllers\AlimentacionDiaController.cs" />
+    <Compile Include="Areas\Participante\Controllers\EkilibrateApiController.cs" />
+    <Compile Include="Areas\Participante\Controllers\ComunicacionDosController.cs" />
+    <Compile Include="Areas\Participante\Controllers\ComunicacionController.cs" />
+    <Compile Include="Areas\Participante\Controllers\ExpedienteController.cs" />
+    <Compile Include="Areas\Participante\Controllers\FinalController.cs" />
+    <Compile Include="Areas\Participante\Controllers\LiderazgoController.cs" />
+    <Compile Include="Areas\Participante\Controllers\PasosDiaController.cs" />
+    <Compile Include="Areas\Participante\Controllers\TestFinanzasController.cs" />
+    <Compile Include="Areas\Participante\Controllers\TestTemaFinanzasController.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Controllers\AccountsManagerController.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Controllers\GeneralManagerController.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Controllers\HomeController.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Controllers\SecurityAccessManagerController.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Models\DataValidations.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\GE_Persona.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\HistoricoUsuarioPorRol.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Menu.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\MenuTipo.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Objeto.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\ParametroGeneral.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\ParametroTipo.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Permiso.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Producto.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Propietario.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Rol.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoDB.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SitioAdministrativoUI.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SitioAdministrativoUI.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\TipoUsuario.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\Usuario.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\Data\UsuarioPorRol.cs">
+      <DependentUpon>SitioAdministrativoUI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SitioAdministrativo\Models\IdentityModels.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Models\PermisoObjeto.cs" />
+    <Compile Include="Areas\SitioAdministrativo\Models\ViewModelObjeto.cs" />
+    <Compile Include="Areas\SitioAdministrativo\SitioAdministrativoAreaRegistration.cs" />
+    <Compile Include="Areas\Administrador\AdministradorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrador\Controllers\ColaboradoresController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\ContactoController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\EmpresaController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\ProyectoController.cs" />
+    <Compile Include="Areas\Administrador\Controllers\SalonController.cs" />
+    <Compile Include="Areas\Cliente\ClienteAreaRegistration.cs" />
+    <Compile Include="Areas\Cliente\Controllers\ParticipanteController.cs" />
+    <Compile Include="Areas\Cliente\Controllers\ProyectoController.cs" />
+    <Compile Include="Areas\Nutricionista\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Nutricionista\NutricionistaAreaRegistration.cs" />
+    <Compile Include="Areas\Participante\Controllers\AlimentacionController.cs" />
+    <Compile Include="Areas\Participante\Controllers\CuidadoController.cs" />
+    <Compile Include="Areas\Participante\Controllers\DiagnosticoController.cs" />
+    <Compile Include="Areas\Participante\Controllers\EmocionController.cs" />
+    <Compile Include="Areas\Participante\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Participante\Controllers\RiesgoController.cs" />
+    <Compile Include="Areas\Participante\Controllers\SaludController.cs" />
+    <Compile Include="Areas\Participante\Controllers\TiempoController.cs" />
+    <Compile Include="Areas\Participante\ParticipanteAreaRegistration.cs" />
+    <Compile Include="Autofac\ContainerConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\4095-rtl.min.css" />
+    <Content Include="assets\css\4095.min.css" />
+    <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\beyond-rtl.min.css" />
+    <Content Include="assets\css\beyond.min.css" />
+    <Content Include="assets\css\bootstrap-rtl.min.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\dataTables.bootstrap.css" />
+    <Content Include="assets\css\demo.min.css" />
+    <Content Include="assets\css\ekilibrate-icons.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\skins\azure.min.css" />
+    <Content Include="assets\css\skins\black.min.css" />
+    <Content Include="assets\css\skins\blue.min.css" />
+    <Content Include="assets\css\skins\darkblue.min.css" />
+    <Content Include="assets\css\skins\darkred.min.css" />
+    <Content Include="assets\css\skins\deepblue.min.css" />
+    <Content Include="assets\css\skins\gray.min.css" />
+    <Content Include="assets\css\skins\green.min.css" />
+    <Content Include="assets\css\skins\orange.min.css" />
+    <Content Include="assets\css\skins\pink.min.css" />
+    <Content Include="assets\css\skins\purple.min.css" />
+    <Content Include="assets\css\skins\skins-mixins.min.css" />
+    <Content Include="assets\css\skins\teal.min.css" />
+    <Content Include="assets\css\typicons.min.css" />
+    <Content Include="assets\css\weather-icons.min.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\typicons.svg" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="assets\icon\aceptar.png" />
+    <Content Include="assets\icon\alimentos.png" />
+    <Content Include="assets\icon\areas.png" />
+    <Content Include="assets\icon\colaboradores-menu.png" />
+    <Content Include="assets\icon\colaboradores.png" />
+    <Content Include="assets\icon\contacto.png" />
+    <Content Include="assets\icon\contactos.png" />
+    <Content Include="assets\icon\cuestionario.png" />
+    <Content Include="assets\icon\diagnostico.png" />
+    <Content Include="assets\icon\editar-2.png" />
+    <Content Include="assets\icon\editar.png" />
+    <Content Include="assets\icon\eliminar.png" />
+    <Content Include="assets\icon\empresas.png" />
+    <Content Include="assets\icon\expediente.png" />
+    <Content Include="assets\icon\home.png" />
+    <Content Include="assets\icon\iniciar.png" />
+    <Content Include="assets\icon\notificar.png" />
+    <Content Include="assets\icon\participantes.png" />
+    <Content Include="assets\icon\pasos.png" />
+    <Content Include="assets\icon\proyectos.png" />
+    <Content Include="assets\icon\salones.png" />
+    <Content Include="assets\icon\seguimiento.png" />
+    <Content Include="assets\icon\talleres.png" />
+    <Content Include="assets\img\Admin.jpg" />
+    <Content Include="assets\img\ahorro.jpg" />
+    <Content Include="assets\img\angle-down.png" />
+    <Content Include="assets\img\app.png" />
+    <Content Include="assets\img\attach-blue.png" />
+    <Content Include="assets\img\attach-green.png" />
+    <Content Include="assets\img\attach-red.png" />
+    <Content Include="assets\img\attach-yellow.png" />
+    <Content Include="assets\img\avatars\adam-jansen.jpg" />
+    <Content Include="assets\img\avatars\bing.png" />
+    <Content Include="assets\img\avatars\claudia.jpg" />
+    <Content Include="assets\img\avatars\david.jpg" />
+    <Content Include="assets\img\avatars\divyia.jpg" />
+    <Content Include="assets\img\avatars\guillermo.jpg" />
+    <Content Include="assets\img\avatars\Javi-Jimenez.jpg" />
+    <Content Include="assets\img\avatars\John-Smith.jpg" />
+    <Content Include="assets\img\avatars\Lee-Munroe.jpg" />
+    <Content Include="assets\img\avatars\marlon.jpg" />
+    <Content Include="assets\img\avatars\Matt-Cheuvront.jpg" />
+    <Content Include="assets\img\avatars\monica.jpg" />
+    <Content Include="assets\img\avatars\Nicolai-Larson.jpg" />
+    <Content Include="assets\img\avatars\Osvaldus-Valutis.jpg" />
+    <Content Include="assets\img\avatars\Sergey-Azovskiy.jpg" />
+    <Content Include="assets\img\avatars\silvia.jpg" />
+    <Content Include="assets\img\avatars\Stephanie-Walter.jpg" />
+    <Content Include="assets\img\b1.png" />
+    <Content Include="assets\img\b2.png" />
+    <Content Include="assets\img\b3.png" />
+    <Content Include="assets\img\black\address-book.png" />
+    <Content Include="assets\img\black\alarm-clock.png" />
+    <Content Include="assets\img\black\anchor.png" />
+    <Content Include="assets\img\black\application.png" />
+    <Content Include="assets\img\black\archive.png" />
+    <Content Include="assets\img\black\arrow-down.png" />
+    <Content Include="assets\img\black\arrow-left.png" />
+    <Content Include="assets\img\black\arrow-right.png" />
+    <Content Include="assets\img\black\arrow-up.png" />
+    <Content Include="assets\img\black\auction.png" />
+    <Content Include="assets\img\black\balloon.png" />
+    <Content Include="assets\img\black\bank.png" />
+    <Content Include="assets\img\black\battery.png" />
+    <Content Include="assets\img\black\bell.png" />
+    <Content Include="assets\img\black\bin.png" />
+    <Content Include="assets\img\black\book-bookmark.png" />
+    <Content Include="assets\img\black\book-open-bookmark.png" />
+    <Content Include="assets\img\black\box.png" />
+    <Content Include="assets\img\black\briefcase.png" />
+    <Content Include="assets\img\black\brush.png" />
+    <Content Include="assets\img\black\button-add.png" />
+    <Content Include="assets\img\black\button-begin.png" />
+    <Content Include="assets\img\black\button-check.png" />
+    <Content Include="assets\img\black\button-cross.png" />
+    <Content Include="assets\img\black\button-eject.png" />
+    <Content Include="assets\img\black\button-end.png" />
+    <Content Include="assets\img\black\button-ff.png" />
+    <Content Include="assets\img\black\button-pause.png" />
+    <Content Include="assets\img\black\button-play.png" />
+    <Content Include="assets\img\black\button-power.png" />
+    <Content Include="assets\img\black\button-remove.png" />
+    <Content Include="assets\img\black\button-rew.png" />
+    <Content Include="assets\img\black\button-rotate-ccw.png" />
+    <Content Include="assets\img\black\button-rotate-cw.png" />
+    <Content Include="assets\img\black\button-shuffle.png" />
+    <Content Include="assets\img\black\button-stop.png" />
+    <Content Include="assets\img\black\button-synchronize.png" />
+    <Content Include="assets\img\black\calculator.png" />
+    <Content Include="assets\img\black\calendar.png" />
+    <Content Include="assets\img\black\camcorder.png" />
+    <Content Include="assets\img\black\camera.png" />
+    <Content Include="assets\img\black\chart-area-down.png" />
+    <Content Include="assets\img\black\chart-area-up.png" />
+    <Content Include="assets\img\black\chart-bar-down.png" />
+    <Content Include="assets\img\black\chart-bar-up.png" />
+    <Content Include="assets\img\black\chart-bar.png" />
+    <Content Include="assets\img\black\chart-pie.png" />
+    <Content Include="assets\img\black\clipboard.png" />
+    <Content Include="assets\img\black\clock.png" />
+    <Content Include="assets\img\black\coffee.png" />
+    <Content Include="assets\img\black\color-palette.png" />
+    <Content Include="assets\img\black\compass.png" />
+    <Content Include="assets\img\black\computer.png" />
+    <Content Include="assets\img\black\construction.png" />
+    <Content Include="assets\img\black\credit-cards.png" />
+    <Content Include="assets\img\black\dashboard.png" />
+    <Content Include="assets\img\black\database.png" />
+    <Content Include="assets\img\black\desktop.png" />
+    <Content Include="assets\img\black\disc.png" />
+    <Content Include="assets\img\black\document-edit.png" />
+    <Content Include="assets\img\black\document-file.png" />
+    <Content Include="assets\img\black\document.png" />
+    <Content Include="assets\img\black\documents.png" />
+    <Content Include="assets\img\black\equalizer.png" />
+    <Content Include="assets\img\black\exclamation-circle-frame.png" />
+    <Content Include="assets\img\black\exclamation-circle.png" />
+    <Content Include="assets\img\black\exclamation-diamond.png" />
+    <Content Include="assets\img\black\exclamation.png" />
+    <Content Include="assets\img\black\feed-alt.png" />
+    <Content Include="assets\img\black\feed-comment.png" />
+    <Content Include="assets\img\black\feed-document.png" />
+    <Content Include="assets\img\black\feed.png" />
+    <Content Include="assets\img\black\flag.png" />
+    <Content Include="assets\img\black\floppy-disk.png" />
+    <Content Include="assets\img\black\folder.png" />
+    <Content Include="assets\img\black\game-controller.png" />
+    <Content Include="assets\img\black\gear.png" />
+    <Content Include="assets\img\black\gears.png" />
+    <Content Include="assets\img\black\gift.png" />
+    <Content Include="assets\img\black\hard-drive-download.png" />
+    <Content Include="assets\img\black\hard-drive-network.png" />
+    <Content Include="assets\img\black\hard-drive-upload.png" />
+    <Content Include="assets\img\black\hard-drive.png" />
+    <Content Include="assets\img\black\headphone.png" />
+    <Content Include="assets\img\black\heart.png" />
+    <Content Include="assets\img\black\home.png" />
+    <Content Include="assets\img\black\image.png" />
+    <Content Include="assets\img\black\inbox.png" />
+    <Content Include="assets\img\black\information-balloon.png" />
+    <Content Include="assets\img\black\information-button.png" />
+    <Content Include="assets\img\black\information-frame.png" />
+    <Content Include="assets\img\black\information.png" />
+    <Content Include="assets\img\black\ipod.png" />
+    <Content Include="assets\img\black\key.png" />
+    <Content Include="assets\img\black\keyboard.png" />
+    <Content Include="assets\img\black\laptop.png" />
+    <Content Include="assets\img\black\light-bulb.png" />
+    <Content Include="assets\img\black\link-broken.png" />
+    <Content Include="assets\img\black\link.png" />
+    <Content Include="assets\img\black\lock-unlock.png" />
+    <Content Include="assets\img\black\lock.png" />
+    <Content Include="assets\img\black\magic-wand.png" />
+    <Content Include="assets\img\black\mail-open.png" />
+    <Content Include="assets\img\black\mail.png" />
+    <Content Include="assets\img\black\medal.png" />
+    <Content Include="assets\img\black\megaphone.png" />
+    <Content Include="assets\img\black\microphone.png" />
+    <Content Include="assets\img\black\mobile.png" />
+    <Content Include="assets\img\black\monitor.png" />
+    <Content Include="assets\img\black\mouse.png" />
+    <Content Include="assets\img\black\movie-clap.png" />
+    <Content Include="assets\img\black\music.png" />
+    <Content Include="assets\img\black\navigation-down-button.png" />
+    <Content Include="assets\img\black\navigation-down-frame.png" />
+    <Content Include="assets\img\black\navigation-down.png" />
+    <Content Include="assets\img\black\navigation-left-button.png" />
+    <Content Include="assets\img\black\navigation-left-frame.png" />
+    <Content Include="assets\img\black\navigation-left.png" />
+    <Content Include="assets\img\black\navigation-right-button.png" />
+    <Content Include="assets\img\black\navigation-right-frame.png" />
+    <Content Include="assets\img\black\navigation-right.png" />
+    <Content Include="assets\img\black\navigation-up-button.png" />
+    <Content Include="assets\img\black\navigation-up-frame.png" />
+    <Content Include="assets\img\black\navigation-up.png" />
+    <Content Include="assets\img\black\oscilloscope.png" />
+    <Content Include="assets\img\black\outbox.png" />
+    <Content Include="assets\img\black\paint-bucket.png" />
+    <Content Include="assets\img\black\paint-tube.png" />
+    <Content Include="assets\img\black\paper-clip.png" />
+    <Content Include="assets\img\black\pen.png" />
+    <Content Include="assets\img\black\pencil.png" />
+    <Content Include="assets\img\black\pin.png" />
+    <Content Include="assets\img\black\pipette.png" />
+    <Content Include="assets\img\black\plug.png" />
+    <Content Include="assets\img\black\presentation.png" />
+    <Content Include="assets\img\black\printer.png" />
+    <Content Include="assets\img\black\puzzle.png" />
+    <Content Include="assets\img\black\question-balloon.png" />
+    <Content Include="assets\img\black\question-button.png" />
+    <Content Include="assets\img\black\question-frame.png" />
+    <Content Include="assets\img\black\question.png" />
+    <Content Include="assets\img\black\quill.png" />
+    <Content Include="assets\img\black\ruler-triangle.png" />
+    <Content Include="assets\img\black\ruler.png" />
+    <Content Include="assets\img\black\safe.png" />
+    <Content Include="assets\img\black\scissors.png" />
+    <Content Include="assets\img\black\search.png" />
+    <Content Include="assets\img\black\shapes.png" />
+    <Content Include="assets\img\black\shield.png" />
+    <Content Include="assets\img\black\shopping-bag.png" />
+    <Content Include="assets\img\black\shopping-basket.png" />
+    <Content Include="assets\img\black\shopping-cart.png" />
+    <Content Include="assets\img\black\site-map.png" />
+    <Content Include="assets\img\black\software.png" />
+    <Content Include="assets\img\black\speaker-mute.png" />
+    <Content Include="assets\img\black\speaker.png" />
+    <Content Include="assets\img\black\stamp.png" />
+    <Content Include="assets\img\black\star.png" />
+    <Content Include="assets\img\black\tag.png" />
+    <Content Include="assets\img\black\television.png" />
+    <Content Include="assets\img\black\toggle-collapse-alt.png" />
+    <Content Include="assets\img\black\toggle-collapse.png" />
+    <Content Include="assets\img\black\toggle-down-alt.png" />
+    <Content Include="assets\img\black\toggle-down.png" />
+    <Content Include="assets\img\black\toggle-expand-alt.png" />
+    <Content Include="assets\img\black\toggle-expand.png" />
+    <Content Include="assets\img\black\toggle-right-alt.png" />
+    <Content Include="assets\img\black\toggle-right.png" />
+    <Content Include="assets\img\black\traffic-cone.png" />
+    <Content Include="assets\img\black\traffic-lights.png" />
+    <Content Include="assets\img\black\umbrella.png" />
+    <Content Include="assets\img\black\unlock.png" />
+    <Content Include="assets\img\black\usb-stick.png" />
+    <Content Include="assets\img\black\user-card.png" />
+    <Content Include="assets\img\black\user.png" />
+    <Content Include="assets\img\black\users.png" />
+    <Content Include="assets\img\black\video-music.png" />
+    <Content Include="assets\img\black\video.png" />
+    <Content Include="assets\img\black\wall.png" />
+    <Content Include="assets\img\black\wallet.png" />
+    <Content Include="assets\img\black\weather-cloud.png" />
+    <Content Include="assets\img\black\weather-clouds.png" />
+    <Content Include="assets\img\black\weather-cloudy.png" />
+    <Content Include="assets\img\black\weather-rain.png" />
+    <Content Include="assets\img\black\weather-snow.png" />
+    <Content Include="assets\img\black\weather-sun.png" />
+    <Content Include="assets\img\black\weather-thunder.png" />
+    <Content Include="assets\img\black\web-cam.png" />
+    <Content Include="assets\img\black\web.png" />
+    <Content Include="assets\img\black\wireless-router.png" />
+    <Content Include="assets\img\black\wrench.png" />
+    <Content Include="assets\img\black\zoom-in.png" />
+    <Content Include="assets\img\black\zoom-out.png" />
+    <Content Include="assets\img\bajar-peso.jpg" />
+    <Content Include="assets\img\BotonCrear.png" />
+    <Content Include="assets\img\cintillo.png" />
+    <Content Include="assets\img\Cliente.jpg" />
+    <Content Include="assets\img\ekilibrate.png" />
+    <Content Include="assets\img\encabezado_correo.jpg" />
+    <Content Include="assets\img\encabezado_rayobac.jpg" />
+    <Content Include="assets\img\essential.png" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\final-wide2.jpg" />
+    <Content Include="assets\img\fondo-1.png" />
+    <Content Include="assets\img\foto1.jpg" />
+    <Content Include="assets\img\home-2.jpg" />
+    <Content Include="assets\img\home-2.png" />
+    <Content Include="assets\img\home-cliente.jpg" />
+    <Content Include="assets\img\home-nutricionista.jpg" />
+    <Content Include="assets\img\home-participante.jpg" />
+    <Content Include="assets\img\home-participante2.jpg" />
+    <Content Include="assets\img\home-wide1.jpg" />
+    <Content Include="assets\img\home-wide2.jpg" />
+    <Content Include="assets\img\icono_diagnostico.png" />
+    <Content Include="assets\img\icono_expediente.png" />
+    <Content Include="assets\img\icons\1 Circle C-32%281%29.png" />
+    <Content Include="assets\img\icons\1 Circle C-32%282%29.png" />
+    <Content Include="assets\img\icons\2 Circle C-32%281%29.png" />
+    <Content Include="assets\img\icons\2 Circle C-32%282%29.png" />
+    <Content Include="assets\img\icons\3 Circle C-32%281%29.png" />
+    <Content Include="assets\img\icons\3 Circle C-32%282%29.png" />
+    <Content Include="assets\img\icons\4 Circle C-32%281%29.png" />
+    <Content Include="assets\img\icons\4 Circle C-32.png" />
+    <Content Include="assets\img\icons\5 Circle C-32%281%29.png" />
+    <Content Include="assets\img\icons\5 Circle C-32.png" />
+    <Content Include="assets\img\icons\Accept Database-100.png" />
+    <Content Include="assets\img\icons\Add Database-100.png" />
+    <Content Include="assets\img\icons\Add File-24.png" />
+    <Content Include="assets\img\icons\Add Row-100.png" />
+    <Content Include="assets\img\icons\Add Row-32.png" />
+    <Content Include="assets\img\icons\Apple-100.png" />
+    <Content Include="assets\img\icons\Apple-32.png" />
+    <Content Include="assets\img\icons\Area Chart-100.png" />
+    <Content Include="assets\img\icons\Arrow-50.png" />
+    <Content Include="assets\img\icons\Audience-32.png" />
+    <Content Include="assets\img\icons\Babys Room-32.png" />
+    <Content Include="assets\img\icons\Beer-100.png" />
+    <Content Include="assets\img\icons\Bento-100.png" />
+    <Content Include="assets\img\icons\Body Scan-50.png" />
+    <Content Include="assets\img\icons\Bottle Of Water-100.png" />
+    <Content Include="assets\img\icons\Bread-100.png" />
+    <Content Include="assets\img\icons\Business Contact-32.png" />
+    <Content Include="assets\img\icons\Business-32.png" />
+    <Content Include="assets\img\icons\Cafe-100.png" />
+    <Content Include="assets\img\icons\Calendar-32.png" />
+    <Content Include="assets\img\icons\Caloric Energy-100.png" />
+    <Content Include="assets\img\icons\Carbohydrates-100.png" />
+    <Content Include="assets\img\icons\Categorize-32.png" />
+    <Content Include="assets\img\icons\Check-32.png" />
+    <Content Include="assets\img\icons\Checked-32.png" />
+    <Content Include="assets\img\icons\Cheese-100.png" />
+    <Content Include="assets\img\icons\Chicken-32.png" />
+    <Content Include="assets\img\icons\Class-32.png" />
+    <Content Include="assets\img\icons\Classroom-100.png" />
+    <Content Include="assets\img\icons\Conference-32.png" />
+    <Content Include="assets\img\icons\Contacts-32.png" />
+    <Content Include="assets\img\icons\Cooker-100.png" />
+    <Content Include="assets\img\icons\Corn-100.png" />
+    <Content Include="assets\img\icons\Courses-100.png" />
+    <Content Include="assets\img\icons\Courses-32.png" />
+    <Content Include="assets\img\icons\Cream Tube-32.png" />
+    <Content Include="assets\img\icons\Create New-24.png" />
+    <Content Include="assets\img\icons\Cup-100.png" />
+    <Content Include="assets\img\icons\Cupcake-100.png" />
+    <Content Include="assets\img\icons\Delete Row-32.png" />
+    <Content Include="assets\img\icons\Delete-24.png" />
+    <Content Include="assets\img\icons\Delete-32.png" />
+    <Content Include="assets\img\icons\Diabetes-50.png" />
+    <Content Include="assets\img\icons\Door Filled-32.png" />
+    <Content Include="assets\img\icons\Door-32 %281%29.png" />
+    <Content Include="assets\img\icons\Door-32.png" />
+    <Content Include="assets\img\icons\Dossier Folder-32.png" />
+    <Content Include="assets\img\icons\Doughnut-100.png" />
+    <Content Include="assets\img\icons\Edit File-32.png" />
+    <Content Include="assets\img\icons\Edit Property-24.png" />
+    <Content Include="assets\img\icons\Edit Row-32.png" />
+    <Content Include="assets\img\icons\Edit-32.png" />
+    <Content Include="assets\img\icons\Eggs Filled-32.png" />
+    <Content Include="assets\img\icons\Eggs-32.png" />
+    <Content Include="assets\img\icons\Enter Key-32.png" />
+    <Content Include="assets\img\icons\Exit-32.png" />
+    <Content Include="assets\img\icons\Fiber-100.png" />
+    <Content Include="assets\img\icons\Finish Flag Filled-32.png" />
+    <Content Include="assets\img\icons\Fish Food-100.png" />
+    <Content Include="assets\img\icons\Fork-100.png" />
+    <Content Include="assets\img\icons\French Fries-100.png" />
+    <Content Include="assets\img\icons\Gallery-32.png" />
+    <Content Include="assets\img\icons\gris\Add Row-32.png" />
+    <Content Include="assets\img\icons\gris\Briefcase-26.png" />
+    <Content Include="assets\img\icons\gris\Briefcase-32.png" />
+    <Content Include="assets\img\icons\gris\Checked Checkbox-26.png" />
+    <Content Include="assets\img\icons\gris\Checked-26.png" />
+    <Content Include="assets\img\icons\gris\Checked-32.png" />
+    <Content Include="assets\img\icons\gris\Conference-25.png" />
+    <Content Include="assets\img\icons\gris\Conference-32.png" />
+    <Content Include="assets\img\icons\gris\Delete Row-32.png" />
+    <Content Include="assets\img\icons\gris\Dossier-26.png" />
+    <Content Include="assets\img\icons\gris\Edit Row-32.png" />
+    <Content Include="assets\img\icons\gris\Folder-32.png" />
+    <Content Include="assets\img\icons\gris\Home-26 %281%29.png" />
+    <Content Include="assets\img\icons\gris\Home-26.png" />
+    <Content Include="assets\img\icons\gris\Home-32.png" />
+    <Content Include="assets\img\icons\gris\Organization Filled-25.png" />
+    <Content Include="assets\img\icons\gris\Organization-25.png" />
+    <Content Include="assets\img\icons\gris\Organization-32.png" />
+    <Content Include="assets\img\icons\gris\Ratings-26.png" />
+    <Content Include="assets\img\icons\gris\Ratings-32.png" />
+    <Content Include="assets\img\icons\gris\Room-26.png" />
+    <Content Include="assets\img\icons\gris\Room-32.png" />
+    <Content Include="assets\img\icons\Groups-32.png" />
+    <Content Include="assets\img\icons\Groups-50.png" />
+    <Content Include="assets\img\icons\Hamburger-100.png" />
+    <Content Include="assets\img\icons\Happy-32.png" />
+    <Content Include="assets\img\icons\HDD-100.png" />
+    <Content Include="assets\img\icons\Heart Monitor-32.png" />
+    <Content Include="assets\img\icons\Heart Monitor-50.png" />
+    <Content Include="assets\img\icons\Home-32.png" />
+    <Content Include="assets\img\icons\Hot Dog-100.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\11-1-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\11-2-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\11-3-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\11-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\12-AFam.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\12-AFam1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\12-AFam2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\13-Alco.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\13-Alco1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\13-Alco2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\13-Alco3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\14-Afisica.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\14-AFisica1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\14-Afisica2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\14-Afisica3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\15-diabetes.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\15-diabetes1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\15-diabetes2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\16-hta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\16-hta1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\16-hta2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\16-hta3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\17-tri.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\17-tri1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\17-tri2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\17-tri3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\17-tri4.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\18-prote.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\18-prote1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\18-prote2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\18-prote3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\19-grasa.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\19-grasa1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\19-grasa2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\19-grasa3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\20-azucar.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\20-azucar1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\20-azucar2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\20-azucar3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\21-fat.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\21-fat1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\21-fat2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\21-fat3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\22-aazu.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\22-aazu1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\22-aazu2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\22-aazu3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\23-asal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\23-asal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\23-asal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\23-asal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\24-afib.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\24-afib1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\24-afib2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\24-afib3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\25-agua.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\25-agua1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\25-agua2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\25-agua3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\26-sal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\26-sal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\26-sal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\26-sal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\27-cereal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\27-cereal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\27-cereal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png2\27-cereal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\10Mail.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\11Whats.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\12Face.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\13Tel.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\14Cel.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\15sms.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\16Estrella.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\17Nutr.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\18Ejercicio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\19Stress.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\1Desayuno.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\20pnl.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\21comunica.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\22Tiempo.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\23Finanzas.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\24Lider.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\2Refaam.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\3almuer.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\4Refapm.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\5Cena.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\6Colación.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\7Megusta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\8Nomegusta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\9MehaceDaño.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\1-Edad.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\10-1-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\10-2-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\10-3-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\10-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\16Estrella.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\17-tri.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\17-tri1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\17-tri2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\17-tri3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\17-tri4.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\2-1-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\2-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\3-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\4-EFisio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\5-EFisio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\6-PesoR.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\7-PesoD.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\8-1-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\8-2-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\8-3-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\8-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\9-1-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\9-2-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\9-3-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\9-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\g1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\g2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\g3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\g4.png" />
+    <Content Include="assets\img\icons\IconosExpediente\Png\Red.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._11-1-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._11-2-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._11-3-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._11-Taba.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._12-AFam.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._12-AFam1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._12-AFam2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._13-Alco.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._13-Alco1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._13-Alco2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._13-Alco3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._14-Afisica.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._14-AFisica1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._14-Afisica2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._14-Afisica3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._15-diabetes.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._15-diabetes1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._15-diabetes2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._16-hta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._16-hta1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._16-hta2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._16-hta3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._17-tri.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._17-tri1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._17-tri2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._17-tri3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._17-tri4.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._18-prote.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._18-prote1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._18-prote2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._18-prote3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._19-grasa.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._19-grasa1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._19-grasa2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._19-grasa3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._20-azucar.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._20-azucar1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._20-azucar2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._20-azucar3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._21-fat.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._21-fat1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._21-fat2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._21-fat3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._22-aazu.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._22-aazu1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._22-aazu2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._22-aazu3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._23-asal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._23-asal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._23-asal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._23-asal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._24-afib.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._24-afib1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._24-afib2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._24-afib3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._25-agua.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._25-agua1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._25-agua2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._25-agua3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._26-sal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._26-sal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._26-sal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._26-sal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._27-cereal.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._27-cereal1.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._27-cereal2.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png2\._27-cereal3.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._10Mail.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._11Whats.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._12Face.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._13Tel.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._14Cel.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._15sms.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._16Estrella.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._17Nutr.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._18Ejercicio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._19Stress.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._1Desayuno.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._20pnl.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._21comunica.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._22Tiempo.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._23Finanzas.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._24Lider.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._2Refaam.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._3almuer.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._4Refapm.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._5Cena.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._6Colación.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._7Megusta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._8Nomegusta.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._9MehaceDaño.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._1-Edad.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._10-1-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._10-2-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._10-3-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._10-Coles.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._2-1-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._2-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._3-Género.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._4-EFisio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._5-EFisio.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._6-PesoR.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._7-PesoD.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._8-1-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._8-2-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._8-3-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._8-PesoTalla.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._9-1-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._9-2-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._9-3-Abd.png" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png\._9-Abd.png" />
+    <Content Include="assets\img\icons\Ingredients List-100.png" />
+    <Content Include="assets\img\icons\Ingredients-100.png" />
+    <Content Include="assets\img\icons\Inspection-32.png" />
+    <Content Include="assets\img\icons\Ladle-100.png" />
+    <Content Include="assets\img\icons\Length-100%281%29.png" />
+    <Content Include="assets\img\icons\Length-100.png" />
+    <Content Include="assets\img\icons\Length-32.png" />
+    <Content Include="assets\img\icons\Literature-100.png" />
+    <Content Include="assets\img\icons\Low Salt-100.png" />
+    <Content Include="assets\img\icons\Manager-50.png" />
+    <Content Include="assets\img\icons\Meal-100.png" />
+    <Content Include="assets\img\icons\Meal-32.png" />
+    <Content Include="assets\img\icons\Medical Doctor-100.png" />
+    <Content Include="assets\img\icons\Medical Doctor-50.png" />
+    <Content Include="assets\img\icons\Medical Thermometer-100.png" />
+    <Content Include="assets\img\icons\Mental State-32.png" />
+    <Content Include="assets\img\icons\Message-32.png" />
+    <Content Include="assets\img\icons\Milk Bottle-100.png" />
+    <Content Include="assets\img\icons\Mortar And Pestle-100.png" />
+    <Content Include="assets\img\icons\MS Excel-32.png" />
+    <Content Include="assets\img\icons\No Gluten-100.png" />
+    <Content Include="assets\img\icons\Noodles-100.png" />
+    <Content Include="assets\img\icons\Organization-32.png" />
+    <Content Include="assets\img\icons\Percentage-100.png" />
+    <Content Include="assets\img\icons\Pill-100.png" />
+    <Content Include="assets\img\icons\Pizza-100.png" />
+    <Content Include="assets\img\icons\Plus-24.png" />
+    <Content Include="assets\img\icons\Plus-32.png" />
+    <Content Include="assets\img\icons\Podium With Audience-32.png" />
+    <Content Include="assets\img\icons\Portrait Mode-50.png" />
+    <Content Include="assets\img\icons\Pregnant Filled-32.png" />
+    <Content Include="assets\img\icons\Protein-100.png" />
+    <Content Include="assets\img\icons\Ratings-32.png" />
+    <Content Include="assets\img\icons\Reading-32.png" />
+    <Content Include="assets\img\icons\Restaurant2-100.png" />
+    <Content Include="assets\img\icons\Room-32.png" />
+    <Content Include="assets\img\icons\RSS-32.png" />
+    <Content Include="assets\img\icons\Sack Of Flour-100.png" />
+    <Content Include="assets\img\icons\Salt Shaker-100.png" />
+    <Content Include="assets\img\icons\Save-32%281%29.png" />
+    <Content Include="assets\img\icons\Save-32.png" />
+    <Content Include="assets\img\icons\Scale-100.png" />
+    <Content Include="assets\img\icons\Scales-32.png" />
+    <Content Include="assets\img\icons\Send File-32.png" />
+    <Content Include="assets\img\icons\Shoes-32.png" />
+    <Content Include="assets\img\icons\Spaghetti-100.png" />
+    <Content Include="assets\img\icons\Spoon Of Sugar-100.png" />
+    <Content Include="assets\img\icons\Stack of Photos-32.png" />
+    <Content Include="assets\img\icons\Star Filled-100.png" />
+    <Content Include="assets\img\icons\Star Filled-32.png" />
+    <Content Include="assets\img\icons\Start Filled-32.png" />
+    <Content Include="assets\img\icons\Steak-100.png" />
+    <Content Include="assets\img\icons\Stethoscope-100.png" />
+    <Content Include="assets\img\icons\Sugar-100.png" />
+    <Content Include="assets\img\icons\Sweetener-100.png" />
+    <Content Include="assets\img\icons\Syringe-100.png" />
+    <Content Include="assets\img\icons\Talk-32.png" />
+    <Content Include="assets\img\icons\Tape Measure-100.png" />
+    <Content Include="assets\img\icons\Test Tube-100.png" />
+    <Content Include="assets\img\icons\Time Span-32.png" />
+    <Content Include="assets\img\icons\Time-100.png" />
+    <Content Include="assets\img\icons\Timeline-32.png" />
+    <Content Include="assets\img\icons\Tin Can-100.png" />
+    <Content Include="assets\img\icons\Todo List-32.png" />
+    <Content Include="assets\img\icons\Under Pressure-32.png" />
+    <Content Include="assets\img\icons\USB On-100.png" />
+    <Content Include="assets\img\icons\User Folder-32.png" />
+    <Content Include="assets\img\icons\User Group-32.png" />
+    <Content Include="assets\img\icons\User Menu-32.png" />
+    <Content Include="assets\img\icons\Vegan Food-100.png" />
+    <Content Include="assets\img\icons\Vegan Symbol-100.png" />
+    <Content Include="assets\img\icons\Virus-100.png" />
+    <Content Include="assets\img\icons\Volume-100%281%29.png" />
+    <Content Include="assets\img\icons\Volume-100.png" />
+    <Content Include="assets\img\icons\Webcam-100.png" />
+    <Content Include="assets\img\icons\Weight-100%281%29.png" />
+    <Content Include="assets\img\icons\Weight-100.png" />
+    <Content Include="assets\img\icons\Weight-32.png" />
+    <Content Include="assets\img\icons\Wikipedia-32.png" />
+    <Content Include="assets\img\inteligencia_emocional.jpg" />
+    <Content Include="assets\img\jquery.minicolors.png" />
+    <Content Include="assets\img\loading.gif" />
+    <Content Include="assets\img\logo-inverted.png" />
+    <Content Include="assets\img\logo-rtl.png" />
+    <Content Include="assets\img\logo-solo.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\LogoCyanBaja3.jpg" />
+    <Content Include="assets\img\LogoCyanBaja3.png" />
+    <Content Include="assets\img\logoprincipal.png" />
+    <Content Include="assets\img\logo_login.png" />
+    <Content Include="assets\img\Nutri.jpg" />
+    <Content Include="assets\img\play-button.png" />
+    <Content Include="assets\img\recordatorio.jpg" />
+    <Content Include="assets\img\recordatorio2.jpg" />
+    <Content Include="assets\img\recordatorio3.jpg" />
+    <Content Include="assets\img\SoloLogo-peq.png" />
+    <Content Include="assets\img\sort_asc.png" />
+    <Content Include="assets\img\sort_asc_disabled.png" />
+    <Content Include="assets\img\sort_both.png" />
+    <Content Include="assets\img\sort_desc.png" />
+    <Content Include="assets\img\sort_desc_disabled.png" />
+    <Content Include="assets\img\temp1.png" />
+    <Content Include="assets\img\transform.png" />
+    <Content Include="assets\img\tree-icons.png" />
+    <Content Include="assets\img\xoom2.mp4" />
+    <Content Include="assets\img\xoom_footer.jpg" />
+    <Content Include="assets\js\beyond.js" />
+    <Content Include="assets\js\beyond.min.js" />
+    <Content Include="assets\js\bootbox\bootbox.js" />
+    <Content Include="assets\js\bootbox\bootbox.min.js" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\charts\chartjs\Chart.js" />
+    <Content Include="assets\js\charts\chartjs\Chart.min.js" />
+    <Content Include="assets\js\charts\chartjs\chartjs-init.js" />
+    <Content Include="assets\js\charts\easypiechart\easypiechart-init.js" />
+    <Content Include="assets\js\charts\easypiechart\jquery.easypiechart.js" />
+    <Content Include="assets\js\charts\easypiechart\jquery.easypiechart.min.js" />
+    <Content Include="assets\js\charts\flot\flot-init.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.axislabels.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.categories.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.categories.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.crosshair.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.fillbetween.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.orderBars.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.pie.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.pie.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.resize.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.resize.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.selection.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.selection.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.stack.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.stack.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.time.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.time.min.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.tooltip.js" />
+    <Content Include="assets\js\charts\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="assets\js\charts\morris\morris-init.js" />
+    <Content Include="assets\js\charts\morris\morris.js" />
+    <Content Include="assets\js\charts\morris\raphael-2.0.2.min.js" />
+    <Content Include="assets\js\charts\sparkline\jquery.sparkline.js" />
+    <Content Include="assets\js\charts\sparkline\sparkline-init.js" />
+    <Content Include="assets\js\colorpicker\jquery.minicolors.js" />
+    <Content Include="assets\js\colorpicker\jquery.minicolors.min.js" />
+    <Content Include="assets\js\datatable\datatables-init.js" />
+    <Content Include="assets\js\datatable\dataTables.bootstrap.js" />
+    <Content Include="assets\js\datatable\dataTables.bootstrap.min.js" />
+    <Content Include="assets\js\datatable\dataTables.tableTools.js" />
+    <Content Include="assets\js\datatable\dataTables.tableTools.min.js" />
+    <Content Include="assets\js\datatable\jquery.dataTables.js" />
+    <Content Include="assets\js\datatable\jquery.dataTables.min.js" />
+    <Content Include="assets\js\datatable\ZeroClipboard.js" />
+    <Content Include="assets\js\datetime\bootstrap-datepicker.js" />
+    <Content Include="assets\js\datetime\bootstrap-timepicker.js" />
+    <Content Include="assets\js\datetime\bootstrap-timepicker.min.js" />
+    <Content Include="assets\js\datetime\daterangepicker.js" />
+    <Content Include="assets\js\datetime\moment.js" />
+    <Content Include="assets\js\datetime\moment.min.js" />
+    <Content Include="assets\js\editors\summernote\summernote.js" />
+    <Content Include="assets\js\editors\summernote\summernote.min.js" />
+    <Content Include="assets\js\editors\wysiwyg\bootstrap-wysiwyg.js" />
+    <Content Include="assets\js\editors\wysiwyg\jquery.hotkeys.js" />
+    <Content Include="assets\js\editors\wysiwyg\prettify.js" />
+    <Content Include="assets\js\fuelux\spinbox\fuelux.spinbox.js" />
+    <Content Include="assets\js\fuelux\spinbox\fuelux.spinbox.min.js" />
+    <Content Include="assets\js\fuelux\treeview\tree-custom.js" />
+    <Content Include="assets\js\fuelux\treeview\tree-custom.min.js" />
+    <Content Include="assets\js\fuelux\treeview\treeview-init.js" />
+    <Content Include="assets\js\fuelux\wizard\wizard-custom.js" />
+    <Content Include="assets\js\fuelux\wizard\wizard-custom.min.js" />
+    <Content Include="assets\js\fullcalendar\fullcalendar.js" />
+    <Content Include="assets\js\fullcalendar\fullcalendar.min.js" />
+    <Content Include="assets\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="assets\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="Areas\Participante\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Participante\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Participante\Views\Diagnostico\Index.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\Index.cshtml" />
+    <Content Include="Areas\Cliente\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Cliente\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Cliente\Views\Proyecto\Index.cshtml" />
+    <Content Include="Areas\Administrador\Views\Salon\Index.cshtml" />
+    <Content Include="Areas\Cliente\Views\Participante\Index.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Administrador\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Alimentacion\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Comunicacion\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Cuidado\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Emocion\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Riesgo\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Salud\ActividadFisica.cshtml" />
+    <Content Include="Areas\Participante\Views\Salud\Condiciones.cshtml" />
+    <Content Include="Areas\Participante\Views\Salud\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Tiempo\Index.cshtml" />
+    <Content Include="assets\img\black\Thumbs.db" />
+    <Content Include="Areas\Administrador\Views\Colaboradores\Index.cshtml" />
+    <Content Include="Areas\Administrador\Views\Colaboradores\EditorTemplates\Edit.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\web.config" />
+    <EntityDeploy Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SitioAdministrativoUI.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SitioAdministrativoUI.edmx</DependentUpon>
+      <LastGenOutput>SitioAdministrativoUI.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.edmx.diagram">
+      <DependentUpon>SitioAdministrativoUI.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\SitioAdministrativo\Models\Data\SitioAdministrativoUI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SitioAdministrativoUI.edmx</DependentUpon>
+      <LastGenOutput>SitioAdministrativoUI.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\SitioAdministrativo\Views\AccountsManager\EditorTemplates\UserTemplate.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\AccountsManager\Users.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\AccountsManager\UserTypes.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\GeneralManager\GlobalParameters.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\GeneralManager\Owners.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\GeneralManager\Products.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\Login.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\View.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\SecurityAccessManager\EditorTemplates\ObjectoEdit.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\SecurityAccessManager\EncryptUtility.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\SecurityAccessManager\Menu.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\SecurityAccessManager\ObjectManager.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\SecurityAccessManager\Roles.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\EditorTemplates\EditTaller.cshtml" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Participante\Views\PasosDia\Index.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Index.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\Error404.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\Error500.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\AccessDenied.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\FacilitadorPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\AsistentePartial.cshtml" />
+    <Content Include="Areas\Cliente\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\AlimentacionDia\Index.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\NutricionistaPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\EnfermeraPartial.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\ComunicacionDos\Index.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\Index.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\Seguimiento.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\EstadoSaludExpediente.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Home\IndexCopy.cshtml" />
+    <Content Include="Areas\Participante\Views\Home\IndexCopy.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\Resumen.cshtml" />
+    <Content Include="assets\img\icons\IconosExpediente\Png3\.DS_Store" />
+    <Content Include="assets\img\icons\IconosExpediente\__MACOSX\Png3\._.DS_Store" />
+    <Content Include="Areas\Nutricionista\Views\Home\Citas.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Citas.cshtml" />
+    <Content Include="Areas\Api\Views\web.config" />
+    <Content Include="Areas\Api\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Api\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Diagnostico.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Alimentos.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Anamnesis.cshtml" />
+    <Content Include="Areas\Administrador\Views\Empresa\EditorTemplates\EditContacto.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\EditorTemplates\EditProyecto.cshtml" />
+    <Content Include="Areas\Cliente\Views\Proyecto\EditorTemplates\EditProyecto.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Reprogramacion\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\TestFinanzas\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\TestTemaFinanzas\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Liderazgo\Index.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\CrecimientoPersonal.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\ManejoEmociones.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\RelacionesInterpersonales.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\AnalisisCitas.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\Analisis.cshtml" />
+    <Content Include="Areas\Participante\Views\Final\Index.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\MetaPasos.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\CuadroMetas.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\TallerAreaSalud.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\TallerManejoEmociones.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\TallerCrecimientoPersonal.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\TallerRelacionesInterpersonales.cshtml" />
+    <Content Include="Areas\Administrador\Views\Empresa\EditorTemplates\EditEmpresa.cshtml" />
+    <Content Include="Areas\Administrador\Views\Empresa\EditSalones.cshtml" />
+    <Content Include="Areas\Administrador\Views\Empresa\EditContactos.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\Lock.cshtml" />
+    <Content Include="Areas\Cliente\Views\Home\Participante.cshtml" />
+    <Content Include="Areas\Cliente\Views\Home\Dummy.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\Register.cshtml" />
+    <Content Include="Areas\Cliente\Views\Home\Proyecto.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\SalonesPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\TalleresPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\ColaboradoresPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\AreasPartial.cshtml" />
+    <Content Include="Areas\Administrador\Views\Proyecto\ContactoPartial.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\RecoverPassword.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Areas\SitioAdministrativo\Views\Home\FinalizacionSession.cshtml" />
+    <Content Include="Areas\Participante\Views\Expediente\Seguimiento.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Seguimiento\Plan.cshtml" />
+    <Content Include="Areas\Nutricionista\Views\Diagnostico\FinCitas.cshtml" />
+    <None Include="assets\js\jqueryval\jquery.validate-vsdoc.js" />
+    <Content Include="assets\js\jqueryval\jquery.validate.js" />
+    <Content Include="assets\js\jqueryval\jquery.validate.min.js" />
+    <Content Include="assets\js\jqueryval\jquery.validate.unobtrusive.js" />
+    <Content Include="assets\js\jqueryval\jquery.validate.unobtrusive.min.js" />
+    <Content Include="assets\js\knob\jquery.knob.js" />
+    <Content Include="assets\js\nestable\jquery.nestable.min.js" />
+    <Content Include="assets\js\select2\select2.js" />
+    <Content Include="assets\js\select2\select2.min.js" />
+    <Content Include="assets\js\skins.js" />
+    <Content Include="assets\js\skins.min.js" />
+    <Content Include="assets\js\slider\jQRangeSlider\jQAllRangeSliders-withRuler-min.js" />
+    <Content Include="assets\js\slider\jQRangeSlider\jquery.mousewheel.min.js" />
+    <Content Include="assets\js\slider\jquery.nouislider.js" />
+    <Content Include="assets\js\slimscroll\jquery.slimscroll.js" />
+    <Content Include="assets\js\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="assets\js\tagsinput\bootstrap-tagsinput.js" />
+    <Content Include="assets\js\tagsinput\bootstrap-tagsinput.min.js" />
+    <Content Include="assets\js\textarea\jquery.autosize.js" />
+    <Content Include="assets\js\textarea\jquery.autosize.min.js" />
+    <Content Include="assets\js\toastr\toastr.js" />
+    <Content Include="assets\js\toastr\toastr.min.js" />
+    <Content Include="assets\js\validation\bootstrapValidator.js" />
+    <Content Include="assets\js\validation\bootstrapValidator.min.js" />
+    <Content Include="assets\sound\alert.mp3" />
+    <Content Include="assets\swf\copy_csv_xls.swf" />
+    <Content Include="assets\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="assets\xoom.mp4" />
+    <Content Include="bin\BeyondThemes.Bootstrap.dll" />
+    <Content Include="bin\Kendo.Mvc.dll" />
+    <Content Include="bin\T4MVCExtensions.dll" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\kendo\2015.2.624\Black\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Black\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Black\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\BlueOpal\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Default\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Fiori\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Flat\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Flat\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\HighContrast\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\images\back.png" />
+    <Content Include="Content\kendo\2015.2.624\images\kendoui.svg" />
+    <Content Include="Content\kendo\2015.2.624\images\wp8_icons.png" />
+    <Content Include="Content\kendo\2015.2.624\images\wp8_inverseicons.png" />
+    <Content Include="Content\kendo\2015.2.624\kendo.black.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.black.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.blueopal.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.blueopal.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.bootstrap.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.bootstrap.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-bootstrap.core.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-bootstrap.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-fiori.core.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-fiori.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-material.core.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-material.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common-office365.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common.core.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.common.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.black.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.blueopal.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.bootstrap.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.default.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.fiori.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.flat.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.highcontrast.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.material.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.materialblack.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.metro.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.metroblack.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.moonlight.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.office365.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.silver.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.dataviz.uniform.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.default.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.default.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.fiori.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.fiori.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.flat.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.flat.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.highcontrast.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.highcontrast.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.material.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.material.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.materialblack.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.materialblack.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.metro.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.metro.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.metroblack.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.metroblack.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.all.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.android.dark.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.android.light.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.blackberry.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.common.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.fiori.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.flat.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.ios.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.material.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.meego.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.nova.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.office365.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.mobile.wp8.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.moonlight.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.moonlight.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.office365.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.office365.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.rtl.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.rtl.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.silver.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.silver.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.uniform.min.css" />
+    <Content Include="Content\kendo\2015.2.624\kendo.uniform.mobile.min.css" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\MaterialBlack\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Material\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Material\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\MetroBlack\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Metro\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Metro\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Moonlight\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Office365\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Office365\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Silver\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Silver\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots1.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots10.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots11.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots12.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots13.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots2.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots3.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots4.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots5.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots6.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots7.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots8.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\dots9.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\glass.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\highlight.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\hsv-gradient.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\hue.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\leather1.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\leather2.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\noise.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe1.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe2.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe3.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe4.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe5.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\stripe6.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\transparency.png" />
+    <Content Include="Content\kendo\2015.2.624\textures\transtexture.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\editor.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\imagebrowser.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\indeterminate.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\loading-image.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\loading.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\loading_2x.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\markers.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\markers_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\slider-h.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\slider-v.gif" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\sprite.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\sprite_2x.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\sprite_kpi.png" />
+    <Content Include="Content\kendo\2015.2.624\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\override-bs.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Administrador\Views\web.config" />
+    <Content Include="Areas\Participante\Views\web.config" />
+    <Content Include="Areas\Cliente\Views\web.config" />
+    <Content Include="Areas\Nutricionista\Views\web.config" />
+    <Content Include="Areas\Administrador\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administrador\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administrador\Views\Empresa\Index.cshtml" />
+    <Content Include="assets\fonts\BYekan.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\typicons.eot" />
+    <Content Include="assets\fonts\typicons.ttf" />
+    <Content Include="assets\fonts\typicons.woff" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="assets\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="assets\fonts\YekanWeb-Bold.woff" />
+    <Content Include="assets\fonts\YekanWeb-Regular.woff" />
+    <Content Include="assets\js\beyond.min.js.map">
+      <DependentUpon>beyond.js</DependentUpon>
+    </Content>
+    <Content Include="assets\js\bootbox\bootbox.min.js.map" />
+    <Content Include="assets\js\charts\easypiechart\jquery.easypiechart.min.js.map" />
+    <Content Include="assets\js\charts\flot\jquery.flot.min.js.map" />
+    <Content Include="assets\js\charts\flot\jquery.flot.tooltip.min.js.map" />
+    <Content Include="assets\js\datatable\dataTables.bootstrap.min.js.map" />
+    <Content Include="assets\js\datatable\dataTables.tableTools.min.js.map">
+      <DependentUpon>dataTables.tableTools.js</DependentUpon>
+    </Content>
+    <Content Include="assets\js\datatable\jquery.dataTables.min.js.map" />
+    <Content Include="assets\js\datetime\bootstrap-timepicker.min.js.map" />
+    <Content Include="assets\js\fuelux\spinbox\fuelux.spinbox.min.js.map" />
+    <Content Include="assets\js\fuelux\treeview\tree-custom.min.js.map" />
+    <Content Include="assets\js\fuelux\wizard\wizard-custom.min.js.map" />
+    <Content Include="assets\js\fullcalendar\fullcalendar.min.js.map" />
+    <Content Include="assets\js\tagsinput\bootstrap-tagsinput.min.js.map" />
+    <Content Include="assets\js\toastr\toastr.min.js.map" />
+    <Content Include="Mvc.sitemap" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\kendo\2015.2.624\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\kendo\2015.2.624\images\kendoui.ttf" />
+    <Content Include="Content\kendo\2015.2.624\images\kendoui.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\Correo.html" />
+    <Content Include="assets\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="assets\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="assets\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Content\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Content\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Ekilibrate %283%29.pubxml" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\ErrorHandler.js" />
+    <None Include="Properties\PublishProfiles\Ekilibrate %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\EkilibrateUI.pubxml" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.globalize.js" />
+    <Content Include="Scripts\jquery.validate.globalize.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\kendo.modernizr.custom.js" />
+    <Content Include="Scripts\kendo\2015.2.624\angular.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\cultures\kendo.culture.es-GT.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\jquery.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\jszip.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.all-vsdoc.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.all.min.intellisense.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.all.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.angular.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.autocomplete.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.binder.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.button.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.calendar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.color.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.colorpicker.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.columnmenu.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.columnsorter.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.combobox.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.core.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.odata.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.signalr.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.xml.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.dataviz-vsdoc.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.barcode.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.funnel.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.polar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.core.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.diagram.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.gauge.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.map.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.dataviz.min.intellisense.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.mobile.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.qrcode.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.sparkline.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.stock.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.themes.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.treemap.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.datepicker.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.datetimepicker.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dom.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.draganddrop.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.drawing.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dropdownlist.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.editable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.editor.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.excel.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filebrowser.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filtercell.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filtermenu.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.fx.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.list.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.timeline.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.grid.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.groupable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.imagebrowser.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.list.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.listview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.maskedtextbox.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.menu.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.mobile-vsdoc.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.actionsheet.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.application.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.button.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.buttongroup.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.collapsible.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.drawer.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.listview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.loader.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.mobile.min.intellisense.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.modalview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.navbar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.pane.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.popover.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.scroller.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.scrollview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.shim.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.splitview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.switch.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.tabstrip.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.view.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.multiselect.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.notification.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.numerictextbox.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.ooxml.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pager.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.panelbar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pdf.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivot.configurator.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivot.fieldmenu.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivotgrid.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.popup.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.progressbar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.reorderable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.resizable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.responsivepanel.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.router.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.agendaview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.dayview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.monthview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.recurrence.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.timelineview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.view.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.selectable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.slider.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.sortable.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.splitter.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.tabstrip.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.timepicker.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.timezones.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.toolbar.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.tooltip.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.touch.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treelist.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treeview.draganddrop.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treeview.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.upload.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.userevents.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.validator.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.view.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.virtuallist.min.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.web-vsdoc.js" />
+    <None Include="Scripts\kendo\2015.2.624\kendo.web.min.intellisense.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.web.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.window.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\messages\kendo.messages.es-GT.min.js" />
+    <Content Include="Scripts\kendo\2015.2.624\pako_deflate.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Scripts\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Scripts\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Scripts\_references.js" />
+    <Content Include="Uploads\Empresas\1.jpg" />
+    <Content Include="Uploads\Empresas\1.png" />
+    <Content Include="Uploads\Empresas\10.png" />
+    <Content Include="Uploads\Empresas\14.jpg" />
+    <Content Include="Uploads\Empresas\14.png" />
+    <Content Include="Uploads\Empresas\17.jpg" />
+    <Content Include="Uploads\Empresas\17.png" />
+    <Content Include="Uploads\Empresas\2.png" />
+    <Content Include="Uploads\Empresas\3.png" />
+    <Content Include="Uploads\Empresas\4.png" />
+    <Content Include="Uploads\Empresas\5.png" />
+    <Content Include="Uploads\Empresas\8.png" />
+    <Content Include="Uploads\Participantes\51.jpg" />
+    <Content Include="Uploads\Participantes\53.jpg" />
+    <Content Include="Uploads\Participantes\75.jpg" />
+    <Content Include="Uploads\Participantes\default-user-image.png" />
+    <Content Include="Uploads\Proyectos\1.png" />
+    <Content Include="assets\img\xoom.mp4" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Alerts.cshtml" />
+    <Content Include="Views\Home\Arabic.cshtml" />
+    <Content Include="Views\Home\Blank.cshtml" />
+    <Content Include="Views\Home\Buttons.cshtml" />
+    <Content Include="Views\Home\Calendar.cshtml" />
+    <Content Include="Views\Home\ChartJS.cshtml" />
+    <Content Include="Views\Home\Compose.cshtml" />
+    <Content Include="Views\Home\Databoxes.cshtml" />
+    <Content Include="Views\Home\DataPickers.cshtml" />
+    <Content Include="Views\Home\DataTables.cshtml" />
+    <Content Include="Views\Home\EasyPieCharts.cshtml" />
+    <Content Include="Views\Home\Elements.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Home\Error500.cshtml" />
+    <Content Include="Views\Home\FlotCharts.cshtml" />
+    <Content Include="Views\Home\FontAwesome.cshtml" />
+    <Content Include="Views\Home\FormEditors.cshtml" />
+    <Content Include="Views\Home\FormInputs.cshtml" />
+    <Content Include="Views\Home\FormLayouts.cshtml" />
+    <Content Include="Views\Home\FormValidation.cshtml" />
+    <Content Include="Views\Home\GlyphIcons.cshtml" />
+    <Content Include="Views\Home\Grid.cshtml" />
+    <Content Include="Views\Home\Inbox.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Invoice.cshtml" />
+    <Content Include="Views\Home\Modals.cshtml" />
+    <Content Include="Views\Home\MorrisCharts.cshtml" />
+    <Content Include="Views\Home\NestableList.cshtml" />
+    <Content Include="Views\Home\Persian.cshtml" />
+    <Content Include="Views\Home\PricingTables.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\SimpleTables.cshtml" />
+    <Content Include="Views\Home\SparklineCharts.cshtml" />
+    <Content Include="Views\Home\Tabs.cshtml" />
+    <Content Include="Views\Home\Timeline.cshtml" />
+    <Content Include="Views\Home\TreeView.cshtml" />
+    <Content Include="Views\Home\Typicons.cshtml" />
+    <Content Include="Views\Home\Typography.cshtml" />
+    <Content Include="Views\Home\ViewMessage.cshtml" />
+    <Content Include="Views\Home\WeatherIcons.cshtml" />
+    <Content Include="Views\Home\Widgets.cshtml" />
+    <Content Include="Views\Home\Wizards.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\_Default.cshtml" />
+    <Content Include="Views\Shared\_Empty.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\kendo\2015.2.624\jquery.min.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.all.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.angular.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.aspnetmvc.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.autocomplete.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.binder.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.button.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.calendar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.color.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.colorpicker.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.columnmenu.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.columnsorter.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.combobox.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.core.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.odata.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.signalr.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.data.xml.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.barcode.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.funnel.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.chart.polar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.core.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.diagram.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.gauge.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.map.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.mobile.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.qrcode.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.sparkline.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.stock.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.themes.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dataviz.treemap.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.datepicker.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.datetimepicker.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dom.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.draganddrop.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.drawing.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.dropdownlist.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.editable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.editor.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.excel.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filebrowser.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filtercell.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.filtermenu.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.fx.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.list.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.gantt.timeline.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.grid.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.groupable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.imagebrowser.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.list.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.listview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.maskedtextbox.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.menu.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.actionsheet.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.application.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.button.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.buttongroup.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.collapsible.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.drawer.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.listview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.loader.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.modalview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.navbar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.pane.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.popover.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.scroller.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.scrollview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.shim.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.splitview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.switch.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.tabstrip.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.mobile.view.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.multiselect.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.notification.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.numerictextbox.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.ooxml.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pager.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.panelbar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pdf.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivot.configurator.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivot.fieldmenu.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.pivotgrid.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.popup.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.progressbar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.reorderable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.resizable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.responsivepanel.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.router.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.agendaview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.dayview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.monthview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.recurrence.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.timelineview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.scheduler.view.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.selectable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.slider.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.sortable.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.splitter.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.tabstrip.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.timepicker.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.toolbar.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.tooltip.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.touch.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treelist.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treeview.draganddrop.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.treeview.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.upload.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.userevents.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.validator.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.view.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.virtuallist.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.web.min.js.map" />
+    <Content Include="Scripts\kendo\2015.2.624\kendo.window.min.js.map" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReadOnly.cshtml" />
+    <Content Include="Views\Home\IndexCopy.cshtml" />
+    <Content Include="Uploads\Participantes\Participantes.xlsx" />
+    <Content Include="Views\Shared\_DefaultSinMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administrador\Models\" />
+    <Folder Include="Areas\Administrador\Views\Contacto\" />
+    <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\Notification\" />
+    <Folder Include="Areas\Api\Views\Seguridad\" />
+    <Folder Include="Areas\Cliente\Models\" />
+    <Folder Include="Areas\Nutricionista\Models\" />
+    <Folder Include="Areas\Participante\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarcoSoftUtilidades\BarcoSoftUtilidades.csproj">
+      <Project>{c1112225-3ff3-4ce8-92af-bb346d5ad945}</Project>
+      <Name>BarcoSoftUtilidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{2a1404a2-de56-446c-bfd0-13094c85a055}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EkilibrateModel\EkilibrateModel.csproj">
+      <Project>{c7f40bf3-098d-41f8-b1c6-a4da93134be6}</Project>
+      <Name>EkilibrateModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>15319</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/EkilibrateUI</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

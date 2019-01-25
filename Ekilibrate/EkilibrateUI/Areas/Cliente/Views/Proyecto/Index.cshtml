@@ -1,0 +1,524 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Proyecto";
+    ViewBag.Description = "Administración de proyectos Ekilibrate";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+<h2><img src='~/assets/icon/proyectos.png' height="32" /> Proyectos</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-themefourthcolor">
+                <span class="widget-caption">Listado de Proyectos</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsProyecto>()
+
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Width(35);
+                        columns.ForeignKey(p => p.EmpresaId, (System.Collections.IEnumerable)ViewBag.Empresas, "Value", "Text").Width(175);
+                        columns.Bound(p => p.Estado).Width(175);
+                        columns.Bound(p => p.FechaInicio).Format("{0:dd/MM/yyyy}").Width(125);
+                        columns.Bound(p => p.FechaFin).Format("{0:dd/MM/yyyy}").Width(125);
+                        columns.Command(command =>
+                        {
+                            command.Edit().Text(" ");
+                            command.Custom("Salones").Text(" ").Click("MostrarSalones");
+                            command.Custom("Contacto").Text("  ").Click("MostrarContacto");
+                            command.Custom("Participantes").Text(" ").Click("onClickParticipante");
+                            command.Custom("Finalizar").Text(" ").Click("Finalizar");
+                        }).Width(300);
+                    })
+                        .ToolBar(toolbar =>
+                        {
+                            //toolbar.Create().Text(" ");
+                            //toolbar.Custom().Name("Arrancar").Text(" ").Action("Arrancar", "Proyecto");
+                        })
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditProyecto"))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .Events(e => e.Save("GuardarColor"))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+                            model.Field(p => p.Estado).DefaultValue("EN REGISTRO");
+                        })
+                        .Create(update => update.Action("Create", "Proyecto"))
+                        .Read(read => read.Action("Read", "Proyecto"))
+                        .Update(update => update.Action("Update", "Proyecto"))
+                        .Destroy(update => update.Action("Delete", "Proyecto"))
+                    )
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+            .Filter(".k-grid-Salones")
+        .Position(TooltipPosition.Top)
+            .Content("Salones")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Contacto")
+        .Position(TooltipPosition.Top)
+            .Content("Contacto")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Participantes")
+        .Position(TooltipPosition.Top)
+                .Content("Participantes")
+        .Width(120)
+)
+
+@(Html.Kendo().Tooltip()
+            .For("#grid")
+                .Filter(".k-grid-Finalizar")
+        .Position(TooltipPosition.Top)
+                .Content("Finalizar Configuración del Proyecto")
+        .Width(120)
+)
+
+<div id="Salones">
+    @{Html.Kendo().Window()
+    .Name("WindowSalones")
+    .Title("Salones")
+    .Modal(true)
+    .Visible(false)
+    .Width(870)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(50))
+
+    .Content(
+    @<text>
+
+        @*<h3>Salones del proyecto</h3>*@
+
+
+        @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsProyectoSalon>()
+
+            .Name("gridSalonesProyecto")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.SalonId).Title("").Width(50);
+                columns.Bound(p => p.Nombre).Width(100);
+                columns.Bound(p => p.Seleccionado).ClientTemplate("<input onclick='OnCheckedSalon(#=SalonId #, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' #= Seleccionado ? checked='checked' :'' # />").Width(200);
+
+            })
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:300px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.SalonId);
+
+                })
+                .Read(read => read.Action("ProyectoSalon_Read", "Proyecto").Data("ProyectoSeleccionado"))
+
+            )
+        )
+
+    </text>
+)
+    .Render();
+    }
+
+
+
+
+</div>
+
+<div id="Contactos">
+    @{Html.Kendo().Window()
+    .Name("WindowContacto")
+    .Title("Contactos")
+    .Modal(true)
+    .Visible(false)
+    .Width(870)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(50))
+
+    .Content(
+    @<text>
+
+        @*<h3>Contactos del proyecto</h3>*@
+
+
+        @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsProyectoContacto>()
+
+            .Name("gridContactosProyecto")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ContactoId).Title(" ").Width(50).Visible(false);
+                columns.Bound(p => p.Nombre).Width(100);
+                columns.Bound(p => p.Seleccionado).ClientTemplate("<input onclick='OnCheckedContacto(#=ContactoId #, this);' style='opacity: 1 !important; left:0 !important; position:inherit !important;' type='checkbox' #= Seleccionado ? checked='checked' :'' # />").Width(200);
+
+            })
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:300px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.ContactoId);
+
+                })
+                        .Read(read => read.Action("ProyectoContacto_Read", "Proyecto").Data("ProyectoSeleccionado"))
+
+            )
+        )
+
+    </text>
+)
+    .Render();
+    }
+
+
+
+
+</div>
+
+<div id="Participantes">
+    @{Html.Kendo().Window()
+    .Name("window")
+    .Title("Participantes")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+    .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(500)
+    .Position(x => x.Top(50))
+    .Content(
+    @<text>
+        <h4> <label id="EmpresaNombre"></label> </h4>
+        <label id="ProyectoId"></label>
+        <label id="RoleDescriptionU">Para cargar el listado de participantes por medio de un archivo de Excel (.xls, .xlsx) presione el botón seleccionar y seleccione el archivo</label>
+        <label>Descargar Excel de prueba</label><a href="~/Uploads/Participantes/Participantes.xlsx" title='Descargar Excel Ejemplo'><img src='../assets/img/icons/MS Excel-32.png' /></a>
+        
+
+        @(Html.Kendo().Upload()
+            .Name("files1")
+            .Multiple(false)
+            .Messages(x => x.Select("Cargar"))
+            .Events(x => x.Upload("onImageUpload").Complete("onComplete"))
+            .Async(a => a
+                .Save("Submit","Proyecto")
+                .AutoUpload(true)
+            )
+        )
+
+        <script type="text/javascript">
+            function onComplete() {
+                alert("Archivo cargado exitosamente.");
+                $("#gridParticipantes").data("kendoGrid").dataSource.read();
+            }
+        </script>
+
+        <div id="divUnAssignedUsers" class="grid-mantenimientos-content-center">
+            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Participante.clsParticipante>()
+                .Name("gridParticipantes")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.Id).Width(25).Title("");
+                    columns.Bound(p => p.Nombre).Width(175);
+                    columns.Bound(p => p.Apellido).Width(175);
+                    columns.Bound(p => p.Grupo).Width(175);
+                    columns.Command(command =>
+                    {
+                        //command.Edit().Text("Actualizar");
+                        command.Destroy().Text(" ");
+                    }).Width(200);
+                })
+                //.ToolBar(toolbar => toolbar.Create().Text(" "))
+                .Editable(editable => editable.Mode(GridEditMode.InCell))
+                .Filterable(f =>
+                {
+                    f.Extra(false);
+                })
+                .Pageable(p =>
+                {
+                    p.Refresh(true);
+                })
+                .Sortable()
+                .Scrollable()
+                .HtmlAttributes(new { style = "height:430px;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Events(events => events.Error("error_handler"))
+                    .PageSize(10)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.Id);
+                    })
+                    .Create(update => update.Action("Create", "Participante"))
+                    .Read(read => read.Action("Read", "Participante").Data("ParametroProyecto"))
+                    .Update(update => update.Action("Update", "Participante"))
+                    .Destroy(update => update.Action("Delete", "Participante"))
+                )
+            )
+        </div>
+    </text>
+)
+    .Render();
+    }
+</div>
+
+<script type="text/javascript">
+    var ProyectoId;
+    function ParametroProyecto() {
+        return {
+            pProyectoId: ProyectoId
+        }
+    }
+    function OnCheckedSalon(pIdSalon, e) {
+
+        if (e.checked) {
+
+            $.ajax({
+                url: 'Proyecto/AddProyectoSalon?pIdProyecto=' + IdProyecto + '&pIdSalon=' + pIdSalon,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        alert("Salon asociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'Proyecto/DeleteProyectoSalon?pIdProyecto=' + IdProyecto + '&pIdSalon=' + pIdSalon,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        alert("Salon desasociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+    }
+
+    function OnCheckedContacto(pIdContacto, e) {
+
+        if (e.checked) {
+
+            $.ajax({
+                url: 'Proyecto/AddProyectoContacto?pIdProyecto=' + IdProyecto + '&pIdContacto=' + pIdContacto,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        alert("Contacto asociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'Proyecto/DeleteProyectoContacto?pIdProyecto=' + IdProyecto + '&pIdContacto=' + pIdContacto,
+                type: 'POST',
+                data: {
+
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success) {
+                        alert("Contacto desasociado a proyecto exitosamente.");
+                    }
+                    else {
+                        alert(data.error);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+    }
+
+    var IdProyecto;
+    var IdEmpresa;
+
+    function MostrarSalones(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+        IdEmpresa = dataItem.EmpresaId;
+
+        if (IdProyecto > 0) {
+            $("#WindowSalones").data("kendoWindow").open();
+            $("#gridSalonesProyecto").data("kendoGrid").dataSource.read();
+
+            $('#WindowSalones').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#ED207B');
+            $('#WindowSalones').parent().find('.k-window-title').css('color', '#FFFFFF');
+        }
+    }
+
+    function MostrarContacto(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+        IdEmpresa = dataItem.EmpresaId;
+
+        if (IdProyecto > 0) {
+            $("#WindowContacto").data("kendoWindow").open();
+            $("#gridContactosProyecto").data("kendoGrid").dataSource.read();
+
+            $('#WindowContacto').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#92278F');
+            $('#WindowContacto').parent().find('.k-window-title').css('color', '#FFFFFF');
+        }
+    }
+
+    function ProyectoSeleccionado() {
+
+        return {
+            pIdProyecto: IdProyecto,
+            pIdEmpresa: IdEmpresa
+        };
+    }
+
+    function ProyectoSeleccionadoContacto() {
+
+        return {
+            pIdProyecto: IdProyecto
+        };
+    }
+    
+    function onClickParticipante(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        ProyectoId = dataItem.Id;
+
+        document.getElementById("EmpresaNombre").innerHTML = "Empresa: <b>" + dataItem.Empresa + "</b>";
+
+        if (ProyectoId > 0) {
+            $("#gridParticipantes").data("kendoGrid").dataSource.read();
+            $("#window").data("kendoWindow").open();
+
+            $('#window').parent().find('.k-window-titlebar,.k-window-actions').css('backgroundColor', '#8CC63E');
+            $('#window').parent().find('.k-window-title').css('color', '#FFFFFF');
+        }
+    }
+
+    function Finalizar(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        IdProyecto = dataItem.Id;
+
+        $.ajax({
+            url: 'Proyecto/FinalizarCarga?pIdProyecto=' + IdProyecto,
+            type: 'POST',
+            data: {
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                if (data.success) {
+                    dataItem.Estado = "PREPARACIÓN";
+                    alert("Proyecto se inició correctamente.");
+                }
+                else {
+                    alert(data.error);
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function GuardarColor(e) {
+        var colorpicker = $("#Color").data("kendoColorPalette");
+        e.model.set("Color", colorpicker.value());
+    }
+    
+    function onImageUpload(e) {
+        e.data = { pProyectoId: ProyectoId };
+    }
+
+</script>

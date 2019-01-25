@@ -1,0 +1,1597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BarcoSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
+          <Property Name="Target" Type="varchar" MaxLength="300" />
+          <Property Name="TargetController" Type="varchar" MaxLength="300" />
+          <Property Name="IdObjeto" Type="int" Nullable="false" />
+          <Property Name="IdMenuTipo" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuTipo">
+          <Key>
+            <PropertyRef Name="IdMenuTipo" />
+          </Key>
+          <Property Name="IdMenuTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Objeto">
+          <Key>
+            <PropertyRef Name="IdObjeto" />
+          </Key>
+          <Property Name="IdObjeto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdObjetoPadre" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametroGeneral">
+          <Key>
+            <PropertyRef Name="IdParametroGeneral" />
+          </Key>
+          <Property Name="IdParametroGeneral" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="1000" />
+          <Property Name="IdParametroTipo" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="IdPropietario" Type="int" Nullable="false" />
+          <Property Name="TransacDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TransacUser" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametroTipo">
+          <Key>
+            <PropertyRef Name="IdParametroTipo" />
+          </Key>
+          <Property Name="IdParametroTipo" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdObjeto" />
+          </Key>
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="IdObjeto" Type="int" Nullable="false" />
+          <Property Name="TransacDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TransacUser" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdPropietario" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="IdPropietario" />
+          </Key>
+          <Property Name="IdPropietario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdPropietario" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="IdTipoUsuario" />
+          </Key>
+          <Property Name="IdTipoUsuario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UrlRedireccion" Type="varchar" MaxLength="300" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="300" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuarioPorRol">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="TransacDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TransacUser" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ADM_Colaborador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nutricionista" Type="bit" Nullable="false" />
+          <Property Name="Facilitador" Type="bit" Nullable="false" />
+          <Property Name="Asistente" Type="bit" Nullable="false" />
+          <Property Name="Enfermero(a)" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ADM_Contacto">
+          <Key>
+            <PropertyRef Name="PersonaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="int" Nullable="false" />
+          <Property Name="PersonaId" Type="int" Nullable="false" />
+          <Property Name="EsPrincipal" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ADM_Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PBX" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CantidadTotalEmpleados" Type="int" Nullable="false" />
+          <Property Name="CantidadAdministrativo" Type="int" Nullable="false" />
+          <Property Name="CantidadDistribucion" Type="int" Nullable="false" />
+          <Property Name="CantidadVentas" Type="int" Nullable="false" />
+          <Property Name="CantidadProduccion" Type="int" Nullable="false" />
+          <Property Name="OtrosDescripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantidadOtros" Type="int" />
+          <Property Name="GiroId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GE_MensajeCorreo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Asunto" Type="varchar(max)" />
+          <Property Name="Mensaje" Type="varchar(max)" />
+          <Property Name="EsHTML" Type="varchar" MaxLength="2" />
+          <Property Name="Para" Type="varchar(max)" />
+          <Property Name="EsLista" Type="varchar" MaxLength="2" />
+          <Property Name="FechaEnvio" Type="datetime" />
+          <Property Name="EstadoEnvio" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="GE_Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PrimerNombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PrimerApellido" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="24" />
+          <Property Name="Direccion" Type="nvarchar(max)" />
+          <Property Name="Correo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="8" />
+          <Property Name="Puesto" Type="nvarchar" MaxLength="250" />
+          <Property Name="FotoPerfil" Type="varbinary(max)" />
+          <Property Name="Celular" Type="nvarchar" MaxLength="24" />
+          <Property Name="SegundoNombre" Type="nvarchar" MaxLength="150" />
+          <Property Name="SegundoApellido" Type="nvarchar" MaxLength="150" />
+          <Property Name="ApellidoCasada" Type="nvarchar" MaxLength="150" />
+          <Property Name="Departamento" Type="nchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PAR_Participante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PaisId" Type="int" />
+          <Property Name="GrupoId" Type="int" />
+          <Property Name="Compa" Type="int" />
+          <Property Name="ProyectoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PR_Nutricionista">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+            <PropertyRef Name="ColaboradorId" />
+          </Key>
+          <Property Name="ProyectoId" Type="int" Nullable="false" />
+          <Property Name="ColaboradorId" Type="int" Nullable="false" />
+          <Property Name="RolId" Type="int" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PR_Proyecto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpresaId" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="NoSemanas" Type="int" Nullable="false" />
+          <Property Name="NoParticipantes" Type="int" Nullable="false" />
+          <Property Name="NoEnfermeras" Type="int" Nullable="false" />
+          <Property Name="NoFacilitadores" Type="int" Nullable="false" />
+          <Property Name="NoAsistentes" Type="int" Nullable="false" />
+          <Property Name="NoConsultasNutricionales" Type="int" Nullable="false" />
+          <Property Name="FrecuenciaConsultas" Type="int" Nullable="false" />
+          <Property Name="FrecuenciaAlertas" Type="int" Nullable="false" />
+          <Property Name="FrecuenciaAlertasUnidad" Type="int" Nullable="false" />
+          <Property Name="FrecuenciaConsultasUnidad" Type="int" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="10" />
+          <Property Name="CrearUsuarios" Type="bit" />
+          <Property Name="LogoURL" Type="nvarchar" MaxLength="500" />
+          <Property Name="AseguradoraId" Type="int" />
+          <Property Name="IndiceReclamos" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="NoParticipantesPorGrupo" Type="int" />
+          <Property Name="FechaCorreoInvitacion" Type="date" />
+          <Property Name="FechaPrimeraCitaDiagnostico" Type="date" />
+          <Property Name="CitasProgramadas" Type="bit" />
+          <Property Name="MetasCalculadas" Type="bit" />
+          <Property Name="FechaInicioConsultas" Type="date" />
+          <Property Name="HoraInicioConsultas" Type="time" Precision="7" />
+          <Property Name="HoraFinConsultas" Type="time" Precision="7" />
+          <Property Name="DuracionConsultas" Type="time" Precision="7" />
+          <Property Name="NoNutricionistas" Type="int" Nullable="false" />
+          <Property Name="TipoProyectoId" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="25" />
+          <Property Name="CodigoRegistro" Type="varchar" MaxLength="25" />
+          <Property Name="Correo" Type="varchar" MaxLength="500" />
+          <Property Name="PasswordCorreo" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_ADM_Colaborador">
+          <End Role="GE_Persona" Type="Self.GE_Persona" Multiplicity="1" />
+          <End Role="ADM_Colaborador" Type="Self.ADM_Colaborador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Colaborador">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ADM_Contacto_Empresa">
+          <End Role="ADM_Empresa" Type="Self.ADM_Empresa" Multiplicity="1" />
+          <End Role="ADM_Contacto" Type="Self.ADM_Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Contacto">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ADM_Contacto_Persona">
+          <End Role="GE_Persona" Type="Self.GE_Persona" Multiplicity="1" />
+          <End Role="ADM_Contacto" Type="Self.ADM_Contacto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Contacto">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_MenuTipo">
+          <End Role="MenuTipo" Type="Self.MenuTipo" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuTipo">
+              <PropertyRef Name="IdMenuTipo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IdMenuTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Objeto">
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IdObjeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objeto">
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="IdObjeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objeto_Padre">
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="0..1" />
+          <End Role="Objeto1" Type="Self.Objeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Objeto1">
+              <PropertyRef Name="IdObjetoPadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objeto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Objeto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAR_Participante_Compa">
+          <End Role="PAR_Participante" Type="Self.PAR_Participante" Multiplicity="0..1" />
+          <End Role="PAR_Participante1" Type="Self.PAR_Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAR_Participante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PAR_Participante1">
+              <PropertyRef Name="Compa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAR_Participante_Persona">
+          <End Role="GE_Persona" Type="Self.GE_Persona" Multiplicity="1" />
+          <End Role="PAR_Participante" Type="Self.PAR_Participante" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PAR_Participante">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametro_Propietario">
+          <End Role="Propietario" Type="Self.Propietario" Multiplicity="1" />
+          <End Role="ParametroGeneral" Type="Self.ParametroGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="ParametroGeneral">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametro_Type">
+          <End Role="ParametroTipo" Type="Self.ParametroTipo" Multiplicity="0..1" />
+          <End Role="ParametroGeneral" Type="Self.ParametroGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParametroTipo">
+              <PropertyRef Name="IdParametroTipo" />
+            </Principal>
+            <Dependent Role="ParametroGeneral">
+              <PropertyRef Name="IdParametroTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PR_Nutricionista_Colaborador">
+          <End Role="ADM_Colaborador" Type="Self.ADM_Colaborador" Multiplicity="1" />
+          <End Role="PR_Nutricionista" Type="Self.PR_Nutricionista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Colaborador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Nutricionista">
+              <PropertyRef Name="ColaboradorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PR_Nutricionista_Proyecto">
+          <End Role="PR_Proyecto" Type="Self.PR_Proyecto" Multiplicity="1" />
+          <End Role="PR_Nutricionista" Type="Self.PR_Nutricionista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PR_Proyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Nutricionista">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PR_Proyecto_Empresa">
+          <End Role="ADM_Empresa" Type="Self.ADM_Empresa" Multiplicity="1" />
+          <End Role="PR_Proyecto" Type="Self.PR_Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Proyecto">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Propietario">
+          <End Role="Propietario" Type="Self.Propietario" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Propietario">
+          <End Role="Propietario" Type="Self.Propietario" Multiplicity="1" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleToUser">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="UsuarioPorRol" Type="Self.UsuarioPorRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="UsuarioPorRol">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserToRole">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="UsuarioPorRol" Type="Self.UsuarioPorRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="UsuarioPorRol">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Persona">
+          <End Role="GE_Persona" Type="Self.GE_Persona" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarcoSoftDBModelStoreContainer">
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="MenuTipo" EntityType="Self.MenuTipo" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Objeto" EntityType="Self.Objeto" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="ParametroGeneral" EntityType="Self.ParametroGeneral" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="ParametroTipo" EntityType="Self.ParametroTipo" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Permiso" EntityType="Self.Permiso" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Propietario" EntityType="Self.Propietario" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="UsuarioPorRol" EntityType="Self.UsuarioPorRol" Schema="Administracion" store:Type="Tables" />
+          <EntitySet Name="ADM_Colaborador" EntityType="Self.ADM_Colaborador" Schema="dbo" Table="ADM.Colaborador" store:Type="Tables" />
+          <EntitySet Name="ADM_Contacto" EntityType="Self.ADM_Contacto" Schema="dbo" Table="ADM.Contacto" store:Type="Tables" />
+          <EntitySet Name="ADM_Empresa" EntityType="Self.ADM_Empresa" Schema="dbo" Table="ADM.Empresa" store:Type="Tables" />
+          <EntitySet Name="GE_MensajeCorreo" EntityType="Self.GE_MensajeCorreo" Schema="dbo" Table="GE.MensajeCorreo" store:Type="Tables" />
+          <EntitySet Name="GE_Persona" EntityType="Self.GE_Persona" Schema="dbo" Table="GE.Persona" store:Type="Tables" />
+          <EntitySet Name="PAR_Participante" EntityType="Self.PAR_Participante" Schema="dbo" Table="PAR.Participante" store:Type="Tables" />
+          <EntitySet Name="PR_Nutricionista" EntityType="Self.PR_Nutricionista" Schema="dbo" Table="PR.Nutricionista" store:Type="Tables" />
+          <EntitySet Name="PR_Proyecto" EntityType="Self.PR_Proyecto" Schema="dbo" Table="PR.Proyecto" store:Type="Tables" />
+          <AssociationSet Name="FK_ADM_Colaborador" Association="Self.FK_ADM_Colaborador">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="ADM_Colaborador" EntitySet="ADM_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ADM_Contacto_Empresa" Association="Self.FK_ADM_Contacto_Empresa">
+            <End Role="ADM_Empresa" EntitySet="ADM_Empresa" />
+            <End Role="ADM_Contacto" EntitySet="ADM_Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ADM_Contacto_Persona" Association="Self.FK_ADM_Contacto_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="ADM_Contacto" EntitySet="ADM_Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_MenuTipo" Association="Self.FK_Menu_MenuTipo">
+            <End Role="MenuTipo" EntitySet="MenuTipo" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Objeto" Association="Self.FK_Menu_Objeto">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objeto" Association="Self.FK_Objeto">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Permiso" EntitySet="Permiso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objeto_Padre" Association="Self.FK_Objeto_Padre">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Objeto1" EntitySet="Objeto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objeto_Producto" Association="Self.FK_Objeto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Objeto" EntitySet="Objeto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAR_Participante_Compa" Association="Self.FK_PAR_Participante_Compa">
+            <End Role="PAR_Participante" EntitySet="PAR_Participante" />
+            <End Role="PAR_Participante1" EntitySet="PAR_Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAR_Participante_Persona" Association="Self.FK_PAR_Participante_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="PAR_Participante" EntitySet="PAR_Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametro_Propietario" Association="Self.FK_Parametro_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="ParametroGeneral" EntitySet="ParametroGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametro_Type" Association="Self.FK_Parametro_Type">
+            <End Role="ParametroTipo" EntitySet="ParametroTipo" />
+            <End Role="ParametroGeneral" EntitySet="ParametroGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PR_Nutricionista_Colaborador" Association="Self.FK_PR_Nutricionista_Colaborador">
+            <End Role="ADM_Colaborador" EntitySet="ADM_Colaborador" />
+            <End Role="PR_Nutricionista" EntitySet="PR_Nutricionista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PR_Nutricionista_Proyecto" Association="Self.FK_PR_Nutricionista_Proyecto">
+            <End Role="PR_Proyecto" EntitySet="PR_Proyecto" />
+            <End Role="PR_Nutricionista" EntitySet="PR_Nutricionista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PR_Proyecto_Empresa" Association="Self.FK_PR_Proyecto_Empresa">
+            <End Role="ADM_Empresa" EntitySet="ADM_Empresa" />
+            <End Role="PR_Proyecto" EntitySet="PR_Proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Propietario" Association="Self.FK_Producto_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol" Association="Self.FK_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Permiso" EntitySet="Permiso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Propietario" Association="Self.FK_Rol_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleToUser" Association="Self.FK_RoleToUser">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="UsuarioPorRol" EntitySet="UsuarioPorRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserToRole" Association="Self.FK_UserToRole">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="UsuarioPorRol" EntitySet="UsuarioPorRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BarcoSoftDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Objeto">
+          <Key>
+            <PropertyRef Name="IdObjeto" />
+          </Key>
+          <Property Name="IdObjeto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdObjetoPadre" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Permiso" Relationship="Self.FK_Objeto" FromRole="Objeto" ToRole="Permiso" />
+          <NavigationProperty Name="Objeto1" Relationship="Self.FK_Objeto_Padre" FromRole="Objeto" ToRole="Objeto1" />
+          <NavigationProperty Name="Objeto2" Relationship="Self.FK_Objeto_Padre" FromRole="Objeto1" ToRole="Objeto" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Objeto_Producto" FromRole="Objeto" ToRole="Producto" />
+          <NavigationProperty Name="Menu" Relationship="BarcoSoftDBModel.FK_Menu_Objeto" FromRole="Objeto" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Permiso">
+          <Key>
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdObjeto" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="IdObjeto" Type="Int32" Nullable="false" />
+          <Property Name="TransacDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransacUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Objeto" Relationship="Self.FK_Objeto" FromRole="Permiso" ToRole="Objeto" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol" FromRole="Permiso" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdPropietario" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Objeto" Relationship="Self.FK_Objeto_Producto" FromRole="Producto" ToRole="Objeto" />
+          <NavigationProperty Name="Propietario" Relationship="Self.FK_Producto_Propietario" FromRole="Producto" ToRole="Propietario" />
+        </EntityType>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="IdPropietario" />
+          </Key>
+          <Property Name="IdPropietario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Propietario" FromRole="Propietario" ToRole="Producto" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol_Propietario" FromRole="Propietario" ToRole="Rol" />
+          <NavigationProperty Name="ParametroGeneral" Relationship="BarcoSoftDBModel.FK_Parametro_Propietario" FromRole="Propietario" ToRole="ParametroGeneral" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdPropietario" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Permiso" Relationship="Self.FK_Rol" FromRole="Rol" ToRole="Permiso" />
+          <NavigationProperty Name="Propietario" Relationship="Self.FK_Rol_Propietario" FromRole="Rol" ToRole="Propietario" />
+          <NavigationProperty Name="UsuarioPorRol" Relationship="Self.FK_RoleToUser" FromRole="Rol" ToRole="UsuarioPorRol" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="IdTipoUsuario" />
+          </Key>
+          <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UrlRedireccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="UsuarioPorRol" Relationship="Self.FK_UserToRole" FromRole="Usuario" ToRole="UsuarioPorRol" />
+          <NavigationProperty Name="GE_Persona" Relationship="BarcoSoftDBModel.FK_Usuario_Persona" FromRole="Usuario" ToRole="GE_Persona" />
+        </EntityType>
+        <EntityType Name="UsuarioPorRol">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="TransacDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransacUser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_RoleToUser" FromRole="UsuarioPorRol" ToRole="Rol" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UserToRole" FromRole="UsuarioPorRol" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Objeto">
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="IdObjeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objeto_Padre">
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="0..1" />
+          <End Role="Objeto1" Type="Self.Objeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Objeto1">
+              <PropertyRef Name="IdObjetoPadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objeto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Objeto" Type="Self.Objeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Objeto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Permiso" Type="Self.Permiso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Permiso">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Propietario">
+          <End Role="Propietario" Type="Self.Propietario" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Propietario">
+          <End Role="Propietario" Type="Self.Propietario" Multiplicity="1" />
+          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleToUser">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="UsuarioPorRol" Type="Self.UsuarioPorRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="UsuarioPorRol">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserToRole">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="UsuarioPorRol" Type="Self.UsuarioPorRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="UsuarioPorRol">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarcoSoftUtilidadesDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Objeto" EntityType="Self.Objeto" />
+          <EntitySet Name="Permiso" EntityType="Self.Permiso" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Propietario" EntityType="Self.Propietario" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="UsuarioPorRol" EntityType="Self.UsuarioPorRol" />
+          <AssociationSet Name="FK_Objeto" Association="Self.FK_Objeto">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Permiso" EntitySet="Permiso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objeto_Padre" Association="Self.FK_Objeto_Padre">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Objeto1" EntitySet="Objeto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objeto_Producto" Association="Self.FK_Objeto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Objeto" EntitySet="Objeto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol" Association="Self.FK_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Permiso" EntitySet="Permiso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Propietario" Association="Self.FK_Producto_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Propietario" Association="Self.FK_Rol_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleToUser" Association="Self.FK_RoleToUser">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="UsuarioPorRol" EntitySet="UsuarioPorRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserToRole" Association="Self.FK_UserToRole">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="UsuarioPorRol" EntitySet="UsuarioPorRol" />
+          </AssociationSet>
+          <EntitySet Name="Menu" EntityType="BarcoSoftDBModel.Menu" />
+          <EntitySet Name="MenuTipo" EntityType="BarcoSoftDBModel.MenuTipo" />
+          <EntitySet Name="ParametroGeneral" EntityType="BarcoSoftDBModel.ParametroGeneral" />
+          <EntitySet Name="ParametroTipo" EntityType="BarcoSoftDBModel.ParametroTipo" />
+          <AssociationSet Name="FK_Menu_MenuTipo" Association="BarcoSoftDBModel.FK_Menu_MenuTipo">
+            <End Role="MenuTipo" EntitySet="MenuTipo" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Objeto" Association="BarcoSoftDBModel.FK_Menu_Objeto">
+            <End Role="Objeto" EntitySet="Objeto" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametro_Propietario" Association="BarcoSoftDBModel.FK_Parametro_Propietario">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="ParametroGeneral" EntitySet="ParametroGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametro_Type" Association="BarcoSoftDBModel.FK_Parametro_Type">
+            <End Role="ParametroTipo" EntitySet="ParametroTipo" />
+            <End Role="ParametroGeneral" EntitySet="ParametroGeneral" />
+          </AssociationSet>
+          <EntitySet Name="PAR_Participante" EntityType="BarcoSoftDBModel.PAR_Participante" />
+          <AssociationSet Name="FK_PAR_Participante_Compa" Association="BarcoSoftDBModel.FK_PAR_Participante_Compa">
+            <End Role="PAR_Participante" EntitySet="PAR_Participante" />
+            <End Role="PAR_Participante1" EntitySet="PAR_Participante" />
+          </AssociationSet>
+          <EntitySet Name="PR_Nutricionista" EntityType="BarcoSoftDBModel.PR_Nutricionista" />
+          <EntitySet Name="ADM_Colaborador" EntityType="BarcoSoftDBModel.ADM_Colaborador" />
+          <AssociationSet Name="FK_PR_Nutricionista_Colaborador" Association="BarcoSoftDBModel.FK_PR_Nutricionista_Colaborador">
+            <End Role="ADM_Colaborador" EntitySet="ADM_Colaborador" />
+            <End Role="PR_Nutricionista" EntitySet="PR_Nutricionista" />
+          </AssociationSet>
+          <EntitySet Name="GE_MensajeCorreo" EntityType="BarcoSoftDBModel.GE_MensajeCorreo" />
+          <EntitySet Name="ADM_Contacto" EntityType="BarcoSoftDBModel.ADM_Contacto" />
+          <EntitySet Name="ADM_Empresa" EntityType="BarcoSoftDBModel.ADM_Empresa" />
+          <EntitySet Name="GE_Persona" EntityType="BarcoSoftDBModel.GE_Persona" />
+          <EntitySet Name="PR_Proyecto" EntityType="BarcoSoftDBModel.PR_Proyecto" />
+          <AssociationSet Name="FK_Usuario_Persona" Association="BarcoSoftDBModel.FK_Usuario_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ADM_Colaborador" Association="BarcoSoftDBModel.FK_ADM_Colaborador">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="ADM_Colaborador" EntitySet="ADM_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ADM_Contacto_Empresa" Association="BarcoSoftDBModel.FK_ADM_Contacto_Empresa">
+            <End Role="ADM_Empresa" EntitySet="ADM_Empresa" />
+            <End Role="ADM_Contacto" EntitySet="ADM_Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ADM_Contacto_Persona" Association="BarcoSoftDBModel.FK_ADM_Contacto_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="ADM_Contacto" EntitySet="ADM_Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PR_Proyecto_Empresa" Association="BarcoSoftDBModel.FK_PR_Proyecto_Empresa">
+            <End Role="ADM_Empresa" EntitySet="ADM_Empresa" />
+            <End Role="PR_Proyecto" EntitySet="PR_Proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAR_Participante_Persona" Association="BarcoSoftDBModel.FK_PAR_Participante_Persona">
+            <End Role="GE_Persona" EntitySet="GE_Persona" />
+            <End Role="PAR_Participante" EntitySet="PAR_Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PR_Nutricionista_Proyecto" Association="BarcoSoftDBModel.FK_PR_Nutricionista_Proyecto">
+            <End Role="PR_Proyecto" EntitySet="PR_Proyecto" />
+            <End Role="PR_Nutricionista" EntitySet="PR_Nutricionista" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Target" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="TargetController" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IdObjeto" Type="Int32" Nullable="false" />
+          <Property Name="IdMenuTipo" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MenuTipo" Relationship="BarcoSoftDBModel.FK_Menu_MenuTipo" FromRole="Menu" ToRole="MenuTipo" />
+          <NavigationProperty Name="Objeto" Relationship="BarcoSoftDBModel.FK_Menu_Objeto" FromRole="Menu" ToRole="Objeto" />
+        </EntityType>
+        <EntityType Name="MenuTipo">
+          <Key>
+            <PropertyRef Name="IdMenuTipo" />
+          </Key>
+          <Property Name="IdMenuTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Menu" Relationship="BarcoSoftDBModel.FK_Menu_MenuTipo" FromRole="MenuTipo" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="ParametroGeneral">
+          <Key>
+            <PropertyRef Name="IdParametroGeneral" />
+          </Key>
+          <Property Name="IdParametroGeneral" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdParametroTipo" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="IdPropietario" Type="Int32" Nullable="false" />
+          <Property Name="TransacDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransacUser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Propietario" Relationship="BarcoSoftDBModel.FK_Parametro_Propietario" FromRole="ParametroGeneral" ToRole="Propietario" />
+          <NavigationProperty Name="ParametroTipo" Relationship="BarcoSoftDBModel.FK_Parametro_Type" FromRole="ParametroGeneral" ToRole="ParametroTipo" />
+        </EntityType>
+        <EntityType Name="ParametroTipo">
+          <Key>
+            <PropertyRef Name="IdParametroTipo" />
+          </Key>
+          <Property Name="IdParametroTipo" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ParametroGeneral" Relationship="BarcoSoftDBModel.FK_Parametro_Type" FromRole="ParametroTipo" ToRole="ParametroGeneral" />
+        </EntityType>
+        <Association Name="FK_Menu_MenuTipo">
+          <End Type="BarcoSoftDBModel.MenuTipo" Role="MenuTipo" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuTipo">
+              <PropertyRef Name="IdMenuTipo" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IdMenuTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Objeto">
+          <End Type="BarcoSoftDBModel.Objeto" Role="Objeto" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objeto">
+              <PropertyRef Name="IdObjeto" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="IdObjeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametro_Propietario">
+          <End Type="BarcoSoftDBModel.Propietario" Role="Propietario" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.ParametroGeneral" Role="ParametroGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="ParametroGeneral">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametro_Type">
+          <End Type="BarcoSoftDBModel.ParametroTipo" Role="ParametroTipo" Multiplicity="0..1" />
+          <End Type="BarcoSoftDBModel.ParametroGeneral" Role="ParametroGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParametroTipo">
+              <PropertyRef Name="IdParametroTipo" />
+            </Principal>
+            <Dependent Role="ParametroGeneral">
+              <PropertyRef Name="IdParametroTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PAR_Participante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PaisId" Type="Int32" />
+          <Property Name="GrupoId" Type="Int32" />
+          <Property Name="Compa" Type="Int32" />
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PAR_Participante1" Relationship="BarcoSoftDBModel.FK_PAR_Participante_Compa" FromRole="PAR_Participante" ToRole="PAR_Participante1" />
+          <NavigationProperty Name="PAR_Participante2" Relationship="BarcoSoftDBModel.FK_PAR_Participante_Compa" FromRole="PAR_Participante1" ToRole="PAR_Participante" />
+          <NavigationProperty Name="GE_Persona" Relationship="BarcoSoftDBModel.FK_PAR_Participante_Persona" FromRole="PAR_Participante" ToRole="GE_Persona" />
+        </EntityType>
+        <Association Name="FK_PAR_Participante_Compa">
+          <End Type="BarcoSoftDBModel.PAR_Participante" Role="PAR_Participante" Multiplicity="0..1" />
+          <End Type="BarcoSoftDBModel.PAR_Participante" Role="PAR_Participante1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAR_Participante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PAR_Participante1">
+              <PropertyRef Name="Compa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PR_Nutricionista">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+            <PropertyRef Name="ColaboradorId" />
+          </Key>
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" />
+          <Property Name="ColaboradorId" Type="Int32" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ADM_Colaborador" Relationship="BarcoSoftDBModel.FK_PR_Nutricionista_Colaborador" FromRole="PR_Nutricionista" ToRole="ADM_Colaborador" />
+          <NavigationProperty Name="PR_Proyecto" Relationship="BarcoSoftDBModel.FK_PR_Nutricionista_Proyecto" FromRole="PR_Nutricionista" ToRole="PR_Proyecto" />
+        </EntityType>
+        <EntityType Name="ADM_Colaborador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nutricionista" Type="Boolean" Nullable="false" />
+          <Property Name="Facilitador" Type="Boolean" Nullable="false" />
+          <Property Name="Asistente" Type="Boolean" Nullable="false" />
+          <Property Name="Enfermero_a_" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PR_Nutricionista" Relationship="BarcoSoftDBModel.FK_PR_Nutricionista_Colaborador" FromRole="ADM_Colaborador" ToRole="PR_Nutricionista" />
+          <NavigationProperty Name="GE_Persona" Relationship="BarcoSoftDBModel.FK_ADM_Colaborador" FromRole="ADM_Colaborador" ToRole="GE_Persona" />
+        </EntityType>
+        <Association Name="FK_PR_Nutricionista_Colaborador">
+          <End Type="BarcoSoftDBModel.ADM_Colaborador" Role="ADM_Colaborador" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.PR_Nutricionista" Role="PR_Nutricionista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Colaborador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Nutricionista">
+              <PropertyRef Name="ColaboradorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GE_MensajeCorreo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EsHTML" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Para" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EsLista" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEnvio" Type="DateTime" Precision="3" />
+          <Property Name="EstadoEnvio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ADM_Contacto">
+          <Key>
+            <PropertyRef Name="PersonaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="Int32" Nullable="false" />
+          <Property Name="PersonaId" Type="Int32" Nullable="false" />
+          <Property Name="EsPrincipal" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ADM_Empresa" Relationship="BarcoSoftDBModel.FK_ADM_Contacto_Empresa" FromRole="ADM_Contacto" ToRole="ADM_Empresa" />
+          <NavigationProperty Name="GE_Persona" Relationship="BarcoSoftDBModel.FK_ADM_Contacto_Persona" FromRole="ADM_Contacto" ToRole="GE_Persona" />
+        </EntityType>
+        <EntityType Name="ADM_Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PBX" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadTotalEmpleados" Type="Int32" Nullable="false" />
+          <Property Name="CantidadAdministrativo" Type="Int32" Nullable="false" />
+          <Property Name="CantidadDistribucion" Type="Int32" Nullable="false" />
+          <Property Name="CantidadVentas" Type="Int32" Nullable="false" />
+          <Property Name="CantidadProduccion" Type="Int32" Nullable="false" />
+          <Property Name="OtrosDescripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CantidadOtros" Type="Int32" />
+          <Property Name="GiroId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ADM_Contacto" Relationship="BarcoSoftDBModel.FK_ADM_Contacto_Empresa" FromRole="ADM_Empresa" ToRole="ADM_Contacto" />
+          <NavigationProperty Name="PR_Proyecto" Relationship="BarcoSoftDBModel.FK_PR_Proyecto_Empresa" FromRole="ADM_Empresa" ToRole="PR_Proyecto" />
+        </EntityType>
+        <EntityType Name="GE_Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PrimerNombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PrimerApellido" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Puesto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FotoPerfil" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Celular" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="SegundoNombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SegundoApellido" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoCasada" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Departamento" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Usuario" Relationship="BarcoSoftDBModel.FK_Usuario_Persona" FromRole="GE_Persona" ToRole="Usuario" />
+          <NavigationProperty Name="ADM_Colaborador" Relationship="BarcoSoftDBModel.FK_ADM_Colaborador" FromRole="GE_Persona" ToRole="ADM_Colaborador" />
+          <NavigationProperty Name="ADM_Contacto" Relationship="BarcoSoftDBModel.FK_ADM_Contacto_Persona" FromRole="GE_Persona" ToRole="ADM_Contacto" />
+          <NavigationProperty Name="PAR_Participante" Relationship="BarcoSoftDBModel.FK_PAR_Participante_Persona" FromRole="GE_Persona" ToRole="PAR_Participante" />
+        </EntityType>
+        <EntityType Name="PR_Proyecto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpresaId" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NoSemanas" Type="Int32" Nullable="false" />
+          <Property Name="NoParticipantes" Type="Int32" Nullable="false" />
+          <Property Name="NoEnfermeras" Type="Int32" Nullable="false" />
+          <Property Name="NoFacilitadores" Type="Int32" Nullable="false" />
+          <Property Name="NoAsistentes" Type="Int32" Nullable="false" />
+          <Property Name="NoConsultasNutricionales" Type="Int32" Nullable="false" />
+          <Property Name="FrecuenciaConsultas" Type="Int32" Nullable="false" />
+          <Property Name="FrecuenciaAlertas" Type="Int32" Nullable="false" />
+          <Property Name="FrecuenciaAlertasUnidad" Type="Int32" Nullable="false" />
+          <Property Name="FrecuenciaConsultasUnidad" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CrearUsuarios" Type="Boolean" />
+          <Property Name="LogoURL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AseguradoraId" Type="Int32" />
+          <Property Name="IndiceReclamos" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="NoParticipantesPorGrupo" Type="Int32" />
+          <Property Name="FechaCorreoInvitacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaPrimeraCitaDiagnostico" Type="DateTime" Precision="0" />
+          <Property Name="CitasProgramadas" Type="Boolean" />
+          <Property Name="MetasCalculadas" Type="Boolean" />
+          <Property Name="FechaInicioConsultas" Type="DateTime" Precision="0" />
+          <Property Name="HoraInicioConsultas" Type="Time" Precision="7" />
+          <Property Name="HoraFinConsultas" Type="Time" Precision="7" />
+          <Property Name="DuracionConsultas" Type="Time" Precision="7" />
+          <Property Name="NoNutricionistas" Type="Int32" Nullable="false" />
+          <Property Name="TipoProyectoId" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoRegistro" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordCorreo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ADM_Empresa" Relationship="BarcoSoftDBModel.FK_PR_Proyecto_Empresa" FromRole="PR_Proyecto" ToRole="ADM_Empresa" />
+          <NavigationProperty Name="PR_Nutricionista" Relationship="BarcoSoftDBModel.FK_PR_Nutricionista_Proyecto" FromRole="PR_Proyecto" ToRole="PR_Nutricionista" />
+        </EntityType>
+        <Association Name="FK_Usuario_Persona">
+          <End Type="BarcoSoftDBModel.GE_Persona" Role="GE_Persona" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ADM_Colaborador">
+          <End Type="BarcoSoftDBModel.GE_Persona" Role="GE_Persona" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.ADM_Colaborador" Role="ADM_Colaborador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Colaborador">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ADM_Contacto_Empresa">
+          <End Type="BarcoSoftDBModel.ADM_Empresa" Role="ADM_Empresa" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.ADM_Contacto" Role="ADM_Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Contacto">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ADM_Contacto_Persona">
+          <End Type="BarcoSoftDBModel.GE_Persona" Role="GE_Persona" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.ADM_Contacto" Role="ADM_Contacto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADM_Contacto">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PR_Proyecto_Empresa">
+          <End Type="BarcoSoftDBModel.ADM_Empresa" Role="ADM_Empresa" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.PR_Proyecto" Role="PR_Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADM_Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Proyecto">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAR_Participante_Persona">
+          <End Type="BarcoSoftDBModel.GE_Persona" Role="GE_Persona" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.PAR_Participante" Role="PAR_Participante" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GE_Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PAR_Participante">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PR_Nutricionista_Proyecto">
+          <End Type="BarcoSoftDBModel.PR_Proyecto" Role="PR_Proyecto" Multiplicity="1" />
+          <End Type="BarcoSoftDBModel.PR_Nutricionista" Role="PR_Nutricionista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PR_Proyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PR_Nutricionista">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BarcoSoftDBModelStoreContainer" CdmEntityContainer="BarcoSoftUtilidadesDB">
+          <EntitySetMapping Name="Objeto">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Objeto">
+              <MappingFragment StoreEntitySet="Objeto">
+                <ScalarProperty Name="IdObjeto" ColumnName="IdObjeto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdObjetoPadre" ColumnName="IdObjetoPadre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permiso">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Permiso">
+              <MappingFragment StoreEntitySet="Permiso">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdObjeto" ColumnName="IdObjeto" />
+                <ScalarProperty Name="TransacDateTime" ColumnName="TransacDateTime" />
+                <ScalarProperty Name="TransacUser" ColumnName="TransacUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propietario">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Propietario">
+              <MappingFragment StoreEntitySet="Propietario">
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UrlRedireccion" ColumnName="UrlRedireccion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioPorRol">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.UsuarioPorRol">
+              <MappingFragment StoreEntitySet="UsuarioPorRol">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="TransacDateTime" ColumnName="TransacDateTime" />
+                <ScalarProperty Name="TransacUser" ColumnName="TransacUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdMenuTipo" ColumnName="IdMenuTipo" />
+                <ScalarProperty Name="IdObjeto" ColumnName="IdObjeto" />
+                <ScalarProperty Name="TargetController" ColumnName="TargetController" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuTipo">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.MenuTipo">
+              <MappingFragment StoreEntitySet="MenuTipo">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdMenuTipo" ColumnName="IdMenuTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametroGeneral">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.ParametroGeneral">
+              <MappingFragment StoreEntitySet="ParametroGeneral">
+                <ScalarProperty Name="TransacUser" ColumnName="TransacUser" />
+                <ScalarProperty Name="TransacDateTime" ColumnName="TransacDateTime" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdParametroTipo" ColumnName="IdParametroTipo" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdParametroGeneral" ColumnName="IdParametroGeneral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametroTipo">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.ParametroTipo">
+              <MappingFragment StoreEntitySet="ParametroTipo">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdParametroTipo" ColumnName="IdParametroTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAR_Participante">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.PAR_Participante">
+              <MappingFragment StoreEntitySet="PAR_Participante">
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="Compa" ColumnName="Compa" />
+                <ScalarProperty Name="GrupoId" ColumnName="GrupoId" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PR_Nutricionista">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.PR_Nutricionista">
+              <MappingFragment StoreEntitySet="PR_Nutricionista">
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="ColaboradorId" ColumnName="ColaboradorId" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADM_Colaborador">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.ADM_Colaborador">
+              <MappingFragment StoreEntitySet="ADM_Colaborador">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Enfermero_a_" ColumnName="Enfermero(a)" />
+                <ScalarProperty Name="Asistente" ColumnName="Asistente" />
+                <ScalarProperty Name="Facilitador" ColumnName="Facilitador" />
+                <ScalarProperty Name="Nutricionista" ColumnName="Nutricionista" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GE_MensajeCorreo">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.GE_MensajeCorreo">
+              <MappingFragment StoreEntitySet="GE_MensajeCorreo">
+                <ScalarProperty Name="EstadoEnvio" ColumnName="EstadoEnvio" />
+                <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+                <ScalarProperty Name="EsLista" ColumnName="EsLista" />
+                <ScalarProperty Name="Para" ColumnName="Para" />
+                <ScalarProperty Name="EsHTML" ColumnName="EsHTML" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADM_Contacto">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.ADM_Contacto">
+              <MappingFragment StoreEntitySet="ADM_Contacto">
+                <ScalarProperty Name="EsPrincipal" ColumnName="EsPrincipal" />
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADM_Empresa">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.ADM_Empresa">
+              <MappingFragment StoreEntitySet="ADM_Empresa">
+                <ScalarProperty Name="GiroId" ColumnName="GiroId" />
+                <ScalarProperty Name="CantidadOtros" ColumnName="CantidadOtros" />
+                <ScalarProperty Name="OtrosDescripcion" ColumnName="OtrosDescripcion" />
+                <ScalarProperty Name="CantidadProduccion" ColumnName="CantidadProduccion" />
+                <ScalarProperty Name="CantidadVentas" ColumnName="CantidadVentas" />
+                <ScalarProperty Name="CantidadDistribucion" ColumnName="CantidadDistribucion" />
+                <ScalarProperty Name="CantidadAdministrativo" ColumnName="CantidadAdministrativo" />
+                <ScalarProperty Name="CantidadTotalEmpleados" ColumnName="CantidadTotalEmpleados" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="PBX" ColumnName="PBX" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GE_Persona">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.GE_Persona">
+              <MappingFragment StoreEntitySet="GE_Persona">
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="ApellidoCasada" ColumnName="ApellidoCasada" />
+                <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+                <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PR_Proyecto">
+            <EntityTypeMapping TypeName="BarcoSoftDBModel.PR_Proyecto">
+              <MappingFragment StoreEntitySet="PR_Proyecto">
+                <ScalarProperty Name="PasswordCorreo" ColumnName="PasswordCorreo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="CodigoRegistro" ColumnName="CodigoRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoProyectoId" ColumnName="TipoProyectoId" />
+                <ScalarProperty Name="NoNutricionistas" ColumnName="NoNutricionistas" />
+                <ScalarProperty Name="DuracionConsultas" ColumnName="DuracionConsultas" />
+                <ScalarProperty Name="HoraFinConsultas" ColumnName="HoraFinConsultas" />
+                <ScalarProperty Name="HoraInicioConsultas" ColumnName="HoraInicioConsultas" />
+                <ScalarProperty Name="FechaInicioConsultas" ColumnName="FechaInicioConsultas" />
+                <ScalarProperty Name="MetasCalculadas" ColumnName="MetasCalculadas" />
+                <ScalarProperty Name="CitasProgramadas" ColumnName="CitasProgramadas" />
+                <ScalarProperty Name="FechaPrimeraCitaDiagnostico" ColumnName="FechaPrimeraCitaDiagnostico" />
+                <ScalarProperty Name="FechaCorreoInvitacion" ColumnName="FechaCorreoInvitacion" />
+                <ScalarProperty Name="NoParticipantesPorGrupo" ColumnName="NoParticipantesPorGrupo" />
+                <ScalarProperty Name="IndiceReclamos" ColumnName="IndiceReclamos" />
+                <ScalarProperty Name="AseguradoraId" ColumnName="AseguradoraId" />
+                <ScalarProperty Name="LogoURL" ColumnName="LogoURL" />
+                <ScalarProperty Name="CrearUsuarios" ColumnName="CrearUsuarios" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="FrecuenciaConsultasUnidad" ColumnName="FrecuenciaConsultasUnidad" />
+                <ScalarProperty Name="FrecuenciaAlertasUnidad" ColumnName="FrecuenciaAlertasUnidad" />
+                <ScalarProperty Name="FrecuenciaAlertas" ColumnName="FrecuenciaAlertas" />
+                <ScalarProperty Name="FrecuenciaConsultas" ColumnName="FrecuenciaConsultas" />
+                <ScalarProperty Name="NoConsultasNutricionales" ColumnName="NoConsultasNutricionales" />
+                <ScalarProperty Name="NoAsistentes" ColumnName="NoAsistentes" />
+                <ScalarProperty Name="NoFacilitadores" ColumnName="NoFacilitadores" />
+                <ScalarProperty Name="NoEnfermeras" ColumnName="NoEnfermeras" />
+                <ScalarProperty Name="NoParticipantes" ColumnName="NoParticipantes" />
+                <ScalarProperty Name="NoSemanas" ColumnName="NoSemanas" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

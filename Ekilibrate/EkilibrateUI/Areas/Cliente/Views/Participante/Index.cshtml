@@ -1,0 +1,113 @@
+﻿@using Kendo.Mvc.UI
+
+<h2>Proyecto</h2>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">Listado de Participantes</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    @*<a href="#" data-toggle="dispose">
+                            <i class="fa fa-times"></i>
+                        </a>*@
+                </div>
+            </div>
+            <div class="widget-body">
+                @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Proyecto.clsProyectoCliente>()
+
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Width(25).Title("");
+                        columns.Bound(p => p.Empresa).Width(175);
+                        columns.Bound(p => p.Estado).Width(175);
+                        columns.Bound(p => p.FechaInicio).Width(175).Format("{0:dd/MM/yyyy}");
+                        columns.Bound(p => p.FechaFin).Width(175).Format("{0:dd/MM/yyyy}");
+                        columns.Command(command =>
+                        {
+                            command.Edit().Text("Actualizar");
+                            command.Destroy().Text("Eliminar");
+                            command.Custom("Contactos").Text("Contactos").Click("");
+                        }).Width(200);
+                    })
+                    .ToolBar(toolbar => {
+                        toolbar.Create().Text(" ");
+                        toolbar.Custom().Name("Excel").Text(" ").Action("CargarExcel", "Participante");
+                    })
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                        .Filterable(f =>
+                        {
+                            f.Extra(false);
+                        })
+                        .Pageable(p =>
+                        {
+                            p.Refresh(true);
+                        })
+                    .Sortable()
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.Id);
+                            model.Field(p => p.Empresa).Editable(false);
+
+                        })
+                                .Create(update => update.Action("Create", "Proyecto"))
+                                .Read(read => read.Action("Read", "Proyecto"))
+                                .Update(update => update.Action("Update", "Proyecto"))
+                                .Destroy(update => update.Action("Delete", "Proyecto"))
+                    )
+                    .Events(e => e.Edit("onEdit"))
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+@{Html.Kendo().Window()
+    .Name("window")
+    .Title("Participantes")
+    .Modal(true)
+    .Visible(false)
+    .Width(950)
+  .HtmlAttributes(new { style = "background-color:white;" })
+    .Height(830)
+    .Position(x => x.Top(50))
+
+    .Content(
+        @<text>
+            <form method="post" action='<%= Url.Action("Submit") %>' style="width:45%">
+                <div class="demo-section">
+                    <%= Html.Kendo().Upload()
+                    .Name("files")
+                    %>
+                    <p>                        
+                        @*<input type="submit" value="Submit" class="k-button" />*@
+                        <a onclick="document.getElementById('CargarExcelForm').submit()" title='CargarExcel'><img src='../assets/img/icons/MS Excel-32.png' /></a>
+                    </p>
+                </div>
+            </form>
+        </text>
+    )
+    .Render();
+}
+
+<script type="text/javascript">
+    function onEdit(e) {
+        $('[name="Empresa"]').attr("readonly", true);
+    }
+
+    function onClick(e) {
+        window.location.href = "/Cliente/ProyectoParticipantes/" + tableName;
+    }
+</script>

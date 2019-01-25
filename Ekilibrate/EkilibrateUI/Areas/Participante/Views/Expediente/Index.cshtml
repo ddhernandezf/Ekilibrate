@@ -1,0 +1,399 @@
+﻿@model Ekilibrate.Model.Entity.Participante.ResumenExpediente
+
+@{
+    ViewBag.Title = "Expediente del Participante";
+    ViewBag.Description = "Expediente";
+    Layout = "~/Views/Shared/_Default.cshtml";
+
+    Ekilibrate.Model.Entity.Nutricionista.clsSeguimiento ModelSeg = ViewBag.ModelSeg;
+    Ekilibrate.Model.Entity.Nutricionista.clsPlanAlimentacion ModelPlan = ViewBag.ModelPlan;
+}
+
+<div class="tabbable">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="tab-green bg-lightred">
+            <a data-toggle="tab" href="#seguimiento">
+                <span class="widget-caption h5" >Seguimiento</span>
+            </a>
+        </li>
+
+        <li class="tab-green bg-green">
+            <a data-toggle="tab" href="#metas">
+                <span class="widget-caption h5">Cuadro de Metas</span>
+            </a>
+        </li>
+
+        <li class="tab-themethirdcolor bg-themethirdcolor">
+            <a data-toggle="tab" href="#plan">
+                <span class="widget-caption h5">Plan de Alimentación</span>
+            </a>
+        </li>
+
+        <li class="tab-themeprimary bg-themeprimary">
+            <a data-toggle="tab" href="#resumen">
+                <span class="widget-caption h5" >Resumen</span>
+            </a>
+        </li>
+        
+        <li class="tab-themethirdcolor bg-themethirdcolor">
+            <a data-toggle="tab" href="#salud">
+                <span class="widget-caption h5" >Estado de Salud</span>
+            </a>
+        </li>
+
+        <li class="tab-themefourthcolor bg-themefourthcolor">
+            <a data-toggle="tab" href="#emociones">
+                <span class="widget-caption h5" >Emociones</span>
+            </a>
+        </li>
+
+        <li class="tab-green bg-green">
+            <a data-toggle="tab" href="#relaciones">
+                <span class="widget-caption h5" >Relaciones Interpersonales</span>
+            </a>
+        </li>
+
+        <li class="tab-themeprimary bg-themeprimary">
+            <a data-toggle="tab" href="#crecimiento">
+                <span class="widget-caption h5" >Crecimiento Personal</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="seguimiento" class="tab-pane in active">
+            @{
+                Html.RenderPartial("Seguimiento");
+            }
+        </div>
+
+        <div id="plan" class="tab-pane">
+            @{
+                Html.RenderPartial("~/Areas/Nutricionista/Views/Seguimiento/Plan.cshtml", ModelPlan);
+            }
+        </div>
+
+        <div id="metas" class="tab-pane in active">
+            @{
+                Html.RenderPartial("~/Areas/Nutricionista/Views/Seguimiento/CuadroMetas.cshtml", ModelSeg);                
+            }
+        </div>
+
+        <div id="resumen" class="tab-pane">
+            @{
+                Html.RenderPartial("Resumen");
+            } 
+        </div>
+
+        <div id="salud" class="tab-pane">
+            @{
+                Html.RenderPartial("EstadoSaludExpediente", new Ekilibrate.Model.Entity.Participante.clsExpedienteEstadoSalud());
+            } 
+        </div>
+
+        <div id="emociones" class="tab-pane">
+            @{
+                Html.RenderPartial("ManejoEmociones", new Ekilibrate.Model.Entity.Participante.clsExpedienteManejoEmociones());
+            } 
+        </div>
+
+        <div id="relaciones" class="tab-pane">
+            @{
+                Html.RenderPartial("RelacionesInterpersonales", new Ekilibrate.Model.Entity.Participante.clsExpedienteRelacionesInterpersonales());
+            } 
+        </div>
+
+        <div id="crecimiento" class="tab-pane">
+            @{
+                Html.RenderPartial("CrecimientoPersonal", (Ekilibrate.Model.Entity.Participante.clsExpedienteCrecimientoPersonal)ViewBag.ModelCP);
+            } 
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    //window.onresize = heightsResize;
+    
+    //function heightsResize() {
+    //    var alt = document.getElementById('internal-row').clientHeight;
+    //    var alt2 = document.getElementById('cell-inicial').clientHeight;
+
+    //    $(".background-img").css("height", alt);
+    //    $(".internal-cell").css("height", alt2);
+    //};
+</script>
+
+<script type="text/javascript">
+    function change_handler(e) {
+        //console.log(e);
+        if (e.action == "sync") {
+            //$("#spinner").show();
+            location.reload();
+        }
+    }
+
+    $("#gridPasos").on('edit', function () {
+        e.container.find("td:eq(2) input").focus();
+    });
+</script>
+
+<style>
+    div#tabs li.k-item.k-state-active.k-link {
+        color: #fbfbfb;
+    }
+
+    div#tabs li.k-item.k-state-default {
+        color: white !important;
+    }
+</style>
+
+<style>
+    @@media (min-width: 1200px) {
+        .col-lg-4 {
+            width: 32% !important;
+            padding: 0px 5px 0px 5px !important;
+        }
+    }
+</style>
+
+<style>
+    .internal-row {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0px 0px 0px 0px !important;
+        padding: 0px 0px 0px 0px !important;
+        height: 90px;
+    }
+
+        .internal-row .background-img {
+            width: 20%;
+            float: left;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            padding-left: 5px;
+            margin-left: 1%;
+            height: 90px;
+        }
+
+        .internal-row .background-img-bioquimico {
+            width: 30% !important;
+        }
+
+        .internal-row .background-img-facriesgo {
+            width: 29% !important;
+        }
+
+        .internal-row .background-img-evper {
+            width: 29% !important;
+        }
+
+        .internal-row .background-img .value {
+            font-size: 21px !important;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important;
+            color: white;
+            position: relative;
+            width: 82%;
+            padding: 0px 0px 0px 0px !important;
+            margin: 47% 0px 0px 0px !important;
+            text-align: center;
+        }
+
+        .internal-row .background-img .val-fisiologico {
+            font-size: 14px !important;
+        }
+
+        .internal-row .background-img .val-bioquimico {
+            margin: 37% 0px 0px 0px !important;
+        }
+
+        .internal-row .background-img .val-riesgo {
+            margin: 24% 0px 0px 0px !important;
+            font-size: 16px !important;
+        }
+
+        .internal-row .minirow {
+            width: 100%;
+            display: inline-block;
+            position: relative;
+        }
+
+            .internal-row .minirow .minititle {
+                font-weight: bolder;
+                font-size: 24px;
+                float: left;
+                width: 20%;
+            }
+
+            .internal-row .minirow .minivalue {
+                float: left;
+                margin-top: 2%;
+                width: 70%;
+                text-align: right;
+                font-size: 16px;
+            }
+
+        .internal-row .grid-tcomida {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 5%;
+        }
+
+            .internal-row .grid-tcomida .grid-row {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+            }
+
+                .internal-row .grid-tcomida .grid-row .grid-cell {
+                    border: solid;
+                    float: left;
+                    width: 30%;
+                }
+
+    .red-row {
+        width: 100%;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .red-vale {
+        float: left;
+        width: 68%;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bolder;
+        margin-top: 5%;
+    }
+
+    .comida-row {
+        display: inline-block;
+        width: 100%;
+    }
+
+        .comida-row .comida-vale {
+            float: left;
+            width: 60%;
+            margin-left: 3%;
+            overflow-y: scroll;
+            height: 81px;
+        }
+
+
+    .cell-secundary {
+        width: 20% !important;
+    }
+
+    .internal-cell {
+        width: 33%;
+        position: relative;
+        float: left;
+        display: inline-block;
+        margin-left: 1% !important;
+        padding: 0px;
+    }
+
+        .internal-cell .info-img {
+            width: 32%;
+            display: inline-block;
+            position: relative;
+            float: left;
+        }
+
+            .internal-cell .info-img img {
+                width: 100%;
+            }
+
+    .part-info {
+        width: 66%;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        margin-left: 6px !important;
+    }
+
+        .part-info .Nombre {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .part-info .info-row {
+            float: left;
+            width: 100%;
+            display: inline-block;
+            font-size: 10px;
+            padding-top: 3px;
+        }
+
+            .part-info .info-row .title {
+                width: 40%;
+                float: left;
+                font-weight: bolder;
+            }
+
+            .part-info .info-row .value {
+                width: 53%;
+                float: left;
+            }
+
+    .internal-cell .notarank {
+        height: 100px;
+    }
+
+        .internal-cell .notarank .imgnotarank {
+            width: 41%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            padding-left: 5px;
+            margin-left: 2%;
+            height: 90px;
+            float: left;
+        }
+
+    .internal-cell .img-contactado {
+        position: relative;
+        float: left;
+        display: inline-block;
+        width: 39%;
+    }
+
+    .internal-cell .info-contactado {
+        display: inline-block;
+        float: left;
+        width: 53%;
+        margin-top: 10%;
+        margin-left: 1%;
+        text-align: center;
+    }
+
+        .internal-cell .info-contactado .title {
+            font-size: 17px;
+            font-weight: bolder;
+        }
+
+    .internal-cell .contactado {
+        width: 90%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        padding-left: 5px;
+        margin-left: 2%;
+        height: 90px;
+        float: left;
+    }
+
+    .nav-tabs > li > a {
+        color: #FFFFFF;
+    }
+
+    .nav-tabs > li:active > a {
+        color: #000000;
+    }
+
+</style>

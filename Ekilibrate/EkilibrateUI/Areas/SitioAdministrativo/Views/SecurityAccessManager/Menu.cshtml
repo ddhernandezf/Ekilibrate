@@ -1,0 +1,201 @@
+﻿@model  EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Menu
+@using Kendo.Mvc.UI;
+
+@using (Html.BeginForm("OperarMenu", "SecurityAccessManager", FormMethod.Post, new { id = "myForm" }))
+{
+
+
+
+
+    <div id="partial">
+        <center>
+            <h3>Información de menu</h3>
+            <br />
+            @Html.HiddenFor(model => model.IdMenu)
+            @Html.HiddenFor(model => model.IdObjeto)
+
+            @Html.ValidationSummary(string.Empty, new { @style = "color:#1472d0;" })
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.LabelFor(model => model.Nombre)
+                </div>
+                <div class="wraper-content">
+                    @Html.EditorFor(model => model.Nombre)
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+            </div>
+
+            <div class="wrapper-row padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.LabelFor(model => model.IdMenuTipo)
+                </div>
+                <div class="wraper-content">
+                    @(Html.Kendo().DropDownListFor(m => m.IdMenuTipo)
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Events(e => e.Select("onChangeType"))
+     .BindTo((System.Collections.IEnumerable)(new EkilibrateUI.Areas.SitioAdministrativo.Models.Data.EkiibrateDBEntities(true)).MenuTipo.Select(x => new
+                 {
+                     Text = x.Nombre,
+                     Value = x.IdMenuTipo
+                 }))
+                    )
+                    @Html.ValidationMessageFor(model => model.IdMenuTipo)
+                </div>
+            </div>
+
+
+            <div id="htmlDescDiv" class="wrapper-row fha-padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.LabelFor(model => model.ImageUrl)
+                </div>
+                <div class="wraper-content">
+                    @Html.EditorFor(model => model.ImageUrl)
+                    @Html.ValidationMessageFor(model => model.ImageUrl)
+                </div>
+            </div>
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                @(
+ Html.Kendo().ListView<EkilibrateUI.Areas.SitioAdministrativo.Models.Data.Menu>()
+                 .Name("lstView")
+                 .TagName("div")
+
+                 .ClientTemplateId("template")
+                    .DataSource(dataSource =>
+                    {
+                        dataSource.Read(read => read.Action("MenuImages", "SecurityAccessManager"));
+                        dataSource.PageSize(48);
+                    })
+                .Pageable()
+                )
+
+            </div>
+
+            <script type="text/x-kendo-tmpl" id="template">
+                <i onclick="seleccionImagen('#:ImageUrl#');" class="#:ImageUrl#" style="height:30px;width:30px;"></i>
+
+
+            </script>
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.LabelFor(model => model.TargetController)
+                </div>
+                <div class="wraper-content">
+                    @Html.EditorFor(model => model.TargetController)
+                    @Html.ValidationMessageFor(model => model.TargetController)
+                </div>
+            </div>
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.LabelFor(model => model.Target)
+                </div>
+                <div class="wraper-content">
+                    @Html.EditorFor(model => model.Target)
+                    @Html.ValidationMessageFor(model => model.Target)
+                </div>
+            </div>
+
+            <div class="wrapper-row fha-padding-top-15px ">
+                <div class="wraper-title fha-font-size">
+                    @Html.Label("Activar")
+                </div>
+                <div class="wraper-content">
+                    @Html.CheckBoxFor(model => model.Activo, new { style = "position: inherit !important; opacity: 1 !important;" })
+                    @Html.ValidationMessageFor(model => model.Activo)
+                </div>
+            </div>
+            <div class="wrapper-row fha-padding-top-15px ">
+
+                @(Html.Kendo().Button()
+                    .Name("btnSend")
+                    .Content("Guardar")
+                    .HtmlAttributes(new { @class = "k-primary" })
+                )
+
+                @(Html.Kendo().Button()
+                    .Name("GenerarMenu")
+                    .Content("Cerrar")
+                    .HtmlAttributes(new { @class = "k-primary" })
+                )
+
+            </div>
+
+
+        </center>
+    </div>
+}
+
+<script type="text/javascript">
+
+    function seleccionImagen(ImageName)
+    {
+        $("#ImageUrl").val( ImageName);
+
+
+    }
+
+    $("#GenerarMenu").click(function () {
+        var dialog = $("#windowMenu").data("kendoWindow");
+        dialog.close();
+    }
+    );
+
+    $("#btnSend").click(function () {
+
+        var frm = $('#myForm');
+        //alert($("#Name").val() );
+        var m = { "Nombre": $("#Nombre").val() ,
+            "IdObjeto": $("#IdObjeto").val() ,
+            "Activo": $("#Activo").is(":checked") ,
+            "Target": $("#Target").val() ,
+            "TargetController": $("#TargetController").val() ,
+            "IdMenuTipo": $("#IdMenuTipo").val() ,
+            "ImageUrl": $("#ImageUrl").val() ,
+            "IdMenu": $("#IdMenu").val()
+        }
+
+
+        var dialog = $("#windowMenu").data("kendoWindow");
+        dialog.refresh({
+            url:  "@Url.Action("OperarMenu", "SecurityAccessManager")",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ model: m })
+        });
+
+        dialog.center();
+        dialog.open();
+
+
+    }
+    );
+
+    $(document).ready(function () {
+
+
+
+        $("#MenuProductoDiv").fadeOut(0);
+        $("#myForm").submit(function () {
+            return false;
+            // if (!isValid) {
+            //    if (true) {
+            //        alert('opa');
+            //    }
+            //    else
+            //    {
+            //        alert("viejo");
+            //        //   $('#myForm').validate().showErrors();
+            //        return false;
+            //    }
+        });
+
+    })
+
+</script>
+<script type="text/javascript">
+    var isValid = @Html.Raw(Json.Encode(ViewData.ModelState.IsValid));
+
+</script>

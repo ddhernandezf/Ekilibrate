@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+
+
+<div class="grid-mantenimientos-content-center">
+
+
+    @model System.Collections.Generic.IEnumerable<SitioAdministrativoUI.Models.Data.Usuario>
+
+
+    @(Html.Kendo().Grid(Model)
+
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.IdUsuario).Title("").Width(50);
+                columns.Bound(p => p.NombreUsuario).Width(100);
+                columns.Bound(p => p.Persona.NombreCompleto).Width(250);
+                columns.ForeignKey(p => p.IdTipoUsuario, (System.Collections.IEnumerable)ViewBag.UserTypes, "Value", "Text")
+                             .Title("Tipo Usuario").Width(150);
+
+                columns.Command(command => { command.Edit().Text("Actualizar"); command.Destroy().Text("Eliminar"); }).Width(172);
+            })
+                .ToolBar(toolbar => toolbar.Create().Text("Nuevo"))
+                    .Editable(editable =>
+                    {
+                        editable.Mode(GridEditMode.PopUp ).DisplayDeleteConfirmation(true).ConfirmDelete("¿Está seguro que desea eliminar?").TemplateName("UserTemplate");
+                    })
+                    .Filterable(f =>
+                    {
+                        f.Extra(false);
+                    })
+                    .Pageable(p =>
+                    {
+                        p.Refresh(true);
+                    })
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .ServerOperation(false)
+                .Events(events =>
+                        {
+                            events.Change("GridReload");
+                            events.Error("error_handler");
+                        })
+                .Model(model =>
+                {
+                    model.Id(p => p.IdUsuario);
+                    model.Field(p => p.Persona).DefaultValue(new SitioAdministrativoUI.Models.Data.Persona());
+                })
+                    .Create(update => update.Action("User_Create", "AccountsManager"))
+                    .Read(read => read.Action("User_Read", "AccountsManager"))
+                    .Update(update => update.Action("User_Update", "AccountsManager"))
+                    .Destroy(update => update.Action("User_Destroy", "AccountsManager"))
+            )
+    )
+
+</div>
+
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function GridReload(e) {
+
+        if (e.action == "sync") {
+            $("#grid").data("kendoGrid").dataSource.read();
+        }
+    }
+</script>

@@ -1,0 +1,888 @@
+﻿@model Ekilibrate.Model.Entity.Participante.ResumenExpediente
+
+<div class="row" style="background-color: #E4E2E5;">
+    <div id="cell-inicial" class="internal-cell">
+        <div class="info-img">
+            @{
+                BarcoSoftUtilidades.Seguridad.Usuario usuario = null;
+                try
+                {
+                    usuario = BarcoSoftUtilidades.Extensiones.GetActualUser(this.Context);
+                }
+                catch (Exception ex)
+                {
+                }
+
+               
+                if (usuario != null)
+                {
+                    if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".jpg")))
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".jpg")" class="avatar">
+                    }
+                    else if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".png")))
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".png")" class="avatar">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" class="avatar">
+                    }
+                }
+            }
+        </div>
+        <div class="part-info">
+            <div class="Nombre">@Model.Nombre</div>
+            <div class="info-row">
+                <div class="title">DEPARTAMENTO</div>
+                <div class="value">Informatica</div>
+            </div>
+            <div class="info-row">
+                <div class="title puesto">PUESTO:</div>
+                <div class="value">@Model.Puesto</div>
+            </div>
+            <div class="info-row">
+                <div class="title">CORREO ELECTRONICO:</div>
+                <div class="value">@Model.Correo</div>
+            </div>
+        </div>
+    </div>
+    <div class="internal-cell cell-secundary">
+        <div class="notarank">
+            <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/16Estrella.png")')">
+                <div class="value">5</div>
+            </div>
+            <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/16Estrella.png")')">
+                <div class="value">16</div>
+            </div>
+        </div>
+    </div>
+    <div class="internal-cell cell-secundary">
+        <div class="img-contactado">
+            @{
+                String BackgroundValue = "";
+                if (Model.MedioComunicacion == "Llamada")
+                {
+                    BackgroundValue = @Url.Content("~/assets/img/icons/IconosExpediente/Png3/13Tel.png");
+                }
+                else if (Model.MedioComunicacion == "Whatsapp")
+                {
+                    BackgroundValue = @Url.Content("~/assets/img/icons/IconosExpediente/Png3/11Whats.png");
+                }
+                else if (Model.MedioComunicacion == "FB FB Messenger")
+                {
+                    BackgroundValue = @Url.Content("~/assets/img/icons/IconosExpediente/Png3/12Face.png");
+                }
+                else if (Model.MedioComunicacion == "E-mail")
+                {
+                    BackgroundValue = @Url.Content("~/assets/img/icons/IconosExpediente/Png3/10Mail.png");
+                }
+            }
+            <div class="contactado" style="background-image:url('@BackgroundValue')">
+            </div>
+        </div>
+        <div class="info-contactado">
+            <div class="title">TELEFONO:</div>
+            <div class="value">@Model.Telefono</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themeprimary">
+                <span class="widget-caption">Información general</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/1-Edad.png")')">
+                        <div class="value">@Model.Edad</div>
+                    </div>
+                    @{if (Model.Sexo.ToUpper() == "MASCULINO")
+                    {
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/3-Género.png")')"></div>
+                    }
+                    else if (Model.Sexo.ToUpper() == "FEMENINO")
+                    {
+                        if (Model.Menopausia)
+                        {
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/2-1-Género.png")')"></div>
+                        }
+                        else
+                        {
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/2-Género.png")')"></div>
+                        }
+
+                        if (Convert.ToBoolean(Model.EsEmbarazada))
+                        {
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/4-EFisio.png")')"></div>
+                            if (!String.IsNullOrEmpty(Model.EdadGestacional) || !String.IsNullOrWhiteSpace(Model.EdadGestacional))
+                            {
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/5-EFisio.png")')">
+                        <div class="value val-fisiologico">@Model.EdadGestacional</div>
+                    </div>
+                            }
+                        }
+                    }
+                    }
+
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/16Estrella.png")')">
+                        <div class="value">5</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Antropometría</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/6-PesoR.png")')">
+                        <div class="value">@Model.PesoReal</div>
+                    </div>
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/7-PesoD.png")')">
+                        <div class="value">@Model.PesoDeseable</div>
+                    </div>
+                    <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/8-PesoTalla.png")')">
+                        <div class="value">@Model.PorcPT %</div>
+                    </div>
+                    <div id="segnut-abdomen" class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/9-Abd.png")')">
+                        <div class="value">@Model.Abdomen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Análisis bioquímico</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/10-Coles.png")')"><div class="value val-bioquimico">@Model.CHOL</div></div>
+                    <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/g1.png")')"><div class="value val-bioquimico">@Model.GLI</div></div>
+                    <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/17-tri.png")')"><div class="value val-bioquimico">@Model.TGL</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Factores de riesgo</span>
+            </div>
+            <div class="widget-body">
+                <div class="internal-row" style="overflow-y:scroll">
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/11-3-Taba.png")')"><div class="value val-riesgo">@Model.FrecuenciaFumaTexto</div></div>
+                                        
+                    @if (Convert.ToBoolean(Model.Bebe))
+                    {
+                        if (Model.Sexo.ToUpper() == "FEMENINO")
+                        {
+                            if (Model.Enfermo > 0)
+                            {
+                                <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco3.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                            }
+                            else
+                            {
+                                if (Model.CantidadBebe == 1 && Model.FrecuenciaBebe == 1)
+                                {
+                                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                                }
+                                else if (Model.CantidadBebe > 1 && Model.FrecuenciaBebe > 1)
+                                {
+                                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco2.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                                }
+                            }
+                        }
+
+                        if (Model.Sexo.ToUpper() == "MASCULINO")
+                        {
+                            if (Model.Enfermo > 0)
+                            {
+                                <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco3.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                            }
+                            else
+                            {
+                                if (Model.CantidadBebe == 2 && Model.FrecuenciaBebe == 1)
+                                {
+                                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                                }
+                                else if (Model.CantidadBebe > 2 && Model.FrecuenciaBebe > 1)
+                                {
+                                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/13-Alco2.png")')"><div class="value val-riesgo">@Model.FrecuenciaBebeTexto</div></div>
+                                }
+                            }
+                        }
+
+                    }
+
+                    @if (Convert.ToBoolean(Model.Diabetes))
+                    {
+                        int flagdiab1 = 3;
+                        if (flagdiab1 == 1)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/15-diabetes.png")')"></div>
+                        }
+                        else if (flagdiab1 == 2)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/15-diabetes1.png")')"></div>
+                        }
+                        else if (flagdiab1 == 3)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/15-diabetes2.png")')"></div>
+                        }
+                    }
+
+
+                    @{
+                        int flagantfamt1 = 2;
+                        if (flagantfamt1 == 1)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/12-AFam.png")')"></div>
+                        }
+                        else if (flagantfamt1 == 2)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/12-AFam1.png")')"></div>
+                        }
+                        else if (flagantfamt1 == 3)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/12-AFam2.png")')"></div>
+                        }
+                    }
+
+                    @{
+                        int flagactfis1 = 4;
+                        if (flagactfis1 == 1)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/14-Afisica.png")')"></div>
+                        }
+                        else if (flagactfis1 == 2)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/14-AFisica1.png")')"></div>
+                        }
+                        else if (flagactfis1 == 3)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/14-Afisica2.png")')"></div>
+                        }
+                        else if (flagactfis1 == 4)
+                        {
+                    <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/14-Afisica3.png")')"></div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Recordatorio 24h</span>
+            </div>
+            <div class="widget-body">
+                <div class="internal-row">
+                    <div class="minirow">
+                        <div class="minititle">VET</div>
+                        <div class="minivalue">@Model.VET</div>
+                    </div>
+                    <div class="minirow">
+                        <div class="minititle">RED</div>
+                        <div class="minivalue">@Model.RED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Distribución de VET</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    @{
+                        int flagvet1 = 1;
+                        if (flagvet1 == 1)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/18-prote.png")')"><div class="value val-bioquimico">@Model.Proteinas</div></div>
+                        }
+                        else if (flagvet1 == 2)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/18-prote1.png")')"><div class="value val-bioquimico">@Model.Proteinas</div></div>
+                        }
+                        else if (flagvet1 == 3)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/18-prote2.png")')"><div class="value val-bioquimico">@Model.Proteinas</div></div>
+                        }
+                        else if (flagvet1 == 4)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/18-prote3.png")')"><div class="value val-bioquimico">@Model.Proteinas</div></div>
+                        }
+}
+
+                    @{
+                        int flagvet2 = 2;
+                        if (flagvet2 == 1)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/27-cereal.png")')"><div class="value val-bioquimico">@Model.Carbohidratos</div></div>
+                        }
+                        else if (flagvet2 == 2)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/27-cereal1.png")')"><div class="value val-bioquimico">@Model.Carbohidratos</div></div>
+                        }
+                        else if (flagvet2 == 3)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/27-cereal2.png")')"><div class="value val-bioquimico">@Model.Carbohidratos</div></div>
+                        }
+                        else if (flagvet2 == 4)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/27-cereal3.png")')"><div class="value">@Model val-bioquimico.Carbohidratos</div></div>
+                        }
+}
+
+                    @{
+                        int flagvet3 = 3;
+                        if (flagvet3 == 1)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/19-grasa.png")')"><div class="value val-bioquimico">@Model.Grasas</div></div>
+                        }
+                        else if (flagvet3 == 2)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/19-grasa1.png")')"><div class="value val-bioquimico">@Model.Grasas</div></div>
+                        }
+                        else if (flagvet3 == 3)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/19-grasa2.png")')"><div class="value val-bioquimico">@Model.Grasas</div></div>
+                        }
+                        else if (flagvet3 == 4)
+                        {
+                            <div class="background-img background-img-bioquimico" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/19-grasa3.png")')"><div class="value val-bioquimico">@Model.Grasas</div></div>
+                        }
+}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Frecuencia de consumo</span>
+            </div>
+            <div class="widget-body">
+                <div class="internal-row" style="overflow-y:scroll">
+                    @{
+                        if (Model.FrecuenciaSal == "VERDE")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/23-asal1.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaSal == "AMARILLO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/23-asal2.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaSal == "ROJO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/23-asal3.png")')"></div>
+                        }
+                    }
+
+                    @{
+                        if (Model.FrecuenciaAzucar == "VERDE")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/22-aazu1.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaAzucar == "AMARILLO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/22-aazu2.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaAzucar == "ROJO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/22-aazu3.png")')"></div>
+                        }
+                    }
+
+                    @{
+                        if (Model.FrecuenciaGrasa == "VERDE")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/21-fat1.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaGrasa == "AMARILLO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/21-fat2.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaGrasa == "ROJO")
+                        {
+                            <div class="background-img background-img-facriesgo" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/21-fat3.png")')"></div>
+                        }
+                    }
+
+                    @{
+                        if (Model.FrecuenciaFibra == "VERDE")
+                        {
+                            <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/24-afib1.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaFibra == "AMARILLO")
+                        {
+                            <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/24-afib2.png")')"></div>
+                        }
+                        else if (Model.FrecuenciaFibra == "ROJO")
+                        {
+                            <div class="background-img" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/24-afib3.png")')"></div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Tiempos de comida</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="grid-tcomida">
+                        <div class="grid-row">
+                            @if (Convert.ToBoolean(Model.Desayuno))
+                            {
+                                <div class="grid-cell" style="background-color: #E4E2E5;">D</div>
+                            }
+                            else
+                            {
+                                <div class="grid-cell">D</div>
+                            }
+
+                            @if (Convert.ToBoolean(Model.RefaAM))
+                            {
+                                <div class="grid-cell" style="background-color: #E4E2E5;">R</div>
+                            }
+                            else
+                            {
+                                <div class="grid-cell">R</div>
+                            }
+
+                            @if (Convert.ToBoolean(Model.Almuerzo))
+                            {
+                                <div class="grid-cell" style="background-color: #E4E2E5;">A</div>
+                            }
+                            else
+                            {
+                                <div class="grid-cell">A</div>
+                            }
+
+                            @if (Convert.ToBoolean(Model.RefaPM))
+                            {
+                                <div class="grid-cell" style="background-color: #E4E2E5;">R</div>
+                            }
+                            else
+                            {
+                                <div class="grid-cell">R</div>
+                            }
+
+                            @if (Convert.ToBoolean(Model.Cena))
+                            {
+                                <div class="grid-cell" style="background-color: #E4E2E5;">C</div>
+                            }
+                            else
+                            {
+                                <div class="grid-cell">C</div>
+                            }
+                            <div class="grid-cell">CN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Evaluación personal</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    @{
+                        int flagevpe1 = 3;
+                        if (flagevpe1 == 1)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/25-agua.png")')"><div class="value">@Model.Agua</div></div>
+                        }
+                        else if (flagevpe1 == 2)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/25-agua1.png")')"><div class="value">@Model.Agua</div></div>
+                        }
+                        else if (flagevpe1 == 3)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/25-agua2.png")')"><div class="value">@Model.Agua</div></div>
+                        }
+                        else if (flagevpe1 == 4)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/25-agua3.png")')"><div class="value">@Model.Agua</div></div>
+                        }
+                    }
+
+                    @{
+                        int flagevpe2 = 4;
+                        if (flagevpe2 == 1)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/26-sal.png")')"><div class="value">@Model.Sal</div></div>
+                        }
+                        else if (flagevpe2 == 2)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/26-sal1.png")')"><div class="value">@Model.Sal</div></div>
+                        }
+                        else if (flagevpe2 == 3)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/26-sal2.png")')"><div class="value">@Model.Sal</div></div>
+                        }
+                        else if (flagevpe2 == 4)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/26-sal3.png")')"><div class="value">@Model.Sal</div></div>
+                        }
+                    }
+
+                    @{
+                        int flagevpe3 = 1;
+                        if (flagevpe3 == 1)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/20-azucar.png")')"><div class="value">@Model.Azucar</div></div>
+                        }
+                        else if (flagevpe3 == 2)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/20-azucar1.png")')"><div class="value">@Model.Azucar</div></div>
+                        }
+                        else if (flagevpe3 == 3)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/20-azucar2.png")')"><div class="value">@Model.Azucar</div></div>
+                        }
+                        else if (flagevpe3 == 4)
+                        {
+                    <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png2/20-azucar3.png")')"><div class="value">@Model.Azucar</div></div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption"></span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="red-row">
+                        <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png/Red.png")')"></div>
+                        <div class="red-vale">@Model.RED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Comidas favoritas</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="comida-row">
+                        <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png3/7Megusta.png")')"></div>
+                        <div class="comida-vale">@Model.ComidasFavoritas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Comidas que no te gustan</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="comida-row">
+                        <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png3/8Nomegusta.png")')"></div>
+                        <div class="comida-vale">@Model.ComidasNoGustan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-themethirdcolor">
+                <span class="widget-caption">Comidas que te hacen daño</span>
+            </div>
+            <div class="widget-body">
+                <div id="internal-row" class="internal-row">
+                    <div class="comida-row">
+                        <div class="background-img background-img-evper" style="background-image:url('@Url.Content("~/assets/img/icons/IconosExpediente/Png3/9MehaceDaño.png")')"></div>
+                        <div class="comida-vale">@Model.ComidasDaninas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@media (min-width: 1200px) {
+        .col-lg-4 {
+            width: 32% !important;
+            padding: 0px 5px 0px 5px !important;
+        }
+    }
+</style>
+
+<style>
+    .internal-row {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0px 0px 0px 0px !important;
+        padding: 0px 0px 0px 0px !important;
+        height: 90px;
+    }
+
+        .internal-row .background-img {
+            width: 20%;
+            float: left;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            padding-left: 5px;
+            margin-left: 1%;
+            height: 90px;
+        }
+
+        .internal-row .background-img-bioquimico {
+            width: 30% !important;
+        }
+
+        .internal-row .background-img-facriesgo {
+            width: 29% !important;
+        }
+
+        .internal-row .background-img-evper {
+            width: 29% !important;
+        }
+
+        .internal-row .background-img .value {
+            font-size: 21px !important;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important;
+            color: white;
+            position: relative;
+            width: 82%;
+            padding: 0px 0px 0px 0px !important;
+            margin: 47% 0px 0px 0px !important;
+            text-align: center;
+        }
+
+        .internal-row .background-img .val-fisiologico {
+            font-size: 14px !important;
+        }
+
+        .internal-row .background-img .val-bioquimico {
+            margin: 37% 0px 0px 0px !important;
+        }
+
+        .internal-row .background-img .val-riesgo {
+            margin: 24% 0px 0px 0px !important;
+            font-size: 16px !important;
+        }
+
+        .internal-row .minirow {
+            width: 100%;
+            display: inline-block;
+            position: relative;
+        }
+
+            .internal-row .minirow .minititle {
+                font-weight: bolder;
+                font-size: 24px;
+                float: left;
+                width: 20%;
+            }
+
+            .internal-row .minirow .minivalue {
+                float: left;
+                margin-top: 2%;
+                width: 70%;
+                text-align: right;
+                font-size: 16px;
+            }
+
+        .internal-row .grid-tcomida {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 5%;
+        }
+
+            .internal-row .grid-tcomida .grid-row {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+            }
+
+                .internal-row .grid-tcomida .grid-row .grid-cell {
+                    border: solid;
+                    float: left;
+                    width: 30%;
+                }
+
+    .red-row {
+        width: 100%;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .red-vale {
+        float: left;
+        width: 68%;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bolder;
+        margin-top: 5%;
+    }
+
+    .comida-row {
+        display: inline-block;
+        width: 100%;
+    }
+
+        .comida-row .comida-vale {
+            float: left;
+            width: 60%;
+            margin-left: 3%;
+            overflow-y: scroll;
+            height: 81px;
+        }
+
+
+    .cell-secundary {
+        width: 20% !important;
+    }
+
+    .internal-cell {
+        width: 33%;
+        position: relative;
+        float: left;
+        display: inline-block;
+        margin-left: 1% !important;
+        padding: 0px;
+    }
+
+        .internal-cell .info-img {
+            width: 32%;
+            display: inline-block;
+            position: relative;
+            float: left;
+        }
+
+            .internal-cell .info-img img {
+                width: 100%;
+            }
+
+    .part-info {
+        width: 66%;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        margin-left: 6px !important;
+
+    }
+
+        .part-info .Nombre {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .part-info .info-row {
+            float: left;
+            width: 100%;
+            display: inline-block;
+            font-size: 10px;
+            padding-top: 3px;
+        }
+
+            .part-info .info-row .title {
+                width: 40%;
+                float: left;
+                font-weight: bolder;
+            }
+
+            .part-info .info-row .value {
+                width: 53%;
+                float: left;
+            }
+
+    .internal-cell .notarank {
+        height: 100px;
+    }
+
+        .internal-cell .notarank .imgnotarank {
+            width: 41%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            padding-left: 5px;
+            margin-left: 2%;
+            height: 90px;
+            float: left;
+        }
+
+    .internal-cell .img-contactado {
+        position: relative;
+        float: left;
+        display: inline-block;
+        width: 39%;
+    }
+
+    .internal-cell .info-contactado {
+        display: inline-block;
+        float: left;
+        width: 53%;
+        margin-top: 10%;
+        margin-left: 1%;
+        text-align: center;
+    }
+
+        .internal-cell .info-contactado .title {
+            font-size: 17px;
+            font-weight: bolder;
+        }
+
+    .internal-cell .contactado {
+        width: 90%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        padding-left: 5px;
+        margin-left: 2%;
+        height: 90px;
+        float: left;
+    }
+</style>

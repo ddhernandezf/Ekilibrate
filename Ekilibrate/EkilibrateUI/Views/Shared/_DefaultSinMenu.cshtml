@@ -1,0 +1,468 @@
+﻿@using System
+@using BeyondThemes.Bootstrap
+@using Kendo.Mvc.UI
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
+Version: 1.4.1
+Purchase: http://wrapbootstrap.com
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="@ViewBag.Description" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="~/assets/img/favicon.png" type="image/x-icon">
+
+    <!--Basic Styles-->
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <script src="~/Scripts/kendo/2015.2.624/cultures/kendo.culture.es-GT.min.js"></script>
+    <script src="~/Scripts/kendo/2015.2.624/messages/kendo.messages.es-GT.min.js"></script>
+    <script src="~/Scripts/ErrorHandler.js"></script>
+
+    <script>
+        kendo.culture("es-GT");
+    </script>
+
+    @Styles.Render("~/css/bootstrap")
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/css/ekilibrate-icons.css")" rel="stylesheet" type="text/css" />
+    <!--Fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300"
+          rel="stylesheet" type="text/css">
+
+    <style>
+    </style>
+
+    @(Html.Kendo().Tooltip()
+            .For("#grid")
+            .Filter(".k-grid-edit")
+        .Position(TooltipPosition.Top)
+        .Content("Editar")
+        .Width(120)
+    )
+
+    @(Html.Kendo().Tooltip()
+            .For("#grid")
+            .Filter(".k-grid-add")
+        .Position(TooltipPosition.Top)
+        .Content("Agregar")
+        .Width(120)
+    )
+
+    @(Html.Kendo().Tooltip()
+            .For("#grid")
+            .Filter(".k-grid-delete")
+        .Position(TooltipPosition.Top)
+        .Content("Eliminar")
+        .Width(120)
+    )
+
+    <!--Beyond styles-->
+    @Styles.Render("~/css/beyond")
+    @*<link id="skin-link" href="" rel="stylesheet" type="text/css" />*@
+    @*<link id="skin-link" href="@Url.Content("~/assets/css/skins/green.min.css")" rel="stylesheet" type="text/css" />*@
+    @{
+        var user = BarcoSoftUtilidades.Extensiones.GetActualUser(this.Context);
+        if (user != null && user.Proyecto != null && user.Proyecto.Color != null && user.Proyecto.Color.Length > 0)
+        {
+            switch (user.Proyecto.Color.ToUpper())
+            {
+                case "#5DB2FF":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/blue.min.css")" rel="stylesheet" type="text/css" /> break;
+                case "#00ADEF":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/azure.min.css")" rel="stylesheet" type="text/css" />   break;
+                case "#03B3B2":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/teal.min.css")" rel="stylesheet" type="text/css" />    break;
+                case "#53a93f":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/green.min.css")" rel="stylesheet" type="text/css" />   break;
+                case "#FF8F32":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/orange.min.css")" rel="stylesheet" type="text/css" />  break;
+                case "#cc324b":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/pink.min.css")" rel="stylesheet" type="text/css" />    break;
+                case "#AC193D":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/darkred.min.css")" rel="stylesheet" type="text/css" /> break;
+                case "#8C0095":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/purple.min.css")" rel="stylesheet" type="text/css" />  break;
+                case "#0072C6":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/darkblue.min.css")" rel="stylesheet" type="text/css" />break;
+                case "#585858":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/gray.min.css")" rel="stylesheet" type="text/css" />    break;
+                case "#474544":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/black.min.css")" rel="stylesheet" type="text/css" />   break;
+                case "#001940":
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/deepblue.min.css")" rel="stylesheet" type="text/css" /> break;
+                default:
+                    <link id="skin-link" href="@Url.Content("~/assets/css/skins/blue.min.css")" rel="stylesheet" type="text/css" /> break;
+            }
+        }
+        else
+        {
+            <link id="skin-link" href="@Url.Content("~/assets/css/skins/blue.min.css")" rel="stylesheet" type="text/css" />
+        }
+    }
+
+    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
+    @Scripts.Render("~/bundles/skin")
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body style="height:100%">
+    <script type="text/javascript">
+
+
+        $(window)
+
+
+        .ajaxComplete(function () {
+            $("#spinner").fadeOut("slow");
+        })
+                //Register a handler to be called when Ajax requests complete. This is an AjaxEvent.
+        .ajaxError(function () {
+            $("#spinner").fadeOut("slow");
+        })
+              //  Register a handler to be called when Ajax requests complete with an error. This is an Ajax Event.
+        .ajaxSend(function () {
+            $("#spinner").show();
+        })
+       // Attach a function to be executed before an Ajax request is sent. This is an Ajax Event.
+        .ajaxStart(function () {
+            $("#spinner").show();
+        })
+           // Register a handler to be called when the first Ajax request begins. This is an Ajax Event.
+        .ajaxStop(function () {
+            $("#spinner").fadeOut("slow");
+        })
+        //    Register a handler to be called when all Ajax requests have completed. This is an Ajax Event.
+        .ajaxSuccess(function () {
+            $("#spinner").fadeOut("slow");
+        })
+    </script>
+    <style>
+        #spinner {
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: #666666;
+            z-index: 30000001 !important;
+            opacity: .8;
+            filter: alpha(opacity=70);
+            display: none;
+        }
+    </style>
+
+
+
+    <div id="spinner">
+        <p style="position: absolute;top: 30%; left: 45%; color: White;">
+            Trabajando en su proceso, por favor espere...    <br /><br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="~/assets/img/loading.gif">
+        </p>
+    </div>
+
+    <!-- Loading Container -->
+    <div class="loading-container">
+        <div class="loader"></div>
+    </div>
+    <!--  /Loading Container -->
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+                        <small>
+                            <img src="~/assets/img/LogoCyanBaja3.png" alt="" />
+                        </small>
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings --->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                        <ul class="account-area">
+                            <li>
+                                <!--Tasks Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-tasks dropdown-arrow ">
+                                    <li class="dropdown-header bordered-darkorange">
+                                        <i class="fa fa-tasks"></i>
+                                        4 Tasks In Progress
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <span class="pull-left">Account Creation</span>
+                                                <span class="pull-right">65%</span>
+                                            </div>
+
+                                            <div class="progress progress-xs">
+                                                <div style="width:65%" class="progress-bar"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <span class="pull-left">Profile Data</span>
+                                                <span class="pull-right">35%</span>
+                                            </div>
+
+                                            <div class="progress progress-xs">
+                                                <div style="width:35%" class="progress-bar progress-bar-success"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <span class="pull-left">Updating Resume</span>
+                                                <span class="pull-right">75%</span>
+                                            </div>
+
+                                            <div class="progress progress-xs">
+                                                <div style="width:75%" class="progress-bar progress-bar-darkorange"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <span class="pull-left">Adding Contacts</span>
+                                                <span class="pull-right">10%</span>
+                                            </div>
+
+                                            <div class="progress progress-xs">
+                                                <div style="width:10%" class="progress-bar progress-bar-warning"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="dropdown-footer">
+                                        <a href="#">
+                                            See All Tasks
+                                        </a>
+                                        <button class="btn btn-xs btn-default shiny darkorange icon-only pull-right"><i class="fa fa-check"></i></button>
+                                    </li>
+                                </ul>
+                                <!--/Tasks Dropdown-->
+                            </li>
+                            @{
+                                BarcoSoftUtilidades.Seguridad.Usuario usuario = null;
+                                try
+                                {
+                                    usuario = BarcoSoftUtilidades.Extensiones.GetActualUser(this.Context);
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+
+
+                            }
+                            <li>
+                                <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                    <div class="avatar" title="Perfil">
+
+                                        @{
+                                            if (usuario != null)
+                                            {
+                                                if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".jpg")))
+                                                {
+                                                    <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".jpg")" class="avatar">
+                                                }
+                                                else if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".png")))
+                                                {
+                                                    <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".png")" class="avatar">
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" class="avatar">
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                    <section>
+                                        <h2><span class="profile"><span>@( usuario != null ? usuario.Nombres + " " + usuario.Apellidos : string.Empty)</span></span></h2>
+                                    </section>
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                    <li class="username"><a style="font-size: medium!important;">@( usuario != null ? usuario.Nombres + " " + usuario.Apellidos : string.Empty)</a></li>
+                                    <li class="email"><a>@( usuario != null ? usuario.NombreUsuario : string.Empty)</a></li>
+                                    <!--Avatar Area-->
+                                    <li>
+                                        <div class="avatar-area">
+
+                                            @{
+                                                if (usuario != null)
+                                                {
+                                                    if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".jpg")))
+                                                    {
+                                                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".jpg")" class="avatar">
+                                                    }
+                                                    else if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".png")))
+                                                    {
+                                                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".png")" class="avatar">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" class="avatar">
+                                                    }
+                                                }
+                                            }
+                                            @(Html.Kendo().Upload()
+                                                    .Name("files")
+                                                    .Multiple(false)
+                                                    .Messages(x => x.Select("Cambiar"))
+                                                    .Events(x => x.Complete("onComplete"))
+                                                    .Async(a => a
+                                                        .Save("Submit", "../SitioAdministrativo/Home")
+                                                        .AutoUpload(true)
+                                                    )
+                                            )
+                                            <script type="text/javascript">
+                                                function onComplete() {
+
+                                                    location.reload();
+                                                }
+                                            </script>                                            
+                                        </div>
+                                    </li>                                   
+                                    <!--/Theme Selector Area-->
+                                    <li class="dropdown-footer">
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            using (Html.BeginForm("LogOut", "../SitioAdministrativo/Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+
+
+
+
+                                                <a style="padding-right: 15px; padding-bottom: 11px;" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+
+                                            }
+                                        }
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>
+                            <!-- /Account Area -->
+                            <!--Note: notice that setting div must start right after account area list.
+                            no space must be between these elements-->
+                            <!-- Settings -->
+                        </ul>                        
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            
+                
+                    <div class="page-sidebar" id="sidebar">
+                        <!-- Page Sidebar Header-->
+                        @*<div class="sidebar-header-wrapper">
+                                <input type="text" class="searchinput" />
+                                <i class="searchicon fa fa-search"></i>
+                                <div class="searchhelper">Search Reports, Charts, Emails or Notificatio ns</div>
+                            </div>*@
+                        <!-- /Page Sidebar Header -->
+                        <!-- Sidebar Menu -->
+                        @{
+                            if (ViewContext.RouteData.DataTokens["area"] != null && ViewContext.RouteData.DataTokens["area"] != "Cliente")
+                            {
+                                @Html.MvcSiteMap().Menu()
+                            }
+                            <!-- /Sidebar Menu -->
+                        }
+                    </div>
+                
+            
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                @*<div class="page-breadcrumbs">
+                        @Html.MvcSiteMap().SiteMapPath()
+                    </div>*@
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+                <div class="page-header position-relative">
+                    @*@Html.MvcSiteMap().SiteMapTitle()*@
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                <div class="page-body" style="height:98%;">
+                    <!-- Your Content Goes Here -->
+                    @RenderBody()
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+    </div>
+
+    <!--Basic Scripts-->
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!--Beyond Scripts-->
+    @Scripts.Render("~/bundles/beyond")
+
+    <!--Page Related Scripts-->
+    @RenderSection("PageScripts", required: false)
+</body>
+<!--  /Body -->
+</html>

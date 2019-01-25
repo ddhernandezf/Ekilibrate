@@ -1,0 +1,211 @@
+﻿
+@using Kendo.Mvc.UI
+@model int?
+<div class="edit-form">
+
+
+    <div class="row">
+
+
+
+        <div class="tpart-a">
+            <label style="color: #50A6D0;font-size:  20px;text-align: center;width: 100%;">
+                TALLER MANEJO DE FINANZAS PERSONALES
+
+            </label>
+            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.clsCalificacionTaller>()
+
+                    .Name("gridFinanzasPersonalesTaller")
+
+
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.IdTaller).Hidden();
+                        columns.Bound(p => p.AreaId).Hidden();
+                        columns.Bound(p => p.NoSesion);
+
+                        columns.Bound(p => p.Tarea);
+                        columns.Bound(p => p.Asistencia);
+
+                    })
+                            .ToolBar(toolbar => toolbar.Save())
+                        .Editable(editable => editable.Mode(GridEditMode.InCell))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Batch(true)
+                        .ServerOperation(false)
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.NoSesion);
+                            model.Field(p => p.NoSesion).Editable(false);
+                            //model.Field(p => p.Porcentaje).Editable(false);
+
+                        })
+        .Read(read => read.Action("Read_TalleresCalificacion", "Seguimiento", new { pParticipante = Model, pTallerId = 8 }))
+                                .Update(update => update.Action("Update_Aspectos", "Seguimiento"))
+                    )
+            )
+
+
+        </div>
+        <div class="tpart-b">
+            <label style="color: #50A6D0;font-size:  20px;text-align: center;width: 100%;">
+                TALLER LIDERANDO CON VALORES
+
+
+            </label>
+            @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.clsCalificacionTaller>()
+
+                    .Name("gridTallerLiderazgoVa")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.IdTaller).Hidden();
+                        columns.Bound(p => p.AreaId).Hidden();
+                        columns.Bound(p => p.NoSesion);
+
+                        columns.Bound(p => p.Tarea);
+                        columns.Bound(p => p.Asistencia);
+
+                    })
+                            .ToolBar(toolbar => toolbar.Save())
+                        .Editable(editable => editable.Mode(GridEditMode.InCell))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+
+                    .Scrollable()
+                    .HtmlAttributes(new { style = "height:430px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Batch(true)
+                        .ServerOperation(false)
+                        .PageSize(10)
+                        .Model(model =>
+                        {
+                            model.Id(p => p.NoSesion);
+                            model.Field(p => p.NoSesion).Editable(false);
+                            //model.Field(p => p.Porcentaje).Editable(false);
+
+                        })
+        .Read(read => read.Action("Read_TalleresCalificacion", "Seguimiento", new { pParticipante = Model, pTallerId = 9 }))                                                                                   
+                                .Update(update => update.Action("Update_Aspectos", "Seguimiento"))
+                    )
+            )
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .k-edit-form-container {
+        width: 650px !important;
+    }
+
+    .edit-form {
+        position: relative;
+        width: 90%;
+        display: inline-block;
+        margin-left: 5%;
+    }
+
+    .tpart-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        min-width: 300px;
+    }
+
+    .tpart-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 3%;
+        min-width: 300px;
+    }
+
+    .row {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        margin-left: 0%;
+        padding-bottom: 15px;
+    }
+
+    .part-a {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+    }
+
+    .part-b {
+        width: 48%;
+        float: left;
+        position: relative;
+        display: inline-block;
+        margin-left: 1%;
+    }
+
+    .title {
+        width: 25%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value {
+        margin-left: 1%;
+        width: 68%;
+        float: left;
+    }
+
+    .title-single {
+        width: 22%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .value-single {
+        margin-left: 1%;
+        width: 71%;
+        float: left;
+    }
+
+    .object-check {
+        padding-bottom: 15px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .title-profile {
+        width: 21%;
+        float: left;
+        font-weight: bolder;
+    }
+
+    .check-container {
+        float: left;
+        margin-left: 2%;
+        width: 70%;
+    }
+</style>

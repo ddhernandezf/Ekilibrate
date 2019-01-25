@@ -1,0 +1,284 @@
+﻿@using Kendo.Mvc.UI
+@model Ekilibrate.Model.Entity.Nutricionista.Diagnostico
+
+@using (Html.BeginForm("AgregaFormulario", "Diagnostico", new { P = Request.QueryString["P"], C = Request.QueryString["C"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 col-xs-12">
+            @Html.ValidationSummary(true, "Favor verifique los campos obligatorios", new { @class = "text-danger h3" })
+            @Html.AntiForgeryToken()
+        </div>
+    </div>
+    <div class="widget-header bordered-bottom bordered-themesecondary">
+        <span class="widget-caption themesecondary">Evaluación Bioquímica</span>            
+    </div>
+    <div class="widget-body">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Glucosa, new { @class = "col-sm-6 control-label" }))
+                    <div class="col-sm-6">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.Glucosa).Name("Glucosa").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Resultado glucosa (mg/dl)" }))
+                        @Html.ValidationMessageFor(x => x.Glucosa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Colesterol, new { @class = "col-sm-6 control-label" }))
+                    <div class="col-sm-6">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.Colesterol).Name("Colesterol").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Resultado colesterol (mg/dl)" }))
+                        @Html.ValidationMessageFor(x => x.Colesterol, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Triglicerios, new { @class = "col-sm-6 control-label" }))
+                    <div class="col-sm-6">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.Triglicerios).Name("Triglicerios").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Resultado Trigliceridos (mg/dl)" }))
+                        @Html.ValidationMessageFor(x => x.Triglicerios, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.PresionArterial, new { @class = "col-sm-4 control-label" }))
+                    <div class="col-sm-4">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.PresionArterial).Name("PresionArterial").Decimals(0).Format("#").HtmlAttributes(new { @style = "width:100%", Placeholder = "Presión Arterial (mmHg)" }))
+                        @Html.ValidationMessageFor(x => x.PresionArterial, "", new { @class = "text-danger" })
+                    </div>                    
+                    <div class="col-sm-4">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.PresionArterial2).Name("PresionArterial2").Decimals(0).Format("#").HtmlAttributes(new { @style = "width:100%", Placeholder = "Presión Arterial (mmHg)" }))
+                        @Html.ValidationMessageFor(x => x.PresionArterial2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-header bordered-bottom bordered-themesecondary">
+        <span class="widget-caption themesecondary">Evaluación Antropométrica</span>
+    </div>
+    <div class="widget-body">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Peso, new { @class = "col-sm-4 control-label" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.Peso).Name("Peso").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Peso" }).Events(e => e.Change("CalcularIMC")))
+                        @Html.ValidationMessageFor(x => x.Peso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Estatura, new { @class = "col-sm-4 control-label" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.Estatura).Name("Estatura").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Estatura" }).Events(e => e.Change("CalcularIMC")))
+                        @Html.ValidationMessageFor(x => x.Estatura, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.PorcentajeGrasa, new { @class = "col-sm-4 control-label" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.PorcentajeGrasa).Name("PorcentajeGrasa").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Porcentaje de grasa (%)" }))
+                        @Html.ValidationMessageFor(x => x.PorcentajeGrasa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.CircunferenciaMuneca, new { @class = "col-sm-4 control-label no-padding-right" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.CircunferenciaMuneca).Name("CircunferenciaMuneca").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Circunferencia de muñeca" }))
+                        @Html.ValidationMessageFor(x => x.CircunferenciaMuneca, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.CircunferenciaAbdominal, new { @class = "col-sm-4 control-label no-padding-right" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.CircunferenciaAbdominal).Name("CircunferenciaAbdominal").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Circunferencia abdominal" }))
+                        @Html.ValidationMessageFor(x => x.CircunferenciaAbdominal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.CircunferenciaCadera, new { @class = "col-sm-4 control-label no-padding-right" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().NumericTextBoxFor(x => x.CircunferenciaCadera).Name("CircunferenciaCadera").Decimals(2).HtmlAttributes(new { @style = "width:100%", Placeholder = "Circunferencia de cadera" }))
+                        @Html.ValidationMessageFor(x => x.CircunferenciaCadera, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Genero, new { @class = "col-sm-4 control-label no-padding-right" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().DropDownListFor(x => x.Genero)
+                                        .HtmlAttributes(new { @style = "width:100%" })
+                                        .Name("Genero")
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel("Seleccione el género")
+                                        .Events(e => e.Change("CalcularRED"))
+                                        .BindTo(new List<SelectListItem>{
+                                    new SelectListItem{Text = "Masculino", Value="MASCULINO"},
+                                    new SelectListItem{Text = "Femenino", Value="FEMENINO"}
+                                    })
+                        )
+                        @Html.ValidationMessageFor(x => x.Genero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.NivelActividad, new { @class = "col-sm-4 control-label no-padding-right" }))
+                    <div class="col-sm-8">
+                        @(Html.Kendo().DropDownListFor(x => x.NivelActividad)
+                                        .HtmlAttributes(new { @style = "width:100%" })
+                                        .Name("NivelActividad")
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel("Seleccione el nivel de actividad")
+                                        .Events(e => e.Change("CalcularRED"))
+                                        .BindTo(new List<SelectListItem>{
+                                    new SelectListItem{Text = "Sedentario", Value="1"},
+                                    new SelectListItem{Text = "Ligeramente Activo", Value="2"},
+                                    new SelectListItem{Text = "Activo Moderado", Value="3"},
+                                    new SelectListItem{Text = "Muy Activo", Value="4"},
+                                    new SelectListItem{Text = "Extra Activo", Value="5"}
+                                    })
+                        )
+                        @Html.ValidationMessageFor(x => x.NivelActividad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+            </div>
+        </div>
+    </div>
+    <div class="widget-header bordered-bottom bordered-themesecondary">
+        <span class="widget-caption themesecondary">Resultados Iniciales</span>
+    </div>
+    <div class="widget-body">
+        <div class="row">
+            <div class="col-lg-6 col-sm-5 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label h3 success">IMC</label>
+                            @*<label class="col-lg-8 control-label h3 success" id="IMC"></label>*@
+                            <div class="col-sm-8 h3">
+                                @Html.TextBox("IMC", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label h3 success">RED</label>
+                            @*<label class="col-lg-8 control-label h3 success" id="RED"></label>*@
+                            <div class="col-sm-8 h3">
+                                @Html.TextBox("RED", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-5 col-xs-12">
+                <div class="form-group">
+                    @(Html.LabelFor(x => x.Observaciones, new { @class = "col-sm-4 control-label" }))
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(m => m.Observaciones, 7, 59, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Observaciones, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pull-right" style="display: inline-flex; padding-right: 1em;">
+                <div class="btn-group">
+                    @*<button type="button" class="btn-lg btn-warning" onclick="location.href = '../Nutricionista/Diagnostico/Citas';"><i class="fa fa-angle-left"></i> Atrás</button>*@
+                    <button type="submit" value="Guardar" name="accion" class="btn-lg btn-blue"><i class="fa fa-check"></i>Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+        <script>
+            function CalcularIMC() {
+                if ($("#Peso").val() != null && $("#Estatura").val() != null) {
+                    var Peso = $("#Peso").val();
+                    var Estatura = $("#Estatura").val();
+                    $("#IMC").val(Math.round(((Peso / 2.20462) / (Estatura * Estatura)) * 10000));
+                    CalcularRED();
+                }
+            };
+
+            function CalcularRED() {
+                if ($("#Genero").val() != null && $("#Peso").val() != null && $("#NivelActividad").val() != null) {
+                    var Peso = $("#Peso").val();
+                    var Genero = $("#Genero").val();
+                    var Nivel = $("#NivelActividad").val();
+                    var IMC = $("#IMC").val();
+                    var FactorIMC = 0;
+                    var Factor = 0;
+
+                    switch (Nivel) {
+                        case "1": Factor = 1.2; break;
+                        case "2": Factor = 1.375; break;
+                        case "3": Factor = 1.55; break;
+                        case "4": Factor = 1.725; break;
+                        case "5": Factor = 1.9; break;
+                    }
+
+                    if (IMC > 25)
+                        FactorIMC = 250;
+
+                    if (Genero == "MASCULINO")
+                        $("#RED").val(Math.round(((Peso / 2.20462) * 24 * Factor * 100) / 100) - FactorIMC);
+                    else
+                        $("#RED").val(Math.round(((Peso / 2.20462) * 21.6 * Factor * 100) / 100) - FactorIMC);
+                }
+            };
+
+            $(document).ready(function () {
+                CalcularRED();
+                CalcularIMC();
+            });
+
+            //$(function () {
+            //    $("input").kendoNumericTextBox();
+
+            //    //wire focus of all numerictextbox widgets on the page
+            //    $('.k-input').bind("focus", function () {
+            //        var input = $(this);
+            //        clearTimeout(input.data("selectTimeId")); //stop started time out if any
+
+            //        var selectTimeId = setTimeout(function () {
+            //            input.select();
+            //        });
+
+            //        input.data("selectTimeId", selectTimeId);
+            //    }).blur(function (e) {
+            //        clearTimeout($(this).data("selectTimeId")); //stop started timeout
+            //    });
+            //})
+
+            //$(document).ready(function () {
+            //    $("input:text").focus(function () { $(this).select(); });
+            //});
+
+            
+        </script>

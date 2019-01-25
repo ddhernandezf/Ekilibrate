@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Inicio Sesión";
+    ViewBag.Description = "login page";
+    Layout = "~/Views/Shared/_Empty.cshtml";
+}
+@model EkilibrateUI.Areas.SitioAdministrativo.Models.LoginViewModel
+@*<div style="background-image:url(../../assets/img/fondo-1.png); background-size:cover; background-repeat:no-repeat; height:100%;">
+    <div style="align-content:center; text-align:center; margin-top: 50px;">
+        <img src="~/assets/img/logoprincipal.png" alt="" />
+    </div>*@
+    @{
+        BarcoSoftUtilidades.Seguridad.Usuario usuario = null;
+        try
+        {
+            usuario = BarcoSoftUtilidades.Extensiones.GetActualUser(this.Context);
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+    <div class="lock-container animated fadeInDown">
+        <div class="lock-box text-align-center">
+            @{
+                if (usuario != null)
+                {
+                    <div class="lock-username"> @usuario.NombreUsuario </div>
+                    if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".jpg")))
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".jpg")" class="avatar">
+                    }
+                    else if (File.Exists(Server.MapPath("~/Uploads/Participantes/" + usuario.IdPersona + ".png")))
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/"+ usuario.IdPersona + ".png")" class="avatar">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Uploads/Participantes/default-user-image.png")" class="avatar">
+                    }
+                }
+            }
+            
+            <div class="lock-password" style="width:80%">
+                <div style="text-align:left;">
+                    <span>Ingresar Como...</span>
+                    <br />
+                </div>
+
+                <br />
+
+                @Html.Bootstrap().ActionLinkButton("Cliente", "Cliente", "Home").ButtonBlock().Color(BootstrapColors.Primary).IconPrepend(GlyphIcons.Cog).HtmlAttributes(new { @style = "width:100%" })
+                <br />
+                <br />
+                @Html.Bootstrap().ActionLinkButton("Participante", "Participante", "Home").ButtonBlock().Color(BootstrapColors.Yellow).IconPrepend(GlyphIcons.User).HtmlAttributes(new { @style = "width:100%" })
+            </div>
+
+        </div>
+        <div class="signinbox">
+            <span>¿Cambiar de Usuario?</span>
+            @Html.Bootstrap().ActionLink("Login", "Login", "Home")
+        </div>
+    </div>
+@section PageScripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

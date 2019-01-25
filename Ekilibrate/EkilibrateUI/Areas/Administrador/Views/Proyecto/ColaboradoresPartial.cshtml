@@ -1,0 +1,20 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().TabStrip()
+          .Name("tabstrip")
+          .Items(tabstrip =>
+            {
+                tabstrip.Add().Text("Facilitador")
+                    .Selected(true)
+                    .LoadContentFrom(Url.Content("~/Administrador/Proyecto/FacilitadorPartial"));
+
+                tabstrip.Add().Text("Asistente")
+                   .LoadContentFrom(Url.Content("~/Administrador/Proyecto/AsistentePartial"));
+
+                tabstrip.Add().Text("Enfermera")
+                   .LoadContentFrom(Url.Content("~/Administrador/Proyecto/EnfermeraPartial"));
+
+                tabstrip.Add().Text("Nutricionista")
+                .LoadContentFrom(Url.Content("~/Administrador/Proyecto/NutricionistaPartial"));
+            })
+)

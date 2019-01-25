@@ -1,0 +1,82 @@
+﻿@using Kendo.Mvc.UI;
+
+@using (Html.BeginForm("Index", "Alimentos", FormMethod.Post, new { id = "myform" }))
+{
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                @Html.ValidationSummary(true, "Favor verifique los campos obligatorios", new { @class = "text-danger h3" })
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+        <div class="widget-header bordered-bottom bordered-themesecondary">
+            <span class="widget-caption themesecondary">Frecuencia de Consumo</span>
+        </div>
+        <div class="widget-body">
+            <div class="row">
+                <div class="col-lg-12 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label class="col-lg-12 control-label h4">
+                            Pregunte al participante cuántas veces a la semana consume los siguientes alimentos y la cantidad.  Anote la cantidad EN PORCIONES DIARIAS.
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-4 col-xs-12">
+                    @(Html.Kendo().Grid<Ekilibrate.Model.Entity.Nutricionista.DiagnosticoAlimentos>()
+                        .Name("gridAlimentos")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(p => p.AlimentoId).Hidden();
+                            columns.Bound(p => p.NombreAlimento).Title("Alimento").Width(175).Sortable(false).Filterable(false);
+                            columns.Bound(p => p.Dias).Width(40).Sortable(false).Filterable(false);
+                            columns.Bound(p => p.Porciones).Width(40).Sortable(false).Filterable(false);
+                        })
+                            .ToolBar(toolbar =>
+                            {
+                                toolbar.Save();
+                            })
+                            .Editable(editable => editable.Mode(GridEditMode.InCell))
+                            .Navigatable()
+                            .Filterable(f =>
+                            {
+                                f.Enabled(false);
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Enabled(false);
+                                p.Refresh(false);
+                            })
+                        .Sortable()
+                        .Scrollable(s => s.Height("auto"))
+                        //.HtmlAttributes(new { style = "height:100%;" })
+                        .Events(ev => ev.Edit("selectTextOnGrid"))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .Events(events => events.Error("error_handler"))
+                            .PageSize(20)
+                            .Model(model =>
+                            {
+                                model.Id(p => p.AlimentoId);
+                                model.Field(p => p.NombreAlimento).Editable(false);
+                            })
+                                .Update(update => update.Action("Update_Alimentos", "Diagnostico").Data("CargarParametros"))
+                                .Read(read => read.Action("Read", "Diagnostico").Data("CargarParametros"))
+                        )
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function CargarParametros() {
+        return {
+            Par: "@Request.QueryString["P"].ToString()",
+            Ci: "@Request.QueryString["C"].ToString()"
+        }
+    }
+</script>

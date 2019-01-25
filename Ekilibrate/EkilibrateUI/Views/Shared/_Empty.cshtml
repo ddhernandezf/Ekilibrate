@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<!--
+Beyond Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.1
+Version: 1.4.1
+Purchase: http://wrapbootstrap.com
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:100%">
+<!--Head-->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="@ViewBag.Description" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="~/assets/img/favicon.png" type="image/x-icon">
+
+    <!--Basic Styles-->
+    @Styles.Render(Url.Content("~/css/bootstrap"))
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
+    
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.624/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/cultures/kendo.culture.es-GT.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.624/messages/kendo.messages.es-GT.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/ErrorHandler.js")"></script>
+
+    <script>
+        kendo.culture("es-GT");
+    </script>
+
+    <!--Fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300"
+          rel="stylesheet" type="text/css">
+
+    <!--Beyond styles-->
+    @Styles.Render(Url.Content("~/css/beyond"))
+    <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+
+    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
+    @Scripts.Render(Url.Content("~/bundles/skin"))
+
+    <style>
+        body {
+          background: -webkit-gradient(top, from(#FFFFFF), to(#858585)) fixed;
+        }
+        /*body {
+            background: #FFFFFF;
+            background-image: url(../../assets/img/fondo-1.png), -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#858585));
+            background-image: url(../../assets/img/fondo-1.png), -webkit-linear-gradient(top, #FFFFFF, #858585); /* Chrome 10+, Saf5.1+ *
+            background-image: url(../../assets/img/fondo-1.png), -moz-linear-gradient(top, #FFFFFF, #858585); /* FF3.6+
+            background-image: url(../../assets/img/fondo-1.png), -o-linear-gradient(top, #FFFFFF, #858585); /* Opera 11.10+
+            background-image: url(../../assets/img/fondo-1.png), linear-gradient(to bottom, #FFFFFF, #858585); /* W3C
+        }*/
+    </style>
+</head>
+<!--Head Ends-->
+<!--Body-->
+
+<body style="height:100%">
+    @RenderBody()
+    <!--Basic Scripts-->
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render(Url.Content("~/bundles/bootstrap"))
+
+    <!--Beyond Scripts-->
+    @Scripts.Render(Url.Content("~/bundles/beyond"))
+
+    <!--Page Related Scripts-->
+    @RenderSection("PageScripts", required: false)
+</body>
+<!--  /Body -->
+</html>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93c9536d5a134005b6873d3f4f105f7c" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Objeto" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Permiso" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Producto" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Propietario" Width="1.5" PointX="1.625" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Rol" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Usuario" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.UsuarioPorRol" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Objeto" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Objeto_Padre" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Objeto_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Producto_Propietario" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Rol_Propietario" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_RoleToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_UserToRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.Menu" Width="1.5" PointX="9.375" PointY="4.625" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.MenuTipo" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.ParametroGeneral" Width="1.5" PointX="8" PointY="8.375" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.ParametroTipo" Width="1.5" PointX="5.75" PointY="12" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Menu_MenuTipo" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Menu_Objeto" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Parametro_Propietario" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Parametro_Type" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.PAR_Participante" Width="1.5" PointX="14.5" PointY="3" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_PAR_Participante_Compa" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.PR_Nutricionista" Width="1.5" PointX="17.25" PointY="11.125" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.ADM_Colaborador" Width="1.5" PointX="14.625" PointY="17.625" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_PR_Nutricionista_Colaborador" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.GE_MensajeCorreo" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.ADM_Contacto" Width="1.5" PointX="10.625" PointY="12.5" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.ADM_Empresa" Width="1.5" PointX="8.375" PointY="17" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.GE_Persona" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="BarcoSoftDBModel.PR_Proyecto" Width="1.5" PointX="10.625" PointY="17.5" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_Usuario_Persona" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_ADM_Colaborador" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_ADM_Contacto_Empresa" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_ADM_Contacto_Persona" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_PR_Proyecto_Empresa" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_PAR_Participante_Persona" />
+        <AssociationConnector Association="BarcoSoftDBModel.FK_PR_Nutricionista_Proyecto" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

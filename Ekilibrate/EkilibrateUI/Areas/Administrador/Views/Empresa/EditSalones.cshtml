@@ -1,0 +1,43 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsSalonBase>()
+            .Name("gridSalonesProyecto")
+            .Columns(columns =>
+                    {
+                        columns.Bound(p => p.Id).Width(25).Title("").EditorTemplateName("ReadOnlyTemplate");
+                        columns.Bound(p => p.Nombre).Width(200);
+                        columns.Bound(p => p.Capacidad).Width(100);
+                        columns.ForeignKey(p => p.TipoUsoId, (System.Collections.IEnumerable)ViewBag.TipoUsoSalon, "Id", "Nombre").Width(150).Title("Uso");
+                        columns.Command(command =>
+                        {
+                            command.Edit().Text(" ");
+                            command.Destroy().Text(" ");
+                        }).Width(200);
+                    })
+                            .ToolBar(toolbar => toolbar.Create().Text(" "))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp))
+                            .Filterable(f =>
+                            {
+                                f.Extra(false);
+                            })
+                            .Pageable(p =>
+                            {
+                                p.Refresh(true);
+                            })
+                    .Sortable()
+                    .Scrollable()
+                        .HtmlAttributes(new { style = "height:98%;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(10)
+                                .Model(model =>
+                                {
+                                    model.Id(p => p.Id);
+                                })
+                                .Create(update => update.Action("Create", "Salon").Data("EmpresaSeleccionada"))
+                                .Read(read => read.Action("Read", "Salon").Data("EmpresaSeleccionada"))
+                                .Update(update => update.Action("Update", "Salon").Data("EmpresaSeleccionada"))
+                                .Destroy(update => update.Action("Delete", "Salon"))
+                    )
+)

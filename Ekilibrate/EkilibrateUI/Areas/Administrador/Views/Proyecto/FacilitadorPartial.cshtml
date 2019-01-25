@@ -1,0 +1,47 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().Grid<Ekilibrate.Model.Entity.Administrador.clsFacilitadorBase>()
+            .Name("gridFacilitador")
+            .Columns(columns =>
+            {
+
+
+                columns.ForeignKey(p => p.AreaId, (System.Collections.IEnumerable)ViewBag.Areas, "Value", "Text").Width(175);
+                columns.ForeignKey(p => p.ColaboradorId, (System.Collections.IEnumerable)ViewBag.ColaboradorFacilitador, "Value", "Text").Width(175);
+                columns.Command(cmd =>
+                {
+                    
+                    cmd.Edit().Text(" ");
+                    cmd.Destroy().Text(" ");
+                }).Width(100);
+            })
+            .ToolBar(tl => tl.Create().Text(" "))
+                //.Events(events => events.DataBound("dataBound"))
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Filterable(f =>
+            {
+                f.Extra(false);
+            })
+            .Pageable(p =>
+            {
+                p.Refresh(true);
+            })
+            .Sortable()
+            .Scrollable()
+                 .Events(events => events.DataBound("dataBound"))
+            .HtmlAttributes(new { style = "height:480;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Events(events => events.Error("error_handler"))
+                .PageSize(10)
+                .Model(model =>
+                {
+                    model.Id(p => p.ColaboradorId);
+
+                })
+                .Read(read => read.Action("Facilitador_Read", "Proyecto").Data("ProyectoSeleccionado"))
+                .Create(read => read.Action("Facilitador_Create", "Proyecto").Data("ProyectoSeleccionado"))
+                .Update(read => read.Action("Facilitador_Update", "Proyecto").Data("ProyectoSeleccionado"))
+                .Destroy(read => read.Action("Facilitador_Destroy", "Proyecto").Data("ProyectoSeleccionado"))
+            )
+)
